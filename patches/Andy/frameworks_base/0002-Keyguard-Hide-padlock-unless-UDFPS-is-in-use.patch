@@ -1,0 +1,59 @@
+From 088df08a596040ba36948e5d2a00bb4b02388245 Mon Sep 17 00:00:00 2001
+From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
+Date: Sat, 2 Nov 2019 06:41:03 +0000
+Subject: [PATCH 2/2] Keyguard: Hide padlock unless UDFPS is in use
+
+Fair enough Google, but don't give me that otherwise
+
+Change-Id: Ie91e80ca5c6637a51a8acc72fb28cd6ac2a7abb6
+---
+ .../keyguard/LockIconViewController.java      | 29 +++++--------------
+ 1 file changed, 7 insertions(+), 22 deletions(-)
+
+diff --git a/packages/SystemUI/src/com/android/keyguard/LockIconViewController.java b/packages/SystemUI/src/com/android/keyguard/LockIconViewController.java
+index 52ebf2fa..0ed36b4f 100644
+--- a/packages/SystemUI/src/com/android/keyguard/LockIconViewController.java
++++ b/packages/SystemUI/src/com/android/keyguard/LockIconViewController.java
+@@ -259,32 +259,17 @@ public class LockIconViewController extends ViewController<LockIconView> impleme
+             return;
+         }
+ 
+-        boolean wasShowingFpIcon = mUdfpsEnrolled && !mShowUnlockIcon && !mShowLockIcon;
+-        boolean wasShowingLockIcon = mShowLockIcon;
++        boolean wasShowingFpIcon = mUdfpsEnrolled && !mShowUnlockIcon;
+         boolean wasShowingUnlockIcon = mShowUnlockIcon;
+-        mShowLockIcon = !mCanDismissLockScreen && !mUserUnlockedWithBiometric && isLockScreen()
+-            && (!mUdfpsEnrolled || !mRunningFPS);
+-        mShowUnlockIcon = mCanDismissLockScreen && isLockScreen();
++        mShowUnlockIcon = mCanDismissLockScreen && isLockScreen() && mUdfpsEnrolled;
+         mShowAODFpIcon = mIsDozing && mUdfpsEnrolled && !mRunningFPS;
+ 
+         final CharSequence prevContentDescription = mView.getContentDescription();
+-        if (mShowLockIcon) {
+-            mView.setImageDrawable(mLockIcon);
+-            mView.setVisibility(View.VISIBLE);
+-            mView.setContentDescription(mLockedLabel);
+-        } else if (mShowUnlockIcon) {
+-            if (!wasShowingUnlockIcon) {
+-                if (wasShowingFpIcon) {
+-                    mView.setImageDrawable(mFpToUnlockIcon);
+-                    mFpToUnlockIcon.forceAnimationOnUI();
+-                    mFpToUnlockIcon.start();
+-                } else if (wasShowingLockIcon) {
+-                    mView.setImageDrawable(mLockToUnlockIcon);
+-                    mLockToUnlockIcon.forceAnimationOnUI();
+-                    mLockToUnlockIcon.start();
+-                } else {
+-                    mView.setImageDrawable(mUnlockIcon);
+-                }
++        if (mShowUnlockIcon) {
++            if (wasShowingFpIcon) {
++                mView.setImageDrawable(mFpToUnlockIcon);
++                mFpToUnlockIcon.forceAnimationOnUI();
++                mFpToUnlockIcon.start();
+             }
+             mView.setVisibility(View.VISIBLE);
+             mView.setContentDescription(mUnlockedLabel);
+-- 
+2.34.1
+

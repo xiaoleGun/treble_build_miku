@@ -1,0 +1,36 @@
+{
+  "version": "v401",
+  "date": "1644632160",
+  "variants": [
+    {
+      "name": "treble_arm64_bvS",
+      "size": "580271088",
+      "url": "https://github.com/xiaoleGun/treble_build/releases/download/v401/MikuUI-SNOW-arm64-ab-20220212-UNOFFICIAL.img.xz"
+    },
+    {
+      "name": "treble_arm64_bvS-vndklite",
+      "size": "566992004",
+      "url": "https://github.com/xiaoleGun/treble_build/releases/download/v401/MikuUI-SNOW-arm64-ab-vndklite-20220212-UNOFFICIAL.img.xz"
+    },
+    {
+      "name": "treble_arm64_bvS-secure",
+      "size": "566500528",
+      "url": "https://github.com/xiaoleGun/treble_build/releases/download/v401/MikuUI-SNOW-arm64-ab-vndklite-secure-20220212-UNOFFICIAL.img.xz"
+    },
+    {
+      "name": "treble_arm64_bgS",
+      "size": "872615332",
+      "url": "https://github.com/xiaoleGun/treble_build/releases/download/v401/MikuUI-SNOW-arm64-ab-gapps-20220212-UNOFFICIAL.img.xz"
+    },
+    {
+      "name": "treble_arm64_bgS-vndklite",
+      "size": "846728496",
+      "url": "https://github.com/xiaoleGun/treble_build/releases/download/v401/MikuUI-SNOW-arm64-ab-vndklite-gapps-20220212-UNOFFICIAL.img.xz"
+    },
+    {
+      "name": "treble_arm64_bgS-secure",
+      "size": "846246628",
+      "url": "https://github.com/xiaoleGun/treble_build/releases/download/v401/MikuUI-SNOW-arm64-ab-vndklite-gapps-secure-20220212-UNOFFICIAL.img.xz"
+    }
+  ]
+}

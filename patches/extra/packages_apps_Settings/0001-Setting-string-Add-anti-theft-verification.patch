@@ -1,0 +1,89 @@
+From 20d2d71e405849487df2fff618a9c6432c353358 Mon Sep 17 00:00:00 2001
+From: xiaoleGun <1592501605@qq.com>
+Date: Sun, 6 Feb 2022 15:16:51 +0800
+Subject: [PATCH] Setting: string: Add anti-theft verification
+
+* I know that this commit is of little use, but I hope to prevent people like XDA from stealing the GSI I I made, thanks very much.
+
+Signed-off-by: xiaoleGun <1592501605@qq.com>
+---
+ res/values-zh-rCN/strings.xml | 4 ++++
+ res/values-zh-rHK/strings.xml | 4 ++++
+ res/values-zh-rTW/strings.xml | 4 ++++
+ res/values/strings.xml        | 4 ++++
+ res/xml/firmware_version.xml  | 7 +++++++
+ 5 files changed, 23 insertions(+)
+
+diff --git a/res/values-zh-rCN/strings.xml b/res/values-zh-rCN/strings.xml
+index 1198102afd..056e840dfc 100644
+--- a/res/values-zh-rCN/strings.xml
++++ b/res/values-zh-rCN/strings.xml
+@@ -5600,4 +5600,8 @@
+     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"“<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>”想连接到此手机。\n\n您之前没有连接过“<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>”。"</string>
+     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"不连接"</string>
+     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"连接"</string>
++    
++    <!-- Some simple validation -->
++    <string name="verification_title">GSI防盗验证</string>
++    <string name="verification_sentence">“给岁月以文明，而不是给文明以岁月”</string>
+ </resources>
+diff --git a/res/values-zh-rHK/strings.xml b/res/values-zh-rHK/strings.xml
+index 2ae7e92658..032e954c00 100644
+--- a/res/values-zh-rHK/strings.xml
++++ b/res/values-zh-rHK/strings.xml
+@@ -5566,4 +5566,8 @@
+     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想連接此手機。\n\n請注意，您從未連接「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」"</string>
+     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"不要連接"</string>
+     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"連接"</string>
++    
++    <!-- Some simple validation -->
++    <string name="verification_title">GSI防盜驗證</string>
++    <string name="verification_sentence">“給歲月以文明，而不是給文明以歲月”</string>
+ </resources>
+diff --git a/res/values-zh-rTW/strings.xml b/res/values-zh-rTW/strings.xml
+index f4edd54d1f..8368c9ef3b 100644
+--- a/res/values-zh-rTW/strings.xml
++++ b/res/values-zh-rTW/strings.xml
+@@ -5565,4 +5565,8 @@
+     <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想要連線到這支手機。\n\n請注意，你從未與「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」連線。"</string>
+     <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"不要連線"</string>
+     <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"連線"</string>
++
++    <!-- Some simple validation -->
++    <string name="verification_title">GSI防盜驗證</string>
++    <string name="verification_sentence">“給歲月以文明，而不是給文明以歲月”</string>
+ </resources>
+diff --git a/res/values/strings.xml b/res/values/strings.xml
+index a7d4b2e7da..be61810f10 100644
+--- a/res/values/strings.xml
++++ b/res/values/strings.xml
+@@ -13603,4 +13603,8 @@
+     <string name="bluetooth_connect_access_dialog_negative">Don\u2019t connect</string>
+     <!-- Strings for Dialog connect button -->
+     <string name="bluetooth_connect_access_dialog_positive">Connect</string>
++
++    <!-- Some simple validation -->
++    <string name="verification_title">GSI anti theft verification</string>
++    <string name="verification_sentence">To the time to life, rather than to life in time.</string>
+ </resources>
+diff --git a/res/xml/firmware_version.xml b/res/xml/firmware_version.xml
+index 7584cebd3e..a29c5798e8 100644
+--- a/res/xml/firmware_version.xml
++++ b/res/xml/firmware_version.xml
+@@ -103,6 +103,13 @@
+         settings:enableCopying="true"
+         settings:controller="com.android.settings.deviceinfo.firmwareversion.SimpleBuildNumberPreferenceController"/>
+ 
++    <!-- xiaoleGun -->
++    <Preference
++        android:key="xiaole_verification"
++        android:title="@string/verification_title"
++        android:summary="@string/verification_sentence"
++        settings:enableCopying="true"/>
++
+     <!-- SELinux -->
+     <Preference
+         android:key="selinux_status"
+-- 
+2.32.0 (Apple Git-132)
+

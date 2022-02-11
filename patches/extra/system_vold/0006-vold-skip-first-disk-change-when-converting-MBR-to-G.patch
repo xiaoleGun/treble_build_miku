@@ -1,0 +1,143 @@
+From 7d193edc8a8d89b46207b7426743fde0541968d7 Mon Sep 17 00:00:00 2001
+From: Scott Mertz <scott@cyngn.com>
+Date: Thu, 31 Mar 2016 13:09:56 -0700
+Subject: [PATCH 6/7] vold: skip first disk change when converting MBR to GPT
+
+When converting a public (MBR) partition to private (GPT) partition,
+'sgdisk --zap-all <path>' triggers a disk change netlink event
+when converting from MBR to GPT.  Then, 'sgdisk --new=....' triggers
+another disk change netlink event.
+
+vold informs clients a new volume is created after the first disk
+change event occurs.  system server reacts by requesting to mount
+the volume.  If this request is honored before the second disk change
+event, the volume will be unmounted immediately after system server's
+request to mount is honored.  The next time system server performs
+an operation (createnewuser) on this volume, it will fail due to
+the volume being unmounted.
+
+This is reproduced by running the following commands in a loop:
+
+adb shell sm partition <disk> private
+adb shell sm partition <disk> public
+adb shell sm forget all
+
+OR
+
+run cts -c com.android.cts.appsecurity.AdoptableHostTest -m testPackageInstaller
+
+This change causes vold to delay notifying clients that the volume is
+ready until after it's actually partitioned.
+
+CYNGNOS-2283
+Change-Id: I457cc1508573d73ef2be2f0cfdc5c2237bfabad7
+
+Signed-off-by: Joey Huab <joey@evolution-x.org>
+---
+ model/Disk.cpp | 53 ++++++++++++++++++++++++++++++++++++++++++++++++--
+ model/Disk.h   |  2 ++
+ 2 files changed, 53 insertions(+), 2 deletions(-)
+
+diff --git a/model/Disk.cpp b/model/Disk.cpp
+index b50ca50..d33d081 100644
+--- a/model/Disk.cpp
++++ b/model/Disk.cpp
+@@ -97,7 +97,8 @@ Disk::Disk(const std::string& eventPath, dev_t device, const std::string& nickna
+       mNickname(nickname),
+       mFlags(flags),
+       mCreated(false),
+-      mJustPartitioned(false) {
++      mJustPartitioned(false),
++      mSkipChange(false) {
+     mId = StringPrintf("disk:%u,%u", major(device), minor(device));
+     mEventPath = eventPath;
+     mSysPath = StringPrintf("/sys/%s", eventPath.c_str());
+@@ -237,6 +238,11 @@ void Disk::destroyAllVolumes() {
+ }
+ 
+ status_t Disk::readMetadata() {
++
++    if (mSkipChange) {
++        return OK;
++    }
++
+     mSize = -1;
+     mLabel.clear();
+ 
+@@ -328,6 +334,12 @@ status_t Disk::readPartitions() {
+         return -ENOTSUP;
+     }
+ 
++    if (mSkipChange) {
++        mSkipChange = false;
++        LOG(INFO) << "Skip first change";
++        return OK;
++    }
++
+     destroyAllVolumes();
+ 
+     // Parse partition table
+@@ -449,9 +461,46 @@ status_t Disk::partitionPublic() {
+     destroyAllVolumes();
+     mJustPartitioned = true;
+ 
+-    // First nuke any existing partition table
++    // Determine if we're coming from MBR
+     std::vector<std::string> cmd;
+     cmd.push_back(kSgdiskPath);
++    cmd.push_back("--android-dump");
++    cmd.push_back(mDevPath);
++
++    std::vector<std::string> output;
++    res = ForkExecvp(cmd, &output);
++    if (res != OK) {
++        LOG(WARNING) << "sgdisk failed to scan " << mDevPath;
++        mJustPartitioned = false;
++        return res;
++    }
++
++    Table table = Table::kUnknown;
++    for (auto line : output) {
++        char* cline = (char*) line.c_str();
++        char* token = strtok(cline, kSgdiskToken);
++        if (token == nullptr) continue;
++
++        if (!strcmp(token, "DISK")) {
++            const char* type = strtok(nullptr, kSgdiskToken);
++            if (!strcmp(type, "mbr")) {
++                table = Table::kMbr;
++                break;
++            } else if (!strcmp(type, "gpt")) {
++                table = Table::kGpt;
++                break;
++            }
++        }
++    }
++
++    if (table == Table::kMbr) {
++        LOG(INFO) << "skip first disk change event due to MBR -> GPT switch";
++        mSkipChange = true;
++    }
++
++    // First nuke any existing partition table
++    cmd.clear();
++    cmd.push_back(kSgdiskPath);
+     cmd.push_back("--zap-all");
+     cmd.push_back(mDevPath);
+ 
+diff --git a/model/Disk.h b/model/Disk.h
+index 3e1ecd5..92958ec 100644
+--- a/model/Disk.h
++++ b/model/Disk.h
+@@ -116,6 +116,8 @@ class Disk {
+     bool mCreated;
+     /* Flag that we just partitioned and should format all volumes */
+     bool mJustPartitioned;
++    /* Flag that we need to skip first disk change events after partitioning*/
++    bool mSkipChange;
+ 
+     void createPublicVolume(dev_t device,
+                     const std::string& fstype = "",
+-- 
+2.32.0 (Apple Git-132)
+

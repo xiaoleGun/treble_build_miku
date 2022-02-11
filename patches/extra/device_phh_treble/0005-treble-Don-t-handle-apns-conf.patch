@@ -1,0 +1,37 @@
+From 691b3adbc262e3223eb292345170605f84063812 Mon Sep 17 00:00:00 2001
+From: AndyCGYan <GeForce8800Ultra@gmail.com>
+Date: Mon, 7 Feb 2022 14:49:31 +0800
+Subject: [PATCH 5/7] treble: Don't handle apns-conf
+
+Signed-off-by: xiaoleGun <1592501605@qq.com>
+---
+ base-pre.mk | 3 ---
+ base.mk     | 4 ----
+ 2 files changed, 7 deletions(-)
+
+diff --git a/base-pre.mk b/base-pre.mk
+index 6a317e4..e69de29 100644
+--- a/base-pre.mk
++++ b/base-pre.mk
+@@ -1,3 +0,0 @@
+-#Use a more decent APN config
+-PRODUCT_COPY_FILES += \
+-	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+diff --git a/base.mk b/base.mk
+index a396c3b..5bb19ca 100644
+--- a/base.mk
++++ b/base.mk
+@@ -8,10 +8,6 @@ PRODUCT_COPY_FILES := \
+ 	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+ 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+ 
+-#Use a more decent APN config
+-PRODUCT_COPY_FILES += \
+-	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+-
+ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/phh/treble/sepolicy
+ 
+ PRODUCT_PACKAGE_OVERLAYS += \
+-- 
+2.32.0 (Apple Git-132)
+

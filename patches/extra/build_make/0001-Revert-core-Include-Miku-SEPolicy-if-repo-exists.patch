@@ -1,0 +1,30 @@
+From 7126a8bbc2c332f67825c91cf2f5ded721d2586c Mon Sep 17 00:00:00 2001
+From: xiaoleGun <1592501605@qq.com>
+Date: Tue, 8 Feb 2022 10:13:12 +0800
+Subject: [PATCH] Revert "core: Include Miku SEPolicy if repo exists"
+
+* Because it will lead to duplicate definition of sepolicy
+
+This reverts commit 270ba3158b8810236f80e1b70e3414aebcec9627.
+---
+ core/config.mk | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/core/config.mk b/core/config.mk
+index 4a3fc8d6a..5ebdd0b54 100644
+--- a/core/config.mk
++++ b/core/config.mk
+@@ -1160,10 +1160,6 @@ dont_bother_goals := out \
+ # consistency with those defined in BoardConfig.mk files.
+ include $(BUILD_SYSTEM)/android_soong_config_vars.mk
+ 
+-ifneq ($(wildcard device/miku/sepolicy/common/sepolicy.mk),)
+-$(eval include device/miku/sepolicy/common/sepolicy.mk)
+-endif
+-
+ ifeq ($(CALLED_FROM_SETUP),true)
+ include $(BUILD_SYSTEM)/ninja_config.mk
+ include $(BUILD_SYSTEM)/soong_config.mk
+-- 
+2.32.0 (Apple Git-132)
+

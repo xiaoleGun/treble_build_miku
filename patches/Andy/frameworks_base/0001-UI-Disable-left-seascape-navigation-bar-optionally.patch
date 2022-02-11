@@ -1,0 +1,66 @@
+From 020cb5ed9ce51078930186ad8ebc2afea3ae53f1 Mon Sep 17 00:00:00 2001
+From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
+Date: Fri, 9 Mar 2018 15:41:26 +0800
+Subject: [PATCH 1/2] UI: Disable left (seascape) navigation bar optionally
+
+Toggle this behaviour with property "persist.ui.seascape.disable"
+
+Change-Id: Ieb58efa4b59feeb0c4ac70e497f4c59aa04210d6
+---
+ .../navigationbar/buttons/ReverseLinearLayout.java        | 8 +++++++-
+ .../core/java/com/android/server/wm/DisplayPolicy.java    | 5 +++--
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/packages/SystemUI/src/com/android/systemui/navigationbar/buttons/ReverseLinearLayout.java b/packages/SystemUI/src/com/android/systemui/navigationbar/buttons/ReverseLinearLayout.java
+index f1e13664..f43bef85 100644
+--- a/packages/SystemUI/src/com/android/systemui/navigationbar/buttons/ReverseLinearLayout.java
++++ b/packages/SystemUI/src/com/android/systemui/navigationbar/buttons/ReverseLinearLayout.java
+@@ -16,6 +16,7 @@ package com.android.systemui.navigationbar.buttons;
+ 
+ import android.annotation.Nullable;
+ import android.content.Context;
++import android.os.SystemProperties;
+ import android.util.AttributeSet;
+ import android.view.Gravity;
+ import android.view.View;
+@@ -86,6 +87,11 @@ public class ReverseLinearLayout extends LinearLayout {
+         boolean isLayoutRtl = getLayoutDirection() == LAYOUT_DIRECTION_RTL;
+         boolean isLayoutReverse = isLayoutRtl ^ mIsAlternativeOrder;
+ 
++        boolean isSeascapeDisabled = SystemProperties.getBoolean("persist.ui.seascape.disable", false);
++        if (isSeascapeDisabled) {
++            isLayoutReverse = isLayoutRtl ^ true;
++        }
++
+         if (mIsLayoutReverse != isLayoutReverse) {
+             // reversity changed, swap the order of all views.
+             int childCount = getChildCount();
+@@ -154,7 +160,7 @@ public class ReverseLinearLayout extends LinearLayout {
+             if (getGravity() != gravityToApply) setGravity(gravityToApply);
+         }
+     }
+-    
++
+     private static void reverseGroup(ViewGroup group, boolean isLayoutReverse) {
+         for (int i = 0; i < group.getChildCount(); i++) {
+             final View child = group.getChildAt(i);
+diff --git a/services/core/java/com/android/server/wm/DisplayPolicy.java b/services/core/java/com/android/server/wm/DisplayPolicy.java
+index d0457b08..d165552d 100644
+--- a/services/core/java/com/android/server/wm/DisplayPolicy.java
++++ b/services/core/java/com/android/server/wm/DisplayPolicy.java
+@@ -2352,9 +2352,10 @@ public class DisplayPolicy {
+     @NavigationBarPosition
+     int navigationBarPosition(int displayWidth, int displayHeight, int displayRotation) {
+         if (navigationBarCanMove() && displayWidth > displayHeight) {
+-            if (displayRotation == Surface.ROTATION_270) {
++            boolean isSeascapeDisabled = SystemProperties.getBoolean("persist.ui.seascape.disable", false);
++            if (displayRotation == Surface.ROTATION_270 && !isSeascapeDisabled) {
+                 return NAV_BAR_LEFT;
+-            } else if (displayRotation == Surface.ROTATION_90) {
++            } else {
+                 return NAV_BAR_RIGHT;
+             }
+         }
+-- 
+2.34.1
+

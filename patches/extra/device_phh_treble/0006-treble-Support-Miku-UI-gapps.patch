@@ -1,0 +1,39 @@
+From abf497a7c7a3daf1efebec750a3797068c5e2b7a Mon Sep 17 00:00:00 2001
+From: xiaoleGun <1592501605@qq.com>
+Date: Thu, 10 Feb 2022 09:27:23 +0800
+Subject: [PATCH 6/7] treble: Support Miku UI gapps
+
+---
+ gapps.mk | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
+
+diff --git a/gapps.mk b/gapps.mk
+index 15e12a9..c61752b 100644
+--- a/gapps.mk
++++ b/gapps.mk
+@@ -42,11 +42,19 @@ $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
+ endif
+ 
+ #Pixel Experience gapps
++#ifneq ($(wildcard vendor/gapps),)
++#IS_PHONE := true
++#$(call inherit-product,vendor/gapps/config.mk)
++#PRODUCT_PACKAGES += \
++#       phh-overrides \
++#	   com.simplemobiletools.gallery.pro \
++#
++#endif
++
++#Miku UI Gapps
+ ifneq ($(wildcard vendor/gapps),)
+-IS_PHONE := true
+-$(call inherit-product,vendor/gapps/config.mk)
++$(call inherit-product, vendor/gapps/common/common-vendor.mk)
+ PRODUCT_PACKAGES += \
+        phh-overrides \
+-	   com.simplemobiletools.gallery.pro \
+ 
+ endif
+-- 
+2.32.0 (Apple Git-132)
+
