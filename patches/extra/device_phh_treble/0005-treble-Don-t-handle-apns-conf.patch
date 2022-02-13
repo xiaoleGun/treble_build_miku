@@ -1,7 +1,7 @@
 From 691b3adbc262e3223eb292345170605f84063812 Mon Sep 17 00:00:00 2001
 From: AndyCGYan <GeForce8800Ultra@gmail.com>
 Date: Mon, 7 Feb 2022 14:49:31 +0800
-Subject: [PATCH 5/7] treble: Don't handle apns-conf
+Subject: [PATCH 5/8] treble: Don't handle apns-conf
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---

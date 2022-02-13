@@ -209,14 +209,14 @@ done
 #build_make
 DISPLAY_MSG=1
 cp -r ${extra}/build_make ${SOURCE_DIR}/build/make/extra && cd ${SOURCE_DIR}/build/make
-for i in {0001..0001}
+for i in {0001..0002}
 do apply_patches build/make extra $i
 done
 
 #device_phh_treble
 DISPLAY_MSG=1
 cp -r ${extra}/device_phh_treble ${SOURCE_DIR}/device/phh/treble/extra && cd ${SOURCE_DIR}/device/phh/treble
-for i in {0001..0007}
+for i in {0001..0008}
 do apply_patches device/phh/treble extra $i
 done
 
@@ -225,6 +225,13 @@ DISPLAY_MSG=1
 cp -r ${extra}/packages_apps_Settings ${SOURCE_DIR}/packages/apps/Settings/extra && cd ${SOURCE_DIR}/packages/apps/Settings/
 for i in {0001..0001}
 do apply_patches packages/apps/Settings extra $i
+done
+
+#system_core
+DISPLAY_MSG=1
+cp -r ${extra}/system_core ${SOURCE_DIR}/system/core/extra && cd ${SOURCE_DIR}/system/core
+for i in {0001..0001}
+do apply_patches system/core extra $i
 done
 
 #system_vold
@@ -237,7 +244,7 @@ done
 #treble_app
 DISPLAY_MSG=1
 cp -r ${extra}/treble_app ${SOURCE_DIR}/treble_app/extra && cd ${SOURCE_DIR}/treble_app
-for i in {0001..0002}
+for i in {0001..0003}
 do apply_patches treble_app extra $i
 done
 
