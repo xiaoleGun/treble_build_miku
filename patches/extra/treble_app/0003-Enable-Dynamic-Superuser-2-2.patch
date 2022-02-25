@@ -1,4 +1,4 @@
-From 4d69fcc8a6fb0740d5faa059cea60f7efb4626a5 Mon Sep 17 00:00:00 2001
+From ec4a6df5dccd50f63bd65843a3f4c9a059400da3 Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Sun, 13 Feb 2022 12:03:42 +0800
 Subject: [PATCH 3/3] Enable Dynamic Superuser (2/2)
@@ -47,10 +47,10 @@ index 819df0e..53a711b 100644
      val multiCameras = "key_misc_multi_camera"
      val forceCamera2APIHAL3 = "key_misc_force_camera2api_hal3"
 diff --git a/app/src/main/res/values-zh-rCH/strings.xml b/app/src/main/res/values-zh-rCH/strings.xml
-index 6dcf2a7..9a60b2f 100644
+index 4e5bdaf..fd45db2 100644
 --- a/app/src/main/res/values-zh-rCH/strings.xml
 +++ b/app/src/main/res/values-zh-rCH/strings.xml
-@@ -109,6 +109,8 @@
+@@ -113,6 +113,8 @@
      <string name="misc_dt2w">双击唤醒</string>
      <string name="misc_dt2w_summary">如果不会工作</string>
      <string name="misc_securize">安全</string>
@@ -60,10 +60,10 @@ index 6dcf2a7..9a60b2f 100644
      <string name="misc_debug_sensors">调试传感器</string>
      <string name="misc_remotectl">允许Phh为了调试设备接管它</string>
 diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
-index 760ecd4..3743e36 100644
+index 7d6f5b8..4b94075 100644
 --- a/app/src/main/res/values/strings.xml
 +++ b/app/src/main/res/values/strings.xml
-@@ -109,6 +109,8 @@
+@@ -113,6 +113,8 @@
      <string name="misc_dt2w">Double tap to wake</string>
      <string name="misc_dt2w_summary">Unlikely to work for you</string>
      <string name="misc_securize">Securize</string>
