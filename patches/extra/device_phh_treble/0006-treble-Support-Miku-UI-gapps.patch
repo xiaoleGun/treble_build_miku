@@ -1,7 +1,7 @@
 From abf497a7c7a3daf1efebec750a3797068c5e2b7a Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Thu, 10 Feb 2022 09:27:23 +0800
-Subject: [PATCH 6/8] treble: Support Miku UI gapps
+Subject: [PATCH 6/9] treble: Support Miku UI gapps
 
 ---
  gapps.mk | 14 +++++++++++---

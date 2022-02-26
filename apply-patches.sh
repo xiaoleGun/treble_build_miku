@@ -216,8 +216,15 @@ done
 #device_phh_treble
 DISPLAY_MSG=1
 cp -r ${extra}/device_phh_treble ${SOURCE_DIR}/device/phh/treble/extra && cd ${SOURCE_DIR}/device/phh/treble
-for i in {0001..0008}
+for i in {0001..0009}
 do apply_patches device/phh/treble extra $i
+done
+
+#frameworks_base
+DISPLAY_MSG=1
+cp -r ${extra}/frameworks_base ${SOURCE_DIR}/frameworks/base/extra && cd ${SOURCE_DIR}/frameworks/base
+for i in {0001..0005}
+do apply_patches frameworks/base extra $i
 done
 
 #packages_apps_settings
