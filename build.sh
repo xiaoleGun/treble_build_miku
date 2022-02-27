@@ -30,8 +30,17 @@ echo "Syncing repos"
 repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
 echo ""
 
+if [ ! -d miku_faceunlock ]
+then
+    git clone https://github.com/xiaoleGun/miku_faceunlock -b snow
+fi
+
 echo "Applying patches"
 bash ./treble_build/apply-patches.sh
+echo ""
+
+echo "Applying FaceUnlock patches"
+bash ./miku_faceunlock/start.sh
 echo ""
 
 echo "Setting up build environment"
