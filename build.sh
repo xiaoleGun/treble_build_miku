@@ -64,37 +64,37 @@ buildTrebleApp() {
 }
 
 buildtreble() {
-    lunch treble_arm64_bvS-userdebug
+    lunch miku_treble_arm64_bvS-userdebug
     make installclean
     make -j$(nproc --all) systemimage
-    mv $OUT/system.img $BD/system-treble_arm64_bvS.img
+    mv $OUT/system.img $BD/system-miku_treble_arm64_bvS.img
     sleep 1
-    lunch treble_arm64_bgS-userdebug
+    lunch miku_treble_arm64_bgS-userdebug
     make -j$(nproc --all) systemimage
-    mv $OUT/system.img $BD/system-treble_arm64_bgS.img
+    mv $OUT/system.img $BD/system-miku_treble_arm64_bgS.img
 }
 
 buildSasImages() {
     cd sas-creator
-    sudo bash lite-adapter.sh 64 $BD/system-treble_arm64_bvS.img
-    cp s.img $BD/system-treble_arm64_bvS-vndklite.img
+    sudo bash lite-adapter.sh 64 $BD/system-miku_treble_arm64_bvS.img
+    cp s.img $BD/system-miku_treble_arm64_bvS-vndklite.img
     sudo bash securize.sh s.img
-    cp s-secure.img $BD/system-treble_arm64_bvS-vndklite-secure.img
+    cp s-secure.img $BD/system-miku_treble_arm64_bvS-vndklite-secure.img
     sudo rm -rf s.img  s-secure.img d tmp
-    sudo bash lite-adapter.sh 64 $BD/system-treble_arm64_bgS.img
-    cp s.img $BD/system-treble_arm64_bgS-vndklite.img
+    sudo bash lite-adapter.sh 64 $BD/system-miku_treble_arm64_bgS.img
+    cp s.img $BD/system-miku_treble_arm64_bgS-vndklite.img
     sudo bash securize.sh s.img
-    cp s-secure.img $BD/system-treble_arm64_bgS-vndklite-secure.img
+    cp s-secure.img $BD/system-miku_treble_arm64_bgS-vndklite-secure.img
     sudo rm -rf s.img  s-secure.img d tmp
     cd ..
 }
 
 generatePackages() {
-    BASE_IMAGE=$BD/system-treble_arm64_bvS.img
+    BASE_IMAGE=$BD/system-miku_treble_arm64_bvS.img
     xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOW-arm64-ab-$BUILD_DATE-UNOFFICIAL.img.xz
     xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOW-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.img.xz
     xz -cv ${BASE_IMAGE%.img}-vndklite-secure.img -T0 > $BD/MikuUI-SNOW-arm64-ab-vndklite-secure-$BUILD_DATE-UNOFFICIAL.img.xz
-    BASE_IMAGE=$BD/system-treble_arm64_bgS.img
+    BASE_IMAGE=$BD/system-miku_treble_arm64_bgS.img
     xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOW-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.img.xz
     xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOW-arm64-ab-vndklite-gapps-$BUILD_DATE-UNOFFICIAL.img.xz
     xz -cv ${BASE_IMAGE%.img}-vndklite-secure.img -T0 > $BD/MikuUI-SNOW-arm64-ab-vndklite-gapps-secure-$BUILD_DATE-UNOFFICIAL.img.xz
@@ -109,12 +109,12 @@ generateOtaJson() {
         while read file; do
             packageVariant=$(echo $(basename $file) | sed -e s/^$prefix// -e s/$suffix$//)
             case $packageVariant in
-                "arm64-ab") name="treble_arm64_bvS";;
-                "arm64-ab-vndklite") name="treble_arm64_bvS-vndklite";;
-                "arm64-ab-vndklite-secure") name="treble_arm64_bvS-secure";;
-                "arm64-ab-gapps") name="treble_arm64_bgS";;
-                "arm64-ab-vndklite-gapps") name="treble_arm64_bgS-vndklite";;
-                "arm64-ab-vndklite-gapps-secure") name="treble_arm64_bgS-secure";;
+                "arm64-ab") name="miku_treble_arm64_bvS";;
+                "arm64-ab-vndklite") name="miku_treble_arm64_bvS-vndklite";;
+                "arm64-ab-vndklite-secure") name="miku_treble_arm64_bvS-secure";;
+                "arm64-ab-gapps") name="miku_treble_arm64_bgS";;
+                "arm64-ab-vndklite-gapps") name="miku_treble_arm64_bgS-vndklite";;
+                "arm64-ab-vndklite-gapps-secure") name="miku_treble_arm64_bgS-secure";;
             esac
             size=$(wc -c $file | awk '{print $1}')
             url="https://github.com/xiaoleGun/treble_build/releases/download/$VERSION/$(basename $file)"
