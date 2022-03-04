@@ -12,7 +12,7 @@ BUILD_DATE="$(date +%Y%m%d)"
 WITHOUT_CHECK_API=true
 BL=$PWD/treble_build
 BD=$HOME/builds
-VERSION="v401"
+VERSION="v401.1"
 
 if [ ! -d .repo ]
 then
