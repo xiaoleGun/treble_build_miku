@@ -269,7 +269,6 @@ for i in {0001..0001}
 do apply_patches vendor/vndk-tests extra $i
 done
 
-echo "Clean UP"
 rm -rf ${SOURCE_DIR}/build/*/{andy,extra,phh}
 rm -rf ${SOURCE_DIR}/bionic/*/{andy,extra,phh}
 rm -rf ${SOURCE_DIR}/device/phh/*/{andy,extra,phh}
