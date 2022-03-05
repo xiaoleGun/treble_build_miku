@@ -65,7 +65,7 @@ done
 #platform_frameworks_opt_telephony
 DISPLAY_MSG=1
 cp -r ${PHH}/platform_frameworks_opt_telephony ${SOURCE_DIR}/frameworks/opt/telephony/phh && cd ${SOURCE_DIR}/frameworks/opt/telephony
-for i in {0001..0003}
+for i in {0001..0005}
 do apply_patches frameworks/opt/telephony phh $i
 done
 
