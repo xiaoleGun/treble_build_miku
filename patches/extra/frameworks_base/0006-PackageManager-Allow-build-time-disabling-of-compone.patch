@@ -1,0 +1,179 @@
+From d61bbb60efc6b68a8c14fa41d9f5b35b88907b50 Mon Sep 17 00:00:00 2001
+From: Pawit Pornkitprasan <p.pawit@gmail.com>
+Date: Sun, 1 Sep 2013 16:24:14 +0700
+Subject: [PATCH 6/6] PackageManager: Allow build-time disabling of components
+
+Author: Pawit Pornkitprasan <p.pawit@gmail.com>
+Date:   Sun Sep 1 16:24:14 2013 +0700
+
+    PackageManager: allow build-time disabling of components
+
+    Allow components to be specified as disabled at build time
+    (applied on boot).
+
+    This allows stock OTA components to be marked as disabled in
+    CM builds.
+
+    Change-Id: I6e4499cc40a779792a5ea97a10137399dad7d69f
+
+Author: Gianmarco Reverberi <gianmarco.reverberi@gmail.com>
+Date:   Mon Mar 16 20:02:15 2015 +0100
+
+    SystemUpdateService: enable service but lock its receivers [1/2]
+
+    Added a check for ensure that disabled components are not
+    re-enabled at runtime
+
+    Added code for forcing enable of previously disabled components
+
+    Change-Id: Icfcfa26ccb85028d32edbb5cdb3dd7cdae85b720
+
+Author: Michael W <baddaemon87@gmail.com>
+Date:   Mon Oct 28 14:26:43 2019 +0100
+
+    PM: Allow disabling components per-device
+
+    * Introduce a new overlayable string-array
+      "config_deviceDisabledComponents"
+    * This is equally used to disable components per-device, e.g.
+      NearbyMessagingService
+    * At the same time, rename config_disabledComponents to
+      config_globallyDisabledComponents to reflect the difference
+
+    Change-Id: Ieeec0788b063a33e8a2830dd95b239c99a58466f
+
+Author: Michael W <baddaemon87@gmail.com>
+Date:   Fri Nov 1 11:11:29 2019 +0100
+
+    PackageManager: Refactor en-/disabling of components
+
+    * Don't use the same code twice, make it reusable
+
+    Change-Id: I9fc388f56cea413654a390cb0ccd15a706fb3ad8
+
+Change-Id: Ic26c9d2f080ab61e09b2d64ae48cd6f29147774a
+Signed-off-by: xiaoleGun <1592501605@qq.com>
+---
+ core/res/res/values/miku_config.xml           | 14 +++++++
+ core/res/res/values/miku_symbols.xml          |  5 +++
+ .../server/pm/PackageManagerService.java      | 42 +++++++++++++++++++
+ 3 files changed, 61 insertions(+)
+
+diff --git a/core/res/res/values/miku_config.xml b/core/res/res/values/miku_config.xml
+index b3ef736ddc17..1e9e816a0aca 100644
+--- a/core/res/res/values/miku_config.xml
++++ b/core/res/res/values/miku_config.xml
+@@ -15,6 +15,20 @@
+ -->
+ <resources>
+ 
++
++     <!-- The list of components which should be automatically disabled for a specific device.
++          Note: this MUST not be used to randomly disable components, ask for approval first! -->
++     <string-array name="config_deviceDisabledComponents" translatable="false">
++     </string-array>
++
++     <!-- The list of components which should be automatically disabled for all devices. -->
++     <string-array name="config_globallyDisabledComponents" translatable="false">
++     </string-array>
++
++     <!-- The list of components which should be forced to be enabled. -->
++     <string-array name="config_forceEnabledComponents" translatable="false">
++     </string-array>
++
+      <!-- Paths to the libraries that contain device specific key handlers -->
+      <string-array name="config_deviceKeyHandlerLibs" translatable="false">
+      </string-array>
+diff --git a/core/res/res/values/miku_symbols.xml b/core/res/res/values/miku_symbols.xml
+index 92e4801e2fba..88f062630ecb 100644
+--- a/core/res/res/values/miku_symbols.xml
++++ b/core/res/res/values/miku_symbols.xml
+@@ -16,6 +16,11 @@
+ -->
+ <resources>
+ 
++  <!-- Package Manager -->
++  <java-symbol type="array" name="config_deviceDisabledComponents" />
++  <java-symbol type="array" name="config_globallyDisabledComponents" />
++  <java-symbol type="array" name="config_forceEnabledComponents" />
++
+   <!-- Device keyhandlers -->
+   <java-symbol type="array" name="config_deviceKeyHandlerLibs" />
+   <java-symbol type="array" name="config_deviceKeyHandlerClasses" />
+diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
+index e81ba7e40205..a9c1f3bc93ed 100644
+--- a/services/core/java/com/android/server/pm/PackageManagerService.java
++++ b/services/core/java/com/android/server/pm/PackageManagerService.java
+@@ -1539,6 +1539,8 @@ public class PackageManagerService extends IPackageManager.Stub
+ 
+     private final PackageProperty mPackageProperty = new PackageProperty();
+ 
++    ArrayList<ComponentName> mDisabledComponentsList;
++
+     // Set of pending broadcasts for aggregating enable/disable of components.
+     @VisibleForTesting(visibility = Visibility.PACKAGE)
+     public static class PendingPackageBroadcasts {
+@@ -8044,6 +8046,17 @@ public class PackageManagerService extends IPackageManager.Stub
+                 Slog.i(TAG, "Deferred reconcileAppsData finished " + count + " packages");
+             }, "prepareAppData");
+ 
++            // Disable components marked for disabling at build-time
++            mDisabledComponentsList = new ArrayList<ComponentName>();
++            enableComponents(mContext.getResources().getStringArray(
++                    com.android.internal.R.array.config_deviceDisabledComponents), false);
++            enableComponents(mContext.getResources().getStringArray(
++                    com.android.internal.R.array.config_globallyDisabledComponents), false);
++
++            // Enable components marked for forced-enable at build-time
++            enableComponents(mContext.getResources().getStringArray(
++                    com.android.internal.R.array.config_forceEnabledComponents), true);
++
+             // If this is first boot after an OTA, and a normal boot, then
+             // we need to clear code cache directories.
+             // Note that we do *not* clear the application profiles. These remain valid
+@@ -8207,6 +8220,29 @@ public class PackageManagerService extends IPackageManager.Stub
+         Slog.i(TAG, "Fix for b/169414761 is applied");
+     }
+ 
++    private void enableComponents(String[] components, boolean enable) {
++        // Disable or enable components marked at build-time
++        for (String name : components) {
++            ComponentName cn = ComponentName.unflattenFromString(name);
++            if (!enable) {
++                mDisabledComponentsList.add(cn);
++            }
++            Slog.v(TAG, "Changing enabled state of " + name + " to " + enable);
++            String className = cn.getClassName();
++            PackageSetting pkgSetting = mSettings.mPackages.get(cn.getPackageName());
++            if (pkgSetting == null || pkgSetting.pkg == null
++                    || !AndroidPackageUtils.hasComponentClassName(pkgSetting.pkg, className)) {
++                Slog.w(TAG, "Unable to change enabled state of " + name + " to " + enable);
++                continue;
++            }
++            if (enable) {
++                pkgSetting.enableComponentLPw(className, UserHandle.USER_OWNER);
++            } else {
++                pkgSetting.disableComponentLPw(className, UserHandle.USER_OWNER);
++            }
++        }
++    }
++
+     /**
+      * Uncompress and install stub applications.
+      * <p>In order to save space on the system partition, some applications are shipped in a
+@@ -23981,6 +24017,12 @@ public class PackageManagerService extends IPackageManager.Stub
+     public void setComponentEnabledSetting(ComponentName componentName,
+             int newState, int flags, int userId) {
+         if (!mUserManager.exists(userId)) return;
++        // Don't allow to enable components marked for disabling at build-time
++        if (mDisabledComponentsList.contains(componentName)) {
++            Slog.d(TAG, "Ignoring attempt to set enabled state of disabled component "
++                    + componentName.flattenToString());
++            return;
++        }
+         setEnabledSetting(componentName.getPackageName(),
+                 componentName.getClassName(), newState, flags, userId, null);
+     }
+-- 
+2.32.0 (Apple Git-132)
+

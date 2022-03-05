@@ -1,7 +1,7 @@
-From 73bf216fdc18a3517dda34476029747f35480f3c Mon Sep 17 00:00:00 2001
+From f921c6221736f12f9bfdb303dfd354b824860765 Mon Sep 17 00:00:00 2001
 From: Danny Lin <danny@kdrag0n.dev>
 Date: Sat, 26 Feb 2022 12:32:12 +0800
-Subject: [PATCH 3/5] SystemUI: Use Monet colors for power menu
+Subject: [PATCH 3/6] SystemUI: Use Monet colors for power menu
 
 It's odd that the power menu doesn't use Monet colors, unlike most of
 System UI. This makes it feel more integrated with the rest of the

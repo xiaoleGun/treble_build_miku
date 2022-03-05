@@ -223,7 +223,7 @@ done
 #frameworks_base
 DISPLAY_MSG=1
 cp -r ${extra}/frameworks_base ${SOURCE_DIR}/frameworks/base/extra && cd ${SOURCE_DIR}/frameworks/base
-for i in {0001..0005}
+for i in {0001..0006}
 do apply_patches frameworks/base extra $i
 done
 
