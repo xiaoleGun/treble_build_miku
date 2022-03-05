@@ -32,7 +32,7 @@ echo ""
 
 if [ ! -d miku_faceunlock ]
 then
-    git clone https://github.com/xiaoleGun/miku_faceunlock -b snow
+    git clone https://github.com/xiaoleGun/miku_plus -b snow
 fi
 
 echo "Applying patches"
@@ -40,7 +40,7 @@ bash ./treble_build/apply-patches.sh
 echo ""
 
 echo "Applying FaceUnlock patches"
-bash ./miku_faceunlock/start.sh
+bash ./miku_plus/start.sh
 echo ""
 
 echo "Setting up build environment"
