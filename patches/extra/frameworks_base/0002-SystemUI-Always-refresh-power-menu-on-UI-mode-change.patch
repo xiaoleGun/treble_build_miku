@@ -1,4 +1,4 @@
-From 46c19815f6f94153b4cf55ff2ea5365e4f9cd387 Mon Sep 17 00:00:00 2001
+From d73a0ad58fd0c2d893bcd756e9bc505d1603cd19 Mon Sep 17 00:00:00 2001
 From: Danny Lin <danny@kdrag0n.dev>
 Date: Sat, 26 Feb 2022 12:28:41 +0800
 Subject: [PATCH 2/5] SystemUI: Always refresh power menu on UI mode change
@@ -11,17 +11,18 @@ https://twitter.com/kdrag0n/status/1445960685427433473
 
 Change-Id: Id6f6623096ed231e841ca3794b47f8a0ab54dae6
 ---
- .../android/systemui/globalactions/GlobalActionsDialogLite.java  | 1 +
- 1 file changed, 1 insertion(+)
+ .../android/systemui/globalactions/GlobalActionsDialogLite.java | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/globalactions/GlobalActionsDialogLite.java b/packages/SystemUI/src/com/android/systemui/globalactions/GlobalActionsDialogLite.java
-index a0c18eb33c49..21e9e0abf2e1 100644
+index a0c18eb33c49..2f4dd7d45406 100644
 --- a/packages/SystemUI/src/com/android/systemui/globalactions/GlobalActionsDialogLite.java
 +++ b/packages/SystemUI/src/com/android/systemui/globalactions/GlobalActionsDialogLite.java
-@@ -780,6 +780,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
+@@ -779,7 +779,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
+     @Override
      public void onUiModeChanged() {
          mContext.getTheme().applyStyle(mContext.getThemeResId(), true);
-         if (mDialog != null && mDialog.isShowing()) {
+-        if (mDialog != null && mDialog.isShowing()) {
 +        if (mDialog != null) {
              mDialog.refreshDialog();
          }
