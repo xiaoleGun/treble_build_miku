@@ -39,8 +39,8 @@ echo "Applying patches"
 bash ./treble_build/apply-patches.sh
 echo ""
 
-echo "Applying FaceUnlock patches"
-bash ./miku_plus/start.sh
+echo "Applying FaceUnlock and Per-volume control patches"
+bash ./miku_plus/start.sh faceunlock volume
 echo ""
 
 echo "Setting up build environment"
