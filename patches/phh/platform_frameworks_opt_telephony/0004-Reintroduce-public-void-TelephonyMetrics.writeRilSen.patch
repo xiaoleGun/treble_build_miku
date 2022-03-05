@@ -1,4 +1,4 @@
-From 6f116d4cdb716072261ecfe532da527182f6dad6 Mon Sep 17 00:00:00 2001
+From 6d7357f8782b9294bb71c6a199638ca919bed55c Mon Sep 17 00:00:00 2001
 From: ironydelerium <42721860+ironydelerium@users.noreply.github.com>
 Date: Fri, 31 Dec 2021 02:20:28 -0800
 Subject: [PATCH 4/5] Reintroduce 'public void
@@ -18,7 +18,7 @@ Co-authored-by: Sarah Vandomelen <sarah@sightworks.com>
  1 file changed, 13 insertions(+)
 
 diff --git a/src/java/com/android/internal/telephony/metrics/TelephonyMetrics.java b/src/java/com/android/internal/telephony/metrics/TelephonyMetrics.java
-index 5e43876df8..79d9e03dc3 100644
+index 5e43876df8..e299ad0c16 100644
 --- a/src/java/com/android/internal/telephony/metrics/TelephonyMetrics.java
 +++ b/src/java/com/android/internal/telephony/metrics/TelephonyMetrics.java
 @@ -2311,6 +2311,19 @@ public class TelephonyMetrics {
@@ -35,12 +35,12 @@ index 5e43876df8..79d9e03dc3 100644
 +     *         {@link SmsMessage#FORMAT_3GPP2}.
 +     */
 +    public void writeRilSendSms(int phoneId, int rilSerial, int tech, int format) {
-+    	writeRilSendSms(phoneId, rilSerial, tech, format, 0);
++	writeRilSendSms(phoneId, rilSerial, tech, format, 0);
 +    }
 +
      /**
       * Write Send SMS event using ImsService. Expecting response from
       * {@link #writeOnSmsSolicitedResponse}.
 -- 
-2.25.1
+2.32.0 (Apple Git-132)
 

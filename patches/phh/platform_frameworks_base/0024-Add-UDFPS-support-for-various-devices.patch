@@ -1,4 +1,4 @@
-From 4000ee81078cd2c1bc186fc1c0383d99d986066e Mon Sep 17 00:00:00 2001
+From b0954f980dd78373cb90cd780a3c1a5c5275643c Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 19 Dec 2021 17:08:22 -0500
 Subject: [PATCH 24/26] Add UDFPS support for various devices
@@ -13,11 +13,11 @@ Successfully tested on Galaxy A51, Xiaomi Mi 9, and OnePlus Nord 2
 Change-Id: I9448f06a46c178652f5b216717d914b8db55c993
 ---
  .../systemui/biometrics/UdfpsSurfaceView.java |   4 +-
- .../systemui/biometrics/UdfpsView.java        |  87 ++++--
+ .../systemui/biometrics/UdfpsView.java        |  85 ++++--
  services/core/Android.bp                      |   4 +
  .../server/biometrics/AuthService.java        | 262 +++++++++++++++++-
  .../sensors/fingerprint/UdfpsHelper.java      | 115 +++++++-
- 5 files changed, 434 insertions(+), 38 deletions(-)
+ 5 files changed, 433 insertions(+), 37 deletions(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsSurfaceView.java b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsSurfaceView.java
 index 71e33a699934..7939aaf73a7d 100644
@@ -36,7 +36,7 @@ index 71e33a699934..7939aaf73a7d 100644
  
      @Override public void surfaceCreated(SurfaceHolder holder) {
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
-index b5174e809e80..66a8c72b7cb5 100644
+index b5174e809e80..3ac253835ceb 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
 @@ -41,6 +41,12 @@ import com.android.systemui.R;
@@ -119,7 +119,7 @@ index b5174e809e80..66a8c72b7cb5 100644
          if (Build.IS_ENG || Build.IS_USERDEBUG) {
              mHbmType = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                      SETTING_HBM_TYPE, DEFAULT_HBM_TYPE, UserHandle.USER_CURRENT);
-@@ -240,22 +288,25 @@ public class UdfpsView extends FrameLayout implements DozeReceiver, UdfpsIllumin
+@@ -240,19 +288,22 @@ public class UdfpsView extends FrameLayout implements DozeReceiver, UdfpsIllumin
          if (mGhbmView != null && surface == null) {
              Log.e(TAG, "doIlluminate | surface must be non-null for GHBM");
          }
@@ -154,11 +154,7 @@ index b5174e809e80..66a8c72b7cb5 100644
 +		    }
          }
      }
--
-+    
-     @Override
-     public void stopIllumination() {
-         mIlluminationRequested = false;
+ 
 @@ -266,8 +317,6 @@ public class UdfpsView extends FrameLayout implements DozeReceiver, UdfpsIllumin
              mGhbmView.setGhbmIlluminationListener(null);
              mGhbmView.setVisibility(View.INVISIBLE);

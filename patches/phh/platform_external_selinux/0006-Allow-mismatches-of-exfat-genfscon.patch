@@ -1,4 +1,4 @@
-From 86de4ee0a818c97d1b160248919ebf35d25ab6a7 Mon Sep 17 00:00:00 2001
+From d0f6253cc465586925490b5006a4b5347e353b35 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 24 May 2020 17:22:22 +0200
 Subject: [PATCH 6/7] Allow mismatches of exfat genfscon
@@ -8,7 +8,7 @@ Subject: [PATCH 6/7] Allow mismatches of exfat genfscon
  1 file changed, 4 insertions(+)
 
 diff --git a/libsepol/cil/src/cil_post.c b/libsepol/cil/src/cil_post.c
-index 68c0318..75e5128 100644
+index 68c0318e..75e5128c 100644
 --- a/libsepol/cil/src/cil_post.c
 +++ b/libsepol/cil/src/cil_post.c
 @@ -488,6 +488,10 @@ int cil_post_genfscon_context_compare(const void *a, const void *b)
@@ -23,5 +23,5 @@ index 68c0318..75e5128 100644
  			fprintf(stderr, "Received conflicting %s vs %s but ignore\n", a_genfscon->path_str, b_genfscon->path_str);
  			return 0;
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 

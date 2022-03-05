@@ -1,4 +1,4 @@
-From 691b3adbc262e3223eb292345170605f84063812 Mon Sep 17 00:00:00 2001
+From a1e3f82b075f7a85671ed946de6143e89adfbc4f Mon Sep 17 00:00:00 2001
 From: AndyCGYan <GeForce8800Ultra@gmail.com>
 Date: Mon, 7 Feb 2022 14:49:31 +0800
 Subject: [PATCH 5/9] treble: Don't handle apns-conf
@@ -18,7 +18,7 @@ index 6a317e4..e69de29 100644
 -PRODUCT_COPY_FILES += \
 -	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 diff --git a/base.mk b/base.mk
-index a396c3b..5bb19ca 100644
+index df56fc3..9309641 100644
 --- a/base.mk
 +++ b/base.mk
 @@ -8,10 +8,6 @@ PRODUCT_COPY_FILES := \

@@ -1,4 +1,4 @@
-From 138c2e0687e5ab984fb43303ee6755537a33d6f5 Mon Sep 17 00:00:00 2001
+From 55417b9cead556478b0911694f5814e864946399 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 17 Dec 2021 17:16:14 -0500
 Subject: [PATCH 23/26] Reduce the size of udfps enroll progress bar. Some

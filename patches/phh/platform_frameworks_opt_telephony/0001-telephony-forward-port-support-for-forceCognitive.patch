@@ -1,4 +1,4 @@
-From 7f236e7e89930042c91652cb9c8b76ec0c6429b4 Mon Sep 17 00:00:00 2001
+From 860ed2c0b0dd18de77bed8cea40672c8abd6e30e Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 13 Oct 2019 17:21:31 +0800
 Subject: [PATCH 1/5] telephony: forward-port support for forceCognitive
@@ -51,5 +51,5 @@ index 21b8c4f108..2c5ab7d104 100644
              if (profileId == DATA_PROFILE_DEFAULT) {
                  profileId = getApnProfileID(apnContext.getApnType());
 -- 
-2.25.1
+2.32.0 (Apple Git-132)
 

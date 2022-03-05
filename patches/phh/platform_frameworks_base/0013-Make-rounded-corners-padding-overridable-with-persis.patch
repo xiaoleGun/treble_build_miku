@@ -1,4 +1,4 @@
-From 1b48ba5b767055f3e8a10ed4b7c55437fe63d75d Mon Sep 17 00:00:00 2001
+From bf93582321f58bbec3b865d8d6f05ae0eff37d6c Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 6 Dec 2020 12:20:08 +0100
 Subject: [PATCH 13/26] Make rounded corners padding overridable with

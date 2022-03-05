@@ -1,4 +1,4 @@
-From 843358e294b19c3f41d8276c3eefab22147b71ba Mon Sep 17 00:00:00 2001
+From 894a61fb62f49c4b31d48341f06b13c02f857711 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 31 Mar 2021 23:32:37 +0200
 Subject: [PATCH 2/7] Workaround device/phh/treble conflict with SELinux policy
@@ -17,7 +17,7 @@ simply ignore them.
  3 files changed, 30 insertions(+), 8 deletions(-)
 
 diff --git a/libsepol/cil/src/cil_binary.c b/libsepol/cil/src/cil_binary.c
-index 03d53e1..160fd0e 100644
+index 03d53e1f..160fd0e0 100644
 --- a/libsepol/cil/src/cil_binary.c
 +++ b/libsepol/cil/src/cil_binary.c
 @@ -515,13 +515,17 @@ int cil_typealias_to_policydb(policydb_t *pdb, struct cil_alias *cil_alias)
@@ -49,7 +49,7 @@ index 03d53e1..160fd0e 100644
  	return rc;
  }
 diff --git a/libsepol/cil/src/cil_build_ast.c b/libsepol/cil/src/cil_build_ast.c
-index 307b1ee..94d55d7 100644
+index 307b1ee3..aaec0a9b 100644
 --- a/libsepol/cil/src/cil_build_ast.c
 +++ b/libsepol/cil/src/cil_build_ast.c
 @@ -108,7 +108,7 @@ int cil_gen_node(struct cil_db *db, struct cil_tree_node *ast_node, struct cil_s
@@ -76,7 +76,7 @@ index 307b1ee..94d55d7 100644
 -				goto exit;
 +                if(
 +                        strcmp(key, "sysfs_usb_supply") == 0 ||
-+                        strcmp(key, "hostapd") == 0 || 
++                        strcmp(key, "hostapd") == 0 ||
 +                        strcmp(key, "rpmb_device") == 0) {
 +                    cil_log(CIL_ERR, "Ignoring...");
 +                } else {
@@ -86,10 +86,10 @@ index 307b1ee..94d55d7 100644
  			/* multiple_decls is enabled and works for this datum type, add node */
  			cil_list_append(prev->nodes, CIL_NODE, ast_node);
 diff --git a/libsepol/cil/src/cil_resolve_ast.c b/libsepol/cil/src/cil_resolve_ast.c
-index e72abde..db3f24f 100644
+index 87575860..21e9718b 100644
 --- a/libsepol/cil/src/cil_resolve_ast.c
 +++ b/libsepol/cil/src/cil_resolve_ast.c
-@@ -512,7 +512,13 @@ int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_args, enu
+@@ -508,7 +508,13 @@ int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_args, enu
  	}
  	if (NODE(alias_datum)->flavor != alias_flavor) {
  		cil_log(CIL_ERR, "%s is not an alias\n",alias_datum->name);
@@ -104,7 +104,7 @@ index e72abde..db3f24f 100644
  		goto exit;
  	}
  
-@@ -553,7 +559,12 @@ int cil_resolve_alias_to_actual(struct cil_tree_node *current, enum cil_flavor f
+@@ -549,7 +555,12 @@ int cil_resolve_alias_to_actual(struct cil_tree_node *current, enum cil_flavor f
  	int limit = 2;
  
  	if (alias->actual == NULL) {
@@ -119,5 +119,5 @@ index e72abde..db3f24f 100644
  	}
  
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 

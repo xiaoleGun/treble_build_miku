@@ -1,4 +1,4 @@
-From c7c361eda9f8cb67a15d54817e493d4ff151ddb0 Mon Sep 17 00:00:00 2001
+From a456de930940f48b07813f0e7abb89ab28bef656 Mon Sep 17 00:00:00 2001
 From: Ryan Press <ryan@presslab.us>
 Date: Tue, 25 Jan 2022 11:29:41 -0800
 Subject: [PATCH 5/5] Fix Huawei signal strength indicator
@@ -180,5 +180,5 @@ index d18efdcb9c..26c0f51ab8 100644
              mRil.mSignalStrengthRegistrant.notifyRegistrant(new AsyncResult (null, ss, null));
          }
 -- 
-2.25.1
+2.32.0 (Apple Git-132)
 

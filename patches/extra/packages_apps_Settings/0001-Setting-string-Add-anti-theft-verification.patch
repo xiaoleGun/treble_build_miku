@@ -1,4 +1,4 @@
-From 20d2d71e405849487df2fff618a9c6432c353358 Mon Sep 17 00:00:00 2001
+From d5d485dea6df0fe818ce16f20720abf80f56716d Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sun, 6 Feb 2022 15:16:51 +0800
 Subject: [PATCH] Setting: string: Add anti-theft verification
@@ -15,27 +15,27 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
  5 files changed, 23 insertions(+)
 
 diff --git a/res/values-zh-rCN/strings.xml b/res/values-zh-rCN/strings.xml
-index 1198102afd..056e840dfc 100644
+index 1198102afd..078f69ca0e 100644
 --- a/res/values-zh-rCN/strings.xml
 +++ b/res/values-zh-rCN/strings.xml
 @@ -5600,4 +5600,8 @@
      <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"“<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>”想连接到此手机。\n\n您之前没有连接过“<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>”。"</string>
      <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"不连接"</string>
      <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"连接"</string>
-+    
++
 +    <!-- Some simple validation -->
 +    <string name="verification_title">GSI防盗验证</string>
 +    <string name="verification_sentence">“给岁月以文明，而不是给文明以岁月”</string>
  </resources>
 diff --git a/res/values-zh-rHK/strings.xml b/res/values-zh-rHK/strings.xml
-index 2ae7e92658..032e954c00 100644
+index 2ae7e92658..171c8c061d 100644
 --- a/res/values-zh-rHK/strings.xml
 +++ b/res/values-zh-rHK/strings.xml
 @@ -5566,4 +5566,8 @@
      <string name="bluetooth_connect_access_dialog_content" msgid="4336436466468405850">"「<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>」想連接此手機。\n\n請注意，您從未連接「<xliff:g id="DEVICE_NAME_1">%2$s</xliff:g>」"</string>
      <string name="bluetooth_connect_access_dialog_negative" msgid="4944672755226375059">"不要連接"</string>
      <string name="bluetooth_connect_access_dialog_positive" msgid="3630561675207269710">"連接"</string>
-+    
++
 +    <!-- Some simple validation -->
 +    <string name="verification_title">GSI防盜驗證</string>
 +    <string name="verification_sentence">“給歲月以文明，而不是給文明以歲月”</string>

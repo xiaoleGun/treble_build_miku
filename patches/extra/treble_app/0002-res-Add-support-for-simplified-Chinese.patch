@@ -1,4 +1,4 @@
-From 97d4dc6cda96784301afcf4ba7c12595b87cc494 Mon Sep 17 00:00:00 2001
+From edb4c5f83f59caf02bc4b86065369faab9f6a6c6 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Wed, 9 Feb 2022 14:16:06 +0800
 Subject: [PATCH 2/3] res: Add support for simplified Chinese
@@ -11,8 +11,8 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
  app/src/main/res/values-zh-rCH/pref_nubia.xml |  75 +++++++++
  .../main/res/values-zh-rCH/pref_oneplus.xml   |  29 ++++
  .../main/res/values-zh-rCH/pref_samsung.xml   |  17 ++
- app/src/main/res/values-zh-rCH/strings.xml    | 154 ++++++++++++++++++
- 7 files changed, 388 insertions(+)
+ app/src/main/res/values-zh-rCH/strings.xml    | 155 ++++++++++++++++++
+ 7 files changed, 389 insertions(+)
  create mode 100644 app/src/main/res/values-zh-rCH/pref_custom.xml
  create mode 100644 app/src/main/res/values-zh-rCH/pref_huawei.xml
  create mode 100644 app/src/main/res/values-zh-rCH/pref_misc.xml
@@ -293,10 +293,10 @@ index 0000000..f3b12e2
 +</resources>
 diff --git a/app/src/main/res/values-zh-rCH/strings.xml b/app/src/main/res/values-zh-rCH/strings.xml
 new file mode 100644
-index 0000000..4e5bdaf
+index 0000000..dd298b3
 --- /dev/null
 +++ b/app/src/main/res/values-zh-rCH/strings.xml
-@@ -0,0 +1,154 @@
+@@ -0,0 +1,155 @@
 +<resources>
 +    <string name="app_name">PhhTrebleApp</string>
 +    <string name="title_activity_settings">设置</string>
@@ -344,7 +344,7 @@ index 0000000..4e5bdaf
 +    <string name="general_enable_dt2w">启用双击唤醒</string>
 +    <string name="general_double_tap_to_wake">启用双击唤醒</string>
 +    <string name="general_game_mode">启用游戏模式</string>
-+    <string name="general_usb_otg">启用OTG</string> 
++    <string name="general_usb_otg">启用OTG</string>
 +    <string name="general_misc">杂项</string>
 +    <string name="general_other">其它</string>
 +    <string name="general_requires_a_reboot">需要重启</string>
@@ -443,6 +443,7 @@ index 0000000..4e5bdaf
 +    <string name="samsung_high_brightness">启用扩展亮度范围</string>
 +    <string name="samsung_glove_mode">启用手套模式</string>
 +    <string name="samsung_wireless_charging_transmit">启用反向无线充电 (如果适用)</string>
++    <string name="samsung_fod_single_click">轻触指纹以打开设备</string>
 +    <string name="samsung_camera_ids">启用所有摄像头访问权限</string>
 +    <string name="samsung_camera_ids_summary">需要Android 10的Vendor</string>
 +    <string name="samsung_workarounds">替代方案</string>

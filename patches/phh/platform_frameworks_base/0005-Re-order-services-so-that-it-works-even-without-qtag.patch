@@ -1,4 +1,4 @@
-From 39af6b083f3e9c7da8df3294c17300bb6549a514 Mon Sep 17 00:00:00 2001
+From 6cadadb537473837d7b172a68ab9ba5517cc898c Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 8 Nov 2018 23:04:03 +0100
 Subject: [PATCH 05/26] Re-order services so that it works even without qtaguid
