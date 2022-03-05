@@ -30,7 +30,7 @@ echo "Syncing repos"
 repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
 echo ""
 
-if [ ! -d miku_faceunlock ]
+if [ ! -d miku_plus ]
 then
     git clone https://github.com/xiaoleGun/miku_plus -b snow
 fi
