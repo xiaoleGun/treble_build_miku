@@ -3,7 +3,7 @@
 SOURCE_DIR=$PWD
 PHH=${SOURCE_DIR}/treble_build/patches/phh
 Andy=${SOURCE_DIR}/treble_build/patches/Andy
-extra=${SOURCE_DIR}/treble_build/patches/extra
+personal=${SOURCE_DIR}/treble_build/patches/personal
 
 RED_BOLD="\e[1;31m"
 RED_BOLD_HIGHLIGHT="\e[1;41m"
@@ -208,75 +208,75 @@ done
 
 #build_make
 DISPLAY_MSG=1
-cp -r ${extra}/build_make ${SOURCE_DIR}/build/make/extra && cd ${SOURCE_DIR}/build/make
+cp -r ${personal}/build_make ${SOURCE_DIR}/build/make/personal && cd ${SOURCE_DIR}/build/make
 for i in {0001..0002}
-do apply_patches build/make extra $i
+do apply_patches build/make personal $i
 done
 
 #device_phh_treble
 DISPLAY_MSG=1
-cp -r ${extra}/device_phh_treble ${SOURCE_DIR}/device/phh/treble/extra && cd ${SOURCE_DIR}/device/phh/treble
+cp -r ${personal}/device_phh_treble ${SOURCE_DIR}/device/phh/treble/personal && cd ${SOURCE_DIR}/device/phh/treble
 for i in {0001..0009}
-do apply_patches device/phh/treble extra $i
+do apply_patches device/phh/treble personal $i
 done
 
 #frameworks_base
 DISPLAY_MSG=1
-cp -r ${extra}/frameworks_base ${SOURCE_DIR}/frameworks/base/extra && cd ${SOURCE_DIR}/frameworks/base
+cp -r ${personal}/frameworks_base ${SOURCE_DIR}/frameworks/base/personal && cd ${SOURCE_DIR}/frameworks/base
 for i in {0001..0006}
-do apply_patches frameworks/base extra $i
+do apply_patches frameworks/base personal $i
 done
 
 #packages_apps_settings
 DISPLAY_MSG=1
-cp -r ${extra}/packages_apps_Settings ${SOURCE_DIR}/packages/apps/Settings/extra && cd ${SOURCE_DIR}/packages/apps/Settings/
+cp -r ${personal}/packages_apps_Settings ${SOURCE_DIR}/packages/apps/Settings/personal && cd ${SOURCE_DIR}/packages/apps/Settings/
 for i in {0001..0001}
-do apply_patches packages/apps/Settings extra $i
+do apply_patches packages/apps/Settings personal $i
 done
 
 #system_core
 DISPLAY_MSG=1
-cp -r ${extra}/system_core ${SOURCE_DIR}/system/core/extra && cd ${SOURCE_DIR}/system/core
+cp -r ${personal}/system_core ${SOURCE_DIR}/system/core/personal && cd ${SOURCE_DIR}/system/core
 for i in {0001..0001}
-do apply_patches system/core extra $i
+do apply_patches system/core personal $i
 done
 
 #system_vold
 DISPLAY_MSG=1
-cp -r ${extra}/system_vold ${SOURCE_DIR}/system/vold/extra && cd ${SOURCE_DIR}/system/vold
+cp -r ${personal}/system_vold ${SOURCE_DIR}/system/vold/personal && cd ${SOURCE_DIR}/system/vold
 for i in {0001..0007}
-do apply_patches system/vold extra $i
+do apply_patches system/vold personal $i
 done
 
 #treble_app
 DISPLAY_MSG=1
-cp -r ${extra}/treble_app ${SOURCE_DIR}/treble_app/extra && cd ${SOURCE_DIR}/treble_app
+cp -r ${personal}/treble_app ${SOURCE_DIR}/treble_app/personal && cd ${SOURCE_DIR}/treble_app
 for i in {0001..0003}
-do apply_patches treble_app extra $i
+do apply_patches treble_app personal $i
 done
 
 #vendor/miku
 DISPLAY_MSG=1
-cp -r ${extra}/vendor_miku ${SOURCE_DIR}/vendor/miku/extra && cd ${SOURCE_DIR}/vendor/miku
+cp -r ${personal}/vendor_miku ${SOURCE_DIR}/vendor/miku/personal && cd ${SOURCE_DIR}/vendor/miku
 for i in {0001..0001}
-do apply_patches vendor/miku extra $i
+do apply_patches vendor/miku personal $i
 done
 
 #vendor/vndk-tests
 DISPLAY_MSG=1
-cp -r ${extra}/vendor_vndk-tests ${SOURCE_DIR}/vendor/vndk-tests/extra && cd ${SOURCE_DIR}/vendor/vndk-tests
+cp -r ${personal}/vendor_vndk-tests ${SOURCE_DIR}/vendor/vndk-tests/personal && cd ${SOURCE_DIR}/vendor/vndk-tests
 for i in {0001..0001}
-do apply_patches vendor/vndk-tests extra $i
+do apply_patches vendor/vndk-tests personal $i
 done
 
-rm -rf ${SOURCE_DIR}/build/*/{andy,extra,phh}
-rm -rf ${SOURCE_DIR}/bionic/*/{andy,extra,phh}
-rm -rf ${SOURCE_DIR}/device/phh/*/{andy,extra,phh}
-rm -rf ${SOURCE_DIR}/external/*/{andy,extra,phh}
-rm -rf ${SOURCE_DIR}/frameworks/*/{andy,extra,phh}
-rm -rf ${SOURCE_DIR}/frameworks/opt/*/{andy,extra,phh}
-rm -rf ${SOURCE_DIR}/hardware/*/{andy,extra,phh}
-rm -rf ${SOURCE_DIR}/packages/apps/*/{andy,extra,phh}
-rm -rf ${SOURCE_DIR}/system/*/{andy,extra,phh}
-rm -rf ${SOURCE_DIR}/treble_app/{andy,extra,phh}
-rm -rf ${SOURCE_DIR}/vendor/*/{andy,extra,phh}
+rm -rf ${SOURCE_DIR}/build/*/{andy,personal,phh}
+rm -rf ${SOURCE_DIR}/bionic/*/{andy,personal,phh}
+rm -rf ${SOURCE_DIR}/device/phh/*/{andy,personal,phh}
+rm -rf ${SOURCE_DIR}/external/*/{andy,personal,phh}
+rm -rf ${SOURCE_DIR}/frameworks/*/{andy,personal,phh}
+rm -rf ${SOURCE_DIR}/frameworks/opt/*/{andy,personal,phh}
+rm -rf ${SOURCE_DIR}/hardware/*/{andy,personal,phh}
+rm -rf ${SOURCE_DIR}/packages/apps/*/{andy,personal,phh}
+rm -rf ${SOURCE_DIR}/system/*/{andy,personal,phh}
+rm -rf ${SOURCE_DIR}/treble_app/{andy,personal,phh}
+rm -rf ${SOURCE_DIR}/vendor/*/{andy,personal,phh}
