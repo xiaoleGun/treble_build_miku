@@ -12,7 +12,7 @@ BUILD_DATE="$(date +%Y%m%d)"
 WITHOUT_CHECK_API=true
 BL=$PWD/treble_build
 BD=$HOME/builds
-VERSION="v401.1"
+VERSION="0.9.7"
 
 if [ ! -d .repo ]
 then
@@ -104,7 +104,7 @@ generatePackages() {
 generateOtaJson() {
     prefix="MikuUI-SNOW-"
     suffix="-$BUILD_DATE-UNOFFICIAL.img.xz"
-    json="{\"version\": \"$VERSION\",\"date\": \"$(date +%s -d '-6hours')\",\"variants\": ["
+    json="{\"version\": \"$VERSION\",\"date\": \"$(date +%s -d '-4hours')\",\"variants\": ["
     find $BD -name "*.img.xz" | {
         while read file; do
             packageVariant=$(echo $(basename $file) | sed -e s/^$prefix// -e s/$suffix$//)
