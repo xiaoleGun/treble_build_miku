@@ -1,7 +1,7 @@
-From e2392f1b2f4afbf783fd6b1b25c2d905828c71f1 Mon Sep 17 00:00:00 2001
+From 4454718ad2ae6b79a1a16bfc038787dda5d000a9 Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Wed, 3 Mar 2021 06:31:17 -0500
-Subject: [PATCH 3/4] Restore /sbin for Magisk compatibility
+Subject: [PATCH 3/5] Restore /sbin for Magisk compatibility
 
 Squash of:
 - Revert "Do not create /sbin"
@@ -83,5 +83,5 @@ index bf6e986c4..090fa5a78 100644
      %EXPORT_GLOBAL_GCOV_OPTIONS%
      %EXPORT_GLOBAL_CLANG_COVERAGE_OPTIONS%
 -- 
-2.25.1
+2.32.0 (Apple Git-132)
 

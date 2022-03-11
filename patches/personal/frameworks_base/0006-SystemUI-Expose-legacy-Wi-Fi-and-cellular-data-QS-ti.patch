@@ -1,7 +1,7 @@
-From 10c02b954c958e4c64df4377e4cf8ae30b813636 Mon Sep 17 00:00:00 2001
+From 2637027ac75130c102bf2aa5c8dd9e86474cffbd Mon Sep 17 00:00:00 2001
 From: Danny Lin <danny@kdrag0n.dev>
 Date: Sat, 26 Feb 2022 12:41:10 +0800
-Subject: [PATCH 4/6] SystemUI: Expose legacy Wi-Fi and cellular data QS tiles
+Subject: [PATCH 6/8] SystemUI: Expose legacy Wi-Fi and cellular data QS tiles
 
 We'll still use Android 12's unified internet settings and the Internet
 tile by default, but expose the legacy Wi-Fi and cellular data tiles so

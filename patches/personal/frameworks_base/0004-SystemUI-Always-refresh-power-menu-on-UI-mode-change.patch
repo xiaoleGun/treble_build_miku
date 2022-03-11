@@ -1,7 +1,7 @@
-From efbf7c9c75df1a82d3b63cafe664e7960121b6e1 Mon Sep 17 00:00:00 2001
+From 32b3fff7af07327e0b43832ddaa3e865b07e7d9f Mon Sep 17 00:00:00 2001
 From: Danny Lin <danny@kdrag0n.dev>
 Date: Sat, 26 Feb 2022 12:28:41 +0800
-Subject: [PATCH 2/6] SystemUI: Always refresh power menu on UI mode change
+Subject: [PATCH 4/8] SystemUI: Always refresh power menu on UI mode change
 
 This is necessary for reliably theming the global actions dialog with
 dynamic colors and adapting it to light/dark themes.

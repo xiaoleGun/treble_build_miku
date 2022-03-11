@@ -1,7 +1,7 @@
-From 1c13959077f9616c050b4ee92420f561b3af6121 Mon Sep 17 00:00:00 2001
+From 605a46d82d918cd4c2a6a8ba0d028bf4a87c42df Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Wed, 26 Feb 2020 07:23:44 +0200
-Subject: [PATCH 4/4] fix offline charger v7
+Subject: [PATCH 4/5] fix offline charger v7
 
 	modified:   rootdir/init.rc
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 4/4] fix offline charger v7
  1 file changed, 11 insertions(+), 2 deletions(-)
 
 diff --git a/rootdir/init.rc b/rootdir/init.rc
-index 376a678a8..6434d06bf 100644
+index 98fb6efd0..30c7ecb3d 100644
 --- a/rootdir/init.rc
 +++ b/rootdir/init.rc
 @@ -11,6 +11,11 @@ import /vendor/etc/init/hw/init.${ro.hardware}.rc
@@ -33,7 +33,7 @@ index 376a678a8..6434d06bf 100644
      trigger late-init
  
  on load_persist_props_action
-@@ -1090,8 +1095,12 @@ on nonencrypted
+@@ -1104,8 +1109,12 @@ on nonencrypted
  on property:sys.init_log_level=*
      loglevel ${sys.init_log_level}
  
@@ -48,5 +48,5 @@ index 376a678a8..6434d06bf 100644
  on property:vold.decrypt=trigger_load_persist_props
      load_persist_props
 -- 
-2.25.1
+2.32.0 (Apple Git-132)
 

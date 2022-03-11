@@ -1,7 +1,7 @@
-From 020cb5ed9ce51078930186ad8ebc2afea3ae53f1 Mon Sep 17 00:00:00 2001
+From 7c1b9e4acb1c32f27b51801a9cbec882844ab199 Mon Sep 17 00:00:00 2001
 From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Fri, 9 Mar 2018 15:41:26 +0800
-Subject: [PATCH 1/2] UI: Disable left (seascape) navigation bar optionally
+Subject: [PATCH 2/8] UI: Disable left (seascape) navigation bar optionally
 
 Toggle this behaviour with property "persist.ui.seascape.disable"
 
@@ -12,7 +12,7 @@ Change-Id: Ieb58efa4b59feeb0c4ac70e497f4c59aa04210d6
  2 files changed, 10 insertions(+), 3 deletions(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/navigationbar/buttons/ReverseLinearLayout.java b/packages/SystemUI/src/com/android/systemui/navigationbar/buttons/ReverseLinearLayout.java
-index f1e13664..f43bef85 100644
+index f1e1366404a2..f43bef8532b8 100644
 --- a/packages/SystemUI/src/com/android/systemui/navigationbar/buttons/ReverseLinearLayout.java
 +++ b/packages/SystemUI/src/com/android/systemui/navigationbar/buttons/ReverseLinearLayout.java
 @@ -16,6 +16,7 @@ package com.android.systemui.navigationbar.buttons;
@@ -45,7 +45,7 @@ index f1e13664..f43bef85 100644
          for (int i = 0; i < group.getChildCount(); i++) {
              final View child = group.getChildAt(i);
 diff --git a/services/core/java/com/android/server/wm/DisplayPolicy.java b/services/core/java/com/android/server/wm/DisplayPolicy.java
-index d0457b08..d165552d 100644
+index d0457b08aa34..d165552d5ce8 100644
 --- a/services/core/java/com/android/server/wm/DisplayPolicy.java
 +++ b/services/core/java/com/android/server/wm/DisplayPolicy.java
 @@ -2352,9 +2352,10 @@ public class DisplayPolicy {
@@ -62,5 +62,5 @@ index d0457b08..d165552d 100644
              }
          }
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 

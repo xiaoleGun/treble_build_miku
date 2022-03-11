@@ -1,7 +1,7 @@
-From d61bbb60efc6b68a8c14fa41d9f5b35b88907b50 Mon Sep 17 00:00:00 2001
+From d66fbecd50a0f06b1bf1a2808e5fda8e325de842 Mon Sep 17 00:00:00 2001
 From: Pawit Pornkitprasan <p.pawit@gmail.com>
 Date: Sun, 1 Sep 2013 16:24:14 +0700
-Subject: [PATCH 6/6] PackageManager: Allow build-time disabling of components
+Subject: [PATCH 8/8] PackageManager: Allow build-time disabling of components
 
 Author: Pawit Pornkitprasan <p.pawit@gmail.com>
 Date:   Sun Sep 1 16:24:14 2013 +0700
