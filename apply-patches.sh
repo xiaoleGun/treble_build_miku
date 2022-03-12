@@ -166,7 +166,7 @@ done
 #device_phh_treble
 DISPLAY_MSG=1
 cp -r ${personal}/device_phh_treble ${SOURCE_DIR}/device/phh/treble/personal && cd ${SOURCE_DIR}/device/phh/treble
-for i in {0001..0013}
+for i in {0001..0014}
 do apply_patches device/phh/treble personal $i
 done
 
