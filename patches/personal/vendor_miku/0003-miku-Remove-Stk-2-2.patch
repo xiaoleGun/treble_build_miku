@@ -1,0 +1,24 @@
+From 74b5133c3b94cbb72bcfa3261b3041ee7f309735 Mon Sep 17 00:00:00 2001
+From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
+Date: Sat, 12 Mar 2022 10:26:44 +0800
+Subject: [PATCH 3/3] miku: Remove Stk [2/2]
+
+---
+ build/product/miku_product.mk | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/build/product/miku_product.mk b/build/product/miku_product.mk
+index 7fd32e4..5236637 100644
+--- a/build/product/miku_product.mk
++++ b/build/product/miku_product.mk
+@@ -34,7 +34,6 @@ PRODUCT_PACKAGES += \
+     messaging \
+     PartnerBookmarksProvider \
+     QuickAccessWallet \
+-    Stk \
+     TimeZoneUpdater \
+     ThemePicker 
+ 
+-- 
+2.32.0 (Apple Git-132)
+

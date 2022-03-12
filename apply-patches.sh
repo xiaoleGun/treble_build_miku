@@ -159,14 +159,14 @@ done
 #build_make
 DISPLAY_MSG=1
 cp -r ${personal}/build_make ${SOURCE_DIR}/build/make/personal && cd ${SOURCE_DIR}/build/make
-for i in {0001..0004}
+for i in {0001..0005}
 do apply_patches build/make personal $i
 done
 
 #device_phh_treble
 DISPLAY_MSG=1
 cp -r ${personal}/device_phh_treble ${SOURCE_DIR}/device/phh/treble/personal && cd ${SOURCE_DIR}/device/phh/treble
-for i in {0001..0012}
+for i in {0001..0013}
 do apply_patches device/phh/treble personal $i
 done
 
@@ -222,7 +222,7 @@ done
 #vendor/miku
 DISPLAY_MSG=1
 cp -r ${personal}/vendor_miku ${SOURCE_DIR}/vendor/miku/personal && cd ${SOURCE_DIR}/vendor/miku
-for i in {0001..0002}
+for i in {0001..0003}
 do apply_patches vendor/miku personal $i
 done
 

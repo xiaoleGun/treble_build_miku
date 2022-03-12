@@ -1,0 +1,24 @@
+From 0979f55cae35440b12ef3b408c08f9fdb28ea7f7 Mon Sep 17 00:00:00 2001
+From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
+Date: Sat, 12 Mar 2022 10:13:39 +0800
+Subject: [PATCH 5/5] build: Remove Stk [1/2]
+
+---
+ target/product/generic_system.mk | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/target/product/generic_system.mk b/target/product/generic_system.mk
+index f13c9db4d..a559e244d 100644
+--- a/target/product/generic_system.mk
++++ b/target/product/generic_system.mk
+@@ -32,7 +32,6 @@ PRODUCT_PACKAGES += \
+ PRODUCT_PACKAGES += \
+     LiveWallpapersPicker \
+     PartnerBookmarksProvider \
+-    Stk \
+     Tag \
+ 
+ # OTA support
+-- 
+2.32.0 (Apple Git-132)
+

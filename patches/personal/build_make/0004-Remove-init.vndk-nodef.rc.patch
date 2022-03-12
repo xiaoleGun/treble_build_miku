@@ -1,7 +1,7 @@
 From 80f214cb7af8e12f667d39ec97e3c8fd2c883cb9 Mon Sep 17 00:00:00 2001
 From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Wed, 8 Dec 2021 07:04:53 +0000
-Subject: [PATCH 4/4] Remove init.vndk-nodef.rc
+Subject: [PATCH 4/5] Remove init.vndk-nodef.rc
 
 This partially reverts "Deprecate VNDK-lite support from Legacy GSI".
 

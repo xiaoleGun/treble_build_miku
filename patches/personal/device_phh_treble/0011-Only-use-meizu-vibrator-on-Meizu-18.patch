@@ -1,7 +1,7 @@
 From d66cf845759354099d408519d53b94bc1ecf9f23 Mon Sep 17 00:00:00 2001
 From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Sun, 27 Jun 2021 05:21:38 +0000
-Subject: [PATCH 11/12] Only use meizu-vibrator on Meizu 18
+Subject: [PATCH 11/13] Only use meizu-vibrator on Meizu 18
 
 - Convert manifest to VINTF fragment
 - If not the target device, bind to dummy manifest on boot
