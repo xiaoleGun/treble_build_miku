@@ -123,6 +123,7 @@ generateOtaJson() {
         done
         json="${json%?}]}"
         echo "$json" | jq . > $BL/ota.json
+        cp -r $BL/ota.json $BD/ota.json
     }
 }
 
