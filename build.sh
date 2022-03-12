@@ -90,6 +90,7 @@ buildSasImages() {
 }
 
 generatePackages() {
+    rm -rf $BD/MikuUI-*.img.xz
     BASE_IMAGE=$BD/system-miku_treble_arm64_bvS.img
     xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOW-arm64-ab-$BUILD_DATE-UNOFFICIAL.img.xz
     xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOW-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.img.xz
