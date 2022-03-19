@@ -36,7 +36,8 @@ then
 fi
 
 echo "Applying patches"
-bash ./treble_build_miku/apply-patches.sh
+bash $BL/apply-patches.sh $BL phh
+bash $BL/apply-patches.sh $BL personal
 echo ""
 
 echo "Applying FaceUnlock and Per-volume control patches"
