@@ -10,7 +10,7 @@ set -e
 START=`date +%s`
 BUILD_DATE="$(date +%Y%m%d)"
 WITHOUT_CHECK_API=true
-BL=$PWD/treble_build
+BL=$PWD/treble_build_miku
 BD=$HOME/builds
 VERSION="0.9.7f"
 
@@ -22,7 +22,7 @@ then
 
     echo "Preparing local manifest"
     mkdir -p .repo/local_manifests
-    cp ./treble_build/local_manifests_treble/manifest.xml .repo/local_manifests/miku-treble.xml
+    cp ./treble_build_miku/local_manifests_treble/manifest.xml .repo/local_manifests/miku-treble.xml
     echo ""
 fi
 
@@ -36,7 +36,7 @@ then
 fi
 
 echo "Applying patches"
-bash ./treble_build/apply-patches.sh
+bash ./treble_build_miku/apply-patches.sh
 echo ""
 
 echo "Applying FaceUnlock and Per-volume control patches"
@@ -118,7 +118,7 @@ generateOtaJson() {
                 "arm64-ab-vndklite-gapps-secure") name="miku_treble_arm64_bgS-secure";;
             esac
             size=$(wc -c $file | awk '{print $1}')
-            url="https://github.com/xiaoleGun/treble_build/releases/download/$VERSION/$(basename $file)"
+            url="https://github.com/xiaoleGun/treble_build_miku/releases/download/$VERSION/$(basename $file)"
             json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
         done
         json="${json%?}]}"

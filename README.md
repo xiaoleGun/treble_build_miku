@@ -15,11 +15,11 @@ To get started with building Miku UI GSI, you'll need to get familiar with [Git 
     ```
 - Clone this repo:
     ```
-    git clone https://github.com/xiaoleGun/treble_build -b snow
+    git clone https://github.com/xiaoleGun/treble_build_miku -b snow
     ```
 - Finally, start the build script:
     ```
-    bash treble_build/build.sh
+    bash treble_build_miku/build.sh
     ```
 
 ## Credits

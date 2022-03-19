@@ -1,4 +1,4 @@
-From d66cf845759354099d408519d53b94bc1ecf9f23 Mon Sep 17 00:00:00 2001
+From 0714e7e81866a394d9854acf4c31cc9b936b8e1e Mon Sep 17 00:00:00 2001
 From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Sun, 27 Jun 2021 05:21:38 +0000
 Subject: [PATCH 11/14] Only use meizu-vibrator on Meizu 18

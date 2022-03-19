@@ -1,4 +1,4 @@
-From b9293599bca961cf5c59c36d03ab51cfcc1dbc38 Mon Sep 17 00:00:00 2001
+From d048b52a3d45000e1ce6884d323ac2e6a62cd0fe Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Tue, 1 Feb 2022 14:45:40 +0000
 Subject: [PATCH 08/14] treble: Add Dynamic Superuser

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 SOURCE_DIR=$PWD
-PHH=${SOURCE_DIR}/treble_build/patches/phh
-personal=${SOURCE_DIR}/treble_build/patches/personal
+PHH=${SOURCE_DIR}/treble_build_miku/patches/phh
+personal=${SOURCE_DIR}/treble_build_miku/patches/personal
 
 RED_BOLD="\e[1;31m"
 RED_BOLD_HIGHLIGHT="\e[1;41m"
