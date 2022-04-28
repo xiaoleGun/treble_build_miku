@@ -1,7 +1,7 @@
-From 26c5c0e3e50f45c20c16363c5fa9853c2698b9da Mon Sep 17 00:00:00 2001
+From 0dda3c82e86bdc8d3a1416f89ab1f3830741e566 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Fri, 11 Feb 2022 19:27:50 +0800
-Subject: [PATCH 07/14] treble: Add OTA JSON to Miku makefile
+Subject: [PATCH 09/14] treble: Add OTA JSON to Miku makefile
 
 ---
  miku.mk | 6 +++++-
@@ -24,5 +24,5 @@ index bc0a208..80cd864 100644
 +	ro.system.ota.json_url=https://raw.githubusercontent.com/xiaoleGun/treble_build_miku/snow/ota.json
 \ No newline at end of file
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 

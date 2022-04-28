@@ -1,7 +1,7 @@
-From b64676557db9492dbb6c327897da58ff50bcf48b Mon Sep 17 00:00:00 2001
+From cd2de0b829ebdb08be0c71c5e1c437543c46294d Mon Sep 17 00:00:00 2001
 From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Tue, 22 Jun 2021 13:38:31 +0000
-Subject: [PATCH 10/14] Add Meizu 18 vibrator support
+Subject: [PATCH 06/14] treble: Add Meizu 18 vibrator support
 
 Thanks to:
 - @phhusson for guidance
@@ -10,7 +10,7 @@ Thanks to:
 
 Change-Id: Iecf12cd814e8773abfd78a19f98e31125a73761a
 ---
- base.mk                                       |   3 +
+ base.mk                                       |   5 +-
  framework_manifest.xml                        |  10 ++
  hal/meizu-vibrator/Android.bp                 |  31 ++++
  hal/meizu-vibrator/Vibrator.cpp               | 140 ++++++++++++++++++
@@ -19,7 +19,7 @@ Change-Id: Iecf12cd814e8773abfd78a19f98e31125a73761a
  hal/meizu-vibrator/service.cpp                |  72 +++++++++
  sepolicy/file_contexts                        |   1 +
  sepolicy/hal.te                               |  11 ++
- 9 files changed, 332 insertions(+)
+ 9 files changed, 333 insertions(+), 1 deletion(-)
  create mode 100644 hal/meizu-vibrator/Android.bp
  create mode 100644 hal/meizu-vibrator/Vibrator.cpp
  create mode 100644 hal/meizu-vibrator/Vibrator.h
@@ -27,17 +27,21 @@ Change-Id: Iecf12cd814e8773abfd78a19f98e31125a73761a
  create mode 100644 hal/meizu-vibrator/service.cpp
 
 diff --git a/base.mk b/base.mk
-index 51efe3c..cf4c899 100644
+index 5a6e24f..6430cc0 100644
 --- a/base.mk
 +++ b/base.mk
-@@ -222,4 +222,7 @@ PRODUCT_PACKAGES += phh-ota
- PRODUCT_PACKAGES += \
-     xiaomi-touch
+@@ -223,7 +223,10 @@ PRODUCT_COPY_FILES += \
+ PRODUCT_PACKAGES += phh-ota
  
-+PRODUCT_PACKAGES += \
-+    android.hardware.vibrator@1.3-service.meizu
+ PRODUCT_PACKAGES += \
+-    xiaomi-touch
++	xiaomi-touch
 +
- include build/make/target/product/gsi_release.mk
++PRODUCT_PACKAGES += \
++	android.hardware.vibrator@1.3-service.meizu
+ 
+ PRODUCT_COPY_FILES += \
+ 	frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:system/etc/a2dp_audio_policy_configuration_7_0.xml \
 diff --git a/framework_manifest.xml b/framework_manifest.xml
 index cb37b49..1b45b4a 100644
 --- a/framework_manifest.xml
@@ -427,5 +431,5 @@ index cb44422..280ae2d 100644
 +allow hal_vibrator_default vib_strength_sysfs:dir rw_dir_perms;
 +allow hal_vibrator_default vib_strength_sysfs:file rw_file_perms;
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 

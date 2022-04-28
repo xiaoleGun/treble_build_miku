@@ -1,7 +1,7 @@
-From 5f4e555b14ffc469b99e2d915d1ce621ccfad56c Mon Sep 17 00:00:00 2001
+From 5064c213c855b8fb7405706916d78b70a54a0c1e Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sat, 26 Feb 2022 12:01:01 +0800
-Subject: [PATCH 09/14] treble: proper target names
+Subject: [PATCH 11/14] treble: proper target names
 
 ---
  generate.sh | 3 +++
@@ -22,5 +22,5 @@ index 352fe12..07e65b5 100644
  				baseArch="$arch"
  				if [ "$arch" = "a64" ];then
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 

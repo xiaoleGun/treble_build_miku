@@ -1,7 +1,7 @@
-From d048b52a3d45000e1ce6884d323ac2e6a62cd0fe Mon Sep 17 00:00:00 2001
+From 191d9d33cabe1d6c11e49d4bc44325a34c6f7027 Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Tue, 1 Feb 2022 14:45:40 +0000
-Subject: [PATCH 08/14] treble: Add Dynamic Superuser
+Subject: [PATCH 10/14] treble: Add Dynamic Superuser
 
 ---
  base.mk              |   2 ++
@@ -13,7 +13,7 @@ Subject: [PATCH 08/14] treble: Add Dynamic Superuser
  create mode 100644 me.phh.superuser.apk
 
 diff --git a/base.mk b/base.mk
-index 9309641..51efe3c 100644
+index 6430cc0..58ba6e1 100644
 --- a/base.mk
 +++ b/base.mk
 @@ -60,6 +60,8 @@ PRODUCT_COPY_FILES += \
@@ -16479,7 +16479,7 @@ index 935bdde..3221fc6 100644
      class main
 +    disabled
 diff --git a/vndk.rc b/vndk.rc
-index 70b31e5..bf9eb1e 100644
+index c150ace..33436eb 100644
 --- a/vndk.rc
 +++ b/vndk.rc
 @@ -62,6 +62,9 @@ on property:persist.sys.phh.disable_a2dp_offload=1
@@ -16493,5 +16493,5 @@ index 70b31e5..bf9eb1e 100644
      start ril-proxy
  
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 
