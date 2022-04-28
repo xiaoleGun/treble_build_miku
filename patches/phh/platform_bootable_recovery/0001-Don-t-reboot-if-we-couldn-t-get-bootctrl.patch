@@ -1,4 +1,4 @@
-From 386cd174cac698518c7f98f0836e0aed437533b3 Mon Sep 17 00:00:00 2001
+From a33e6603ad19b98579c96b27d60b9c141216b734 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 12 Sep 2019 20:31:07 +0200
 Subject: [PATCH] Don't reboot if we couldn't get bootctrl
@@ -9,7 +9,7 @@ Change-Id: Id1793660bd1c97ab369607f58a772ca3512ec1af
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/update_verifier/update_verifier.cpp b/update_verifier/update_verifier.cpp
-index a042f90..ea3645a 100644
+index a042f900..ea3645af 100644
 --- a/update_verifier/update_verifier.cpp
 +++ b/update_verifier/update_verifier.cpp
 @@ -310,7 +310,7 @@ int update_verifier(int argc, char** argv) {
@@ -22,5 +22,5 @@ index a042f90..ea3645a 100644
  
    uint32_t current_slot = module->getCurrentSlot();
 -- 
-2.34.1
+2.25.1
 

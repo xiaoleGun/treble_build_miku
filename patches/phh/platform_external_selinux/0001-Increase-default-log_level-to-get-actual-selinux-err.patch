@@ -1,7 +1,7 @@
-From 9fd75201402bd9d140bb4453434670f8f2c0e255 Mon Sep 17 00:00:00 2001
+From d76c80afc239721269aae4ba8bf5a8c761c1ab38 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 9 Apr 2018 00:19:49 +0200
-Subject: [PATCH 1/7] Increase default log_level to get actual selinux error in
+Subject: [PATCH 1/8] Increase default log_level to get actual selinux error in
  kmsg
 
 ---
@@ -22,5 +22,5 @@ index 9c78e425..71a0f685 100644
  		{"help", no_argument, 0, 'h'},
  		{"verbose", no_argument, 0, 'v'},
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 

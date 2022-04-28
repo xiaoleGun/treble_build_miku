@@ -1,0 +1,28 @@
+From 5576d022b106461ef797ab816025e29d904a9914 Mon Sep 17 00:00:00 2001
+From: xiaoleGun <1592501605@qq.com>
+Date: Fri, 11 Feb 2022 19:27:50 +0800
+Subject: [PATCH 09/14] treble: Add OTA JSON to Miku makefile
+
+---
+ miku.mk | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/miku.mk b/miku.mk
+index bc0a208..9e3604e 100644
+--- a/miku.mk
++++ b/miku.mk
+@@ -4,4 +4,8 @@ $(call inherit-product, device/miku/sepolicy/common/sepolicy.mk)
+ -include vendor/miku/build/core/config.mk
+ 
+ # Maintaier
+-MIKU_MASTER := xiaoleGun
+\ No newline at end of file
++MIKU_MASTER := xiaoleGun
++
++# OTA json
++PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
++	ro.system.ota.json_url=https://raw.githubusercontent.com/xiaoleGun/treble_build_miku/snowland/ota.json
+\ No newline at end of file
+-- 
+2.34.1
+

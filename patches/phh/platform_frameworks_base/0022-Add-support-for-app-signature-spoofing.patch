@@ -1,7 +1,7 @@
-From 500c7163d71106486953e2a465eb6129d9e58425 Mon Sep 17 00:00:00 2001
+From a60642974537643ab7bbe4a486e9c6ffc31e68fb Mon Sep 17 00:00:00 2001
 From: Danny Lin <danny@kdrag0n.dev>
 Date: Sat, 16 Oct 2021 05:27:57 -0700
-Subject: [PATCH 22/26] Add support for app signature spoofing
+Subject: [PATCH 22/31] Add support for app signature spoofing
 
 This is needed by microG GmsCore to pretend to be the official Google
 Play Services package, because client apps check the package signature
@@ -36,7 +36,7 @@ Change-Id: Ied7d6ce0b83a2d2345c3abba0429998d86494a88
  4 files changed, 57 insertions(+), 3 deletions(-)
 
 diff --git a/core/api/current.txt b/core/api/current.txt
-index cb014ca8a227..1cf176cfaa5d 100644
+index 1ecc42d78c2d..2126a2598574 100644
 --- a/core/api/current.txt
 +++ b/core/api/current.txt
 @@ -84,6 +84,7 @@ package android {
@@ -47,7 +47,7 @@ index cb014ca8a227..1cf176cfaa5d 100644
      field public static final String FOREGROUND_SERVICE = "android.permission.FOREGROUND_SERVICE";
      field public static final String GET_ACCOUNTS = "android.permission.GET_ACCOUNTS";
      field public static final String GET_ACCOUNTS_PRIVILEGED = "android.permission.GET_ACCOUNTS_PRIVILEGED";
-@@ -199,6 +200,7 @@ package android {
+@@ -200,6 +201,7 @@ package android {
      field public static final String CALL_LOG = "android.permission-group.CALL_LOG";
      field public static final String CAMERA = "android.permission-group.CAMERA";
      field public static final String CONTACTS = "android.permission-group.CONTACTS";
@@ -56,10 +56,10 @@ index cb014ca8a227..1cf176cfaa5d 100644
      field public static final String MICROPHONE = "android.permission-group.MICROPHONE";
      field public static final String NEARBY_DEVICES = "android.permission-group.NEARBY_DEVICES";
 diff --git a/core/res/AndroidManifest.xml b/core/res/AndroidManifest.xml
-index 0aa8de740bf0..a7bae700d3f7 100644
+index f525315dd5fa..806d99cc8f71 100644
 --- a/core/res/AndroidManifest.xml
 +++ b/core/res/AndroidManifest.xml
-@@ -3192,6 +3192,21 @@
+@@ -3189,6 +3189,21 @@
          android:description="@string/permdesc_getPackageSize"
          android:protectionLevel="normal" />
  
@@ -82,7 +82,7 @@ index 0aa8de740bf0..a7bae700d3f7 100644
           {@link android.content.pm.PackageManager#addPackageToPreferred}
           for details. -->
 diff --git a/core/res/res/values/strings.xml b/core/res/res/values/strings.xml
-index bba4ff3cfb2f..163991493857 100644
+index 4a58a52388fb..19b38545bbbb 100644
 --- a/core/res/res/values/strings.xml
 +++ b/core/res/res/values/strings.xml
 @@ -880,6 +880,18 @@
@@ -105,10 +105,10 @@ index bba4ff3cfb2f..163991493857 100644
      <string name="permlab_statusBar">disable or modify status bar</string>
      <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
 diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
-index e81ba7e40205..b794ea282e8d 100644
+index 327c590a0348..5806662ab6b6 100644
 --- a/services/core/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/core/java/com/android/server/pm/PackageManagerService.java
-@@ -3323,6 +3323,29 @@ public class PackageManagerService extends IPackageManager.Stub
+@@ -3322,6 +3322,29 @@ public class PackageManagerService extends IPackageManager.Stub
              return result;
          }
  
@@ -138,7 +138,7 @@ index e81ba7e40205..b794ea282e8d 100644
          public final PackageInfo generatePackageInfo(PackageSetting ps, int flags, int userId) {
              if (!mUserManager.exists(userId)) return null;
              if (ps == null) {
-@@ -3351,12 +3374,14 @@ public class PackageManagerService extends IPackageManager.Stub
+@@ -3350,12 +3373,14 @@ public class PackageManagerService extends IPackageManager.Stub
                  final int[] gids = (flags & PackageManager.GET_GIDS) == 0 ? EMPTY_INT_ARRAY
                          : mPermissionManager.getGidsForUid(UserHandle.getUid(userId, ps.appId));
                  // Compute granted permissions only if package has requested permissions

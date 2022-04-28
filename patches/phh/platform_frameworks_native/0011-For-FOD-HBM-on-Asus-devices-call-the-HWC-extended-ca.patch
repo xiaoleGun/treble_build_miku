@@ -1,7 +1,7 @@
-From 6b4142fb6b733450758d203346968506c4ad57a9 Mon Sep 17 00:00:00 2001
+From ddb51d2479d8ab9ace8e863fba2affd29ed03762 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 19 Dec 2021 17:04:51 -0500
-Subject: [PATCH 11/13] For FOD/HBM on Asus devices, call the HWC extended call
+Subject: [PATCH 11/16] For FOD/HBM on Asus devices, call the HWC extended call
  setLayerClass
 
 Change-Id: Id8773fc3d2fb6d2bd228503b1ee0d77864b2eb05
@@ -14,10 +14,10 @@ Change-Id: Id8773fc3d2fb6d2bd228503b1ee0d77864b2eb05
  5 files changed, 31 insertions(+)
 
 diff --git a/services/surfaceflinger/CompositionEngine/src/OutputLayer.cpp b/services/surfaceflinger/CompositionEngine/src/OutputLayer.cpp
-index 9e9d576..0cb0755 100644
+index f605b0271b..cd81a5e5d0 100644
 --- a/services/surfaceflinger/CompositionEngine/src/OutputLayer.cpp
 +++ b/services/surfaceflinger/CompositionEngine/src/OutputLayer.cpp
-@@ -429,6 +429,8 @@ void OutputLayer::writeOutputDependentGeometryStateToHWC(HWC2::Layer* hwcLayer,
+@@ -428,6 +428,8 @@ void OutputLayer::writeOutputDependentGeometryStateToHWC(HWC2::Layer* hwcLayer,
              z = 0x41000031;
          } else if(sXiaomiFod) {
              z |= 0x1000000;
@@ -26,7 +26,7 @@ index 9e9d576..0cb0755 100644
          }
      }
  
-@@ -438,6 +440,8 @@ void OutputLayer::writeOutputDependentGeometryStateToHWC(HWC2::Layer* hwcLayer,
+@@ -437,6 +439,8 @@ void OutputLayer::writeOutputDependentGeometryStateToHWC(HWC2::Layer* hwcLayer,
              z = 0x41000033;
          } else if(sXiaomiFod) {
              z |= 0x2000000;
@@ -36,7 +36,7 @@ index 9e9d576..0cb0755 100644
      }
  
 diff --git a/services/surfaceflinger/DisplayHardware/ComposerHal.cpp b/services/surfaceflinger/DisplayHardware/ComposerHal.cpp
-index caf0294..ff5039f 100644
+index 09734c275f..19f22f453b 100644
 --- a/services/surfaceflinger/DisplayHardware/ComposerHal.cpp
 +++ b/services/surfaceflinger/DisplayHardware/ComposerHal.cpp
 @@ -1220,6 +1220,13 @@ V2_4::Error Composer::setLayerGenericMetadata(Display display, Layer layer, cons
@@ -54,7 +54,7 @@ index caf0294..ff5039f 100644
          std::vector<IComposerClient::LayerGenericMetadataKey>* outKeys) {
      using Error = V2_4::Error;
 diff --git a/services/surfaceflinger/DisplayHardware/ComposerHal.h b/services/surfaceflinger/DisplayHardware/ComposerHal.h
-index b525e63..2eb63f3 100644
+index fe114b9512..669e652fba 100644
 --- a/services/surfaceflinger/DisplayHardware/ComposerHal.h
 +++ b/services/surfaceflinger/DisplayHardware/ComposerHal.h
 @@ -231,6 +231,9 @@ public:
@@ -82,7 +82,7 @@ index b525e63..2eb63f3 100644
      class CommandWriter : public CommandWriterBase {
      public:
 diff --git a/services/surfaceflinger/DisplayHardware/HWC2.cpp b/services/surfaceflinger/DisplayHardware/HWC2.cpp
-index 27146ab..474c3ea 100644
+index 27146ab79c..474c3eade5 100644
 --- a/services/surfaceflinger/DisplayHardware/HWC2.cpp
 +++ b/services/surfaceflinger/DisplayHardware/HWC2.cpp
 @@ -872,6 +872,16 @@ Error Layer::setZOrder(uint32_t z)
@@ -103,7 +103,7 @@ index 27146ab..474c3ea 100644
  Error Layer::setColorTransform(const android::mat4& matrix) {
      if (CC_UNLIKELY(!mDisplay)) {
 diff --git a/services/surfaceflinger/DisplayHardware/HWC2.h b/services/surfaceflinger/DisplayHardware/HWC2.h
-index 871465d..7a04047 100644
+index 871465d717..7a04047407 100644
 --- a/services/surfaceflinger/DisplayHardware/HWC2.h
 +++ b/services/surfaceflinger/DisplayHardware/HWC2.h
 @@ -287,6 +287,8 @@ public:
@@ -125,5 +125,5 @@ index 871465d..7a04047 100644
      // These are references to data owned by HWC2::Device, which will outlive
      // this HWC2::Layer, so these references are guaranteed to be valid for
 -- 
-2.34.1
+2.25.1
 

@@ -1,4 +1,4 @@
-From 8a7d61a04282ae37180bab5a961a36cf9c548fe8 Mon Sep 17 00:00:00 2001
+From cc0feca988ce2fb6b0cb01aa5361108ef4ee2ba0 Mon Sep 17 00:00:00 2001
 From: kindle4jerry <kindle4jerry@gmail.com>
 Date: Sun, 6 Feb 2022 14:42:18 +0800
 Subject: [PATCH 03/14] treble: sepolicy: fix honor v9 no voice
@@ -19,5 +19,5 @@ index 11dd447..20236cc 100644
 +
 +/dev/nxp_smartpa_dev    u:object_r:media_rw_data_file:s0
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 

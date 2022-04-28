@@ -1,7 +1,7 @@
-From 013c48c0f482eea646fff8bc4db93237f0db8c90 Mon Sep 17 00:00:00 2001
+From dc55498f4d76231da48425f8566ab7146f4c3b08 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 14 May 2020 19:54:55 +0200
-Subject: [PATCH 05/20] Add persist.sys.phh.samsung.camera_ids property to
+Subject: [PATCH 05/21] Add persist.sys.phh.samsung.camera_ids property to
  access hidden Samsung cameras
 
 Change-Id: I2c7bf535272acc28ed2277e96c78ddd28a0b4593
@@ -23,7 +23,7 @@ index 26562e0426..e940c33845 100644
      ],
  
 diff --git a/services/camera/libcameraservice/common/CameraProviderManager.cpp b/services/camera/libcameraservice/common/CameraProviderManager.cpp
-index 4f2b878d26..d11ad8d766 100644
+index 2f74df9770..79f11a75ab 100644
 --- a/services/camera/libcameraservice/common/CameraProviderManager.cpp
 +++ b/services/camera/libcameraservice/common/CameraProviderManager.cpp
 @@ -21,6 +21,7 @@
@@ -34,7 +34,7 @@ index 4f2b878d26..d11ad8d766 100644
  
  #include <algorithm>
  #include <chrono>
-@@ -1371,6 +1372,7 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+@@ -1380,6 +1381,7 @@ status_t CameraProviderManager::ProviderInfo::initialize(
              mMinorVersion = 6;
          }
      }
@@ -42,7 +42,7 @@ index 4f2b878d26..d11ad8d766 100644
      // We need to check again since cast2_6.isOk() succeeds even if the provider
      // version isn't actually 2.6.
      if (interface2_6 == nullptr){
-@@ -1407,6 +1409,9 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+@@ -1416,6 +1418,9 @@ status_t CameraProviderManager::ProviderInfo::initialize(
          return mapToStatusT(status);
      }
  
@@ -52,7 +52,7 @@ index 4f2b878d26..d11ad8d766 100644
      hardware::Return<bool> linked = interface->linkToDeath(this, /*cookie*/ mId);
      if (!linked.isOk()) {
          ALOGE("%s: Transaction error in linking to camera provider '%s' death: %s",
-@@ -1437,7 +1442,7 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+@@ -1446,7 +1451,7 @@ status_t CameraProviderManager::ProviderInfo::initialize(
  
      // Get initial list of camera devices, if any
      std::vector<std::string> devices;
@@ -61,7 +61,7 @@ index 4f2b878d26..d11ad8d766 100644
              Status idStatus,
              const hardware::hidl_vec<hardware::hidl_string>& cameraDeviceNames) {
          status = idStatus;
-@@ -1454,7 +1459,12 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+@@ -1463,7 +1468,12 @@ status_t CameraProviderManager::ProviderInfo::initialize(
                      mProviderPublicCameraIds.push_back(id);
                  }
              }

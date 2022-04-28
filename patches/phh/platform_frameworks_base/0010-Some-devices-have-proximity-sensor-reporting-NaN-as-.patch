@@ -1,7 +1,7 @@
-From 843da442e06b2bb37f4bac96b6c96cf894ccd9f8 Mon Sep 17 00:00:00 2001
+From 33b35423d23bbdd9aea87f828d190470d59392c9 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 29 Sep 2020 22:39:47 +0200
-Subject: [PATCH 10/26] Some devices have proximity sensor reporting NaN as max
+Subject: [PATCH 10/31] Some devices have proximity sensor reporting NaN as max
  range for some reason. Make them behave standard way by setting 5 cm
 
 Change-Id: I3c39e3e914a05903c140235702e0480d2d58a612
@@ -10,10 +10,10 @@ Change-Id: I3c39e3e914a05903c140235702e0480d2d58a612
  1 file changed, 3 insertions(+)
 
 diff --git a/services/core/java/com/android/server/display/DisplayPowerController.java b/services/core/java/com/android/server/display/DisplayPowerController.java
-index 00fab25350dc..3c49a01e00b4 100644
+index ada847a7c3e4..bac5747a798b 100644
 --- a/services/core/java/com/android/server/display/DisplayPowerController.java
 +++ b/services/core/java/com/android/server/display/DisplayPowerController.java
-@@ -1724,6 +1724,9 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
+@@ -1732,6 +1732,9 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
          if (mProximitySensor != null) {
              mProximityThreshold = Math.min(mProximitySensor.getMaximumRange(),
                      TYPICAL_PROXIMITY_THRESHOLD);

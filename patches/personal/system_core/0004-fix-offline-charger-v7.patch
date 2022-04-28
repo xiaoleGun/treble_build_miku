@@ -1,4 +1,4 @@
-From 605a46d82d918cd4c2a6a8ba0d028bf4a87c42df Mon Sep 17 00:00:00 2001
+From c7618f10cf293302b14c584310cccf52f8b1cd76 Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Wed, 26 Feb 2020 07:23:44 +0200
 Subject: [PATCH 4/5] fix offline charger v7
@@ -9,7 +9,7 @@ Subject: [PATCH 4/5] fix offline charger v7
  1 file changed, 11 insertions(+), 2 deletions(-)
 
 diff --git a/rootdir/init.rc b/rootdir/init.rc
-index 98fb6efd0..30c7ecb3d 100644
+index df8e75eff..c5415a0a6 100644
 --- a/rootdir/init.rc
 +++ b/rootdir/init.rc
 @@ -11,6 +11,11 @@ import /vendor/etc/init/hw/init.${ro.hardware}.rc
@@ -24,7 +24,7 @@ index 98fb6efd0..30c7ecb3d 100644
  # Cgroups are mounted right before early-init using list from /etc/cgroups.json
  on early-init
      # Disable sysrq from keyboard
-@@ -452,7 +457,7 @@ on init
+@@ -456,7 +461,7 @@ on init
  # Healthd can trigger a full boot from charger mode by signaling this
  # property when the power button is held.
  on property:sys.boot_from_charger_mode=1
@@ -33,7 +33,7 @@ index 98fb6efd0..30c7ecb3d 100644
      trigger late-init
  
  on load_persist_props_action
-@@ -1104,8 +1109,12 @@ on nonencrypted
+@@ -1108,8 +1113,12 @@ on nonencrypted
  on property:sys.init_log_level=*
      loglevel ${sys.init_log_level}
  
@@ -48,5 +48,5 @@ index 98fb6efd0..30c7ecb3d 100644
  on property:vold.decrypt=trigger_load_persist_props
      load_persist_props
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 

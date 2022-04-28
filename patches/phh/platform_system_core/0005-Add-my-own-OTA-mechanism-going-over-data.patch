@@ -1,7 +1,7 @@
-From b81cf38184cfab14c87bc1539844a1b81500f3f7 Mon Sep 17 00:00:00 2001
+From aabff8f842f5bc1eb6278f66eb2211875935f6e3 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sat, 22 Jan 2022 14:34:45 -0500
-Subject: [PATCH 5/5] Add my own OTA mechanism going over /data
+Subject: [PATCH 5/6] Add my own OTA mechanism going over /data
 
 Change-Id: I9cacff2d761affa0376b4bb8ca63353a9d95b5de
 ---
@@ -23,7 +23,7 @@ index dcbbc5448..ea2f4254d 100644
  
  FiemapStatus ImageManager::CreateBackingImage(
 diff --git a/init/selinux.cpp b/init/selinux.cpp
-index 42d302324..068849989 100644
+index 29c0ff3ba..28f3fb899 100644
 --- a/init/selinux.cpp
 +++ b/init/selinux.cpp
 @@ -58,6 +58,9 @@
@@ -61,7 +61,7 @@ index 42d302324..068849989 100644
  
  namespace android {
  namespace init {
-@@ -696,6 +704,60 @@ static void LoadSelinuxPolicy(std::string& policy) {
+@@ -712,6 +720,60 @@ static void LoadSelinuxPolicy(std::string& policy) {
      }
  }
  
@@ -122,7 +122,7 @@ index 42d302324..068849989 100644
  // The SELinux setup process is carefully orchestrated around snapuserd. Policy
  // must be loaded off dynamic partitions, and during an OTA, those partitions
  // cannot be read without snapuserd. But, with kernel-privileged snapuserd
-@@ -718,6 +780,8 @@ int SetupSelinux(char** argv) {
+@@ -734,6 +796,8 @@ int SetupSelinux(char** argv) {
      if (REBOOT_BOOTLOADER_ON_PANIC) {
          InstallRebootSignalHandlers();
      }

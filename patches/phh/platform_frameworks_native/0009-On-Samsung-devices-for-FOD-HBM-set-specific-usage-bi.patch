@@ -1,7 +1,7 @@
-From d0b2df417053cb85f284e8300d1a5cb62cbb70ed Mon Sep 17 00:00:00 2001
+From 95f3bd5a505d5af185dd51051b66fb006362db75 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 17 Dec 2021 17:18:20 -0500
-Subject: [PATCH 09/13] On Samsung devices for FOD HBM, set specific usage bits
+Subject: [PATCH 09/16] On Samsung devices for FOD HBM, set specific usage bits
 
 Change-Id: Ibe71e291c6fba9ce48e83a5fd93f1beae3a63bc7
 ---
@@ -12,7 +12,7 @@ Change-Id: Ibe71e291c6fba9ce48e83a5fd93f1beae3a63bc7
  4 files changed, 20 insertions(+), 5 deletions(-)
 
 diff --git a/libs/gui/BLASTBufferQueue.cpp b/libs/gui/BLASTBufferQueue.cpp
-index 94e1ae1..d23fb53 100644
+index f034642681..f9a52e48ee 100644
 --- a/libs/gui/BLASTBufferQueue.cpp
 +++ b/libs/gui/BLASTBufferQueue.cpp
 @@ -32,9 +32,19 @@
@@ -35,7 +35,7 @@ index 94e1ae1..d23fb53 100644
  using namespace std::chrono_literals;
  
  namespace {
-@@ -144,9 +154,14 @@ BLASTBufferQueue::BLASTBufferQueue(const std::string& name, const sp<SurfaceCont
+@@ -140,9 +150,14 @@ BLASTBufferQueue::BLASTBufferQueue(const std::string& name)
  
      // safe default, most producers are expected to override this
      mProducer->setMaxDequeuedBufferCount(2);
@@ -48,15 +48,15 @@ index 94e1ae1..d23fb53 100644
      mBufferItemConsumer = new BLASTBufferItemConsumer(mConsumer,
 -                                                      GraphicBuffer::USAGE_HW_COMPOSER |
 -                                                              GraphicBuffer::USAGE_HW_TEXTURE,
-+							    usage,
-                                                       1, false);
++                                                      usage,
+                                                       1, false, this);
      static int32_t id = 0;
      mName = name + "#" + std::to_string(id);
 diff --git a/libs/ui/Gralloc2.cpp b/libs/ui/Gralloc2.cpp
-index 224caf7..c543b4e 100644
+index 040a62b542..a9c74858ea 100644
 --- a/libs/ui/Gralloc2.cpp
 +++ b/libs/ui/Gralloc2.cpp
-@@ -115,7 +115,7 @@ status_t Gralloc2Mapper::validateBufferDescriptorInfo(
+@@ -108,7 +108,7 @@ status_t Gralloc2Mapper::validateBufferDescriptorInfo(
      if (descriptorInfo->usage & ~validUsageBits) {
          ALOGE("buffer descriptor contains invalid usage bits 0x%" PRIx64,
                descriptorInfo->usage & ~validUsageBits);
@@ -66,10 +66,10 @@ index 224caf7..c543b4e 100644
      return NO_ERROR;
  }
 diff --git a/libs/ui/Gralloc3.cpp b/libs/ui/Gralloc3.cpp
-index 4a8a4d0..4b1c974 100644
+index 882674f479..330caf4302 100644
 --- a/libs/ui/Gralloc3.cpp
 +++ b/libs/ui/Gralloc3.cpp
-@@ -106,7 +106,7 @@ status_t Gralloc3Mapper::validateBufferDescriptorInfo(
+@@ -99,7 +99,7 @@ status_t Gralloc3Mapper::validateBufferDescriptorInfo(
      if (descriptorInfo->usage & ~validUsageBits) {
          ALOGE("buffer descriptor contains invalid usage bits 0x%" PRIx64,
                descriptorInfo->usage & ~validUsageBits);
@@ -79,10 +79,10 @@ index 4a8a4d0..4b1c974 100644
      return NO_ERROR;
  }
 diff --git a/libs/ui/Gralloc4.cpp b/libs/ui/Gralloc4.cpp
-index 4f5e098..baf557b 100644
+index 80f6c82bb0..1bda8332f9 100644
 --- a/libs/ui/Gralloc4.cpp
 +++ b/libs/ui/Gralloc4.cpp
-@@ -116,7 +116,7 @@ status_t Gralloc4Mapper::validateBufferDescriptorInfo(
+@@ -109,7 +109,7 @@ status_t Gralloc4Mapper::validateBufferDescriptorInfo(
      if (descriptorInfo->usage & ~validUsageBits) {
          ALOGE("buffer descriptor contains invalid usage bits 0x%" PRIx64,
                descriptorInfo->usage & ~validUsageBits);
@@ -92,5 +92,5 @@ index 4f5e098..baf557b 100644
      return NO_ERROR;
  }
 -- 
-2.34.1
+2.25.1
 

@@ -1,7 +1,7 @@
-From 13efa4cd247f65c6e19299776d691ff0bfcbc5f2 Mon Sep 17 00:00:00 2001
+From 9bc107ee34c7c8344c7457745563bdc469577932 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 28 Nov 2017 18:28:04 +0100
-Subject: [PATCH 02/26] Relax requirement for visible flag to sdcards
+Subject: [PATCH 02/31] Relax requirement for visible flag to sdcards
 
 The vast majority of sdcard readers are stable enough to be declared by
 the API. (I see no counter-example)

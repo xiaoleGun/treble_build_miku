@@ -1,7 +1,7 @@
-From 1902516faf777363f42b7c1c6f9be0fcb9251682 Mon Sep 17 00:00:00 2001
+From 6277aceb30a9d523378bd78d065ea6810b251d67 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 14 Aug 2019 23:37:10 +0200
-Subject: [PATCH 01/13] On Samsung, we need to send a hack-message to HAL to
+Subject: [PATCH 01/16] On Samsung, we need to send a hack-message to HAL to
  get all Sensors
 
 Change-Id: Id6a1fa48340de61c418493668e9abd22c2599376
@@ -10,7 +10,7 @@ Change-Id: Id6a1fa48340de61c418493668e9abd22c2599376
  1 file changed, 4 insertions(+)
 
 diff --git a/services/sensorservice/SensorDevice.cpp b/services/sensorservice/SensorDevice.cpp
-index c233bf0..623ba66 100644
+index e4efde2448..78961a295d 100644
 --- a/services/sensorservice/SensorDevice.cpp
 +++ b/services/sensorservice/SensorDevice.cpp
 @@ -34,7 +34,9 @@
@@ -33,5 +33,5 @@ index c233bf0..623ba66 100644
              [&](const auto &list) {
                  const size_t count = list.size();
 -- 
-2.34.1
+2.25.1
 

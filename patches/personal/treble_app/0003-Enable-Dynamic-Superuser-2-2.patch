@@ -1,4 +1,4 @@
-From 008d54ce3f2536dde424d2adacd9e679aea8f1ec Mon Sep 17 00:00:00 2001
+From 4f178cf52993ddba0bc678a499f64b47392197cb Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Sun, 13 Feb 2022 12:03:42 +0800
 Subject: [PATCH 3/3] Enable Dynamic Superuser (2/2)
@@ -47,7 +47,7 @@ index 819df0e..53a711b 100644
      val multiCameras = "key_misc_multi_camera"
      val forceCamera2APIHAL3 = "key_misc_force_camera2api_hal3"
 diff --git a/app/src/main/res/values-zh-rCH/strings.xml b/app/src/main/res/values-zh-rCH/strings.xml
-index dd298b3..402a516 100644
+index 6f12dc8..7b2b50d 100644
 --- a/app/src/main/res/values-zh-rCH/strings.xml
 +++ b/app/src/main/res/values-zh-rCH/strings.xml
 @@ -113,6 +113,8 @@
@@ -60,7 +60,7 @@ index dd298b3..402a516 100644
      <string name="misc_debug_sensors">调试传感器</string>
      <string name="misc_remotectl">允许Phh为了调试设备接管它</string>
 diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
-index 85919dc..5a2feef 100644
+index 3461980..a55f199 100644
 --- a/app/src/main/res/values/strings.xml
 +++ b/app/src/main/res/values/strings.xml
 @@ -113,6 +113,8 @@
@@ -89,5 +89,5 @@ index 78d2364..03f108f 100644
      <PreferenceCategory android:title="@string/misc_debugging">
          <Preference android:title="@string/misc_debug_sensors">
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 

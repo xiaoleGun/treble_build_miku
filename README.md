@@ -15,7 +15,7 @@ To get started with building Miku UI GSI, you'll need to get familiar with [Git 
     ```
 - Clone this repo:
     ```
-    git clone https://github.com/xiaoleGun/treble_build_miku -b snow
+    git clone https://github.com/xiaoleGun/treble_build_miku -b snowland
     ```
 - Finally, start the build script:
     ```
@@ -24,6 +24,7 @@ To get started with building Miku UI GSI, you'll need to get familiar with [Git 
 
 ## Credits
 These people have helped this project in some way or another, so they should be the ones who receive all the credit:
+- [Miku-UI](https://github.com/Miku-UI)
 - [Project-Mushroom](https://github.com/Project-Mushroom)
 - [phhusson](https://github.com/phhusson)
 - [AndyCGYan](https://github.com/AndyCGYan)

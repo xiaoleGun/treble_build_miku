@@ -1,4 +1,4 @@
-From 6d7357f8782b9294bb71c6a199638ca919bed55c Mon Sep 17 00:00:00 2001
+From b517b70d8b31e3f29d256f93bebeee6c542f3062 Mon Sep 17 00:00:00 2001
 From: ironydelerium <42721860+ironydelerium@users.noreply.github.com>
 Date: Fri, 31 Dec 2021 02:20:28 -0800
 Subject: [PATCH 4/5] Reintroduce 'public void
@@ -18,10 +18,10 @@ Co-authored-by: Sarah Vandomelen <sarah@sightworks.com>
  1 file changed, 13 insertions(+)
 
 diff --git a/src/java/com/android/internal/telephony/metrics/TelephonyMetrics.java b/src/java/com/android/internal/telephony/metrics/TelephonyMetrics.java
-index 5e43876df8..e299ad0c16 100644
+index 7028d9506..d84a78b6b 100644
 --- a/src/java/com/android/internal/telephony/metrics/TelephonyMetrics.java
 +++ b/src/java/com/android/internal/telephony/metrics/TelephonyMetrics.java
-@@ -2311,6 +2311,19 @@ public class TelephonyMetrics {
+@@ -2317,6 +2317,19 @@ public class TelephonyMetrics {
          smsSession.increaseExpectedResponse();
      }
  
@@ -42,5 +42,5 @@ index 5e43876df8..e299ad0c16 100644
       * Write Send SMS event using ImsService. Expecting response from
       * {@link #writeOnSmsSolicitedResponse}.
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 

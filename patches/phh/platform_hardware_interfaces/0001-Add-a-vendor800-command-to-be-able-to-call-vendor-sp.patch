@@ -1,4 +1,4 @@
-From bc366bb69afc34986127d369fbac5f1d4e485c7b Mon Sep 17 00:00:00 2001
+From 612b72980500e98464fb4f6bc0050e76fd7c6329 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 19 Dec 2021 17:03:15 -0500
 Subject: [PATCH] Add a vendor800 command, to be able to call vendor-specific
@@ -10,7 +10,7 @@ Change-Id: Icbef1e9e3a331ae3bd5a05687d545851d94d88a8
  1 file changed, 6 insertions(+)
 
 diff --git a/graphics/composer/2.1/utils/command-buffer/include/composer-command-buffer/2.1/ComposerCommandBuffer.h b/graphics/composer/2.1/utils/command-buffer/include/composer-command-buffer/2.1/ComposerCommandBuffer.h
-index 499d3b9..4895784 100644
+index 499d3b96e..489578468 100644
 --- a/graphics/composer/2.1/utils/command-buffer/include/composer-command-buffer/2.1/ComposerCommandBuffer.h
 +++ b/graphics/composer/2.1/utils/command-buffer/include/composer-command-buffer/2.1/ComposerCommandBuffer.h
 @@ -402,6 +402,12 @@ class CommandWriterBase {
@@ -27,5 +27,5 @@ index 499d3b9..4895784 100644
       template <typename T>
       void beginCommand(T command, uint16_t length) {
 -- 
-2.34.1
+2.25.1
 

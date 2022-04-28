@@ -1,7 +1,7 @@
-From def747e3dd9d695e3cd8d6ad5a79e1ebb5176245 Mon Sep 17 00:00:00 2001
+From 5469fa9f6569a2dd84f6a4f2803dc43dc5e1de2d Mon Sep 17 00:00:00 2001
 From: Peter Cai <peter@typeblog.net>
 Date: Wed, 16 Dec 2020 21:26:45 +0800
-Subject: [PATCH 17/26] TelephonyManager: add API annotations for
+Subject: [PATCH 17/31] TelephonyManager: add API annotations for
  setTelephonyProperty
 
 * This method was added back by reverting commit
@@ -14,7 +14,7 @@ Subject: [PATCH 17/26] TelephonyManager: add API annotations for
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/telephony/java/android/telephony/TelephonyManager.java b/telephony/java/android/telephony/TelephonyManager.java
-index b0c640547e0e..c11232326370 100644
+index 967ad10f697d..e5b80e4cee30 100644
 --- a/telephony/java/android/telephony/TelephonyManager.java
 +++ b/telephony/java/android/telephony/TelephonyManager.java
 @@ -7470,7 +7470,7 @@ public class TelephonyManager {

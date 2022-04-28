@@ -1,4 +1,4 @@
-From 3439ed4c91e9ad384f3508eb8588367a4e7ddfc5 Mon Sep 17 00:00:00 2001
+From 0c24096a82d84a6b767b99a989cf05004167f918 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 29 Jul 2019 18:09:12 +0200
 Subject: [PATCH 3/3] Don't fail on FTP conntracking failing
@@ -14,7 +14,7 @@ Change-Id: I3d9c865eb5a4b421f9983210c2ceae62b4906234
  1 file changed, 9 insertions(+), 3 deletions(-)
 
 diff --git a/server/TetherController.cpp b/server/TetherController.cpp
-index 7b10693..0c666b9 100644
+index 7b106933..0c666b9c 100644
 --- a/server/TetherController.cpp
 +++ b/server/TetherController.cpp
 @@ -723,13 +723,19 @@ int TetherController::setForwardRules(bool add, const char *intIface, const char
@@ -41,5 +41,5 @@ index 7b10693..0c666b9 100644
              StringPrintf("%s %s -i %s -o %s -m state --state ESTABLISHED,RELATED -g %s", op,
                           LOCAL_FORWARD, extIface, intIface, LOCAL_TETHER_COUNTERS_CHAIN),
 -- 
-2.34.1
+2.25.1
 

@@ -1,4 +1,4 @@
-From bb9d6bd1b53e127f77e4d0e722517939f58db644 Mon Sep 17 00:00:00 2001
+From 43e08d1cb1b5ea053149ccd8406a2cb8a3793dfe Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 29 Nov 2021 17:49:13 -0500
 Subject: [PATCH 7/7] Don't unmount rw-system.sh binds
@@ -21,5 +21,5 @@ index 2697f67..d592c7f 100644
               !StartsWith(test, "/mnt/scratch") &&
  #endif
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 

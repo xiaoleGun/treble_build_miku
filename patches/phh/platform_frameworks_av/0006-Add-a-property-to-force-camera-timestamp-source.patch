@@ -1,7 +1,7 @@
-From ff81815aa7b9603256b8b890c3642a48821d650c Mon Sep 17 00:00:00 2001
+From 32be1cfcf302656f199cae844b6f6319c2466d7e Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 19 May 2020 14:01:14 +0200
-Subject: [PATCH 06/20] Add a property to force camera timestamp source
+Subject: [PATCH 06/21] Add a property to force camera timestamp source
 
 Some devices wrongly report their timesource
 Camera's timesource can either be CLOCK_MONOTONIC, or CLOCK_BOOTTIME
@@ -18,10 +18,10 @@ timestamp source.
  1 file changed, 10 insertions(+), 2 deletions(-)
 
 diff --git a/services/camera/libcameraservice/device3/Camera3Device.cpp b/services/camera/libcameraservice/device3/Camera3Device.cpp
-index 87c1c750ed..b4a58ec749 100644
+index de418da6cc..6c2de0f088 100644
 --- a/services/camera/libcameraservice/device3/Camera3Device.cpp
 +++ b/services/camera/libcameraservice/device3/Camera3Device.cpp
-@@ -346,8 +346,16 @@ status_t Camera3Device::initializeCommonLocked() {
+@@ -347,8 +347,16 @@ status_t Camera3Device::initializeCommonLocked() {
      // Measure the clock domain offset between camera and video/hw_composer
      camera_metadata_entry timestampSource =
              mDeviceInfo.find(ANDROID_SENSOR_INFO_TIMESTAMP_SOURCE);

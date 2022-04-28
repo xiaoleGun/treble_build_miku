@@ -1,7 +1,7 @@
-From ed834595b9668a005ddccb770718c6610ea10bab Mon Sep 17 00:00:00 2001
+From 9c109da3fe56548fdbde82ea0dc835daae688936 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 25 May 2020 21:26:54 +0200
-Subject: [PATCH 09/20] Add persist.sys.phh.disable_a2dp_offload property to
+Subject: [PATCH 09/21] Add persist.sys.phh.disable_a2dp_offload property to
  force a2dp offload
 
 Change-Id: Id474540c33c594cc4010a1a398d82bff8aadaeea
@@ -12,7 +12,7 @@ Change-Id: Id474540c33c594cc4010a1a398d82bff8aadaeea
  3 files changed, 197 insertions(+), 7 deletions(-)
 
 diff --git a/media/libstagefright/ACodec.cpp b/media/libstagefright/ACodec.cpp
-index 1aa18485f9..f9365cacc9 100644
+index 1e64538d89..2923575327 100644
 --- a/media/libstagefright/ACodec.cpp
 +++ b/media/libstagefright/ACodec.cpp
 @@ -1183,6 +1183,9 @@ status_t ACodec::configureOutputBuffersFromNativeWindow(

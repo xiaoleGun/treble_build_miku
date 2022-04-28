@@ -1,4 +1,4 @@
-From 3afe7902f36ebed084e2490c464093f7f9cba4d3 Mon Sep 17 00:00:00 2001
+From 4bbf6d4428e4ca1dd08a0c4b73c27bb7cd3d585b Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Tue, 15 Sep 2020 21:26:45 -0400
 Subject: [PATCH 12/14] add offline charger sepolicy
@@ -16,5 +16,5 @@ index 0000000..91cfb5c
 @@ -0,0 +1 @@
 +permissive charger;
 -- 
-2.32.0 (Apple Git-132)
+2.34.1
 

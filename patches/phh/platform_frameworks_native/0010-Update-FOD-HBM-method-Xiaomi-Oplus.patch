@@ -1,7 +1,7 @@
-From 8c467b73e4c58530a66afb9fd9160cb7a5c39a8f Mon Sep 17 00:00:00 2001
+From 97155e4ab0c06c82b57ea55f6159bba390ea5fce Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 19 Dec 2021 16:54:31 -0500
-Subject: [PATCH 10/13] Update FOD/HBM method Xiaomi/Oplus
+Subject: [PATCH 10/16] Update FOD/HBM method Xiaomi/Oplus
 
 Change-Id: If99362db18d8eace487e52716a138e15d1dcfab4
 ---
@@ -9,10 +9,10 @@ Change-Id: If99362db18d8eace487e52716a138e15d1dcfab4
  1 file changed, 8 insertions(+), 4 deletions(-)
 
 diff --git a/services/surfaceflinger/CompositionEngine/src/OutputLayer.cpp b/services/surfaceflinger/CompositionEngine/src/OutputLayer.cpp
-index 4369ac0..9e9d576 100644
+index 2b7bf25dc7..f605b0271b 100644
 --- a/services/surfaceflinger/CompositionEngine/src/OutputLayer.cpp
 +++ b/services/surfaceflinger/CompositionEngine/src/OutputLayer.cpp
-@@ -39,6 +39,7 @@
+@@ -38,6 +38,7 @@
  static bool sCheckedProps = false;
  static bool sBBKFod = false;
  static bool sXiaomiFod = false;
@@ -20,7 +20,7 @@ index 4369ac0..9e9d576 100644
  
  namespace android::compositionengine {
  
-@@ -415,11 +416,15 @@ void OutputLayer::writeOutputDependentGeometryStateToHWC(HWC2::Layer* hwcLayer,
+@@ -414,11 +415,15 @@ void OutputLayer::writeOutputDependentGeometryStateToHWC(HWC2::Layer* hwcLayer,
          sCheckedProps = true;
          sBBKFod = property_get_bool("persist.sys.phh.fod.bbk", false);
          sXiaomiFod = property_get_bool("persist.sys.phh.fod.xiaomi", false);
@@ -38,7 +38,7 @@ index 4369ac0..9e9d576 100644
          if(sBBKFod) {
              z = 0x41000031;
          } else if(sXiaomiFod) {
-@@ -427,9 +432,8 @@ void OutputLayer::writeOutputDependentGeometryStateToHWC(HWC2::Layer* hwcLayer,
+@@ -426,9 +431,8 @@ void OutputLayer::writeOutputDependentGeometryStateToHWC(HWC2::Layer* hwcLayer,
          }
      }
  
@@ -50,5 +50,5 @@ index 4369ac0..9e9d576 100644
              z = 0x41000033;
          } else if(sXiaomiFod) {
 -- 
-2.34.1
+2.25.1
 

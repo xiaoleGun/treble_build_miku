@@ -1,6 +1,6 @@
 #!/bin/bash
 echo ""
-echo "Miku UI Snow Unified Buildbot"
+echo "Miku UI SnowLand Unified Buildbot"
 echo "Executing in 3 seconds - CTRL-C to exit"
 echo ""
 
@@ -12,12 +12,12 @@ BUILD_DATE="$(date +%Y%m%d)"
 WITHOUT_CHECK_API=true
 BL=$PWD/treble_build_miku
 BD=$HOME/builds
-VERSION="0.9.7f"
+VERSION="0.3.0"
 
 if [ ! -d .repo ]
 then
     echo "Initializing Miku UI workspace"
-    repo init -u https://github.com/Project-Mushroom/platform_manifest -b snow --depth=1
+    repo init -u https://github.com/Miku-UI/manifesto -b snowland --depth=1
     echo ""
 fi
 
@@ -36,19 +36,19 @@ echo "Syncing repos"
 repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
 echo ""
 
-if [ ! -d miku_plus ]
-then
-    git clone https://github.com/xiaoleGun/miku_plus -b snow
-fi
+#if [ ! -d miku_plus ]
+#then
+#    git clone https://github.com/xiaoleGun/miku_plus -b snow
+#fi
 
 echo "Applying patches"
 bash $BL/apply-patches.sh $BL phh
 bash $BL/apply-patches.sh $BL personal
 echo ""
 
-echo "Applying FaceUnlock and Per-volume control patches"
-bash ./miku_plus/start.sh faceunlock volume
-echo ""
+#echo "Applying FaceUnlock and Per-volume control patches"
+#bash ./miku_plus/start.sh faceunlock volume
+#echo ""
 
 echo "Setting up build environment"
 source build/envsetup.sh &> /dev/null
@@ -99,18 +99,18 @@ buildSasImages() {
 generatePackages() {
     rm -rf $BD/MikuUI-*.img.xz
     BASE_IMAGE=$BD/system-miku_treble_arm64_bvS.img
-    xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOW-arm64-ab-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOW-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-vndklite-secure.img -T0 > $BD/MikuUI-SNOW-arm64-ab-vndklite-secure-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-vndklite-secure.img -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-vndklite-secure-$BUILD_DATE-UNOFFICIAL.img.xz
     BASE_IMAGE=$BD/system-miku_treble_arm64_bgS.img
-    xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOW-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOW-arm64-ab-vndklite-gapps-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-vndklite-secure.img -T0 > $BD/MikuUI-SNOW-arm64-ab-vndklite-gapps-secure-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-vndklite-secure.img -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-secure-$BUILD_DATE-UNOFFICIAL.img.xz
     rm -rf $BD/system-*.img
 }
 
 generateOtaJson() {
-    prefix="MikuUI-SNOW-"
+    prefix="MikuUI-SNOWLAND-"
     suffix="-$BUILD_DATE-UNOFFICIAL.img.xz"
     json="{\"version\": \"$VERSION\",\"date\": \"$(date +%s -d '-4hours')\",\"variants\": ["
     find $BD -name "*.img.xz" | {
