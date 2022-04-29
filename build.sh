@@ -17,13 +17,19 @@ VERSION="0.9.7f"
 if [ ! -d .repo ]
 then
     echo "Initializing Miku UI workspace"
-    repo init -u https://github.com/Project-Mushroom/platform_manifest -b snow --depth=1
+    repo init -u https://github.com/Miku-UI/manifesto -b snowland --depth=1
     echo ""
+fi
 
-    echo "Preparing local manifest"
-    mkdir -p .repo/local_manifests
-    cp ./treble_build_miku/local_manifests_treble/manifest.xml .repo/local_manifests/miku-treble.xml
-    echo ""
+if [ -d .repo ]
+then
+    if [ ! -d .repo/local_manifests ]
+    then
+     echo "Preparing local manifest"
+     mkdir -p .repo/local_manifests
+     cp ./treble_build_miku/local_manifests_treble/manifest.xml .repo/local_manifests/miku-treble.xml
+     echo ""
+    fi 
 fi
 
 echo "Syncing repos"
