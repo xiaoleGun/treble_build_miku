@@ -1,30 +1,29 @@
 # Miku UI GSI
 
-[English](https://github.com/xiaoleGun/treble_build_miku/blob/snowland/README-EN.md)
-
-## 前言
-这是送给所有Miku fans的安卓项目，如果不喜欢它请关闭本页面，但不要攻击任何人，尤其是作者。
+## Preface
+This is an Android project for Miku fans. If you don't like it, please close this page, but don't attack Miku and the author of this project.
 
 ## Build
-要开始构建Miku UI GSI，您需要熟悉[Git和Repo](https://source.android.com/source/using-repo.html)和[How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
-- 安装依赖
+To get started with building Miku UI GSI, you'll need to get familiar with [Git and Repo](https://source.android.com/source/using-repo.html) as well as [How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
+- Install dependencies
     ```
     sudo apt-get install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev xattr openjdk-11-jdk jq android-sdk-libsparse-utils
     ```
-- 新建Miku工作区并进入
+- Create a new working directory for your Miku UI build and navigate to it:
     ```
     mkdir miku-treble && cd miku-treble
     ```
-- 下载本仓库
+- Clone this repo:
     ```
     git clone https://github.com/xiaoleGun/treble_build_miku -b snowland
     ```
-- 完成之后运行脚本:
+- Finally, start the build script:
     ```
     bash treble_build_miku/build.sh
     ```
 
-## 感谢
+## Credits
+These people have helped this project in some way or another, so they should be the ones who receive all the credit:
 - [Miku-UI](https://github.com/Miku-UI)
 - [Project-Mushroom](https://github.com/Project-Mushroom)
 - [phhusson](https://github.com/phhusson)
