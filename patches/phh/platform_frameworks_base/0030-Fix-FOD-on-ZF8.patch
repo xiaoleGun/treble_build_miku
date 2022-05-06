@@ -1,7 +1,7 @@
-From 2a244f8dc55faa62c14fa97b805d1fed68109413 Mon Sep 17 00:00:00 2001
+From e9dd2f023a48656cd66ae122df082279aa23fd81 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 4 Mar 2022 19:26:53 -0500
-Subject: [PATCH 30/31] Fix FOD on ZF8
+Subject: [PATCH 30/33] Fix FOD on ZF8
 
 Goodix HAL expects events in this order:
 - Fingerprint down when touchscreen says fp down

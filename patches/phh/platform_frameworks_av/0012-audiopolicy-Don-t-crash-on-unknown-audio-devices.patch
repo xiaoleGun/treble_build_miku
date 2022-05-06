@@ -1,7 +1,7 @@
 From df8e477da0e65c955287d42922b8164b1280b5fa Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 23 Mar 2021 00:16:42 +0100
-Subject: [PATCH 12/21] [audiopolicy] Don't crash on unknown audio devices
+Subject: [PATCH 12/23] [audiopolicy] Don't crash on unknown audio devices
 
 Change-Id: I2df8d88f742da6a84aa8888cdf19de25444de919
 ---
