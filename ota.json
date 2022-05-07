@@ -1,36 +1,36 @@
 {
-  "version": "0.3.0",
-  "date": "1651232771",
+  "version": "0.3.1",
+  "date": "1651904318",
   "variants": [
     {
-      "name": "miku_treble_arm64_bgS-vndklite",
-      "size": "897907948",
-      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.0/MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-20220429-UNOFFICIAL.img.xz"
-    },
-    {
       "name": "miku_treble_arm64_bgS-secure",
-      "size": "897922008",
-      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.0/MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-secure-20220429-UNOFFICIAL.img.xz"
+      "size": "897837388",
+      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.1/MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-secure-20220507-UNOFFICIAL.img.xz"
     },
     {
-      "name": "miku_treble_arm64_bvS-vndklite",
-      "size": "609066084",
-      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.0/MikuUI-SNOWLAND-arm64-ab-vndklite-20220429-UNOFFICIAL.img.xz"
-    },
-    {
-      "name": "miku_treble_arm64_bgS",
-      "size": "918373860",
-      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.0/MikuUI-SNOWLAND-arm64-ab-gapps-20220429-UNOFFICIAL.img.xz"
+      "name": "miku_treble_arm64_bgS-vndklite",
+      "size": "897835640",
+      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.1/MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-20220507-UNOFFICIAL.img.xz"
     },
     {
       "name": "miku_treble_arm64_bvS-secure",
-      "size": "609069436",
-      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.0/MikuUI-SNOWLAND-arm64-ab-vndklite-secure-20220429-UNOFFICIAL.img.xz"
+      "size": "609229016",
+      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.1/MikuUI-SNOWLAND-arm64-ab-vndklite-secure-20220507-UNOFFICIAL.img.xz"
+    },
+    {
+      "name": "miku_treble_arm64_bvS-vndklite",
+      "size": "609213880",
+      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.1/MikuUI-SNOWLAND-arm64-ab-vndklite-20220507-UNOFFICIAL.img.xz"
     },
     {
       "name": "miku_treble_arm64_bvS",
-      "size": "617616696",
-      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.0/MikuUI-SNOWLAND-arm64-ab-20220429-UNOFFICIAL.img.xz"
+      "size": "617764492",
+      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.1/MikuUI-SNOWLAND-arm64-ab-20220507-UNOFFICIAL.img.xz"
+    },
+    {
+      "name": "miku_treble_arm64_bgS",
+      "size": "918370348",
+      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/0.3.1/MikuUI-SNOWLAND-arm64-ab-gapps-20220507-UNOFFICIAL.img.xz"
     }
   ]
 }
