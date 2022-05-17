@@ -11,19 +11,19 @@
 
 从前到后，分别为
 ```
-ProjectName-{SNOW | SNOWLAND}-arm64-ab-vndklite-gapps-secure-构建日期-构建类型
- |                |             |    |     |      |      |
- |                |             |    |     |      |     安全版本，移除phh su，
- |                |             |    |     |   谷歌服务  一般情况下可以通过SafetyNet测试
- |                |             |    |     |
- |                |             |    |     |
- |                |             |    |    用于vndklite的设备
- |                |             |    |    支持system读写
- |                |             |    |
- |                |             |  分区类型，仅构建AB(1)
- |                |             |
- |                |             |
- |                |         CPU位数，仅构建64位
+ProjectName-{SNOW | SNOWLAND}-Miku-UI版本-arm64-ab-vndklite-gapps-secure-构建日期-构建类型
+ |                |                         |    |     |      |      |
+ |                |                         |    |     |      |     安全版本，移除phh su，
+ |                |                         |    |     |   谷歌服务  一般情况下可以通过SafetyNet测试
+ |                |                         |    |     |
+ |                |                         |    |     |
+ |                |                         |    |    用于vndklite的设备
+ |                |                         |    |    支持system读写
+ |                |                         |    |
+ |                |                         |  分区类型，仅构建AB(1)
+ |                |                         |
+ |                |                         |
+ |                |                     CPU位数，仅构建64位
  |                |
  |     Android 12 | Android 12.1
  |

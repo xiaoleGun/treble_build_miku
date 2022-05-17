@@ -99,18 +99,18 @@ buildSasImages() {
 generatePackages() {
     rm -rf $BD/MikuUI-*.img.xz
     BASE_IMAGE=$BD/system-miku_treble_arm64_bvS.img
-    xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-vndklite-secure.img -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-vndklite-secure-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOWLAND-$VERSION-arm64-ab-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOWLAND-$VERSION-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-vndklite-secure.img -T0 > $BD/MikuUI-SNOWLAND-$VERSION-arm64-ab-vndklite-secure-$BUILD_DATE-UNOFFICIAL.img.xz
     BASE_IMAGE=$BD/system-miku_treble_arm64_bgS.img
-    xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-$BUILD_DATE-UNOFFICIAL.img.xz
-    xz -cv ${BASE_IMAGE%.img}-vndklite-secure.img -T0 > $BD/MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-secure-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv $BASE_IMAGE -T0 > $BD/MikuUI-SNOWLAND-$VERSION-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-vndklite.img -T0 > $BD/MikuUI-SNOWLAND-$VERSION-arm64-ab-vndklite-gapps-$BUILD_DATE-UNOFFICIAL.img.xz
+    xz -cv ${BASE_IMAGE%.img}-vndklite-secure.img -T0 > $BD/MikuUI-SNOWLAND-$VERSION-arm64-ab-vndklite-gapps-secure-$BUILD_DATE-UNOFFICIAL.img.xz
     rm -rf $BD/system-*.img
 }
 
 generateOtaJson() {
-    prefix="MikuUI-SNOWLAND-"
+    prefix="MikuUI-SNOWLAND-$VERSION-"
     suffix="-$BUILD_DATE-UNOFFICIAL.img.xz"
     json="{\"version\": \"$VERSION\",\"date\": \"$(date +%s -d '-4hours')\",\"variants\": ["
     find $BD -name "*.img.xz" | {

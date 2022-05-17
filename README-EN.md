@@ -9,19 +9,19 @@ Examples
 
 They are
 ```
-ProjectName-{SNOW | SNOWLAND}-arm64-ab-vndklite-gapps-secure-BuildDate-Buildtype
- |                |             |    |     |      |      |
- |                |             |    |     |      |     Superuser removed and system props spoofed, 
- |                |             |    |     |     GMS    for better chances of passing SafetyNet
- |                |             |    |     |
- |                |             |    |     |
- |                |             |    |    It is used for vndklite devices and 
- |                |             |    |    supports system reading and writing.
- |                |             |    |
- |                |             |  Partition type, only AB variants are provided.(1)
- |                |             |
- |                |             |
- |                |        CPU bits, currently only 64 bits.
+ProjectName-{SNOW | SNOWLAND}-Miku-UI-version-arm64-ab-vndklite-gapps-secure-BuildDate-Buildtype
+ |                |                            |    |     |      |      |
+ |                |                            |    |     |      |     Superuser removed and system props  
+ |                |                            |    |     |     GMS    spoofed,for better chances of  
+ |                |                            |    |     |            passing SafetyNet.
+ |                |                            |    |     |
+ |                |                            |    |    It is used for vndklite devices and 
+ |                |                            |    |    supports system reading and writing.
+ |                |                            |    |
+ |                |                            |  Partition type, only AB variants are provided.(1)
+ |                |                            |
+ |                |                            |
+ |                |                       CPU bits, currently only 64 bits.
  |                |
  |     Android 12 | Android 12.1
  |
