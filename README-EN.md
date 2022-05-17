@@ -3,6 +3,33 @@
 ## Preface
 This is an Android project for Miku fans. If you don't like it, please close this page, but don't attack Miku and the author of this project.
 
+## Variant
+Examples
+> MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-secure-20220511-UNOFFICIAL.img.xz
+
+They are
+```
+ProjectName-{SNOW | SNOWLAND}-arm64-ab-vndklite-gapps-secure-BuildDate-Buildtype
+ |                |             |    |     |      |      |
+ |                |             |    |     |      |     Superuser removed and system props spoofed, 
+ |                |             |    |     |     GMS    for better chances of passing SafetyNet
+ |                |             |    |     |
+ |                |             |    |     |
+ |                |             |    |    It is used for vndklite devices and 
+ |                |             |    |    supports system reading and writing.
+ |                |             |    |
+ |                |             |  Partition type, only AB variants are provided.(1)
+ |                |             |
+ |                |             |
+ |                |        CPU bits, currently only 64 bits.
+ |                |
+ |     Android 12 | Android 12.1
+ |
+Miku UI
+```
+
+(1) Vendors of Android 9 and above support SAR(system-as-root), so GSI of AB partition type can be used.
+
 ## Build
 To get started with building Miku UI GSI, you'll need to get familiar with [Git and Repo](https://source.android.com/source/using-repo.html) as well as [How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
 - Install dependencies

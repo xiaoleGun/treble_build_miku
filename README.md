@@ -5,6 +5,33 @@
 ## 前言
 这是送给所有Miku fans的安卓项目，如果不喜欢它请关闭本页面，但不要攻击任何人，尤其是作者。
 
+## 版本
+示例
+> MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-secure-20220511-UNOFFICIAL.img.xz
+
+从前到后，分别为
+```
+ProjectName-{SNOW | SNOWLAND}-arm64-ab-vndklite-gapps-secure-构建日期-构建类型
+ |                |             |    |     |      |      |
+ |                |             |    |     |      |     安全版本，移除phh su，
+ |                |             |    |     |   谷歌服务  一般情况下可以通过SafetyNet测试
+ |                |             |    |     |
+ |                |             |    |     |
+ |                |             |    |    用于vndklite的设备
+ |                |             |    |    支持system读写
+ |                |             |    |
+ |                |             |  分区类型，仅构建AB(1)
+ |                |             |
+ |                |             |
+ |                |         CPU位数，仅构建64位
+ |                |
+ |     Android 12 | Android 12.1
+ |
+Miku UI
+```
+
+(1) 安卓9及以上的底包支持SAR(system-as-root)，所以可以使用AB分区类型的GSI
+
 ## Build
 要开始构建Miku UI GSI，您需要熟悉[Git和Repo](https://source.android.com/source/using-repo.html)和[How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
 - 安装依赖
