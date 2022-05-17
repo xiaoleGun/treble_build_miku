@@ -3,7 +3,7 @@
 [English](https://github.com/xiaoleGun/treble_build_miku/blob/snowland/README-EN.md)
 
 ## 前言
-这是送给所有Miku fans的安卓项目，如果不喜欢它请关闭本页面，但不要攻击任何人，尤其是作者。
+这是送给所有Miku fans的安卓项目，如果不喜欢它请关闭本页面，但不要攻击任何人，尤其是其作者。
 
 ## 版本
 示例
@@ -32,7 +32,7 @@ Miku UI
 
 (1) 安卓9及以上的底包支持SAR(system-as-root)，所以可以使用AB分区类型的GSI
 
-## Build
+## 构建
 要开始构建Miku UI GSI，您需要熟悉[Git和Repo](https://source.android.com/source/using-repo.html)和[How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
 - 安装依赖
     ```
