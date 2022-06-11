@@ -1,4 +1,4 @@
-From 49bcbaf5bcb5e0b2c91503a5a5548b90db34cd84 Mon Sep 17 00:00:00 2001
+From f2d75accf5ef1090902b7a0023b4b117929f1cf0 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Wed, 9 Feb 2022 14:16:06 +0800
 Subject: [PATCH 2/3] res: Add support for simplified Chinese
@@ -11,8 +11,8 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
  app/src/main/res/values-zh-rCH/pref_nubia.xml |  75 +++++++++
  .../main/res/values-zh-rCH/pref_oneplus.xml   |  29 ++++
  .../main/res/values-zh-rCH/pref_samsung.xml   |  17 ++
- app/src/main/res/values-zh-rCH/strings.xml    | 157 ++++++++++++++++++
- 7 files changed, 391 insertions(+)
+ app/src/main/res/values-zh-rCH/strings.xml    | 158 ++++++++++++++++++
+ 7 files changed, 392 insertions(+)
  create mode 100644 app/src/main/res/values-zh-rCH/pref_custom.xml
  create mode 100644 app/src/main/res/values-zh-rCH/pref_huawei.xml
  create mode 100644 app/src/main/res/values-zh-rCH/pref_misc.xml
@@ -293,10 +293,10 @@ index 0000000..f3b12e2
 +</resources>
 diff --git a/app/src/main/res/values-zh-rCH/strings.xml b/app/src/main/res/values-zh-rCH/strings.xml
 new file mode 100644
-index 0000000..6f12dc8
+index 0000000..77ffd7d
 --- /dev/null
 +++ b/app/src/main/res/values-zh-rCH/strings.xml
-@@ -0,0 +1,157 @@
+@@ -0,0 +1,158 @@
 +<resources>
 +    <string name="app_name">PhhTrebleApp</string>
 +    <string name="title_activity_settings">设置</string>
@@ -344,7 +344,7 @@ index 0000000..6f12dc8
 +    <string name="general_enable_dt2w">启用双击唤醒</string>
 +    <string name="general_double_tap_to_wake">启用双击唤醒</string>
 +    <string name="general_game_mode">启用游戏模式</string>
-+    <string name="general_usb_otg">启用OTG</string>
++    <string name="general_usb_otg">启用OTG</string> 
 +    <string name="general_misc">杂项</string>
 +    <string name="general_other">其它</string>
 +    <string name="general_requires_a_reboot">需要重启</string>
@@ -410,7 +410,8 @@ index 0000000..6f12dc8
 +    <string name="misc_storage_fuse_summary">可能提升或降低读写速度\n需要重启</string>
 +    <string name="misc_restart_ril">自动重启RIL</string>
 +    <string name="misc_dt2w">双击唤醒</string>
-+    <string name="misc_dt2w_summary">如果不会工作</string>
++    <string name="misc_dt2w_summary">如果不会工作，此选项尝试修复</string>
++    <string name="misc_fod_color">显示FOD颜色</string>
 +    <string name="misc_securize">安全</string>
 +    <string name="misc_debugging">调试</string>
 +    <string name="misc_debug_sensors">调试传感器</string>
@@ -444,10 +445,10 @@ index 0000000..6f12dc8
 +    <string name="samsung_glove_mode">启用手套模式</string>
 +    <string name="samsung_wireless_charging_transmit">启用反向无线充电 (如果适用)</string>
 +    <string name="samsung_fod_single_click">轻触指纹以打开设备</string>
++    <string name="samsung_flash_strength">设置手电筒亮度</string>
++    <string name="samsung_flash_strength_summary">1-5之间的整数</string>
 +    <string name="samsung_camera_ids">启用所有摄像头访问权限</string>
 +    <string name="samsung_camera_ids_summary">需要Android 10的Vendor</string>
-+    <string name="samsung_flash_strength">设置手电筒亮度</string>
-+    <string name="samsung_flash_strength_summary">一般是1-5的整数</string>
 +    <string name="samsung_workarounds">替代方案</string>
 +    <string name="samsung_extra_sensors">启用额外传感器</string>
 +    <string name="samsung_colorspace">启用色温过白的解决方案</string>
@@ -455,5 +456,5 @@ index 0000000..6f12dc8
 +    <string name="samsung_backlight_multiplier">设置背光范围/最大背光</string>
 +</resources>
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 

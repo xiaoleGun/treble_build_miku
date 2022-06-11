@@ -1,4 +1,4 @@
-From 4f178cf52993ddba0bc678a499f64b47392197cb Mon Sep 17 00:00:00 2001
+From 4f88237441567b4f15f919d526ebb88a481ff7b5 Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Sun, 13 Feb 2022 12:03:42 +0800
 Subject: [PATCH 3/3] Enable Dynamic Superuser (2/2)
@@ -12,7 +12,7 @@ Subject: [PATCH 3/3] Enable Dynamic Superuser (2/2)
  5 files changed, 15 insertions(+)
 
 diff --git a/app/src/main/java/me/phh/treble/app/Misc.kt b/app/src/main/java/me/phh/treble/app/Misc.kt
-index e2471cf..6949905 100644
+index bcbbc6e..85022ab 100644
 --- a/app/src/main/java/me/phh/treble/app/Misc.kt
 +++ b/app/src/main/java/me/phh/treble/app/Misc.kt
 @@ -178,6 +178,10 @@ object Misc: EntryStartup {
@@ -26,7 +26,7 @@ index e2471cf..6949905 100644
              MiscSettings.remotectl -> {
                  val value = sp.getBoolean(key, false)
                  SystemProperties.set("persist.sys.phh.remote", if (value) "true" else "false")
-@@ -248,6 +252,7 @@ object Misc: EntryStartup {
+@@ -252,6 +256,7 @@ object Misc: EntryStartup {
          spListener.onSharedPreferenceChanged(sp, MiscSettings.forceCamera2APIHAL3)
          if (! sp.contains(MiscSettings.headsetFix))
              sp.edit().putBoolean(MiscSettings.headsetFix, HuaweiSettings.enabled()).commit()
@@ -35,7 +35,7 @@ index e2471cf..6949905 100644
          spListener.onSharedPreferenceChanged(sp, MiscSettings.bluetooth)
          spListener.onSharedPreferenceChanged(sp, MiscSettings.displayFps)
 diff --git a/app/src/main/java/me/phh/treble/app/MiscSettings.kt b/app/src/main/java/me/phh/treble/app/MiscSettings.kt
-index 819df0e..53a711b 100644
+index 62bb9e7..84147a0 100644
 --- a/app/src/main/java/me/phh/treble/app/MiscSettings.kt
 +++ b/app/src/main/java/me/phh/treble/app/MiscSettings.kt
 @@ -12,6 +12,7 @@ object MiscSettings : Settings {
@@ -47,12 +47,12 @@ index 819df0e..53a711b 100644
      val multiCameras = "key_misc_multi_camera"
      val forceCamera2APIHAL3 = "key_misc_force_camera2api_hal3"
 diff --git a/app/src/main/res/values-zh-rCH/strings.xml b/app/src/main/res/values-zh-rCH/strings.xml
-index 6f12dc8..7b2b50d 100644
+index 77ffd7d..0d7590d 100644
 --- a/app/src/main/res/values-zh-rCH/strings.xml
 +++ b/app/src/main/res/values-zh-rCH/strings.xml
-@@ -113,6 +113,8 @@
-     <string name="misc_dt2w">双击唤醒</string>
-     <string name="misc_dt2w_summary">如果不会工作</string>
+@@ -114,6 +114,8 @@
+     <string name="misc_dt2w_summary">如果不会工作，此选项尝试修复</string>
+     <string name="misc_fod_color">显示FOD颜色</string>
      <string name="misc_securize">安全</string>
 +    <string name="misc_dynamic_superuser">启用动态超级用户</string>
 +    <string name="misc_dynamic_superuser_summary">会导致SafetyNet认证不通过</string>
@@ -60,12 +60,12 @@ index 6f12dc8..7b2b50d 100644
      <string name="misc_debug_sensors">调试传感器</string>
      <string name="misc_remotectl">允许Phh为了调试设备接管它</string>
 diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
-index 3461980..a55f199 100644
+index 800872b..ee422a2 100644
 --- a/app/src/main/res/values/strings.xml
 +++ b/app/src/main/res/values/strings.xml
-@@ -113,6 +113,8 @@
-     <string name="misc_dt2w">Double tap to wake</string>
+@@ -114,6 +114,8 @@
      <string name="misc_dt2w_summary">Unlikely to work for you</string>
+     <string name="misc_fod_color">Under-display fp color</string>
      <string name="misc_securize">Securize</string>
 +    <string name="misc_dynamic_superuser">Enable Dynamic Superuser</string>
 +    <string name="misc_dynamic_superuser_summary">Breaks SafetyNet attestation</string>
@@ -73,10 +73,10 @@ index 3461980..a55f199 100644
      <string name="misc_debug_sensors">Debug Sensors</string>
      <string name="misc_remotectl">Allow takeover of the device by phh for debugging</string>
 diff --git a/app/src/main/res/xml/pref_misc.xml b/app/src/main/res/xml/pref_misc.xml
-index 78d2364..03f108f 100644
+index 9ea2ecc..29f817d 100644
 --- a/app/src/main/res/xml/pref_misc.xml
 +++ b/app/src/main/res/xml/pref_misc.xml
-@@ -143,6 +143,11 @@
+@@ -149,6 +149,11 @@
              android:key="key_misc_securize" />
  		<Preference android:title="@string/remove_telephony_subsystem"
              android:key="key_misc_removetelephony" />
@@ -89,5 +89,5 @@ index 78d2364..03f108f 100644
      <PreferenceCategory android:title="@string/misc_debugging">
          <Preference android:title="@string/misc_debug_sensors">
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 

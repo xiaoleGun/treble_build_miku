@@ -1,4 +1,4 @@
-From 963a0c554a3e8a91f73fc76cfc007ebbc99f4237 Mon Sep 17 00:00:00 2001
+From fa77668a641b3a0f17c8996282357d8d77da2475 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Tue, 8 Feb 2022 16:40:33 +0800
 Subject: [PATCH 1/3] res: Support multiple languages
@@ -7,7 +7,7 @@ Migrate all descriptions to strings.xml
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
- app/src/main/res/values/strings.xml    | 127 +++++++++++++++++++++++++
+ app/src/main/res/values/strings.xml    | 128 +++++++++++++++++++++++++
  app/src/main/res/xml/pref_custom.xml   |  12 +--
  app/src/main/res/xml/pref_doze.xml     |   6 +-
  app/src/main/res/xml/pref_headers.xml  |  30 +++---
@@ -23,13 +23,13 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
  app/src/main/res/xml/pref_samsung.xml  |  40 ++++----
  app/src/main/res/xml/pref_vsmart.xml   |   4 +-
  app/src/main/res/xml/pref_xiaomi.xml   |   4 +-
- 16 files changed, 264 insertions(+), 137 deletions(-)
+ 16 files changed, 265 insertions(+), 137 deletions(-)
 
 diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
-index d6f6e83..3461980 100644
+index d6f6e83..800872b 100644
 --- a/app/src/main/res/values/strings.xml
 +++ b/app/src/main/res/values/strings.xml
-@@ -27,4 +27,131 @@
+@@ -27,4 +27,132 @@
      <string name="magisk_exists_message">Magisk was detected! If you proceed with the update you may lose Magisk or the installation may fail!</string>
      <string name="menu_delete_ota">Delete OTA files</string>
      <string name="delete_ota_message">Take in consideration that you may lose your userdata if you proceed!\nTo prevent this, cancel this dialog, reboot and flash the latest update on fastboot mode.\nDo you want to proceed anyway?</string>
@@ -51,7 +51,7 @@ index d6f6e83..3461980 100644
 +    <string name="general_enable_dt2w">Enable double tap to wake</string>
 +    <string name="general_double_tap_to_wake">Enable DT2W</string>
 +    <string name="general_game_mode">Enable game mode</string>
-+    <string name="general_usb_otg">Enable USB OTG</string>
++    <string name="general_usb_otg">Enable USB OTG</string> 
 +    <string name="general_misc">Misc</string>
 +    <string name="general_other">Other</string>
 +    <string name="general_requires_a_reboot">Requires a reboot</string>
@@ -118,6 +118,7 @@ index d6f6e83..3461980 100644
 +    <string name="misc_restart_ril">Automatically restart RIL</string>
 +    <string name="misc_dt2w">Double tap to wake</string>
 +    <string name="misc_dt2w_summary">Unlikely to work for you</string>
++    <string name="misc_fod_color">Under-display fp color</string>
 +    <string name="misc_securize">Securize</string>
 +    <string name="misc_debugging">Debugging</string>
 +    <string name="misc_debug_sensors">Debug Sensors</string>
@@ -151,10 +152,10 @@ index d6f6e83..3461980 100644
 +    <string name="samsung_glove_mode">Enable glove mode</string>
 +    <string name="samsung_wireless_charging_transmit">Enable reversed wireless charging(If applicable)</string>
 +    <string name="samsung_fod_single_click">Clicking fingerprint turns device on</string>
-+    <string name="samsung_camera_ids">Enable access to all cameras</string>
-+    <string name="samsung_camera_ids_summary">Requires Q vendor</string>
 +    <string name="samsung_flash_strength">Set flash strength</string>
 +    <string name="samsung_flash_strength_summary">Usually values are integers between 1 and 5</string>
++    <string name="samsung_camera_ids">Enable access to all cameras</string>
++    <string name="samsung_camera_ids_summary">Requires Q vendor</string>
 +    <string name="samsung_workarounds">Workarounds</string>
 +    <string name="samsung_extra_sensors">Enable extra sensors</string>
 +    <string name="samsung_colorspace">Enable workaround for white-ish screen</string>
@@ -383,10 +384,10 @@ index 01e1ee2..913d24d 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_misc.xml b/app/src/main/res/xml/pref_misc.xml
-index e5ac34e..78d2364 100644
+index 96ceac6..9ea2ecc 100644
 --- a/app/src/main/res/xml/pref_misc.xml
 +++ b/app/src/main/res/xml/pref_misc.xml
-@@ -1,151 +1,151 @@
+@@ -1,157 +1,157 @@
  <?xml version="1.0" encoding="utf-8"?>
  <PreferenceScreen
  	xmlns:android="http://schemas.android.com/apk/res/android">
@@ -536,7 +537,7 @@ index e5ac34e..78d2364 100644
      	    android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"
      	    android:key="key_misc_max_aspect_ratio_pre_o"
 -    	    android:title="Compatibility max aspect ratio" />
-+	    android:title="@string/misc_max_aspect_ratio_pre_o" />
++    	    android:title="@string/misc_max_aspect_ratio_pre_o" />
  		<CheckBoxPreference
              android:defaultValue="false"
              android:key="key_misc_force_a2dp_offload_disable"
@@ -566,10 +567,16 @@ index e5ac34e..78d2364 100644
  				android:key="key_misc_dt2w"
 -            android:title="Double tap to wake"
 -            android:summary="Unlikely to work for you" />
--		<Preference android:title="Securize"
 +            android:title="@string/misc_dt2w"
 +            android:summary="@string/misc_dt2w_summary" />
-+		<Preference android:title="@string/misc_securize"
+ 		<ListPreference
+ 		    android:defaultValue="00ff00"
+ 		    android:entries="@array/pref_misc_fod_color"
+ 		    android:entryValues="@array/pref_misc_fod_color_values"
+ 		    android:key="key_misc_fod_color"
+-            android:title="Under-display fp color" />
++            android:title="@string/misc_fod_color" />
+ 		<Preference android:title="Securize"
              android:key="key_misc_securize" />
  		<Preference android:title="@string/remove_telephony_subsystem"
              android:key="key_misc_removetelephony" />
@@ -581,7 +588,7 @@ index e5ac34e..78d2364 100644
              <intent
                  android:action="android.intent.action.VIEW"
                  android:targetPackage="me.phh.treble.app"
-@@ -154,6 +154,6 @@
+@@ -160,6 +160,6 @@
  		<CheckBoxPreference
              android:defaultValue="false"
              android:key="key_misc_remotectl"
@@ -923,5 +930,5 @@ index db49beb..70e7a31 100644
      </PreferenceCategory>
  </PreferenceScreen>
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 
