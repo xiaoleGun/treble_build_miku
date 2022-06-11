@@ -14,6 +14,7 @@ BL=$PWD/treble_build_miku
 BD=$HOME/builds
 VERSION="0.4.0"
 
+syncrepo() {
 if [ ! -d .repo ]
 then
     echo "Initializing Miku UI workspace"
@@ -35,21 +36,32 @@ fi
 echo "Syncing repos"
 repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
 echo ""
+}
 
-#if [ ! -d miku_plus ]
-#then
-#    git clone https://github.com/xiaoleGun/miku_plus -b snow
-#fi
+applypatches() {
+patches="$(readlink -f -- $1)"
+tree="$2"
 
+for project in $(cd $patches/patches/$tree; echo *);do
+	p="$(tr _ / <<<$project |sed -e 's;platform/;;g')"
+	[ "$p" == treble/app ] && p=treble_app
+	[ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay
+	pushd $p
+	for patch in $patches/patches/$tree/$project/*.patch;do
+		git am $patch || exit
+	done
+	popd
+    done
+}
+
+applyingpatches() {
 echo "Applying patches"
-bash $BL/apply-patches.sh $BL phh
-bash $BL/apply-patches.sh $BL personal
+applypatches $BL phh
+applypatches $BL personal
 echo ""
+}
 
-#echo "Applying FaceUnlock and Per-volume control patches"
-#bash ./miku_plus/start.sh faceunlock volume
-#echo ""
-
+initenvironment() {
 echo "Setting up build environment"
 source build/envsetup.sh &> /dev/null
 mkdir -p $BD
@@ -62,6 +74,7 @@ git clean -fdx
 bash generate.sh miku
 cd ../../..
 echo ""
+}
 
 buildTrebleApp() {
     cd treble_app
@@ -134,6 +147,9 @@ generateOtaJson() {
     }
 }
 
+syncrepo
+applyingpatches
+initenvironment
 buildTrebleApp
 buildtreble
 buildSasImages
