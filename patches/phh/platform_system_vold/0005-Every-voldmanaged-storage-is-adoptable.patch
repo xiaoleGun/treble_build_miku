@@ -1,4 +1,4 @@
-From bcc3c094aa3f85166038995e0694b9a76d3b2cd6 Mon Sep 17 00:00:00 2001
+From d57052d9c6bdf9fcb88184296500fae5fe41924d Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 11 Mar 2020 14:02:35 +0100
 Subject: [PATCH 5/7] Every voldmanaged storage is adoptable
@@ -21,5 +21,5 @@ index 7f9c21b..4a418d5 100644
                  configs->has_adoptable = true;
              }
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 

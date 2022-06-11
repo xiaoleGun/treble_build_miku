@@ -1,7 +1,7 @@
-From afdef33c7b633f2182b8fda78253207912a1fc49 Mon Sep 17 00:00:00 2001
+From e9eda60da6e1f4d6a1ee8a791ca2119adaea815c Mon Sep 17 00:00:00 2001
 From: Peter Cai <peter@typeblog.net>
 Date: Wed, 16 Dec 2020 13:46:15 +0800
-Subject: [PATCH 16/33] TelephonyManager: bring back getNetworkClass()
+Subject: [PATCH 16/34] TelephonyManager: bring back getNetworkClass()
 
 This partially reverts commit c058cac051ab083dc7fb7ea6aa85699110b2e9bf.
 

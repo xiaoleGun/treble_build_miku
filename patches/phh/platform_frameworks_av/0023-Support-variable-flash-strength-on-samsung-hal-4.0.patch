@@ -1,4 +1,4 @@
-From 1a91caed21cabac752cbf65f9b80ee04b5cb10cd Mon Sep 17 00:00:00 2001
+From 61d6c7f36c083682645e459f1d9ecbce148d23e0 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 2 May 2022 17:37:09 -0400
 Subject: [PATCH 23/23] Support variable flash strength on samsung hal 4.0

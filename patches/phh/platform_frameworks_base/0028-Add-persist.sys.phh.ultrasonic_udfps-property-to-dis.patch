@@ -1,7 +1,7 @@
-From fe835d521af513c1610f3f8499d3e8f54aebd1aa Mon Sep 17 00:00:00 2001
+From fb90852fddc1e875bcb681d0a9542e156ed4f9bd Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 3 Mar 2022 09:15:32 -0500
-Subject: [PATCH 28/33] Add persist.sys.phh.ultrasonic_udfps property to
+Subject: [PATCH 28/34] Add persist.sys.phh.ultrasonic_udfps property to
  disable green circle for udfps
 
 ---

@@ -1,7 +1,7 @@
-From 9435018a88eb29388ef47d7d7c60de0e231969eb Mon Sep 17 00:00:00 2001
+From 1cc8b2b1f302e3d61f7b538291a354f0693cce0e Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 19 Dec 2021 17:08:22 -0500
-Subject: [PATCH 25/33] Add UDFPS support for various devices
+Subject: [PATCH 25/34] Add UDFPS support for various devices
 
 Successfully tested on Galaxy A51, Xiaomi Mi 9, and OnePlus Nord 2
 
@@ -33,7 +33,7 @@ index 77fad35d32d4..51409b9c533a 100644
      }
  
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
-index 30e5aed2f8d8..c60318a9baf7 100644
+index 30e5aed2f8d8..a2c6673d2bbf 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
 @@ -42,6 +42,12 @@ import com.android.systemui.R;
@@ -115,7 +115,7 @@ index 30e5aed2f8d8..c60318a9baf7 100644
 +    else {
 +		if (mGhbmView != null) {
 +			mGhbmView.drawIlluminationDot(mSensorRect);
-+		}
++        }
      }
 +}
  

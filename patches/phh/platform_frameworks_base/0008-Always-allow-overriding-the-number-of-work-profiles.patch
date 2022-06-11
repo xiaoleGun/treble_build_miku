@@ -1,7 +1,7 @@
-From 599c13a40b83eeed3ad13372ad22c0852811b6d8 Mon Sep 17 00:00:00 2001
+From 2ace35a88b00502dbaf1c4cf75448ac9b3c30afc Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 5 Apr 2020 16:32:46 +0200
-Subject: [PATCH 08/33] Always allow overriding the number of work profiles
+Subject: [PATCH 08/34] Always allow overriding the number of work profiles
 
 Change-Id: I6eb09aa71663c6fbe7563e3038bffcabdba0ff6a
 ---

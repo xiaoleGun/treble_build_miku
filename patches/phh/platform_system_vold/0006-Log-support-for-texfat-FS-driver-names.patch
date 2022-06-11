@@ -1,4 +1,4 @@
-From 25014ba7ba489a08bbb7535c51ae1ce558eb6e3c Mon Sep 17 00:00:00 2001
+From f40386566fa37453cd8a6d4e6ee0d6d8270e1e1a Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 24 Nov 2021 15:50:30 -0500
 Subject: [PATCH 6/7] Log support for texfat FS driver names
@@ -23,5 +23,5 @@ index 4a418d5..a50c3ff 100644
      VolumeManager* vm;
      NetlinkManager* nm;
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 
