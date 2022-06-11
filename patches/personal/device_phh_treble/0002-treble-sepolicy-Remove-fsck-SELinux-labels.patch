@@ -22,5 +22,5 @@ index 999ff97..11dd447 100644
  
  /sec_storage(/.*)?      u:object_r:teecd_data_file:s0
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 

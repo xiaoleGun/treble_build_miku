@@ -22,5 +22,5 @@ index 352fe12..07e65b5 100644
  				baseArch="$arch"
  				if [ "$arch" = "a64" ];then
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 

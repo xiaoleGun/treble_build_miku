@@ -431,5 +431,5 @@ index cb44422..280ae2d 100644
 +allow hal_vibrator_default vib_strength_sysfs:dir rw_dir_perms;
 +allow hal_vibrator_default vib_strength_sysfs:file rw_file_perms;
 -- 
-2.34.1
+2.32.0 (Apple Git-132)
 
