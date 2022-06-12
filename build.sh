@@ -12,7 +12,7 @@ BUILD_DATE="$(date +%Y%m%d)"
 WITHOUT_CHECK_API=true
 BL=$PWD/treble_build_miku
 BD=$HOME/builds
-VERSION="0.4.0"
+VERSION="0.5.0"
 
 syncrepo() {
 if [ ! -d .repo ]
