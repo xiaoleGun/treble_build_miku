@@ -147,6 +147,12 @@ generateOtaJson() {
     }
 }
 
+personal() {
+  7z a -t7z -r $BD/all.7z $BD/*
+  rm -rf $BD/*.img.xz
+  rm -rf $BD/ota.json
+}
+
 syncrepo
 applyingpatches
 initenvironment
@@ -155,6 +161,9 @@ buildtreble
 buildSasImages
 generatePackages
 generateOtaJson
+if [ $USER == xiaolegun ];then
+personal
+fi
 
 END=`date +%s`
 ELAPSEDM=$(($(($END-$START))/60))
