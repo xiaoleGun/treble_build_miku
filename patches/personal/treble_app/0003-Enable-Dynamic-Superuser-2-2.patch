@@ -1,4 +1,4 @@
-From 4f88237441567b4f15f919d526ebb88a481ff7b5 Mon Sep 17 00:00:00 2001
+From 3b49599b46e3e732a531c04eece0c3c01c1af835 Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Sun, 13 Feb 2022 12:03:42 +0800
 Subject: [PATCH 3/3] Enable Dynamic Superuser (2/2)
@@ -35,7 +35,7 @@ index bcbbc6e..85022ab 100644
          spListener.onSharedPreferenceChanged(sp, MiscSettings.bluetooth)
          spListener.onSharedPreferenceChanged(sp, MiscSettings.displayFps)
 diff --git a/app/src/main/java/me/phh/treble/app/MiscSettings.kt b/app/src/main/java/me/phh/treble/app/MiscSettings.kt
-index 62bb9e7..84147a0 100644
+index 1666e76..dc1bd01 100644
 --- a/app/src/main/java/me/phh/treble/app/MiscSettings.kt
 +++ b/app/src/main/java/me/phh/treble/app/MiscSettings.kt
 @@ -12,6 +12,7 @@ object MiscSettings : Settings {
@@ -47,7 +47,7 @@ index 62bb9e7..84147a0 100644
      val multiCameras = "key_misc_multi_camera"
      val forceCamera2APIHAL3 = "key_misc_force_camera2api_hal3"
 diff --git a/app/src/main/res/values-zh-rCH/strings.xml b/app/src/main/res/values-zh-rCH/strings.xml
-index 77ffd7d..0d7590d 100644
+index 1bbf161..7e50a1a 100644
 --- a/app/src/main/res/values-zh-rCH/strings.xml
 +++ b/app/src/main/res/values-zh-rCH/strings.xml
 @@ -114,6 +114,8 @@
@@ -60,7 +60,7 @@ index 77ffd7d..0d7590d 100644
      <string name="misc_debug_sensors">调试传感器</string>
      <string name="misc_remotectl">允许Phh为了调试设备接管它</string>
 diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
-index 800872b..ee422a2 100644
+index 4366034..dfc7fb6 100644
 --- a/app/src/main/res/values/strings.xml
 +++ b/app/src/main/res/values/strings.xml
 @@ -114,6 +114,8 @@
