@@ -1,4 +1,4 @@
-From f40386566fa37453cd8a6d4e6ee0d6d8270e1e1a Mon Sep 17 00:00:00 2001
+From d6c49d21a1614a8bcd1afe2a6405eb6bea8d559c Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 24 Nov 2021 15:50:30 -0500
 Subject: [PATCH 6/7] Log support for texfat FS driver names

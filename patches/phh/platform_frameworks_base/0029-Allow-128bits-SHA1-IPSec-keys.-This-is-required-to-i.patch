@@ -1,4 +1,4 @@
-From e5fc94a939ac88f3c389fa393ddc2395007dc33e Mon Sep 17 00:00:00 2001
+From 512be9f32a3bbf83519ca6b85fe29219be7e81e9 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 3 Mar 2022 09:17:17 -0500
 Subject: [PATCH 29/34] Allow 128bits SHA1 IPSec keys. This is required to

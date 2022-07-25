@@ -1,4 +1,4 @@
-From 1cc8b2b1f302e3d61f7b538291a354f0693cce0e Mon Sep 17 00:00:00 2001
+From 17b611633e1bb5b6a750c1c67a90215e9b8648c9 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 19 Dec 2021 17:08:22 -0500
 Subject: [PATCH 25/34] Add UDFPS support for various devices
@@ -13,11 +13,11 @@ Successfully tested on Galaxy A51, Xiaomi Mi 9, and OnePlus Nord 2
 Change-Id: I9448f06a46c178652f5b216717d914b8db55c993
 ---
  .../systemui/biometrics/UdfpsSurfaceView.java |   2 +-
- .../systemui/biometrics/UdfpsView.java        |  56 +++-
+ .../systemui/biometrics/UdfpsView.java        |  57 +++-
  services/core/Android.bp                      |   4 +
  .../server/biometrics/AuthService.java        | 262 +++++++++++++++++-
  .../sensors/fingerprint/UdfpsHelper.java      | 115 +++++++-
- 5 files changed, 421 insertions(+), 18 deletions(-)
+ 5 files changed, 422 insertions(+), 18 deletions(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsSurfaceView.java b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsSurfaceView.java
 index 77fad35d32d4..51409b9c533a 100644
@@ -33,7 +33,7 @@ index 77fad35d32d4..51409b9c533a 100644
      }
  
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
-index 30e5aed2f8d8..a2c6673d2bbf 100644
+index 30e5aed2f8d8..3db3063841f1 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
 @@ -42,6 +42,12 @@ import com.android.systemui.R;
@@ -108,7 +108,7 @@ index 30e5aed2f8d8..a2c6673d2bbf 100644
      public UdfpsView(Context context, AttributeSet attrs) {
          super(context, attrs);
  
-@@ -255,7 +304,12 @@ public class UdfpsView extends FrameLayout implements DozeReceiver, UdfpsIllumin
+@@ -255,7 +304,13 @@ public class UdfpsView extends FrameLayout implements DozeReceiver, UdfpsIllumin
                  }
              });
          }
@@ -116,6 +116,7 @@ index 30e5aed2f8d8..a2c6673d2bbf 100644
 +		if (mGhbmView != null) {
 +			mGhbmView.drawIlluminationDot(mSensorRect);
 +        }
++
      }
 +}
  

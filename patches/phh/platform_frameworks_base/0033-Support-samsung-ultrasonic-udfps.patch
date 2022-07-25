@@ -1,4 +1,4 @@
-From cfe6dd96e618d18454c3b2e1713b428b208940d4 Mon Sep 17 00:00:00 2001
+From 0cf98da391c7c32665657d12e8bb1ecdd56684cf Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 2 May 2022 18:02:40 -0400
 Subject: [PATCH 33/34] Support samsung ultrasonic udfps
@@ -9,7 +9,7 @@ Subject: [PATCH 33/34] Support samsung ultrasonic udfps
  2 files changed, 26 insertions(+), 1 deletion(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
-index a2c6673d2bbf..84ca0084f651 100644
+index 3db3063841f1..953002e0d3ef 100644
 --- a/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
 +++ b/packages/SystemUI/src/com/android/systemui/biometrics/UdfpsView.java
 @@ -65,7 +65,7 @@ public class UdfpsView extends FrameLayout implements DozeReceiver, UdfpsIllumin

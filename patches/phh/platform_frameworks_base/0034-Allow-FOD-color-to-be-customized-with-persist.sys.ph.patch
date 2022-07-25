@@ -1,4 +1,4 @@
-From 0d1a41395f813d1cbeb6e1909cb8260068470f94 Mon Sep 17 00:00:00 2001
+From f3e2140076a7f970cf2aba461629291d58fcde3c Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 9 Jun 2022 14:08:46 -0400
 Subject: [PATCH 34/34] Allow FOD color to be customized with
