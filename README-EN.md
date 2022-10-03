@@ -5,25 +5,25 @@ This is an Android project for Miku fans. If you don't like it, please close thi
 
 ## Variant
 Examples
-> MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-secure-20220511-UNOFFICIAL.img.xz
+> MikuUI-TDA-arm64-ab-vndklite-gapps-20220511-UNOFFICIAL.img.xz
 
 They are
 ```
-ProjectName-{SNOW | SNOWLAND}-Miku-UI-version-arm64-ab-vndklite-gapps-secure-BuildDate-Buildtype
- |                |                            |    |     |      |      |
- |                |                            |    |     |      |     Superuser removed and system props  
- |                |                            |    |     |     GMS    spoofed,for better chances of  
- |                |                            |    |     |            passing SafetyNet.
- |                |                            |    |     |
- |                |                            |    |    It is used for vndklite devices and 
- |                |                            |    |    supports system reading and writing.
- |                |                            |    |
- |                |                            |  Partition type, only AB variants are provided.(1)
- |                |                            |
- |                |                            |
- |                |                       CPU bits, currently only 64 bits.
- |                |
- |     Android 12 | Android 12.1
+ProjectName-{SNOW | SNOWLAND | TDA}-Miku-UI-version-arm64-ab-vndklite-gapps-BuildDate-Buildtype
+ |                |          |                        |    |     |      |
+ |                |          |                        |    |     |      |
+ |                |          |                        |    |     |     GMS
+ |                |          |                        |    |     |
+ |                |          |                        |    |     |
+ |                |          |                        |    |    It is used for vndklite devices and 
+ |                |          |                        |    |    supports system reading and writing.
+ |                |          |                        |    |
+ |                |          |                        |  Partition type, only AB variants are provided.(1)
+ |                |          |                        |
+ |                |          |                        |
+ |                |          |                   CPU bits, currently only 64 bits.
+ |                |          |
+ |     Android 12 | 12.1     | 13  
  |
 Miku UI
 ```
@@ -42,7 +42,7 @@ To get started with building Miku UI GSI, you'll need to get familiar with [Git 
     ```
 - Clone this repo:
     ```
-    git clone https://github.com/xiaoleGun/treble_build_miku -b snowland
+    git clone https://github.com/xiaoleGun/treble_build_miku -b TDA
     ```
 - Finally, start the build script:
     ```
@@ -56,4 +56,3 @@ These people have helped this project in some way or another, so they should be 
 - [phhusson](https://github.com/phhusson)
 - [AndyCGYan](https://github.com/AndyCGYan)
 - [ponces](https://github.com/ponces)
-- [Yilliee](https://github.com/Yilliee)

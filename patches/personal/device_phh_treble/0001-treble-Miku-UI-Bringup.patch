@@ -1,7 +1,7 @@
-From f4dacba2213310bd0cd59fdc3aab37e6fe7d896e Mon Sep 17 00:00:00 2001
+From 9f80a659ab05ca61961c72c032952071fc231473 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sun, 6 Feb 2022 14:31:44 +0800
-Subject: [PATCH 01/14] treble: Miku UI Bringup
+Subject: [PATCH 01/13] treble: Miku UI Bringup
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
@@ -15,7 +15,7 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
  create mode 100644 overlay-miku/packages/apps/Settings/res/values/miku_strings.xml
 
 diff --git a/base.mk b/base.mk
-index 62e5d18..bd5f178 100644
+index d3a0a20..ce59255 100644
 --- a/base.mk
 +++ b/base.mk
 @@ -13,7 +13,10 @@ PRODUCT_COPY_FILES += \
@@ -96,5 +96,5 @@ index 0000000..15887ba
 +</resources>
 \ No newline at end of file
 -- 
-2.32.0 (Apple Git-132)
+2.32.1 (Apple Git-133)
 

@@ -1,4 +1,4 @@
-From 739ebf4f43a09c300d45fd9f2b22ac332a7235e5 Mon Sep 17 00:00:00 2001
+From ceb93c01ea9a83a199197faca6f13e8e56ef63f9 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Tue, 8 Feb 2022 10:13:12 +0800
 Subject: [PATCH 1/5] Revert "core: Include Miku SEPolicy if repo exists"
@@ -11,10 +11,10 @@ This reverts commit 270ba3158b8810236f80e1b70e3414aebcec9627.
  1 file changed, 4 deletions(-)
 
 diff --git a/core/config.mk b/core/config.mk
-index 079da9897..a9863d389 100644
+index 165ee8e8f..6e2357247 100644
 --- a/core/config.mk
 +++ b/core/config.mk
-@@ -1161,10 +1161,6 @@ dont_bother_goals := out \
+@@ -1261,10 +1261,6 @@ dont_bother_goals := out product-graph
  # consistency with those defined in BoardConfig.mk files.
  include $(BUILD_SYSTEM)/android_soong_config_vars.mk
  
@@ -26,5 +26,5 @@ index 079da9897..a9863d389 100644
  include $(BUILD_SYSTEM)/ninja_config.mk
  include $(BUILD_SYSTEM)/soong_config.mk
 -- 
-2.34.1
+2.24.3 (Apple Git-128)
 

@@ -1,4 +1,4 @@
-From 44fead42f2d1d18f6c299e95bb04502e71f597e9 Mon Sep 17 00:00:00 2001
+From 99eefe42f839d7f3a3773afbfdb3ca2cbe33deb8 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sat, 13 Mar 2021 14:20:03 -0500
 Subject: [PATCH 11/23] Support Samsung R multi-cams
@@ -10,30 +10,30 @@ Change-Id: If46f385e8dd16185cbf37ab083e6a1242e1d1555
  2 files changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/services/camera/libcameraservice/Android.bp b/services/camera/libcameraservice/Android.bp
-index e940c33845..a2a2ad623e 100644
+index 02d2d42653..d4d6aa3fd4 100644
 --- a/services/camera/libcameraservice/Android.bp
 +++ b/services/camera/libcameraservice/Android.bp
-@@ -155,6 +155,7 @@ cc_library_shared {
-         "android.hardware.camera.device@3.6",
+@@ -168,6 +168,7 @@ cc_library_shared {
          "android.hardware.camera.device@3.7",
+         "android.hardware.camera.device-V1-ndk",
          "vendor.samsung.hardware.camera.provider@3.0",
 +        "vendor.samsung.hardware.camera.provider@4.0",
          "media_permission-aidl-cpp",
      ],
  
-diff --git a/services/camera/libcameraservice/common/CameraProviderManager.cpp b/services/camera/libcameraservice/common/CameraProviderManager.cpp
-index 015aa12cfa..75004be52c 100644
---- a/services/camera/libcameraservice/common/CameraProviderManager.cpp
-+++ b/services/camera/libcameraservice/common/CameraProviderManager.cpp
-@@ -22,6 +22,7 @@
+diff --git a/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp b/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp
+index cd16cce988..4e6bac24db 100644
+--- a/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp
++++ b/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp
+@@ -28,6 +28,7 @@
  
  #include <android/hardware/camera/device/3.7/ICameraDevice.h>
  #include <vendor/samsung/hardware/camera/provider/3.0/ISehCameraProvider.h>
 +#include <vendor/samsung/hardware/camera/provider/4.0/ISehCameraProvider.h>
  
- #include <algorithm>
- #include <chrono>
-@@ -1421,7 +1422,9 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+ namespace {
+ const bool kEnableLazyHal(property_get_bool("ro.camera.enableLazyHal", false));
+@@ -173,7 +174,9 @@ status_t HidlProviderInfo::initializeHidlProvider(
      }
  
      auto samsungCast = vendor::samsung::hardware::camera::provider::V3_0::ISehCameraProvider::castFrom(interface);
@@ -43,7 +43,7 @@ index 015aa12cfa..75004be52c 100644
  
      hardware::Return<bool> linked = interface->linkToDeath(this, /*cookie*/ mId);
      if (!linked.isOk()) {
-@@ -1459,6 +1462,7 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+@@ -211,6 +214,7 @@ status_t HidlProviderInfo::initializeHidlProvider(
          status = idStatus;
          if (status == Status::OK) {
              for (auto& name : cameraDeviceNames) {
@@ -51,7 +51,7 @@ index 015aa12cfa..75004be52c 100644
                  uint16_t major, minor;
                  std::string type, id;
                  status_t res = parseDeviceName(name, &major, &minor, &type, &id);
-@@ -1472,7 +1476,9 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+@@ -224,7 +228,9 @@ status_t HidlProviderInfo::initializeHidlProvider(
              }
          } };
      hardware::Return<void> ret;

@@ -1,0 +1,35 @@
+From 0532e82bb0c489ba4ea66c32b6020a8b65e1b7aa Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=C5=9Dukasz=20Rymanowski?= <rlukasz@google.com>
+Date: Tue, 28 Jun 2022 08:47:07 +0000
+Subject: [PATCH 1/3] controller/gd: Fix setting HOST ISO SUPPORT in the
+ controller.
+
+There was an errata on BT Core specification, changing the Host behaviour
+in the way that Host can set ISO support feature bit only if controller
+supports ISO as well.
+
+Bug: 235433293
+Test: atest BluetoothInstrumentationTests
+Tag: #feature
+Change-Id: I6ddebfb4bc2f79dcac1337c3fab7436db904c056
+(cherry picked from commit 514d77a06c9633dc024de88ecb1d93fff1ba4690)
+---
+ system/gd/hci/controller.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/system/gd/hci/controller.cc b/system/gd/hci/controller.cc
+index da5986fcb7..cd6fa1f838 100644
+--- a/system/gd/hci/controller.cc
++++ b/system/gd/hci/controller.cc
+@@ -146,7 +146,7 @@ struct Controller::impl {
+       LOG_INFO("LE_READ_PERIODIC_ADVERTISING_LIST_SIZE not supported, defaulting to 0");
+       le_periodic_advertiser_list_size_ = 0;
+     }
+-    if (is_supported(OpCode::LE_SET_HOST_FEATURE)) {
++    if (is_supported(OpCode::LE_SET_HOST_FEATURE) && module_.SupportsBleConnectedIsochronousStreamCentral()) {
+       hci_->EnqueueCommand(
+           LeSetHostFeatureBuilder::Create(LeHostFeatureBits::CONNECTED_ISO_STREAM_HOST_SUPPORT, Enable::ENABLED),
+           handler->BindOnceOn(this, &Controller::impl::le_set_host_feature_handler));
+-- 
+2.24.3 (Apple Git-128)
+

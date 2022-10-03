@@ -1,7 +1,7 @@
-From 3c9b3e4ff4c0c3ace3bad258a170b44d251ba7c1 Mon Sep 17 00:00:00 2001
+From 36725b7b6e40ad482fa97be8b3ad75d1550b281d Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Wed, 3 Mar 2021 06:31:17 -0500
-Subject: [PATCH 3/5] Restore /sbin for Magisk compatibility
+Subject: [PATCH 3/6] Restore /sbin for Magisk compatibility
 
 Squash of:
 - Revert "Do not create /sbin"
@@ -30,7 +30,7 @@ index 0a534a2bd..81150a0fa 100644
  $(call add-clean-step, rm -rf $(PRODUCT_OUT)/product_services.img)
  $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/product_services)
 diff --git a/libcutils/fs_config.cpp b/libcutils/fs_config.cpp
-index e9497a806..8661c1684 100644
+index a6835fc70..e6c67acca 100644
 --- a/libcutils/fs_config.cpp
 +++ b/libcutils/fs_config.cpp
 @@ -80,6 +80,7 @@ static const struct fs_path_config android_dirs[] = {
@@ -49,7 +49,7 @@ index e9497a806..8661c1684 100644
      { 00755, AID_ROOT,      AID_SHELL,     0, "system/bin/crash_dump32" },
      { 00755, AID_ROOT,      AID_SHELL,     0, "system/bin/crash_dump64" },
      { 00755, AID_ROOT,      AID_SHELL,     0, "system/bin/debuggerd" },
-@@ -217,6 +219,7 @@ static const struct fs_path_config android_files[] = {
+@@ -218,6 +220,7 @@ static const struct fs_path_config android_files[] = {
      { 00750, AID_ROOT,      AID_SHELL,     0, "init*" },
      { 00755, AID_ROOT,      AID_SHELL,     0, "odm/bin/*" },
      { 00755, AID_ROOT,      AID_SHELL,     0, "product/bin/*" },
@@ -58,10 +58,10 @@ index e9497a806..8661c1684 100644
      { 00755, AID_ROOT,      AID_SHELL,     0, "system/bin/*" },
      { 00755, AID_ROOT,      AID_SHELL,     0, "system/xbin/*" },
 diff --git a/rootdir/Android.mk b/rootdir/Android.mk
-index 99d8f9a83..6788d2ebf 100644
+index fe23b6206..81bd46342 100644
 --- a/rootdir/Android.mk
 +++ b/rootdir/Android.mk
-@@ -85,7 +85,7 @@ endif
+@@ -91,7 +91,7 @@ endif
  #
  # create some directories (some are mount points) and symlinks
  LOCAL_POST_INSTALL_CMD := mkdir -p $(addprefix $(TARGET_ROOT_OUT)/, \
@@ -83,5 +83,5 @@ index bf6e986c4..090fa5a78 100644
      %EXPORT_GLOBAL_GCOV_OPTIONS%
      %EXPORT_GLOBAL_CLANG_COVERAGE_OPTIONS%
 -- 
-2.34.1
+2.32.1 (Apple Git-133)
 

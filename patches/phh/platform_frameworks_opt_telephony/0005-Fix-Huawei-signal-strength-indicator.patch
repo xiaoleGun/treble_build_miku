@@ -1,4 +1,4 @@
-From 43eebb37aab30a1e6fabf904b3a7aefca1f45160 Mon Sep 17 00:00:00 2001
+From c6308bb5a61dd2059e8d5294e94df27401fa5f53 Mon Sep 17 00:00:00 2001
 From: Ryan Press <ryan@presslab.us>
 Date: Tue, 25 Jan 2022 11:29:41 -0800
 Subject: [PATCH 5/5] Fix Huawei signal strength indicator
@@ -9,10 +9,10 @@ Subject: [PATCH 5/5] Fix Huawei signal strength indicator
  2 files changed, 141 insertions(+), 4 deletions(-)
 
 diff --git a/src/java/com/android/internal/telephony/RIL.java b/src/java/com/android/internal/telephony/RIL.java
-index af28bd8f9..558a55e1b 100644
+index eeb0012b44..975d028c48 100644
 --- a/src/java/com/android/internal/telephony/RIL.java
 +++ b/src/java/com/android/internal/telephony/RIL.java
-@@ -7478,6 +7478,128 @@ public class RIL extends BaseCommands implements CommandsInterface {
+@@ -5913,6 +5913,128 @@ public class RIL extends BaseCommands implements CommandsInterface {
                  new CellSignalStrengthNr());
      }
  
@@ -139,21 +139,21 @@ index af28bd8f9..558a55e1b 100644
 +
 +
      /**
-      * Convert CellInfo defined in 1.4/types.hal to CellInfo type.
-      * @param records List of CellInfo defined in 1.4/types.hal.
+      * Get the HAL version.
+      *
 diff --git a/src/java/com/android/internal/telephony/RadioIndication.java b/src/java/com/android/internal/telephony/RadioIndication.java
-index d18efdcb9..26c0f51ab 100644
+index c7244be82e..af62f5cfe0 100644
 --- a/src/java/com/android/internal/telephony/RadioIndication.java
 +++ b/src/java/com/android/internal/telephony/RadioIndication.java
-@@ -243,14 +243,29 @@ public class RadioIndication extends IRadioIndication.Stub {
+@@ -241,14 +241,29 @@ public class RadioIndication extends IRadioIndication.Stub {
  
      public void currentSignalStrength(int indicationType,
                                        android.hardware.radio.V1_0.SignalStrength signalStrength) {
 +        SignalStrength ss = null;
 +
-         mRil.processIndication(indicationType);
+         mRil.processIndication(RIL.RADIO_SERVICE, indicationType);
  
--        SignalStrength ssInitial = new SignalStrength(signalStrength);
+-        SignalStrength ssInitial = RILUtils.convertHalSignalStrength(signalStrength);
 +	// Note this is set to "verbose" because it happens frequently
 +	if (RIL.RILJ_LOGV) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, signalStrength);
 +
@@ -166,7 +166,7 @@ index d18efdcb9..26c0f51ab 100644
 +	}
 +	else
 +	{
-+		SignalStrength ssInitial = new SignalStrength(signalStrength);
++		SignalStrength ssInitial = RILUtils.convertHalSignalStrength(signalStrength);
 +		ss = mRil.fixupSignalStrength10(ssInitial);
 +	}
  
@@ -180,5 +180,5 @@ index d18efdcb9..26c0f51ab 100644
              mRil.mSignalStrengthRegistrant.notifyRegistrant(new AsyncResult (null, ss, null));
          }
 -- 
-2.34.1
+2.25.1
 

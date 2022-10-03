@@ -1,7 +1,7 @@
-From f5f7cec7134ad933074185554192c3634e1b0fe1 Mon Sep 17 00:00:00 2001
+From 1a9237ae2100a6c4b461eca0bdd72b7a50847ce4 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 5 Oct 2021 17:59:16 -0400
-Subject: [PATCH 01/34] Fallback to stupid autobrightness if brightness values
+Subject: [PATCH 01/30] Fallback to stupid autobrightness if brightness values
  are broken
 
 This is needed because of:
@@ -14,12 +14,14 @@ Change-Id: Ieb679b34239013a5e31b34cb010b12febd9ef6d9
  1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/services/core/java/com/android/server/display/DisplayDeviceConfig.java b/services/core/java/com/android/server/display/DisplayDeviceConfig.java
-index 255494f98667..022870870222 100644
+index a25ac210..a8fd9721 100644
 --- a/services/core/java/com/android/server/display/DisplayDeviceConfig.java
 +++ b/services/core/java/com/android/server/display/DisplayDeviceConfig.java
-@@ -178,7 +178,12 @@ public class DisplayDeviceConfig {
+@@ -318,8 +318,13 @@ public class DisplayDeviceConfig {
+      */
      public static DisplayDeviceConfig create(Context context, boolean useConfigXml) {
-         DisplayDeviceConfig config;
+-        final DisplayDeviceConfig config;
++        DisplayDeviceConfig config;
          if (useConfigXml) {
 -            config = getConfigFromGlobalXml(context);
 +            try {
@@ -32,5 +34,5 @@ index 255494f98667..022870870222 100644
              config = getConfigFromPmValues(context);
          }
 -- 
-2.32.0 (Apple Git-132)
+2.37.3
 

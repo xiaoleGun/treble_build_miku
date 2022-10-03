@@ -1,7 +1,7 @@
-From 160ca2906f858cab26a72d006d2cb0364f756a3b Mon Sep 17 00:00:00 2001
+From 459e02ea0b73cb84220dbd8757122ef064011545 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 12 Aug 2019 23:08:26 +0200
-Subject: [PATCH 07/34] Add support for samsung touch, physical and hover
+Subject: [PATCH 07/35] Add support for samsung touch, physical and hover
  proximity sensor as fallback to real proximity sensor
 
 Change-Id: I7a0f8b4665c802140d19197d850b77b2a7ac1865
@@ -63,5 +63,5 @@ index 77c1fc031598..c5f380964400 100644
                  boolean positive = distance >= 0.0f && distance < mProximityThreshold;
                  handleProximitySensorEvent(time, positive);
 -- 
-2.32.0 (Apple Git-132)
+2.25.1
 

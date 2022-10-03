@@ -1,4 +1,4 @@
-From c70fa5f68dde52d7735ccdede80125751d9f1bbf Mon Sep 17 00:00:00 2001
+From 8f2b35faf91afb1b86457e704e2e9d4da6d03344 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 31 Mar 2021 23:32:37 +0200
 Subject: [PATCH 3/8] Workaround device/phh/treble conflict with SELinux policy
@@ -49,58 +49,55 @@ index 03d53e1f..160fd0e0 100644
  	return rc;
  }
 diff --git a/libsepol/cil/src/cil_build_ast.c b/libsepol/cil/src/cil_build_ast.c
-index 307b1ee3..aaec0a9b 100644
+index 5f9392d1..6af47687 100644
 --- a/libsepol/cil/src/cil_build_ast.c
 +++ b/libsepol/cil/src/cil_build_ast.c
-@@ -108,7 +108,7 @@ int cil_gen_node(struct cil_db *db, struct cil_tree_node *ast_node, struct cil_s
- {
- 	int rc = SEPOL_ERR;
- 	symtab_t *symtab = NULL;
--	struct cil_symtab_datum *prev;
-+	struct cil_symtab_datum *prev = NULL;
+@@ -116,7 +116,7 @@ int cil_add_decl_to_symtab(struct cil_db *db, symtab_t *symtab, hashtab_key_t ke
  
- 	rc = __cil_verify_name((const char*)key);
- 	if (rc != SEPOL_OK) {
-@@ -133,13 +133,20 @@ int cil_gen_node(struct cil_db *db, struct cil_tree_node *ast_node, struct cil_s
- 				/* multiple_decls not ok, ret error */
- 				cil_log(CIL_ERR, "Re-declaration of %s %s\n",
- 					cil_node_to_string(ast_node), key);
--				if (cil_symtab_get_datum(symtab, key, &datum) == SEPOL_OK) {
-+				if (cil_symtab_get_datum(symtab, key, &prev) == SEPOL_OK) {
- 					if (sflavor == CIL_SYM_BLOCKS) {
--						struct cil_tree_node *node = datum->nodes->head->data;
-+						struct cil_tree_node *node = prev->nodes->head->data;
- 						cil_tree_log(node, CIL_ERR, "Previous declaration");
- 					}
- 				}
--				goto exit;
-+                if(
-+                        strcmp(key, "sysfs_usb_supply") == 0 ||
-+                        strcmp(key, "hostapd") == 0 ||
-+                        strcmp(key, "rpmb_device") == 0) {
-+                    cil_log(CIL_ERR, "Ignoring...");
-+                } else {
-+                    goto exit;
-+                }
- 			}
- 			/* multiple_decls is enabled and works for this datum type, add node */
- 			cil_list_append(prev->nodes, CIL_NODE, ast_node);
+ 	rc = cil_symtab_insert(symtab, key, datum, node);
+ 	if (rc == SEPOL_EEXIST) {
+-		struct cil_symtab_datum *prev;
++		struct cil_symtab_datum *prev = NULL;
+ 		rc = cil_symtab_get_datum(symtab, key, &prev);
+ 		if (rc != SEPOL_OK) {
+ 			cil_log(CIL_ERR, "Re-declaration of %s %s, but previous declaration could not be found\n",cil_node_to_string(node), key);
+@@ -129,12 +129,18 @@ int cil_add_decl_to_symtab(struct cil_db *db, symtab_t *symtab, hashtab_key_t ke
+ 				cil_node_to_string(node), key);
+ 			cil_tree_log(node, CIL_ERR, "Previous declaration of %s",
+ 				     cil_node_to_string(n));
+-			return SEPOL_ERR;
++			if(
++				strcmp(key, "sysfs_usb_supply") == 0 ||
++				strcmp(key, "hostapd") == 0 ||
++				strcmp(key, "rpmb_device") == 0) {
++					cil_log(CIL_ERR, "Ignoring...");
++			} else {
++				return SEPOL_ERR;
++			}
+ 		}
+ 		/* multiple_decls is enabled and works for this datum type, add node */
+ 		cil_list_append(prev->nodes, CIL_NODE, node);
+ 		node->data = prev;
+-		return SEPOL_EEXIST;
+ 	}
+ 
+ 	return SEPOL_OK;
 diff --git a/libsepol/cil/src/cil_resolve_ast.c b/libsepol/cil/src/cil_resolve_ast.c
-index e72abdeb..db3f24f4 100644
+index 69a8a2ed..2ed1a62d 100644
 --- a/libsepol/cil/src/cil_resolve_ast.c
 +++ b/libsepol/cil/src/cil_resolve_ast.c
-@@ -512,7 +512,13 @@ int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_args, enu
+@@ -513,7 +513,13 @@ int cil_resolve_aliasactual(struct cil_tree_node *current, void *extra_args, enu
  	}
- 	if (NODE(alias_datum)->flavor != alias_flavor) {
+ 	if (FLAVOR(alias_datum) != alias_flavor) {
  		cil_log(CIL_ERR, "%s is not an alias\n",alias_datum->name);
 -		rc = SEPOL_ERR;
-+        if(
-+                strcmp(alias_datum->name, "hostapd") == 0 ||
-+                strcmp(alias_datum->name, "sysfs_usb_supply") == 0 ||
-+                strcmp(alias_datum->name, "rpmb_device") == 0)
-+            rc = 0;
-+        else
-+            rc = SEPOL_ERR;
++		if(
++			strcmp(alias_datum->name, "hostapd") == 0 ||
++			strcmp(alias_datum->name, "sysfs_usb_supply") == 0 ||
++			strcmp(alias_datum->name, "rpmb_device") == 0)
++				rc = 0;
++			else
++				rc = SEPOL_ERR;
  		goto exit;
  	}
  
@@ -110,14 +107,14 @@ index e72abdeb..db3f24f4 100644
  	if (alias->actual == NULL) {
 -		cil_tree_log(current, CIL_ERR, "Alias declared but not used");
 +		cil_tree_log(current, CIL_ERR, "Alias %s declared but not used", a1->datum.name);
-+        if(
-+                strcmp(a1->datum.name, "hostapd") == 0 ||
-+                strcmp(a1->datum.name, "sysfs_usb_supply") == 0 ||
-+                strcmp(a1->datum.name, "rpmb_device") == 0)
-+            return SEPOL_OK;
++		if(
++			strcmp(a1->datum.name, "hostapd") == 0 ||
++			strcmp(a1->datum.name, "sysfs_usb_supply") == 0 ||
++			strcmp(a1->datum.name, "rpmb_device") == 0)
++				return SEPOL_OK;
  		return SEPOL_ERR;
  	}
  
 -- 
-2.34.1
+2.25.1
 

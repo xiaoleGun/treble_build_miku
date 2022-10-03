@@ -1,4 +1,4 @@
-From b52a6b469c9851cebd9547e38565521b186d1d87 Mon Sep 17 00:00:00 2001
+From 7f3753e9a9157fdbdceeb9fb6188634231f6f304 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 14 May 2020 19:54:55 +0200
 Subject: [PATCH 05/23] Add persist.sys.phh.samsung.camera_ids property to
@@ -11,30 +11,30 @@ Change-Id: I2c7bf535272acc28ed2277e96c78ddd28a0b4593
  2 files changed, 13 insertions(+), 2 deletions(-)
 
 diff --git a/services/camera/libcameraservice/Android.bp b/services/camera/libcameraservice/Android.bp
-index 26562e0426..e940c33845 100644
+index 8e954ddb50..02d2d42653 100644
 --- a/services/camera/libcameraservice/Android.bp
 +++ b/services/camera/libcameraservice/Android.bp
-@@ -154,6 +154,7 @@ cc_library_shared {
-         "android.hardware.camera.device@3.5",
+@@ -167,6 +167,7 @@ cc_library_shared {
          "android.hardware.camera.device@3.6",
          "android.hardware.camera.device@3.7",
+         "android.hardware.camera.device-V1-ndk",
 +        "vendor.samsung.hardware.camera.provider@3.0",
          "media_permission-aidl-cpp",
      ],
  
-diff --git a/services/camera/libcameraservice/common/CameraProviderManager.cpp b/services/camera/libcameraservice/common/CameraProviderManager.cpp
-index 2f74df9770..79f11a75ab 100644
---- a/services/camera/libcameraservice/common/CameraProviderManager.cpp
-+++ b/services/camera/libcameraservice/common/CameraProviderManager.cpp
-@@ -21,6 +21,7 @@
- #include "CameraProviderManager.h"
+diff --git a/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp b/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp
+index bded9aafec..cd16cce988 100644
+--- a/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp
++++ b/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp
+@@ -27,6 +27,7 @@
+ #include <utils/Trace.h>
  
  #include <android/hardware/camera/device/3.7/ICameraDevice.h>
 +#include <vendor/samsung/hardware/camera/provider/3.0/ISehCameraProvider.h>
  
- #include <algorithm>
- #include <chrono>
-@@ -1380,6 +1381,7 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+ namespace {
+ const bool kEnableLazyHal(property_get_bool("ro.camera.enableLazyHal", false));
+@@ -134,6 +135,7 @@ status_t HidlProviderInfo::initializeHidlProvider(
              mMinorVersion = 6;
          }
      }
@@ -42,7 +42,7 @@ index 2f74df9770..79f11a75ab 100644
      // We need to check again since cast2_6.isOk() succeeds even if the provider
      // version isn't actually 2.6.
      if (interface2_6 == nullptr){
-@@ -1416,6 +1418,9 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+@@ -170,6 +172,9 @@ status_t HidlProviderInfo::initializeHidlProvider(
          return mapToStatusT(status);
      }
  
@@ -52,7 +52,7 @@ index 2f74df9770..79f11a75ab 100644
      hardware::Return<bool> linked = interface->linkToDeath(this, /*cookie*/ mId);
      if (!linked.isOk()) {
          ALOGE("%s: Transaction error in linking to camera provider '%s' death: %s",
-@@ -1446,7 +1451,7 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+@@ -200,7 +205,7 @@ status_t HidlProviderInfo::initializeHidlProvider(
  
      // Get initial list of camera devices, if any
      std::vector<std::string> devices;
@@ -61,7 +61,7 @@ index 2f74df9770..79f11a75ab 100644
              Status idStatus,
              const hardware::hidl_vec<hardware::hidl_string>& cameraDeviceNames) {
          status = idStatus;
-@@ -1463,7 +1468,12 @@ status_t CameraProviderManager::ProviderInfo::initialize(
+@@ -217,7 +222,12 @@ status_t HidlProviderInfo::initializeHidlProvider(
                      mProviderPublicCameraIds.push_back(id);
                  }
              }

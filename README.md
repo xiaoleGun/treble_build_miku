@@ -7,25 +7,25 @@
 
 ## 版本
 示例
-> MikuUI-SNOWLAND-arm64-ab-vndklite-gapps-secure-20220511-UNOFFICIAL.img.xz
+> MikuUI-TDA-arm64-ab-vndklite-gapps-20220511-UNOFFICIAL.img.xz
 
 从前到后，分别为
 ```
-ProjectName-{SNOW | SNOWLAND}-Miku-UI版本-arm64-ab-vndklite-gapps-secure-构建日期-构建类型
- |                |                         |    |     |      |      |
- |                |                         |    |     |      |     安全版本，移除phh su，
- |                |                         |    |     |   谷歌服务  一般情况下可以通过SafetyNet测试
- |                |                         |    |     |
- |                |                         |    |     |
- |                |                         |    |    用于vndklite的设备
- |                |                         |    |    支持system读写
- |                |                         |    |
- |                |                         |  分区类型，仅构建AB(1)
- |                |                         |
- |                |                         |
- |                |                     CPU位数，仅构建64位
- |                |
- |     Android 12 | Android 12.1
+ProjectName-{SNOW | SNOWLAND | TDA}-Miku-UI版本-arm64-ab-vndklite-gapps-构建日期-构建类型
+ |                |          |                   |    |     |      |
+ |                |          |                   |    |     |      |
+ |                |          |                   |    |     |   谷歌服务
+ |                |          |                   |    |     |
+ |                |          |                   |    |     |
+ |                |          |                   |    |    用于vndklite的设备
+ |                |          |                   |    |    支持system读写
+ |                |          |                   |    |
+ |                |          |                   |  分区类型，仅构建AB(1)
+ |                |          |                   |
+ |                |          |                   |
+ |                |          |                CPU位数，仅构建64位
+ |                |          |
+ |     Android 12 | 12.1     | 13
  |
 Miku UI
 ```
@@ -44,7 +44,7 @@ Miku UI
     ```
 - 下载本仓库
     ```
-    git clone https://github.com/xiaoleGun/treble_build_miku -b snowland
+    git clone https://github.com/xiaoleGun/treble_build_miku -b TDA
     ```
 - 完成之后运行脚本:
     ```
@@ -57,4 +57,3 @@ Miku UI
 - [phhusson](https://github.com/phhusson)
 - [AndyCGYan](https://github.com/AndyCGYan)
 - [ponces](https://github.com/ponces)
-- [Yilliee](https://github.com/Yilliee)

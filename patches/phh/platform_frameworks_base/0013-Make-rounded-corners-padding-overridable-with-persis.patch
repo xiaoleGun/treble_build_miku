@@ -1,18 +1,18 @@
-From 7c7cbc6fe6d46529aa0519f63ca8e7f72cc72021 Mon Sep 17 00:00:00 2001
+From 858c73c90e23b3b1234313565ee55809a1de857d Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 6 Dec 2020 12:20:08 +0100
-Subject: [PATCH 13/34] Make rounded corners padding overridable with
+Subject: [PATCH 12/30] Make rounded corners padding overridable with
  persist.sys.phh.rounded_corners_padding
 
 Change-Id: I481c1c8849b2f22a7cdfb2896a6d3c2e7e3b44d9
 ---
  .../src/com/android/systemui/qs/QuickStatusBarHeader.java  | 7 +++++--
  .../systemui/statusbar/phone/KeyguardStatusBarView.java    | 7 +++++--
- .../statusbar/phone/StatusBarContentInsetsProvider.kt      | 6 ++++--
- 3 files changed, 14 insertions(+), 6 deletions(-)
+ .../statusbar/phone/StatusBarContentInsetsProvider.kt      | 5 ++++-
+ 3 files changed, 14 insertions(+), 5 deletions(-)
 
 diff --git a/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java b/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
-index 7400a75e755f..99534baaf956 100644
+index 264edb1e..d8354149 100644
 --- a/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
 +++ b/packages/SystemUI/src/com/android/systemui/qs/QuickStatusBarHeader.java
 @@ -22,6 +22,7 @@ import android.content.res.Configuration;
@@ -23,7 +23,7 @@ index 7400a75e755f..99534baaf956 100644
  import android.util.AttributeSet;
  import android.util.Pair;
  import android.view.DisplayCutout;
-@@ -247,8 +248,10 @@ public class QuickStatusBarHeader extends FrameLayout {
+@@ -242,8 +243,10 @@ public class QuickStatusBarHeader extends FrameLayout {
  
          mConfigShowBatteryEstimate = resources.getBoolean(R.bool.config_showBatteryEstimateQSBH);
  
@@ -37,18 +37,18 @@ index 7400a75e755f..99534baaf956 100644
          int qsOffsetHeight = SystemBarUtils.getQuickQsOffsetHeight(mContext);
  
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
-index f068a8ec8294..79bd8a29329f 100644
+index 18877f9f..38c4ca07 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/KeyguardStatusBarView.java
-@@ -28,6 +28,7 @@ import android.graphics.Color;
- import android.graphics.Rect;
+@@ -28,6 +28,7 @@ import android.graphics.Rect;
  import android.graphics.drawable.Drawable;
- import android.os.UserManager;
-+import android.os.SystemProperties;
  import android.util.AttributeSet;
  import android.util.Pair;
++import android.os.SystemProperties;
  import android.util.TypedValue;
-@@ -180,8 +181,10 @@ public class KeyguardStatusBarView extends RelativeLayout {
+ import android.view.DisplayCutout;
+ import android.view.Gravity;
+@@ -190,8 +191,10 @@ public class KeyguardStatusBarView extends RelativeLayout {
                  R.dimen.display_cutout_margin_consumption);
          mShowPercentAvailable = getContext().getResources().getBoolean(
                  com.android.internal.R.bool.config_battery_percentage_setting_available);
@@ -62,20 +62,19 @@ index f068a8ec8294..79bd8a29329f 100644
  
      private void updateVisibilities() {
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarContentInsetsProvider.kt b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarContentInsetsProvider.kt
-index b7988bcc6f45..72b8e971306c 100644
+index f5462bc0..c09ab6db 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarContentInsetsProvider.kt
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/StatusBarContentInsetsProvider.kt
-@@ -23,7 +23,7 @@ import android.graphics.Rect
- import android.util.LruCache
- import android.util.Pair
- import android.view.DisplayCutout
--
+@@ -39,6 +39,7 @@ import com.android.systemui.util.leak.RotationUtils.Rotation
+ import com.android.systemui.util.leak.RotationUtils.getExactRotation
+ import com.android.systemui.util.leak.RotationUtils.getResourcesForRotation
+ import com.android.systemui.util.traceSection
 +import android.os.SystemProperties
- import androidx.annotation.VisibleForTesting
  
- import com.android.internal.policy.SystemBarUtils
-@@ -227,7 +227,9 @@ class StatusBarContentInsetsProvider @Inject constructor(
-         val dc = context.display.cutout
+ import java.io.PrintWriter
+ import java.lang.Math.max
+@@ -231,7 +232,9 @@ class StatusBarContentInsetsProvider @Inject constructor(
+     ): Rect {
          val currentRotation = getExactRotation(context)
  
 -        val roundedCornerPadding = rotatedResources
@@ -86,5 +85,5 @@ index b7988bcc6f45..72b8e971306c 100644
          val minDotPadding = if (isPrivacyDotEnabled)
                  rotatedResources.getDimensionPixelSize(R.dimen.ongoing_appops_dot_min_padding)
 -- 
-2.32.0 (Apple Git-132)
+2.37.3
 

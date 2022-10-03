@@ -1,0 +1,168 @@
+From b6a26e827def74d2da027caa1fc2e444d8190b72 Mon Sep 17 00:00:00 2001
+From: Peter Cai <peter@typeblog.net>
+Date: Wed, 17 Aug 2022 17:28:09 -0400
+Subject: [PATCH] Move all overlays to product/ to satisfy artifact path
+ requirements
+
+---
+ FalseLocks/Android.mk                    | 2 ++
+ NavBar/Android.mk                        | 2 ++
+ Nokia/PNX-8.1-X7-SystemUI/Android.mk     | 2 ++
+ OnePlus/OP6T-SystemUI/Android.mk         | 2 ++
+ Telephony-LTE/Android.mk                 | 2 ++
+ Telephony/CAF-IMS/Android.mk             | 2 ++
+ Telephony/HW-IMS/Android.mk              | 2 ++
+ Telephony/MTK-IMS/Android.mk             | 2 ++
+ Telephony/SLSI-IMS/Android.mk            | 2 ++
+ Telephony/SPRD-IMS/Android.mk            | 2 ++
+ Xiaomi/MiMix3-SystemUI/Android.mk        | 2 ++
+ Xiaomi/RedmiNote6Pro-SystemUI/Android.mk | 2 ++
+ 12 files changed, 24 insertions(+)
+
+diff --git a/FalseLocks/Android.mk b/FalseLocks/Android.mk
+index 008c0b4..bc9f6ab 100644
+--- a/FalseLocks/Android.mk
++++ b/FalseLocks/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-SystemUI-FalseLocks
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/NavBar/Android.mk b/NavBar/Android.mk
+index 4e8a116..660b652 100644
+--- a/NavBar/Android.mk
++++ b/NavBar/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-NavBar
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/Nokia/PNX-8.1-X7-SystemUI/Android.mk b/Nokia/PNX-8.1-X7-SystemUI/Android.mk
+index 8689b05..ef3a893 100644
+--- a/Nokia/PNX-8.1-X7-SystemUI/Android.mk
++++ b/Nokia/PNX-8.1-X7-SystemUI/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-nokia-pnx-8.1-x7-systemui
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/OnePlus/OP6T-SystemUI/Android.mk b/OnePlus/OP6T-SystemUI/Android.mk
+index 017cc4b..efb3e86 100644
+--- a/OnePlus/OP6T-SystemUI/Android.mk
++++ b/OnePlus/OP6T-SystemUI/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-oneplus-op6t-systemui
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/Telephony-LTE/Android.mk b/Telephony-LTE/Android.mk
+index ae4fd92..a77f9f3 100644
+--- a/Telephony-LTE/Android.mk
++++ b/Telephony-LTE/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-Telephony-LTE
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/Telephony/CAF-IMS/Android.mk b/Telephony/CAF-IMS/Android.mk
+index 7785cc3..416f501 100644
+--- a/Telephony/CAF-IMS/Android.mk
++++ b/Telephony/CAF-IMS/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-telephony-caf-ims
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/Telephony/HW-IMS/Android.mk b/Telephony/HW-IMS/Android.mk
+index 0232235..090f8a2 100644
+--- a/Telephony/HW-IMS/Android.mk
++++ b/Telephony/HW-IMS/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-telephony-hw-ims
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/Telephony/MTK-IMS/Android.mk b/Telephony/MTK-IMS/Android.mk
+index 314b1a9..d08cb5a 100644
+--- a/Telephony/MTK-IMS/Android.mk
++++ b/Telephony/MTK-IMS/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-telephony-mtk-ims
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/Telephony/SLSI-IMS/Android.mk b/Telephony/SLSI-IMS/Android.mk
+index fdaccdf..b5ffd1b 100644
+--- a/Telephony/SLSI-IMS/Android.mk
++++ b/Telephony/SLSI-IMS/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-telephony-slsi-ims
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/Telephony/SPRD-IMS/Android.mk b/Telephony/SPRD-IMS/Android.mk
+index f6ecead..813db69 100644
+--- a/Telephony/SPRD-IMS/Android.mk
++++ b/Telephony/SPRD-IMS/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-telephony-sprd-ims
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/Xiaomi/MiMix3-SystemUI/Android.mk b/Xiaomi/MiMix3-SystemUI/Android.mk
+index 9834ca2..f5b027d 100644
+--- a/Xiaomi/MiMix3-SystemUI/Android.mk
++++ b/Xiaomi/MiMix3-SystemUI/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-xiaomi-mimix3-systemui
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+diff --git a/Xiaomi/RedmiNote6Pro-SystemUI/Android.mk b/Xiaomi/RedmiNote6Pro-SystemUI/Android.mk
+index 0b7ba2a..6e33d9c 100644
+--- a/Xiaomi/RedmiNote6Pro-SystemUI/Android.mk
++++ b/Xiaomi/RedmiNote6Pro-SystemUI/Android.mk
+@@ -2,5 +2,7 @@ LOCAL_PATH := $(call my-dir)
+ include $(CLEAR_VARS)
+ LOCAL_MODULE_TAGS := optional
+ LOCAL_PACKAGE_NAME := treble-overlay-xiaomi-redminote6pro-systemui
++LOCAL_MODULE_PATH := $(TARGET_OUT_PRODUCT)/overlay
++LOCAL_IS_RUNTIME_RESOURCE_OVERLAY := true
+ LOCAL_PRIVATE_PLATFORM_APIS := true
+ include $(BUILD_PACKAGE)
+-- 
+2.34.1
+

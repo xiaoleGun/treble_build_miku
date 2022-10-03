@@ -1,7 +1,7 @@
-From 11860ca02b5e4875e0f1a53c127c4541a1ce34a4 Mon Sep 17 00:00:00 2001
+From f0fb7311c7001fed96b29e4aa057965c52ee0afa Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sun, 13 Feb 2022 11:49:31 +0800
-Subject: [PATCH 5/5] Revert "Merge "Set /system/xbin permissions to 750.""
+Subject: [PATCH 5/6] Revert "Merge "Set /system/xbin permissions to 750.""
 
 This reverts commit 9a74174efe4f4de7b17440a0c3a346a444713f31, reversing
 changes made to baf2168da79d939237f516c45ff1e414b06a63c0.
@@ -10,7 +10,7 @@ changes made to baf2168da79d939237f516c45ff1e414b06a63c0.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/libcutils/fs_config.cpp b/libcutils/fs_config.cpp
-index 8661c1684..9409f3754 100644
+index e6c67acca..02998cf96 100644
 --- a/libcutils/fs_config.cpp
 +++ b/libcutils/fs_config.cpp
 @@ -87,7 +87,7 @@ static const struct fs_path_config android_dirs[] = {
@@ -23,5 +23,5 @@ index 8661c1684..9409f3754 100644
      { 00751, AID_ROOT,         AID_SHELL,        0, "system_ext/bin" },
      { 00751, AID_ROOT,         AID_SHELL,        0, "system_ext/apex/*/bin" },
 -- 
-2.34.1
+2.32.1 (Apple Git-133)
 

@@ -1,22 +1,23 @@
-From 9435ae642e91a28a97602b77529baa8f9abbe192 Mon Sep 17 00:00:00 2001
+From 948c0d1d22ef259653af604840333157c42b0fd5 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 17 May 2018 20:28:35 +0200
-Subject: [PATCH 03/34] Don't crash if there is IR HAL is not declared
+Subject: [PATCH 03/30] Don't crash if there is IR HAL is not declared
 
 Change-Id: I3afded27441bbee8244d5fda544b3e6d1238dc1b
 ---
- .../core/java/com/android/server/ConsumerIrService.java    | 7 -------
- services/core/jni/com_android_server_ConsumerIrService.cpp | 2 +-
- 2 files changed, 1 insertion(+), 8 deletions(-)
+ .../core/java/com/android/server/ConsumerIrService.java   | 8 --------
+ .../core/jni/com_android_server_ConsumerIrService.cpp     | 2 +-
+ 2 files changed, 1 insertion(+), 9 deletions(-)
 
 diff --git a/services/core/java/com/android/server/ConsumerIrService.java b/services/core/java/com/android/server/ConsumerIrService.java
-index 2ed6c77baa0d..82ec033bc30b 100644
+index c4e84a4c..2654f499 100644
 --- a/services/core/java/com/android/server/ConsumerIrService.java
 +++ b/services/core/java/com/android/server/ConsumerIrService.java
-@@ -46,13 +46,6 @@ public class ConsumerIrService extends IConsumerIrService.Stub {
+@@ -49,14 +49,6 @@ public class ConsumerIrService extends IConsumerIrService.Stub {
          mWakeLock.setReferenceCounted(true);
  
-         mHasNativeHal = halOpen();
+         mHasNativeHal = getHalService();
+-
 -        if (mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CONSUMER_IR)) {
 -            if (!mHasNativeHal) {
 -                throw new RuntimeException("FEATURE_CONSUMER_IR present, but no IR HAL loaded!");
@@ -28,12 +29,12 @@ index 2ed6c77baa0d..82ec033bc30b 100644
  
      @Override
 diff --git a/services/core/jni/com_android_server_ConsumerIrService.cpp b/services/core/jni/com_android_server_ConsumerIrService.cpp
-index 2ca348b3ae46..148fba9a688c 100644
+index 63daa350..d068ec06 100644
 --- a/services/core/jni/com_android_server_ConsumerIrService.cpp
 +++ b/services/core/jni/com_android_server_ConsumerIrService.cpp
 @@ -36,7 +36,7 @@ static sp<IConsumerIr> mHal;
  
- static jboolean halOpen(JNIEnv* /* env */, jobject /* obj */) {
+ static jboolean getHidlHalService(JNIEnv * /* env */, jobject /* obj */) {
      // TODO(b/31632518)
 -    mHal = IConsumerIr::getService();
 +    mHal = IConsumerIr::tryGetService();
@@ -41,5 +42,5 @@ index 2ca348b3ae46..148fba9a688c 100644
  }
  
 -- 
-2.32.0 (Apple Git-132)
+2.37.3
 

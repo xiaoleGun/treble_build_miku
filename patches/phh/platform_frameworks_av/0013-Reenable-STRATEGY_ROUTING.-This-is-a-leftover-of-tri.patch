@@ -1,4 +1,4 @@
-From 9b47a507676bf6b9010eb1c340790b2a1f1fbdfd Mon Sep 17 00:00:00 2001
+From 399bc8772ee00a283f83946cc83b4a643b2aad09 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 28 Mar 2021 14:47:52 +0200
 Subject: [PATCH 13/23] Reenable STRATEGY_ROUTING. This is a leftover of tries

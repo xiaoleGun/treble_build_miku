@@ -1,7 +1,7 @@
-From 795703d3e2d734036f8fa780182dc6bb65e6479f Mon Sep 17 00:00:00 2001
+From 6764c90fce7d0d4ea02689a8260c7c19e5afe124 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Tue, 2 Feb 2021 10:20:51 +0000
-Subject: [PATCH 18/34] Fix Wakelock issue
+Subject: [PATCH 18/35] Fix Wakelock issue
 
 Prevent SystemUI crash due to "WakeLock under-locked Doze" (issue #12) by only releasing a wakelock that was not already released
 ---
@@ -24,5 +24,5 @@ index 8d77c4a194a9..e9f253433740 100644
  
              /** @see PowerManager.WakeLock#wrap(Runnable) */
 -- 
-2.32.0 (Apple Git-132)
+2.25.1
 

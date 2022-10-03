@@ -1,0 +1,29 @@
+From 3ad61113c8ecca9271968537d52f3fd1fd688509 Mon Sep 17 00:00:00 2001
+From: xiaoleGun <1592501605@qq.com>
+Date: Sat, 12 Mar 2022 10:16:33 +0800
+Subject: [PATCH 12/13] Revert "Include sim toolkit app"
+
+This reverts commit 52d4d731465f37e3e8ccf9d315cfc8195303e51f.
+
+Signed-off-by: xiaoleGun <1592501605@qq.com>
+---
+ base.mk | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/base.mk b/base.mk
+index 93f6f0d..8088905 100644
+--- a/base.mk
++++ b/base.mk
+@@ -159,9 +159,6 @@ PRODUCT_PACKAGES += \
+ 	xiaomi-motor \
+ 	oneplus-motor
+ 
+-PRODUCT_PACKAGES += \
+-	Stk
+-
+ PRODUCT_PACKAGES += \
+ 	resetprop_phh
+ 
+-- 
+2.32.1 (Apple Git-133)
+

@@ -1,4 +1,4 @@
-From 7b75aa5ede4e444644bf61d8c3c817d0c9f21330 Mon Sep 17 00:00:00 2001
+From 8d8b07c250cdcbe3a91f2a5aa06d77f77a4c28c6 Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Sat, 19 Dec 2020 10:12:40 -0500
 Subject: [PATCH 2/5] HAXFIX: no time for that!
@@ -12,10 +12,10 @@ Change-Id: Ia30e92df22e343f9dd61850aefaa573fbcb3b825
  1 file changed, 3 deletions(-)
 
 diff --git a/core/Makefile b/core/Makefile
-index 335e0750b..890ed7700 100644
+index c5cb3323f..c89d7c554 100644
 --- a/core/Makefile
 +++ b/core/Makefile
-@@ -14,9 +14,6 @@ LOCAL_PATH := $(BUILD_SYSTEM)
+@@ -25,9 +25,6 @@ SYSTEM_DLKM_NOTICE_DEPS :=
  #$(1): the src:dest pair
  #$(2): the dest
  define check-product-copy-files
@@ -26,5 +26,5 @@ index 335e0750b..890ed7700 100644
    $(if $(filter $(TARGET_COPY_OUT_SYSTEM)/etc/vintf/% \
                  $(TARGET_COPY_OUT_SYSTEM)/manifest.xml \
 -- 
-2.34.1
+2.24.3 (Apple Git-128)
 

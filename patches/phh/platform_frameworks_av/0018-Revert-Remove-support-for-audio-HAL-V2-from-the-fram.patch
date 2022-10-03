@@ -1,4 +1,4 @@
-From b0b1323d9a3ecee4b4e489097dda5424b984f4f8 Mon Sep 17 00:00:00 2001
+From 33cdfbe9d451caf03e2a0717404b548739727665 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 11 Oct 2021 16:10:42 -0400
 Subject: [PATCH 18/23] Revert "Remove support for audio HAL V2 from the
@@ -16,7 +16,7 @@ Change-Id: Icfd638a91b22ffa6d2cd6d19a624e699a85a850a
  3 files changed, 20 insertions(+)
 
 diff --git a/media/libaudiohal/Android.bp b/media/libaudiohal/Android.bp
-index bd24c84dbc..f7a9ecc2b7 100644
+index 5f63e8de04..aa1d825d2f 100644
 --- a/media/libaudiohal/Android.bp
 +++ b/media/libaudiohal/Android.bp
 @@ -23,6 +23,7 @@ cc_library_shared {
@@ -28,22 +28,30 @@ index bd24c84dbc..f7a9ecc2b7 100644
          "libaudiohal@5.0",
          "libaudiohal@6.0",
 diff --git a/media/libaudiohal/FactoryHalHidl.cpp b/media/libaudiohal/FactoryHalHidl.cpp
-index e420d079b8..7228b221b9 100644
+index 590fec5443..46b6bd757a 100644
 --- a/media/libaudiohal/FactoryHalHidl.cpp
 +++ b/media/libaudiohal/FactoryHalHidl.cpp
-@@ -35,6 +35,7 @@ const char* sAudioHALVersions[] = {
-     "6.0",
-     "5.0",
-     "4.0",
-+    "2.0",
-     nullptr
+@@ -36,12 +36,13 @@ namespace {
+  */
+ #define CONC_VERSION(maj, min) #maj "." #min
+ #define DECLARE_VERSION(maj, min) std::make_pair(std::make_pair(maj, min), CONC_VERSION(maj, min))
+-static constexpr std::array<std::pair<std::pair<int, int>, const char*>, 5> sAudioHALVersions = {
++static constexpr std::array<std::pair<std::pair<int, int>, const char*>, 6> sAudioHALVersions = {
+     DECLARE_VERSION(7, 1),
+     DECLARE_VERSION(7, 0),
+     DECLARE_VERSION(6, 0),
+     DECLARE_VERSION(5, 0),
+-    DECLARE_VERSION(4, 0)
++    DECLARE_VERSION(4, 0),
++    DECLARE_VERSION(2, 0)
  };
  
+ bool createHalService(const std::string& version, const std::string& interface,
 diff --git a/media/libaudiohal/impl/Android.bp b/media/libaudiohal/impl/Android.bp
-index a2c6e8aeba..4e360be7e8 100644
+index d30883a95c..7bba88ca0a 100644
 --- a/media/libaudiohal/impl/Android.bp
 +++ b/media/libaudiohal/impl/Android.bp
-@@ -62,6 +62,24 @@ cc_defaults {
+@@ -68,6 +68,24 @@ cc_defaults {
      ],
  }
  

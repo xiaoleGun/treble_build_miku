@@ -1,7 +1,7 @@
-From c7618f10cf293302b14c584310cccf52f8b1cd76 Mon Sep 17 00:00:00 2001
+From f09a3305e8981203400dd7e27428239ad91ac76b Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Wed, 26 Feb 2020 07:23:44 +0200
-Subject: [PATCH 4/5] fix offline charger v7
+Subject: [PATCH 4/6] fix offline charger v7
 
 	modified:   rootdir/init.rc
 ---
@@ -9,7 +9,7 @@ Subject: [PATCH 4/5] fix offline charger v7
  1 file changed, 11 insertions(+), 2 deletions(-)
 
 diff --git a/rootdir/init.rc b/rootdir/init.rc
-index df8e75eff..c5415a0a6 100644
+index 417de0d4a..6653f6d33 100644
 --- a/rootdir/init.rc
 +++ b/rootdir/init.rc
 @@ -11,6 +11,11 @@ import /vendor/etc/init/hw/init.${ro.hardware}.rc
@@ -24,7 +24,7 @@ index df8e75eff..c5415a0a6 100644
  # Cgroups are mounted right before early-init using list from /etc/cgroups.json
  on early-init
      # Disable sysrq from keyboard
-@@ -456,7 +461,7 @@ on init
+@@ -505,7 +510,7 @@ on init
  # Healthd can trigger a full boot from charger mode by signaling this
  # property when the power button is held.
  on property:sys.boot_from_charger_mode=1
@@ -32,8 +32,8 @@ index df8e75eff..c5415a0a6 100644
 +    class_stop gsicharger
      trigger late-init
  
- on load_persist_props_action
-@@ -1108,8 +1113,12 @@ on nonencrypted
+ # Indicate to fw loaders that the relevant mounts are up.
+@@ -1178,8 +1183,12 @@ on nonencrypted
  on property:sys.init_log_level=*
      loglevel ${sys.init_log_level}
  
@@ -45,8 +45,8 @@ index df8e75eff..c5415a0a6 100644
 -    class_start charger
 +    class_start gsicharger
  
- on property:vold.decrypt=trigger_load_persist_props
-     load_persist_props
+ on property:sys.boot_completed=1
+     bootchart stop
 -- 
-2.34.1
+2.32.1 (Apple Git-133)
 

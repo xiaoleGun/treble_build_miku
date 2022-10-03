@@ -10,11 +10,11 @@ Change-Id: Id6b93c43df84e7453aaca47d752d26b868235fed
  service/java/com/android/server/wifi/SupplicantStaIfaceHal.java | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/service/java/com/android/server/wifi/SupplicantStaIfaceHal.java b/service/java/com/android/server/wifi/SupplicantStaIfaceHal.java
-index ed0c0cc51..7fc59e043 100644
---- a/service/java/com/android/server/wifi/SupplicantStaIfaceHal.java
-+++ b/service/java/com/android/server/wifi/SupplicantStaIfaceHal.java
-@@ -719,6 +719,7 @@ public class SupplicantStaIfaceHal {
+diff --git a/service/java/com/android/server/wifi/SupplicantStaIfaceHalHidlImpl.java b/service/java/com/android/server/wifi/SupplicantStaIfaceHalHidlImpl.java
+index a1aeb9e906..9c298c9aaf 100644
+--- a/service/java/com/android/server/wifi/SupplicantStaIfaceHalHidlImpl.java
++++ b/service/java/com/android/server/wifi/SupplicantStaIfaceHalHidlImpl.java
+@@ -713,6 +713,7 @@ public class SupplicantStaIfaceHalHidlImpl implements ISupplicantStaIfaceHal {
          synchronized (mLock) {
              if (isV1_1()) {
                  Log.i(TAG, "Starting supplicant using HIDL");

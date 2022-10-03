@@ -10,7 +10,7 @@ Change-Id: I9cacff2d761affa0376b4bb8ca63353a9d95b5de
  2 files changed, 65 insertions(+), 1 deletion(-)
 
 diff --git a/fs_mgr/libfiemap/image_manager.cpp b/fs_mgr/libfiemap/image_manager.cpp
-index dcbbc5448..ea2f4254d 100644
+index c416f4df4..b8eba80aa 100644
 --- a/fs_mgr/libfiemap/image_manager.cpp
 +++ b/fs_mgr/libfiemap/image_manager.cpp
 @@ -156,7 +156,7 @@ bool ImageManager::MetadataDirIsTest() const {
@@ -23,23 +23,23 @@ index dcbbc5448..ea2f4254d 100644
  
  FiemapStatus ImageManager::CreateBackingImage(
 diff --git a/init/selinux.cpp b/init/selinux.cpp
-index 29c0ff3ba..28f3fb899 100644
+index be8c5542f..59d41e373 100644
 --- a/init/selinux.cpp
 +++ b/init/selinux.cpp
-@@ -58,6 +58,9 @@
- #include <stdlib.h>
+@@ -62,6 +62,9 @@
  #include <sys/wait.h>
  #include <unistd.h>
+ #include <fstream>
 +#include <fcntl.h>
 +#include <strings.h>
 +#include <sys/sysmacros.h>
  
+ #include <CertUtils.h>
  #include <android-base/chrono_utils.h>
- #include <android-base/file.h>
-@@ -71,12 +74,16 @@
- #include <libgsi/libgsi.h>
- #include <libsnapshot/snapshot.h>
+@@ -80,12 +83,16 @@
+ #include <mini_keyctl_utils.h>
  #include <selinux/android.h>
+ #include <ziparchive/zip_archive.h>
 +#include <sys/mount.h>
 +#include <libfiemap/image_manager.h>
 +#include <liblp/partition_opener.h>
@@ -53,7 +53,7 @@ index 29c0ff3ba..28f3fb899 100644
  
  using namespace std::string_literals;
  
-@@ -85,6 +92,7 @@ using android::base::Timer;
+@@ -94,6 +101,7 @@ using android::base::Timer;
  using android::base::unique_fd;
  using android::fs_mgr::AvbHandle;
  using android::snapshot::SnapshotManager;
@@ -61,7 +61,7 @@ index 29c0ff3ba..28f3fb899 100644
  
  namespace android {
  namespace init {
-@@ -712,6 +720,60 @@ static void LoadSelinuxPolicy(std::string& policy) {
+@@ -920,6 +928,60 @@ static void LoadSelinuxPolicy(std::string& policy) {
      }
  }
  
@@ -122,7 +122,7 @@ index 29c0ff3ba..28f3fb899 100644
  // The SELinux setup process is carefully orchestrated around snapuserd. Policy
  // must be loaded off dynamic partitions, and during an OTA, those partitions
  // cannot be read without snapuserd. But, with kernel-privileged snapuserd
-@@ -734,6 +796,8 @@ int SetupSelinux(char** argv) {
+@@ -942,6 +1004,8 @@ int SetupSelinux(char** argv) {
      if (REBOOT_BOOTLOADER_ON_PANIC) {
          InstallRebootSignalHandlers();
      }
