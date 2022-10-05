@@ -144,7 +144,7 @@ generatePackages() {
     mkdir --parents $BD/dsu/gapps/; mv $BASE_IMAGE $BD/dsu/gapps/system.img
     zip -j -v $BD/MikuUI-$VERSION-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/gapps/system.img
     mkdir --parents $BD/dsu/gapps-vndklite/; mv ${BASE_IMAGE%.img}-vndklite.img $BD/dsu/gapps-vndklite/system.img
-    zip -j -v $BD/MikuUI-$VERSION-arm64-ab-vndklite-gapps-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/gapps-vndklite/system.img
+    zip -j -v $BD/MikuUI-$VERSION-arm64-ab-gapps-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/gapps-vndklite/system.img
     rm -rf $BD/dsu
 }
 
@@ -162,7 +162,7 @@ generateOtaJson() {
                 "arm64-ab") name="miku_treble_arm64_bvN";;
                 "arm64-ab-vndklite") name="miku_treble_arm64_bvN-vndklite";;
                 "arm64-ab-gapps") name="miku_treble_arm64_bgN";;
-                "arm64-ab-vndklite-gapps") name="miku_treble_arm64_bgN-vndklite";;
+                "arm64-ab-gapps-vndklite") name="miku_treble_arm64_bgN-vndklite";;
             esac
             size=$(wc -c $file | awk '{print $1}')
             url="https://github.com/xiaoleGun/treble_build_miku/releases/download/$VERSION/$(basename $file)"
