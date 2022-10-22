@@ -1,0 +1,26 @@
+From c0d7d418d9ffaf93add76c0aa9d5bb26f92275a0 Mon Sep 17 00:00:00 2001
+From: Pierre-Hugues Husson <phh@phh.me>
+Date: Wed, 13 Oct 2021 10:59:09 -0400
+Subject: [PATCH 1/3] Support no-bpf usecase
+
+Change-Id: I639e15bdc321666c64683ea7ccfd42b2ba317cd2
+---
+ server/Controllers.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/server/Controllers.cpp b/server/Controllers.cpp
+index 00ee186d..faa6f135 100644
+--- a/server/Controllers.cpp
++++ b/server/Controllers.cpp
+@@ -284,7 +284,7 @@ void Controllers::init() {
+         // As such simply exit netd.  This may crash loop the system, but by failing
+         // to bootup we will trigger rollback and thus this offers us protection against
+         // a mainline update breaking things.
+-        exit(1);
++        // exit(1);
+     }
+     gLog.info("Enabling bandwidth control: %" PRId64 "us", s.getTimeAndResetUs());
+ 
+-- 
+2.34.1
+

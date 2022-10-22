@@ -1,14 +1,14 @@
-From 2f389a5874c5046e2d543fa806bab526fd0d0037 Mon Sep 17 00:00:00 2001
+From fef481130d039efc5756e3d753b72b5e8e174067 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sun, 6 Feb 2022 14:35:16 +0800
-Subject: [PATCH 02/13] treble: sepolicy: Remove fsck SELinux labels
+Subject: [PATCH 02/14] treble: sepolicy: Remove fsck SELinux labels
 
 ---
  sepolicy/file_contexts | 3 ---
  1 file changed, 3 deletions(-)
 
 diff --git a/sepolicy/file_contexts b/sepolicy/file_contexts
-index 999ff97..11dd447 100644
+index 09cde27..beb639a 100644
 --- a/sepolicy/file_contexts
 +++ b/sepolicy/file_contexts
 @@ -7,9 +7,6 @@

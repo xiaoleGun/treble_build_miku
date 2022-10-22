@@ -1,7 +1,7 @@
-From acb44c339586338c169e31cc5172b44a98ccc852 Mon Sep 17 00:00:00 2001
+From 540f5f9e62be79b34acdc60439f3bfe71998cc47 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Fri, 11 Feb 2022 19:27:50 +0800
-Subject: [PATCH 09/13] treble: Add OTA JSON to Miku makefile
+Subject: [PATCH 09/14] treble: Add OTA JSON to Miku makefile
 
 ---
  miku.mk | 6 +++++-

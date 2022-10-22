@@ -1,7 +1,7 @@
-From 8bf4bd53c1f9913e4b29b696265f7cdc45bf0700 Mon Sep 17 00:00:00 2001
+From 36750b1aa179972d8d3fae2ff65cfacd1a147ca2 Mon Sep 17 00:00:00 2001
 From: kindle4jerry <kindle4jerry@gmail.com>
 Date: Sun, 6 Feb 2022 14:42:18 +0800
-Subject: [PATCH 03/13] treble: sepolicy: fix honor v9 no voice
+Subject: [PATCH 03/14] treble: sepolicy: fix honor v9 no voice
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
@@ -9,13 +9,13 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/sepolicy/file_contexts b/sepolicy/file_contexts
-index 11dd447..20236cc 100644
+index beb639a..6952ac3 100644
 --- a/sepolicy/file_contexts
 +++ b/sepolicy/file_contexts
-@@ -18,3 +18,5 @@
- /efs u:object_r:efs_file:s0
+@@ -19,3 +19,5 @@
  
  /dev/smcinvoke u:object_r:smcinvoke_device:s0
+ /system/bin/hw/android\.hardware\.bluetooth\.audio-service-system u:object_r:hal_audio_sysbta_exec:s0
 +
 +/dev/nxp_smartpa_dev    u:object_r:media_rw_data_file:s0
 -- 

@@ -1,0 +1,208 @@
+From 37146c7b371d097854f829470d5f2f7b519c88d7 Mon Sep 17 00:00:00 2001
+From: Peter Cai <peter@typeblog.net>
+Date: Wed, 24 Aug 2022 21:07:35 -0400
+Subject: [PATCH 4/4] gsi: sysbta: Implement all existing audio HAL versions
+
+This is needed because libaudiohal.so can only interact with one HAL
+version at a time (loading only one of the libaudiohal@version.so
+implementations), so only the interface that matches the stock HAL
+version will be used. libaudiohal decides which version to use by
+looking through the interfaces whose variant is `default` and picking
+the highest versioned one, so our hal will not interfere in the process
+(because we use `sysbta` as our variant).
+---
+ audio/hal/Android.bp                          | 83 +++++++++++++++++++
+ bluetooth/audio/hal/Android.bp                |  5 ++
+ .../audio/hal/bluetooth_audio_system.xml      |  5 ++
+ bluetooth/audio/hal/service_system.cpp        | 19 ++---
+ 4 files changed, 98 insertions(+), 14 deletions(-)
+
+diff --git a/audio/hal/Android.bp b/audio/hal/Android.bp
+index dbf6ac7..75a3bac 100644
+--- a/audio/hal/Android.bp
++++ b/audio/hal/Android.bp
+@@ -37,6 +37,52 @@ cc_defaults {
+     ]
+ }
+ 
++cc_library_shared {
++    name: "android.hardware.audio@2.0-impl-system",
++    defaults: ["android.hardware.audio-impl-system_default"],
++    shared_libs: [
++        "android.hardware.audio@2.0",
++        "android.hardware.audio@2.0-util",
++        "android.hardware.audio.common@2.0",
++        "android.hardware.audio.common@2.0-util",
++    ],
++    cflags: [
++        "-DMAJOR_VERSION=2",
++        "-DMINOR_VERSION=0",
++        "-include common/all-versions/VersionMacro.h",
++    ],
++}
++cc_library_shared {
++    name: "android.hardware.audio@4.0-impl-system",
++    defaults: ["android.hardware.audio-impl-system_default"],
++    shared_libs: [
++        "android.hardware.audio@4.0",
++        "android.hardware.audio@4.0-util",
++        "android.hardware.audio.common@4.0",
++        "android.hardware.audio.common@4.0-util",
++    ],
++    cflags: [
++        "-DMAJOR_VERSION=4",
++        "-DMINOR_VERSION=0",
++        "-include common/all-versions/VersionMacro.h",
++    ],
++}
++cc_library_shared {
++    name: "android.hardware.audio@5.0-impl-system",
++    defaults: ["android.hardware.audio-impl-system_default"],
++    shared_libs: [
++        "android.hardware.audio@5.0",
++        "android.hardware.audio@5.0-util",
++        "android.hardware.audio.common@5.0",
++        "android.hardware.audio.common@5.0-util",
++    ],
++    cflags: [
++        "-DMAJOR_VERSION=5",
++        "-DMINOR_VERSION=0",
++        "-include common/all-versions/VersionMacro.h",
++    ],
++}
++
+ cc_library_shared {
+     name: "android.hardware.audio@6.0-impl-system",
+     defaults: ["android.hardware.audio-impl-system_default"],
+@@ -49,6 +95,43 @@ cc_library_shared {
+     cflags: [
+         "-DMAJOR_VERSION=6",
+         "-DMINOR_VERSION=0",
++        "-include common/all-versions/VersionMacro.h",
++    ],
++}
++
++cc_library_shared {
++    name: "android.hardware.audio@7.0-impl-system",
++    defaults: ["android.hardware.audio-impl-system_default"],
++    shared_libs: [
++        "android.hardware.audio@7.0",
++        "android.hardware.audio@7.0-util",
++        "android.hardware.audio.common@7.0",
++        "android.hardware.audio.common@7.0-enums",
++        "android.hardware.audio.common@7.0-util",
++        "libbase",
++    ],
++    cflags: [
++        "-DMAJOR_VERSION=7",
++        "-DMINOR_VERSION=0",
++        "-include common/all-versions/VersionMacro.h",
++    ],
++}
++
++cc_library_shared {
++    name: "android.hardware.audio@7.1-impl-system",
++    defaults: ["android.hardware.audio-impl-system_default"],
++    shared_libs: [
++        "android.hardware.audio@7.0",
++        "android.hardware.audio@7.1",
++        "android.hardware.audio@7.1-util",
++        "android.hardware.audio.common@7.0",
++        "android.hardware.audio.common@7.1-enums",
++        "android.hardware.audio.common@7.1-util",
++        "libbase",
++    ],
++    cflags: [
++        "-DMAJOR_VERSION=7",
++        "-DMINOR_VERSION=1",
+         "-DCOMMON_TYPES_MINOR_VERSION=0",
+         "-DCORE_TYPES_MINOR_VERSION=0",
+         "-include common/all-versions/VersionMacro.h",
+diff --git a/bluetooth/audio/hal/Android.bp b/bluetooth/audio/hal/Android.bp
+index 72848a3..5bc57ed 100644
+--- a/bluetooth/audio/hal/Android.bp
++++ b/bluetooth/audio/hal/Android.bp
+@@ -30,6 +30,11 @@ cc_binary {
+     ],
+     required: [
+         // Audio HAL impls
++        "android.hardware.audio@2.0-impl-system",
++        "android.hardware.audio@4.0-impl-system",
++        "android.hardware.audio@5.0-impl-system",
+         "android.hardware.audio@6.0-impl-system",
++        "android.hardware.audio@7.0-impl-system",
++        "android.hardware.audio@7.1-impl-system",
+     ],
+ }
+diff --git a/bluetooth/audio/hal/bluetooth_audio_system.xml b/bluetooth/audio/hal/bluetooth_audio_system.xml
+index 450127d..77ab1dc 100644
+--- a/bluetooth/audio/hal/bluetooth_audio_system.xml
++++ b/bluetooth/audio/hal/bluetooth_audio_system.xml
+@@ -7,6 +7,11 @@
+     <hal>
+         <name>android.hardware.audio</name>
+         <transport>hwbinder</transport>
++        <fqname>@2.0::IDevicesFactory/sysbta</fqname>
++        <fqname>@4.0::IDevicesFactory/sysbta</fqname>
++        <fqname>@5.0::IDevicesFactory/sysbta</fqname>
+         <fqname>@6.0::IDevicesFactory/sysbta</fqname>
++        <fqname>@7.0::IDevicesFactory/sysbta</fqname>
++        <fqname>@7.1::IDevicesFactory/sysbta</fqname>
+     </hal>
+ </manifest>
+diff --git a/bluetooth/audio/hal/service_system.cpp b/bluetooth/audio/hal/service_system.cpp
+index 11fce96..515bb44 100644
+--- a/bluetooth/audio/hal/service_system.cpp
++++ b/bluetooth/audio/hal/service_system.cpp
+@@ -23,24 +23,14 @@
+ #include <android/binder_process.h>
+ #include <utils/Log.h>
+ #include <hidl/HidlTransportSupport.h>
+-//#include <hidl/LegacySupport.h>
+ #include <hwbinder/ProcessState.h>
+ #include <binder/ProcessState.h>
+ 
+-//#include PATH(android/hardware/audio/FILE_VERSION/IDevicesFactory.h)
+-
+-//#include <hardware/audio.h>
+-
+ #include "BluetoothAudioProviderFactory.h"
+-//#include "DevicesFactory.h"
+ 
+-//using namespace android::hardware;
+ using ::aidl::android::hardware::bluetooth::audio::
+     BluetoothAudioProviderFactory;
+ 
+-//using ::android::hardware::audio::CPP_VERSION::implementation::DevicesFactory;
+-//using namespace ::android::hardware::audio::CPP_VERSION;
+-
+ #if defined(__LP64__)
+ #define HAL_LIBRARY_PATH "/system/lib64/hw"
+ #else
+@@ -49,7 +39,12 @@ using ::aidl::android::hardware::bluetooth::audio::
+ 
+ void registerAudioInterfaces() {
+   const char *interface_libs[] = {
++    "android.hardware.audio@2.0-impl-system.so",
++    "android.hardware.audio@4.0-impl-system.so",
++    "android.hardware.audio@5.0-impl-system.so",
+     "android.hardware.audio@6.0-impl-system.so",
++    "android.hardware.audio@7.0-impl-system.so",
++    "android.hardware.audio@7.1-impl-system.so",
+   };
+ 
+   for (auto& lib : interface_libs) {
+@@ -89,10 +84,6 @@ int main() {
+   ALOGW_IF(aidl_status != STATUS_OK, "Could not register %s, status=%d",
+            instance_name.c_str(), aidl_status);
+ 
+-  //::android::sp<IDevicesFactory> audio_factory = new DevicesFactory();
+-  //::android::status_t hidl_status = audio_factory->registerAsService("sysbta");
+-  //ALOGW_IF(hidl_status != STATUS_OK, "Could not register sysbta, status=%d", hidl_status);
+-
+   // We must also implement audio HAL interfaces in order to serve audio.sysbta.default.so
+   // It must be served in the *same* process to access the same libbluetooth_audio_session
+   registerAudioInterfaces();
+-- 
+2.34.1
+

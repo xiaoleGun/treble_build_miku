@@ -1,7 +1,7 @@
-From 0de7c87cc76014461042937684386e31cf69d7ae Mon Sep 17 00:00:00 2001
+From 1d5571762dc433ec154826b12bbedc5c2a060fdd Mon Sep 17 00:00:00 2001
 From: AndyCGYan <GeForce8800Ultra@gmail.com>
 Date: Mon, 7 Feb 2022 14:49:31 +0800
-Subject: [PATCH 05/13] treble: Don't handle apns-conf
+Subject: [PATCH 05/14] treble: Don't handle apns-conf
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
@@ -18,12 +18,12 @@ index 6a317e4..e69de29 100644
 -PRODUCT_COPY_FILES += \
 -	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 diff --git a/base.mk b/base.mk
-index ce59255..9e40b8d 100644
+index 5a0c476..4318e24 100644
 --- a/base.mk
 +++ b/base.mk
-@@ -8,10 +8,6 @@ PRODUCT_COPY_FILES := \
- 	frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
- 	frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+@@ -17,10 +17,6 @@ PRODUCT_COPY_FILES += \
+     device/phh/treble/bluetooth/audio/config/sysbta_audio_policy_configuration.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysbta_audio_policy_configuration.xml \
+     device/phh/treble/bluetooth/audio/config/sysbta_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUTY_SYSTEM)/etc/sysbta_audio_policy_configuration_7_0.xml
  
 -#Use a more decent APN config
 -PRODUCT_COPY_FILES += \
