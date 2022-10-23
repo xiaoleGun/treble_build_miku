@@ -1,26 +1,26 @@
 {
   "version": "TDA_0.3.1",
-  "date": "1664872815",
+  "date": "1666461257",
   "variants": [
     {
-      "name": "miku_treble_arm64_bgN-vndklite",
-      "size": "1354917905",
-      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA_0.3.1/MikuUI-TDA_0.3.1-arm64-ab-vndklite-gapps-20221004-UNOFFICIAL.zip"
-    },
-    {
       "name": "miku_treble_arm64_bvN",
-      "size": "1001072889",
-      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA_0.3.1/MikuUI-TDA_0.3.1-arm64-ab-20221004-UNOFFICIAL.zip"
+      "size": "1003314336",
+      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA_0.3.1/MikuUI-TDA_0.3.1-arm64-ab-20221022-UNOFFICIAL.zip"
     },
     {
       "name": "miku_treble_arm64_bgN",
-      "size": "1368076633",
-      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA_0.3.1/MikuUI-TDA_0.3.1-arm64-ab-gapps-20221004-UNOFFICIAL.zip"
+      "size": "1369911851",
+      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA_0.3.1/MikuUI-TDA_0.3.1-arm64-ab-gapps-20221022-UNOFFICIAL.zip"
+    },
+    {
+      "name": "miku_treble_arm64_bgN-vndklite",
+      "size": "1356712426",
+      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA_0.3.1/MikuUI-TDA_0.3.1-arm64-ab-gapps-vndklite-20221022-UNOFFICIAL.zip"
     },
     {
       "name": "miku_treble_arm64_bvN-vndklite",
-      "size": "995938744",
-      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA_0.3.1/MikuUI-TDA_0.3.1-arm64-ab-vndklite-20221004-UNOFFICIAL.zip"
+      "size": "998059112",
+      "url": "https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA_0.3.1/MikuUI-TDA_0.3.1-arm64-ab-vndklite-20221022-UNOFFICIAL.zip"
     }
   ]
 }
