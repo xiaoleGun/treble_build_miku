@@ -1,7 +1,7 @@
 From 8d8b07c250cdcbe3a91f2a5aa06d77f77a4c28c6 Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Sat, 19 Dec 2020 10:12:40 -0500
-Subject: [PATCH 2/5] HAXFIX: no time for that!
+Subject: [PATCH 2/3] HAXFIX: no time for that!
 
   Prebuilt apk found in PRODUCT_COPY_FILES: $(1), use BUILD_PREBUILT
   instead blablabla
@@ -26,5 +26,5 @@ index c5cb3323f..c89d7c554 100644
    $(if $(filter $(TARGET_COPY_OUT_SYSTEM)/etc/vintf/% \
                  $(TARGET_COPY_OUT_SYSTEM)/manifest.xml \
 -- 
-2.24.3 (Apple Git-128)
+2.32.1 (Apple Git-133)
 

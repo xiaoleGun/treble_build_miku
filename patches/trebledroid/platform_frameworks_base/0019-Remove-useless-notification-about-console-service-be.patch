@@ -1,0 +1,26 @@
+From 4621bf22b09cf92f875cdca36c4005a78fcde3d9 Mon Sep 17 00:00:00 2001
+From: Pierre-Hugues Husson <phh@phh.me>
+Date: Fri, 11 Dec 2020 14:41:09 +0100
+Subject: [PATCH 19/32] Remove useless notification about "console" service
+ being running
+
+---
+ .../core/java/com/android/server/am/ActivityManagerService.java | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/services/core/java/com/android/server/am/ActivityManagerService.java b/services/core/java/com/android/server/am/ActivityManagerService.java
+index 1cfa20a740fe..1ced8f254314 100644
+--- a/services/core/java/com/android/server/am/ActivityManagerService.java
++++ b/services/core/java/com/android/server/am/ActivityManagerService.java
+@@ -5182,7 +5182,7 @@ public class ActivityManagerService extends IActivityManager.Stub
+     }
+ 
+     private void showConsoleNotificationIfActive() {
+-        if (!SystemProperties.get("init.svc.console").equals("running")) {
++        if (!SystemProperties.get("init.svc.console").equals("running") || true) {
+             return;
+         }
+         String title = mContext
+-- 
+2.32.1 (Apple Git-133)
+

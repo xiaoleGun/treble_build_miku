@@ -1,7 +1,7 @@
-From 1d5571762dc433ec154826b12bbedc5c2a060fdd Mon Sep 17 00:00:00 2001
+From 1cf9d6e8d64e14b56b46073461fb72e04ca472f1 Mon Sep 17 00:00:00 2001
 From: AndyCGYan <GeForce8800Ultra@gmail.com>
 Date: Mon, 7 Feb 2022 14:49:31 +0800
-Subject: [PATCH 05/14] treble: Don't handle apns-conf
+Subject: [PATCH 05/15] treble: Don't handle apns-conf
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
@@ -18,7 +18,7 @@ index 6a317e4..e69de29 100644
 -PRODUCT_COPY_FILES += \
 -	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 diff --git a/base.mk b/base.mk
-index 5a0c476..4318e24 100644
+index 423fe1d..6b4dba3 100644
 --- a/base.mk
 +++ b/base.mk
 @@ -17,10 +17,6 @@ PRODUCT_COPY_FILES += \
@@ -29,9 +29,9 @@ index 5a0c476..4318e24 100644
 -PRODUCT_COPY_FILES += \
 -	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 -
- BOARD_PLAT_PRIVATE_SEPOLICY_DIR += device/phh/treble/sepolicy
- 
+ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += device/phh/treble/sepolicy
  PRODUCT_PACKAGE_OVERLAYS += \
+     device/phh/treble/overlay \
 -- 
 2.32.1 (Apple Git-133)
 

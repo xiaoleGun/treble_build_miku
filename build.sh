@@ -59,19 +59,11 @@ for project in $(cd $patches/patches/$tree; echo *);do
 
 applyingpatches() {
 echo ""
-echo "--> Applying prerequisite patches"
+echo "--> Applying TrebleDroid patches"
 echo ""
-applypatches $BL prerequisite
+applypatches $BL trebledroid
 echo ""
-echo "--> Applying PHH patches"
-echo ""
-applypatches $BL phh
-echo ""
-echo "--> Applying Peter patches"
-echo ""
-applypatches $BL peter
-echo ""
-echo "--> Applying personal patches"
+echo "--> Applying Personal patches"
 echo ""
 applypatches $BL personal
 }

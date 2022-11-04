@@ -1,0 +1,20 @@
+From d4fa69d672ab206d88259be5b0adc0b68a156356 Mon Sep 17 00:00:00 2001
+From: Victor Bo <bvoid@yandex.ru>
+Date: Tue, 15 Sep 2020 21:26:45 -0400
+Subject: [PATCH 12/15] add offline charger sepolicy
+
+---
+ sepolicy/gsicharger.te | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 sepolicy/gsicharger.te
+
+diff --git a/sepolicy/gsicharger.te b/sepolicy/gsicharger.te
+new file mode 100644
+index 0000000..91cfb5c
+--- /dev/null
++++ b/sepolicy/gsicharger.te
+@@ -0,0 +1 @@
++permissive charger;
+-- 
+2.32.1 (Apple Git-133)
+
