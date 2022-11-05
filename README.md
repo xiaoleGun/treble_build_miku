@@ -53,7 +53,12 @@ Miku UI
 
 ## 感谢
 - [Miku-UI](https://github.com/Miku-UI)
-- [Project-Mushroom](https://github.com/Project-Mushroom)
 - [phhusson](https://github.com/phhusson)
 - [AndyCGYan](https://github.com/AndyCGYan)
 - [ponces](https://github.com/ponces)
+- [eremitein](https://github.com/eremitein)
+- [kdrag0n](https://github.com/kdrag0n)
+- [Peter Cai](https://github.com/PeterCxy)
+- [haridhayal11](https://github.com/haridhayal11)
+- [sooti](https://github.com/sooti)
+- [Iceows](https://github.com/Iceows)

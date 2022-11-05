@@ -52,7 +52,12 @@ To get started with building Miku UI GSI, you'll need to get familiar with [Git 
 ## Credits
 These people have helped this project in some way or another, so they should be the ones who receive all the credit:
 - [Miku-UI](https://github.com/Miku-UI)
-- [Project-Mushroom](https://github.com/Project-Mushroom)
 - [phhusson](https://github.com/phhusson)
 - [AndyCGYan](https://github.com/AndyCGYan)
 - [ponces](https://github.com/ponces)
+- [eremitein](https://github.com/eremitein)
+- [kdrag0n](https://github.com/kdrag0n)
+- [Peter Cai](https://github.com/PeterCxy)
+- [haridhayal11](https://github.com/haridhayal11)
+- [sooti](https://github.com/sooti)
+- [Iceows](https://github.com/Iceows)
