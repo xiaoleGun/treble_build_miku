@@ -178,12 +178,13 @@ generateOtaJson() {
     }
 }
 
+# I use a server so need it
 personal() {
   echo ""
   echo "--> Pack all for me"
   echo ""
-  7z a -t7z -r $BD/all.7z $BD/*
-  rm -rf $BD/*.zip $BD/ota.json
+  7z a -t7z -r $BD/all.7z $BD/*-$BUILD_DATE-UNOFFICIAL.zip $BD/ota.json
+  rm -rf $BD/*-$BUILD_DATE-UNOFFICIAL.zip $BD/ota.json
 }
 
 START=`date +%s`
