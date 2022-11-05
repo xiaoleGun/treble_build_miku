@@ -3,11 +3,11 @@
 [English](https://github.com/xiaoleGun/treble_build_miku/blob/TDA/README-EN.md)
 
 ## 前言
-这是送给所有Miku fans的安卓项目，如果不喜欢它请关闭本页面，但不要攻击任何人，尤其是其作者。
+这是送给所有Miku粉丝的Android项目，如果不喜欢它请关闭本页面，但不要攻击任何人，尤其是其作者。
 
 ## 版本
 示例
-> MikuUI-TDA-arm64-ab-vndklite-gapps-20220511-UNOFFICIAL.img.xz
+> MikuUI-TDA-arm64-ab-vndklite-gapps-20221105-UNOFFICIAL.img.xz
 
 从前到后，分别为
 ```

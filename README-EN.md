@@ -5,7 +5,7 @@ This is an Android project for Miku fans. If you don't like it, please close thi
 
 ## Variant
 Examples
-> MikuUI-TDA-arm64-ab-vndklite-gapps-20220511-UNOFFICIAL.img.xz
+> MikuUI-TDA-arm64-ab-vndklite-gapps-20221105-UNOFFICIAL.img.xz
 
 They are
 ```
