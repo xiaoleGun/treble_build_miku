@@ -1,4 +1,4 @@
-From 4562207b0201169ed626baee3c4a6192f7313edc Mon Sep 17 00:00:00 2001
+From 06cf8d64c8c9180eef5948c4e5520cad95e1d115 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sat, 12 Mar 2022 10:16:33 +0800
 Subject: [PATCH 13/15] Revert "Include sim toolkit app"

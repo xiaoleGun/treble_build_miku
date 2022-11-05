@@ -1,4 +1,4 @@
-From 1d309fb80a3be800ffe319248d2cbfb600155482 Mon Sep 17 00:00:00 2001
+From 669cbcb5150e45ae11a82ec09e89c1ca01c295f4 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Sun, 16 Oct 2022 21:02:52 +0100
 Subject: [PATCH 15/15] Remove force disable of A2DP offload property
