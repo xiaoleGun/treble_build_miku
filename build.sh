@@ -13,7 +13,7 @@ set -e
 
 BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
-VERSION="TDA_0.4.0"
+VERSION="TDA_0.4.1"
 
 initrepo() {
 if [ ! -d .repo ]
