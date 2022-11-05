@@ -30,20 +30,19 @@ if [ -d .repo ] && [ ! -f .repo/local_manifests/miku-treble.xml ] ;then
      echo ""
      rm -rf .repo/local_manifests
      mkdir -p .repo/local_manifests
-     echo "<?xml version="1.0" encoding="UTF-8"?>
+     echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <manifest>
-  <remote name="github"
-          fetch="https://github.com" />
+  <remote name=\"github\"
+          fetch=\"https://github.com\" />
 
-  <project name="TrebleDroid/vendor_hardware_overlay" path="vendor/hardware_overlay" remote="github" revision="pie" />
-  <project name="TrebleDroid/device_phh_treble" path="device/phh/treble" remote="github" revision="android-13.0" />
-  <project name="phhusson/vendor_vndk-tests" path="vendor/vndk-tests" remote="github" revision="master" />
-  <project name="phhusson/vendor_interfaces" path="vendor/interfaces" remote="github" revision="android-11.0" />
-  <project name="phhusson/vendor_magisk" path="vendor/magisk" remote="github" revision="android-10.0" />
-  <project name="phhusson/treble_app" path="treble_app" remote="github" revision="master" />
-  <project name="phhusson/sas-creator" path="sas-creator" remote="github" revision="master" />
-</manifest>
-" .repo/local_manifests/miku-treble.xml
+  <project name=\"TrebleDroid/vendor_hardware_overlay\" path=\"vendor/hardware_overlay\" remote=\"github\" revision=\"pie\" />
+  <project name=\"TrebleDroid/device_phh_treble\" path=\"device/phh/treble\" remote=\"github\" revision=\"android-13.0\" />
+  <project name=\"phhusson/vendor_vndk-tests\" path=\"vendor/vndk-tests\" remote=\"github\" revision=\"master\" />
+  <project name=\"phhusson/vendor_interfaces\" path=\"vendor/interfaces\" remote=\"github\" revision=\"android-11.0\" />
+  <project name=\"phhusson/vendor_magisk\" path=\"vendor/magisk\" remote=\"github\" revision=\"android-10.0\" />
+  <project name=\"phhusson/treble_app\" path=\"treble_app\" remote=\"github\" revision=\"master\" />
+  <project name=\"phhusson/sas-creator\" path=\"sas-creator\" remote=\"github\" revision=\"master\" />
+</manifest>" > .repo/local_manifests/miku-treble.xml
 fi
 }
 
