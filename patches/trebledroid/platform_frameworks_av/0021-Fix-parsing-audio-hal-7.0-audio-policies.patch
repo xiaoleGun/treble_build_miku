@@ -1,7 +1,7 @@
-From da82f479f789d794c738e2df4e6695181b581a32 Mon Sep 17 00:00:00 2001
+From 67504023cf0eec07ca2b2185e1efebc700774ffc Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 30 Jan 2022 07:40:19 -0500
-Subject: [PATCH 21/25] Fix parsing audio hal 7.0 audio policies
+Subject: [PATCH 21/26] Fix parsing audio hal 7.0 audio policies
 
 Google changed separator from natural "," to weird " "
 We broke its support in "FIH devices: Fix "Earpiece" audio output"

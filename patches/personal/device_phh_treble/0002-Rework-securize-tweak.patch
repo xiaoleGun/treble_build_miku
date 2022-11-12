@@ -1,7 +1,7 @@
-From a95eea1a200485c7402a437c147132a72f454fd4 Mon Sep 17 00:00:00 2001
+From b895cf7e6ad5f19cc48aa66e965ac98f9b0e2460 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Wed, 25 Dec 2019 12:34:05 +0200
-Subject: [PATCH 02/15] Rework securize tweak
+Subject: [PATCH 02/14] Rework securize tweak
 
 ---
  base.mk      |  1 -
@@ -9,7 +9,7 @@ Subject: [PATCH 02/15] Rework securize tweak
  2 files changed, 30 insertions(+), 26 deletions(-)
 
 diff --git a/base.mk b/base.mk
-index 7fd62b5..423fe1d 100644
+index a3d48e5..0d4c9f6 100644
 --- a/base.mk
 +++ b/base.mk
 @@ -178,7 +178,6 @@ PRODUCT_PACKAGES += \
@@ -21,10 +21,10 @@ index 7fd62b5..423fe1d 100644
  
  PRODUCT_COPY_FILES += \
 diff --git a/rw-system.sh b/rw-system.sh
-index 8e84e4c..bd7eb5a 100644
+index 42d315f..03c3d38 100644
 --- a/rw-system.sh
 +++ b/rw-system.sh
-@@ -731,35 +731,59 @@ copyprop() {
+@@ -727,35 +727,59 @@ copyprop() {
          resetprop_phh "$1" "$(getprop "$2")"
      fi
  }
@@ -90,7 +90,7 @@ index 8e84e4c..bd7eb5a 100644
  
      resetprop_phh ro.build.tags release-keys
      resetprop_phh ro.boot.vbmeta.device_state locked
-@@ -773,25 +797,6 @@ if [ -f /system/phh/secure ] || [ -f /metadata/phh/secure ];then
+@@ -769,25 +793,6 @@ if [ -f /system/phh/secure ] || [ -f /metadata/phh/secure ];then
      resetprop_phh ro.build.type user
      resetprop_phh ro.build.selinux 0
  

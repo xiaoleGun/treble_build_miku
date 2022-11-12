@@ -1,7 +1,7 @@
-From 79067d96cd7751028aebfec18be85b9ce5b9cbf5 Mon Sep 17 00:00:00 2001
+From 01aec574356c488c2555d3f8fc634eddf807a1c5 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 2 May 2022 17:37:09 -0400
-Subject: [PATCH 24/25] Support variable flash strength on samsung hal 4.0
+Subject: [PATCH 24/26] Support variable flash strength on samsung hal 4.0
 
 ---
  services/camera/libcameraservice/Android.bp                 | 1 +
@@ -21,7 +21,7 @@ index 8c588065cf..769862aaa2 100644
      ],
  
 diff --git a/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp b/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp
-index ecb2011c19..d5c4f4e561 100644
+index fd7615a446..2fa7dcef7f 100644
 --- a/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp
 +++ b/services/camera/libcameraservice/common/hidl/HidlProviderInfo.cpp
 @@ -30,6 +30,7 @@
@@ -32,7 +32,7 @@ index ecb2011c19..d5c4f4e561 100644
  
  namespace {
  const bool kEnableLazyHal(property_get_bool("ro.camera.enableLazyHal", false));
-@@ -782,9 +783,14 @@ status_t HidlProviderInfo::HidlDeviceInfo3::setTorchMode(bool enabled) {
+@@ -787,9 +788,14 @@ status_t HidlProviderInfo::HidlDeviceInfo3::setTorchMode(bool enabled) {
      auto sehCast = vendor::samsung::hardware::camera::device::V5_0::ISehCameraDevice::castFrom(interface);
      android::sp<vendor::samsung::hardware::camera::device::V5_0::ISehCameraDevice> seh = sehCast;
  

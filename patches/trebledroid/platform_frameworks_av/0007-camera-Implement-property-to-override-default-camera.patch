@@ -1,7 +1,7 @@
-From 29fd5f4f06dcbf3b46098f03d6dad1c06ee4f9a9 Mon Sep 17 00:00:00 2001
+From 13670ac74fbf38dca95ed1639bb1baabba1f1700 Mon Sep 17 00:00:00 2001
 From: Peter Cai <peter@typeblog.net>
 Date: Wed, 1 Jun 2022 16:56:46 -0400
-Subject: [PATCH 07/25] camera: Implement property to override default camera
+Subject: [PATCH 07/26] camera: Implement property to override default camera
 
 Complement to the frameworks/base patch.
 
@@ -11,7 +11,7 @@ Change-Id: I002bfa974bafc2cc01365eeea31c7a5dcb5a2028
  1 file changed, 22 insertions(+)
 
 diff --git a/services/camera/libcameraservice/common/CameraProviderManager.cpp b/services/camera/libcameraservice/common/CameraProviderManager.cpp
-index abaea6639f..59b59f44fb 100644
+index 6ef16b3ca8..3dd15d9fe9 100644
 --- a/services/camera/libcameraservice/common/CameraProviderManager.cpp
 +++ b/services/camera/libcameraservice/common/CameraProviderManager.cpp
 @@ -36,6 +36,7 @@
