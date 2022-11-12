@@ -13,7 +13,7 @@ set -e
 
 BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
-VERSION="TDA_0.4.1"
+VERSION="0.4.1"
 
 initrepo() {
 if [ ! -d .repo ]
@@ -141,14 +141,14 @@ generatePackages() {
     echo ""
     BASE_IMAGE=$BD/system-miku_treble_arm64_bvN.img
     mkdir --parents $BD/dsu/vanilla/; mv $BASE_IMAGE $BD/dsu/vanilla/system.img
-    zip -j -v $BD/MikuUI-$VERSION-arm64-ab-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/vanilla/system.img
+    zip -j -v $BD/MikuUI-TDA-$VERSION-arm64-ab-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/vanilla/system.img
     mkdir --parents $BD/dsu/vanilla-vndklite/; mv ${BASE_IMAGE%.img}-vndklite.img $BD/dsu/vanilla-vndklite/system.img
-    zip -j -v $BD/MikuUI-$VERSION-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/vanilla-vndklite/system.img
+    zip -j -v $BD/MikuUI-TDA-$VERSION-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/vanilla-vndklite/system.img
     BASE_IMAGE=$BD/system-miku_treble_arm64_bgN.img
     mkdir --parents $BD/dsu/gapps/; mv $BASE_IMAGE $BD/dsu/gapps/system.img
-    zip -j -v $BD/MikuUI-$VERSION-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/gapps/system.img
+    zip -j -v $BD/MikuUI-TDA-$VERSION-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/gapps/system.img
     mkdir --parents $BD/dsu/gapps-vndklite/; mv ${BASE_IMAGE%.img}-vndklite.img $BD/dsu/gapps-vndklite/system.img
-    zip -j -v $BD/MikuUI-$VERSION-arm64-ab-gapps-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/gapps-vndklite/system.img
+    zip -j -v $BD/MikuUI-TDA-$VERSION-arm64-ab-gapps-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/gapps-vndklite/system.img
     rm -rf $BD/dsu
 }
 
@@ -156,7 +156,7 @@ generateOtaJson() {
     echo ""
     echo "--> Generating Update json"
     echo ""
-    prefix="MikuUI-$VERSION-"
+    prefix="MikuUI-TDA-$VERSION-"
     suffix="-$BUILD_DATE-UNOFFICIAL.zip"
     json="{\"version\": \"$VERSION\",\"date\": \"$(date +%s -d '-4hours')\",\"variants\": ["
     find $BD -name "*.zip" | {
@@ -169,7 +169,7 @@ generateOtaJson() {
                 "arm64-ab-gapps-vndklite") name="miku_treble_arm64_bgN-vndklite";;
             esac
             size=$(wc -c $file | awk '{print $1}')
-            url="https://github.com/xiaoleGun/treble_build_miku/releases/download/$VERSION/$(basename $file)"
+            url="https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA-$VERSION/$(basename $file)"
             json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
         done
         json="${json%?}]}"
