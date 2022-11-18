@@ -1,7 +1,7 @@
-From 81a82adb74c53b1671f24cb69a140a7915707f0f Mon Sep 17 00:00:00 2001
+From 7dfebcb1fdcef5c74061036ce5041fe4d9a73cc4 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 2 Mar 2018 22:49:55 +0100
-Subject: [PATCH 7/8] Enable multipl_decls by default. This is needed because
+Subject: [PATCH 7/9] Enable multipl_decls by default. This is needed because
  8.0 init doesn't add -m
 
 Change-Id: I43dc661d519f7b8576d72a828d8cbd444592bf5e

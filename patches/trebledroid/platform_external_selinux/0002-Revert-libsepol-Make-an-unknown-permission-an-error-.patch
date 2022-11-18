@@ -1,7 +1,7 @@
-From 1e713fc5860318d2a99f31718fea884c8d461923 Mon Sep 17 00:00:00 2001
+From b63320f4022210ee9f8e67d2300f9727cc159d49 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 9 Sep 2020 22:36:42 +0200
-Subject: [PATCH 2/8] Revert "libsepol: Make an unknown permission an error in
+Subject: [PATCH 2/9] Revert "libsepol: Make an unknown permission an error in
  CIL"
 
 This reverts commit dc4e54126bf25dea4d51820922ccd1959be68fbc.

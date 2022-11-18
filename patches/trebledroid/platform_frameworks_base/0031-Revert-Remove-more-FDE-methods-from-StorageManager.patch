@@ -1,7 +1,7 @@
-From ca7e5a21fd82b4212aa3af5f5946a489feb5344b Mon Sep 17 00:00:00 2001
+From 516c95f3e5cbad2d714d0feb7c704d377c8ebcb1 Mon Sep 17 00:00:00 2001
 From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Sat, 15 Oct 2022 09:33:56 +0000
-Subject: [PATCH 32/32] Revert "Remove more FDE methods from StorageManager"
+Subject: [PATCH 31/31] Revert "Remove more FDE methods from StorageManager"
 
 This reverts commit bd13f84152449a3ead6fa8604fd31f48c0224676.
 ---

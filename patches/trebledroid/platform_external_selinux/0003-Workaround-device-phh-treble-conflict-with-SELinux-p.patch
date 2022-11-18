@@ -1,7 +1,7 @@
-From 383c762e65ba755da5f424cea56f7249fb4aa852 Mon Sep 17 00:00:00 2001
+From 2c2c493e7e2b19b2ecb8d9384fca6a708dc3e32d Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 31 Mar 2021 23:32:37 +0200
-Subject: [PATCH 3/8] Workaround device/phh/treble conflict with SELinux policy
+Subject: [PATCH 3/9] Workaround device/phh/treble conflict with SELinux policy
 
 device/phh/treble defines the following three types (hostapd,
 sysfs_usb_supply, rpmb_device)
@@ -77,11 +77,6 @@ index 5f9392d1..90f0fee6 100644
  		}
  		/* multiple_decls is enabled and works for this datum type, add node */
  		cil_list_append(prev->nodes, CIL_NODE, node);
- 		node->data = prev;
--		return SEPOL_EEXIST;
- 	}
- 
- 	return SEPOL_OK;
 diff --git a/libsepol/cil/src/cil_resolve_ast.c b/libsepol/cil/src/cil_resolve_ast.c
 index b63c1359..87db4f81 100644
 --- a/libsepol/cil/src/cil_resolve_ast.c

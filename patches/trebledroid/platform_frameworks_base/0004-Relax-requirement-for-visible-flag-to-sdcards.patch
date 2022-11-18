@@ -1,7 +1,7 @@
-From da9e57ab74bc295286e4b0e6d20ac2206583cea4 Mon Sep 17 00:00:00 2001
+From 3add9bdbd12a5598d37b7f4f153621a8056d3a1a Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 28 Nov 2017 18:28:04 +0100
-Subject: [PATCH 05/32] Relax requirement for visible flag to sdcards
+Subject: [PATCH 04/31] Relax requirement for visible flag to sdcards
 
 The vast majority of sdcard readers are stable enough to be declared by
 the API. (I see no counter-example)
@@ -13,10 +13,10 @@ Change-Id: Ia616671c03562d1eadaff5531a5c708a62d7ad3a
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/services/core/java/com/android/server/StorageManagerService.java b/services/core/java/com/android/server/StorageManagerService.java
-index e6e0d8ef3f47..28e20f211c73 100644
+index 065f0bf2420b..cc8e44debde1 100644
 --- a/services/core/java/com/android/server/StorageManagerService.java
 +++ b/services/core/java/com/android/server/StorageManagerService.java
-@@ -1612,7 +1612,8 @@ class StorageManagerService extends IStorageManager.Stub
+@@ -1610,7 +1610,8 @@ class StorageManagerService extends IStorageManager.Stub
  
              // Adoptable public disks are visible to apps, since they meet
              // public API requirement of being in a stable location.
