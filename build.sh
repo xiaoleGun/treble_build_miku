@@ -13,7 +13,7 @@ set -e
 
 BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
-VERSION="0.5.1"
+VERSION="0.6.0"
 
 initrepo() {
 if [ ! -d .repo ]
