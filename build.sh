@@ -14,7 +14,6 @@ set -e
 BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
 VERSION="0.6.0"
-ND=$(cd ../$(dirname $0);pwd)
 
 autoinstalldependencies() {
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
