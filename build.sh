@@ -13,7 +13,7 @@ set -e
 
 BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
-VERSION="0.6.0"
+VERSION="0.7.0"
 
 autoinstalldependencies() {
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
