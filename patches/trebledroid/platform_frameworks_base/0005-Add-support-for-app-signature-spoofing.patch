@@ -1,7 +1,7 @@
-From 7dee75763d81955097cd497cdace31baa2849f9e Mon Sep 17 00:00:00 2001
+From 73aa23138f746eaa693be5ad003fd3337b08750a Mon Sep 17 00:00:00 2001
 From: Danny Lin <danny@kdrag0n.dev>
 Date: Sat, 16 Oct 2021 05:27:57 -0700
-Subject: [PATCH 05/31] Add support for app signature spoofing
+Subject: [PATCH 05/34] Add support for app signature spoofing
 
 This is needed by microG GmsCore to pretend to be the official Google
 Play Services package, because client apps check the package signature
@@ -58,7 +58,7 @@ index 1e4ff94e2631..80538fb210cd 100644
      field public static final String MICROPHONE = "android.permission-group.MICROPHONE";
      field public static final String NEARBY_DEVICES = "android.permission-group.NEARBY_DEVICES";
 diff --git a/core/res/AndroidManifest.xml b/core/res/AndroidManifest.xml
-index 7439b2f0921f..eadcac3af765 100644
+index 5ae133bbe6e6..47787215ebfe 100644
 --- a/core/res/AndroidManifest.xml
 +++ b/core/res/AndroidManifest.xml
 @@ -3534,6 +3534,21 @@
@@ -84,7 +84,7 @@ index 7439b2f0921f..eadcac3af765 100644
           {@link android.content.pm.PackageManager#addPackageToPreferred}
           for details. -->
 diff --git a/core/res/res/values/strings.xml b/core/res/res/values/strings.xml
-index 92583b12a803..d153122abe38 100644
+index 9833c8ba8809..59260d285e36 100644
 --- a/core/res/res/values/strings.xml
 +++ b/core/res/res/values/strings.xml
 @@ -974,6 +974,18 @@
@@ -107,10 +107,10 @@ index 92583b12a803..d153122abe38 100644
      <string name="permlab_statusBar">disable or modify status bar</string>
      <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
 diff --git a/services/core/java/com/android/server/pm/ComputerEngine.java b/services/core/java/com/android/server/pm/ComputerEngine.java
-index 259ca655d2b9..674b22e28a83 100644
+index 46b7460dff1b..40549962436f 100644
 --- a/services/core/java/com/android/server/pm/ComputerEngine.java
 +++ b/services/core/java/com/android/server/pm/ComputerEngine.java
-@@ -1591,6 +1591,29 @@ public class ComputerEngine implements Computer {
+@@ -1603,6 +1603,29 @@ public class ComputerEngine implements Computer {
          return result;
      }
  
@@ -140,7 +140,7 @@ index 259ca655d2b9..674b22e28a83 100644
      public final PackageInfo generatePackageInfo(PackageStateInternal ps,
              @PackageManager.PackageInfoFlagsBits long flags, int userId) {
          if (!mUserManager.exists(userId)) return null;
-@@ -1620,13 +1643,14 @@ public class ComputerEngine implements Computer {
+@@ -1632,13 +1655,14 @@ public class ComputerEngine implements Computer {
              final int[] gids = (flags & PackageManager.GET_GIDS) == 0 ? EMPTY_INT_ARRAY
                      : mPermissionManager.getGidsForUid(UserHandle.getUid(userId, ps.getAppId()));
              // Compute granted permissions only if package has requested permissions

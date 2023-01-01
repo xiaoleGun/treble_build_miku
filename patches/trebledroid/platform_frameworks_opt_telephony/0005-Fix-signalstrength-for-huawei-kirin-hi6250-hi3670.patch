@@ -1,7 +1,7 @@
-From 26feb0fc064dedec272ecd5a4328a2aac8d2c357 Mon Sep 17 00:00:00 2001
+From 12c7c067d9d2a3033d6b6be3e518bf5dbb9640d3 Mon Sep 17 00:00:00 2001
 From: Raphael Mounier <mounierr07@gmail.com>
 Date: Thu, 6 Oct 2022 08:35:38 +0200
-Subject: [PATCH 5/7] Fix signalstrength for huawei kirin (hi6250, hi3670)
+Subject: [PATCH 05/10] Fix signalstrength for huawei kirin (hi6250, hi3670)
 
 The RILUtils.convertHalSignalStrength function does not work correctly under Huawei hi6250 and hi3660 platform. We have therefore replaced this function with a new one specifically for this Kirin platform.
 
@@ -16,10 +16,10 @@ The RILUtils.convertHalSignalStrength function does not work correctly under Hua
  2 files changed, 136 insertions(+), 4 deletions(-)
 
 diff --git a/src/java/com/android/internal/telephony/RIL.java b/src/java/com/android/internal/telephony/RIL.java
-index 49e8297c45..810afd8fe6 100644
+index 6de66527e1..341d9c5d74 100644
 --- a/src/java/com/android/internal/telephony/RIL.java
 +++ b/src/java/com/android/internal/telephony/RIL.java
-@@ -5904,6 +5904,125 @@ public class RIL extends BaseCommands implements CommandsInterface {
+@@ -5930,6 +5930,125 @@ public class RIL extends BaseCommands implements CommandsInterface {
                  new CellSignalStrengthNr());
      }
  
@@ -146,7 +146,7 @@ index 49e8297c45..810afd8fe6 100644
       * Get the HAL version.
       *
 diff --git a/src/java/com/android/internal/telephony/RadioIndication.java b/src/java/com/android/internal/telephony/RadioIndication.java
-index c7244be82e..5df3f99896 100644
+index d947d53611..b74103f594 100644
 --- a/src/java/com/android/internal/telephony/RadioIndication.java
 +++ b/src/java/com/android/internal/telephony/RadioIndication.java
 @@ -241,13 +241,26 @@ public class RadioIndication extends IRadioIndication.Stub {
@@ -162,24 +162,24 @@ index c7244be82e..5df3f99896 100644
  
 -        SignalStrength ss = mRil.fixupSignalStrength10(ssInitial);
          // Note this is set to "verbose" because it happens frequently
--        if (RIL.RILJ_LOGV) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, ss);
-+	if (RIL.RILJ_LOGV) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, signalStrength);
+-        if (mRil.isLogvOrTrace()) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, ss);
++        if (mRil.isLogvOrTrace()) mRil.unsljLogvRet(RIL_UNSOL_SIGNAL_STRENGTH, signalStrength);
 +
-+	// Fix signalStrength for Huawei
-+	String hardware = android.os.SystemProperties.get("ro.hardware", "");
++        // Fix signalStrength for Huawei
++        String hardware = android.os.SystemProperties.get("ro.hardware", "");
 +        if(hardware.contains("hi3660") || hardware.contains("hi6250") || hardware.contains("hi3670") || hardware.contains("kirin"))
-+	{
-+		if (RIL.RILJ_LOGV) mRil.riljLog("currentSignalStrength Found Huawei device");
-+		ss = mRil.fixupSignalStrengthHuawei(signalStrength);
-+	}
-+	else
-+	{
-+		SignalStrength ssInitial = RILUtils.convertHalSignalStrength(signalStrength);
-+		ss = mRil.fixupSignalStrength10(ssInitial);
-+	}
++        {
++            if (RIL.RILJ_LOGV) mRil.riljLog("currentSignalStrength Found Huawei device");
++            ss = mRil.fixupSignalStrengthHuawei(signalStrength);
++        }
++        else
++        {
++            SignalStrength ssInitial = RILUtils.convertHalSignalStrength(signalStrength);
++            ss = mRil.fixupSignalStrength10(ssInitial);
++        }
  
          if (mRil.mSignalStrengthRegistrant != null) {
              mRil.mSignalStrengthRegistrant.notifyRegistrant(new AsyncResult (null, ss, null));
 -- 
-2.25.1
+2.32.1 (Apple Git-133)
 
