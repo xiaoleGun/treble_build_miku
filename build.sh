@@ -129,10 +129,10 @@ buildtreble() {
     echo "--> Building treble image"
     echo ""
     lunch miku_treble_arm64_bvN-userdebug
-    make installclean
     make -j$(nproc --all) systemimage
     mv $OUT/system.img $BD/system-miku_treble_arm64_bvN.img
     sleep 1
+    make installclean
     lunch miku_treble_arm64_bgN-userdebug
     make -j$(nproc --all) systemimage
     mv $OUT/system.img $BD/system-miku_treble_arm64_bgN.img
