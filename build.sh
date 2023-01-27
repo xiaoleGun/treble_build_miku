@@ -15,7 +15,7 @@ BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
 VERSION="0.9.0"
 
-autoinstalldependencies() {
+autoInstallDependencies() {
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     distro=$(awk -F= '$1 == "ID" {print $2}' /etc/os-release)
     id_like=$(awk -F= '$1 == "ID_LIKE" {print $2}' /etc/os-release)
@@ -32,7 +32,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 fi
 }
 
-initrepo() {
+initRepo() {
 if [ ! -d .repo ]
 then
     echo ""
@@ -62,14 +62,14 @@ if [ -d .repo ] && [ ! -f .repo/local_manifests/miku-treble.xml ] ;then
 fi
 }
 
-syncrepo() {
+syncRepo() {
 echo ""
 echo "--> Syncing repos"
 echo ""
 repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
 }
 
-applypatches() {
+applyPatches() {
 patches="$(readlink -f -- $1)"
 tree="$2"
 
@@ -85,18 +85,18 @@ for project in $(cd $patches/patches/$tree; echo *);do
     done
 }
 
-applyingpatches() {
+applyingPatches() {
 echo ""
 echo "--> Applying TrebleDroid patches"
 echo ""
-applypatches $BL trebledroid
+applyPatches $BL trebledroid
 echo ""
 echo "--> Applying Personal patches"
 echo ""
-applypatches $BL personal
+applyPatches $BL personal
 }
 
-initenvironment() {
+initEnvironment() {
 echo ""
 echo "--> Setting up build environment"
 echo ""
@@ -123,7 +123,7 @@ buildTrebleApp() {
     cd ..
 }
 
-buildtreble() {
+buildTreble() {
     echo ""
     echo "--> Building treble image"
     echo ""
@@ -206,13 +206,13 @@ personal() {
 START=`date +%s`
 BUILD_DATE="$(date +%Y%m%d)"
 
-autoinstalldependencies
-initrepo
-syncrepo
-applyingpatches
-initenvironment
+autoInstallDependencies
+initRepo
+syncRepo
+applyingPatches
+initEnvironment
 buildTrebleApp
-buildtreble
+buildTreble
 buildSasImages
 generatePackages
 generateOtaJson
