@@ -1,7 +1,7 @@
-From 7665e4dfaf048902ca10a0d6b26ba1ac0a26d750 Mon Sep 17 00:00:00 2001
+From 3690ee15c30204f08e5554aedcfe3f06416cb0f3 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 17 Oct 2021 17:17:13 -0400
-Subject: [PATCH 6/6] Don't abort when failing to get real-time priority
+Subject: [PATCH 5/6] Don't abort when failing to get real-time priority
 
 On some devices (like OP6), for unknown reason, trying to go to realtime
 fails with EPERM.
@@ -19,7 +19,7 @@ Change-Id: Id25dac186628e933185bdfd640498004459b375a
  4 files changed, 14 insertions(+), 4 deletions(-)
 
 diff --git a/system/btif/src/btif_a2dp_sink.cc b/system/btif/src/btif_a2dp_sink.cc
-index 665965a3cb..d1f00ceed1 100644
+index 9d52524b4b..95a129d2b5 100644
 --- a/system/btif/src/btif_a2dp_sink.cc
 +++ b/system/btif/src/btif_a2dp_sink.cc
 @@ -197,7 +197,7 @@ bool btif_a2dp_sink_init() {

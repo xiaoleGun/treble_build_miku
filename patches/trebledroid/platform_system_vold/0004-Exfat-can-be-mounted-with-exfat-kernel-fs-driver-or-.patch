@@ -1,7 +1,7 @@
-From 6c60dbed522001d05b10e73804d6bfad04bc5978 Mon Sep 17 00:00:00 2001
+From 63fd8aed36b89197cce37a70b2c8769a14d8e0f4 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 18 Oct 2022 16:08:09 -0400
-Subject: [PATCH 4/4] Exfat can be mounted with "exfat" kernel fs driver, or
+Subject: [PATCH 4/5] Exfat can be mounted with "exfat" kernel fs driver, or
  "sdfat" or "texfat" (Samsung and Sony variants)
 
 ---
