@@ -1,7 +1,7 @@
-From 8d8b07c250cdcbe3a91f2a5aa06d77f77a4c28c6 Mon Sep 17 00:00:00 2001
+From 8f84abfe18cd9afa73a9d0bb298dc0256a64701b Mon Sep 17 00:00:00 2001
 From: Victor Bo <bvoid@yandex.ru>
 Date: Sat, 19 Dec 2020 10:12:40 -0500
-Subject: [PATCH 2/2] HAXFIX: no time for that!
+Subject: [PATCH] HAXFIX: no time for that!
 
   Prebuilt apk found in PRODUCT_COPY_FILES: $(1), use BUILD_PREBUILT
   instead blablabla
@@ -12,7 +12,7 @@ Change-Id: Ia30e92df22e343f9dd61850aefaa573fbcb3b825
  1 file changed, 3 deletions(-)
 
 diff --git a/core/Makefile b/core/Makefile
-index c5cb3323f..c89d7c554 100644
+index 252c89476..66a5615a0 100644
 --- a/core/Makefile
 +++ b/core/Makefile
 @@ -25,9 +25,6 @@ SYSTEM_DLKM_NOTICE_DEPS :=

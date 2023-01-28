@@ -1,7 +1,7 @@
 From b895cf7e6ad5f19cc48aa66e965ac98f9b0e2460 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Wed, 25 Dec 2019 12:34:05 +0200
-Subject: [PATCH 02/15] Rework securize tweak
+Subject: [PATCH 02/16] Rework securize tweak
 
 ---
  base.mk      |  1 -

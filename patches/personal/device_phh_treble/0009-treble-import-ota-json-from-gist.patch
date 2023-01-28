@@ -1,7 +1,7 @@
 From c2faf50b8648f8d1772577885be25c354a376ca4 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Fri, 11 Feb 2022 19:27:50 +0800
-Subject: [PATCH 09/15] treble: import ota json from gist
+Subject: [PATCH 09/16] treble: import ota json from gist
 
 ---
  miku.mk | 6 +++++-

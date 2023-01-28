@@ -1,7 +1,7 @@
 From 32f8666f9d1f26e3dd98bf4b9332d01495dc6e72 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sat, 28 Jan 2023 10:39:48 +0800
-Subject: [PATCH 15/15] treble: Use new gapps
+Subject: [PATCH 15/16] treble: Use new gapps
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
