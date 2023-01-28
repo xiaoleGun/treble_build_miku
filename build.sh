@@ -201,7 +201,9 @@ personal() {
   echo "--> Upload to github release"
   echo ""
   cd $BL
-  hub release create -a $BD/MikuUI-TDA-$VERSION-arm64-ab-$BUILD_DATE-UNOFFICIAL.zip -a $BD/MikuUI-TDA-$VERSION-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.zip -a $BD/MikuUI-TDA-$VERSION-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.zip -a $BD/MikuUI-TDA-$VERSION-arm64-ab-gapps-vndklite-$BUILD_DATE-UNOFFICIAL.zip -m "Miku UI TDA v$VERSION
+  assets=()
+  for f in $BD/*-$BUILD_DATE-UNOFFICIAL.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
+  hub release create ${assets[@]} -m "Miku UI TDA v$VERSION
 - Sync with latest sources of TrebleDroid" TDA-$VERSION
   rm -rf $BD/*-$BUILD_DATE-UNOFFICIAL.zip
   cd ..
