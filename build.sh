@@ -204,6 +204,7 @@ personal() {
   assets=()
   for f in $BD/*-$BUILD_DATE-UNOFFICIAL.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
   hub release create ${assets[@]} -m "Miku UI TDA v$VERSION
+
 - Sync with latest sources of TrebleDroid" TDA-$VERSION
   rm -rf $BD/*-$BUILD_DATE-UNOFFICIAL.zip
   cd ..
