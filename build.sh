@@ -101,6 +101,7 @@ echo ""
 echo "--> Setting up build environment"
 echo ""
 source build/envsetup.sh &> /dev/null
+rm -rf $BD
 mkdir -p $BD
 
 echo ""
@@ -194,13 +195,16 @@ generateOtaJson() {
     }
 }
 
-# I use a server so need it
+# I use American server in China, so need it
 personal() {
   echo ""
-  echo "--> Pack all for me"
+  echo "--> Upload to github release"
   echo ""
-  7z a -t7z -r $BD/all.7z $BD/*-$BUILD_DATE-UNOFFICIAL.zip $BD/ota.json
-  rm -rf $BD/*-$BUILD_DATE-UNOFFICIAL.zip $BD/ota.json
+  cd $BL
+  hub release create -a $BD/MikuUI-TDA-$VERSION-arm64-ab-$BUILD_DATE-UNOFFICIAL.zip -a $BD/MikuUI-TDA-$VERSION-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.zip -a $BD/MikuUI-TDA-$VERSION-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.zip -a $BD/MikuUI-TDA-$VERSION-arm64-ab-gapps-vndklite-$BUILD_DATE-UNOFFICIAL.zip -m "Miku UI TDA v$VERSION
+- Sync with latest sources of TrebleDroid" TDA-$VERSION
+  rm -rf $BD/*-$BUILD_DATE-UNOFFICIAL.zip
+  cd ..
 }
 
 START=`date +%s`
