@@ -1,28 +1,63 @@
 #!/bin/bash
+warning() {
 echo
 echo "-----------------------------------------"
-echo "      Miku UI TDA Treble Buildbot        "
+echo "      $BUILDBOT                          "
 echo "                  by                     "
 echo "               xiaoleGun                 "
-echo " Executing in 3 seconds - CTRL-C to exit "
+echo " $BUILDBOT_EXIT                          "
 echo "-----------------------------------------"
 echo
+}
 
-sleep 3
-set -e
-
-BL=$(cd $(dirname $0);pwd)
-BD=$HOME/builds
-VERSION="0.9.0"
-
-read -s -p "Please enter the password of $USER: " password
+multipleLanguages() {
+   if [ -n `echo $LANG | grep zh_CN` ]; then
+       BUILDBOT="Miku UI TDA通用镜像自动构建"
+       BUILDBOT_EXIT="3秒后开始构建 - CTRL-C退出"
+       ONCE_PASSWORD="请输入 $USER 的密码: "
+       ARCH_LINUX="检测到Arch Linux"
+       INIT_MIKU_UI="初始Miku UI"
+       PREPARE_LOCAL_MANIFEST="处理treble manifest"
+       SYNC_REPOS="同步仓库"
+       APPLY_TREBLEDROID_PATCH="应用 trebledroid 补丁中"
+       APPLY_PERSONAL_PATCH="应用 personal 补丁中"
+       SET_UP_ENVIRONMENT="准备构建环境"
+       GEN_DEVICE_MAKEFILE="生成 treble 设备"
+       BUILD_TREBLE_APP="构建 treble app 中"
+       BUILD_TREBLE_IMAGE="构建 treble 镜像中"
+       BUILD_VNDKLITE_VARIANT="构建 vndklite 版本中"
+       GEN_PACKAGE="打包中"
+       GEN_UP_JSON="生成升级json"
+       UP_GITHUB_RELEASE="上传到Github release"
+       COMPLETED="构建完成，使用了 $1 分钟 $2 秒"
+    else
+       BUILDBOT="Miku UI TDA Treble Buildbot"
+       BUILDBOT_EXIT="Executing in 3 seconds - CTRL-C to exit"
+       ONCE_PASSWORD="Please enter the password of $USER: "
+       ARCH_LINUX="Arch Linux Detected"
+       INIT_MIKU_UI="Initializing Miku UI workspace"
+       PREPARE_LOCAL_MANIFEST="Preparing local manifest"
+       SYNC_REPOS="Syncing repos"
+       APPLY_TREBLEDROID_PATCH="Applying trebledroid patches"
+       APPLY_PERSONAL_PATCH="Applying personal patches"
+       SET_UP_ENVIRONMENT="Setting up build environment"
+       GEN_DEVICE_MAKEFILE="Treble device generation"
+       BUILD_TREBLE_APP="Building treble app"
+       BUILD_TREBLE_IMAGE="Building treble image"
+       BUILD_VNDKLITE_VARIANT="Building vndklite variant"
+       GEN_PACKAGE="Generating packages"
+       GEN_UP_JSON="Generating Update json"
+       UP_GITHUB_RELEASE="Upload to github release"
+       COMPLETED="Buildbot completed in $1 minutes and $2 seconds"
+fi      
+}
 
 autoInstallDependencies() {
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     distro=$(awk -F= '$1 == "ID" {print $2}' /etc/os-release)
     id_like=$(awk -F= '$1 == "ID_LIKE" {print $2}' /etc/os-release)
     if [[ "$distro" == "arch" || "$id_like" == "arch" ]]; then
-       echo "Arch Linux Detected"
+       echo "$ARCH_LINUX"
        git clone https://github.com/akhilnarang/scripts $BD/builds
        cd $BD/scripts
        bash setup/arch-manjaro.sh
@@ -38,14 +73,14 @@ initRepo() {
 if [ ! -d .repo ]
 then
     echo ""
-    echo "--> Initializing Miku UI workspace"
+    echo "--> $INIT_MIKU_UI"
     echo ""
     repo init -u https://github.com/Miku-UI/manifesto -b TDA --depth=1
 fi
 
 if [ -d .repo ] && [ ! -f .repo/local_manifests/miku-treble.xml ] ;then
      echo ""
-     echo "--> Preparing local manifest"
+     echo "--> $PREPARE_LOCAL_MANIFEST"
      echo ""
      rm -rf .repo/local_manifests
      mkdir -p .repo/local_manifests
@@ -66,7 +101,7 @@ fi
 
 syncRepo() {
 echo ""
-echo "--> Syncing repos"
+echo "--> $SYNC_REPOS"
 echo ""
 repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
 }
@@ -89,25 +124,25 @@ for project in $(cd $patches/patches/$tree; echo *);do
 
 applyingPatches() {
 echo ""
-echo "--> Applying TrebleDroid patches"
+echo "--> $APPLY_TREBLEDROID_PATCH"
 echo ""
 applyPatches $BL trebledroid
 echo ""
-echo "--> Applying Personal patches"
+echo "--> $APPLY_PERSONAL_PATCH"
 echo ""
 applyPatches $BL personal
 }
 
 initEnvironment() {
 echo ""
-echo "--> Setting up build environment"
+echo "--> $SET_UP_ENVIRONMENT"
 echo ""
 source build/envsetup.sh &> /dev/null
 rm -rf $BD
 mkdir -p $BD
 
 echo ""
-echo "--> Treble device generation"
+echo "--> $GEN_DEVICE_MAKEFILE"
 echo ""
 rm -rf device/*/sepolicy/common/private/genfs_contexts
 cd device/phh/treble
@@ -118,7 +153,7 @@ cd ../../..
 
 buildTrebleApp() {
     echo ""
-    echo "--> Building treble_app"
+    echo "--> $BUILD_TREBLE_APP"
     echo ""
     cd treble_app
     bash build.sh release
@@ -128,7 +163,7 @@ buildTrebleApp() {
 
 buildTreble() {
     echo ""
-    echo "--> Building treble image"
+    echo "--> $BUILD_TREBLE_IMAGE"
     echo ""
     lunch miku_treble_arm64_bvN-userdebug
     make -j$(nproc --all) systemimage
@@ -142,7 +177,7 @@ buildTreble() {
 
 buildSasImages() {
     echo ""
-    echo "--> Building vndklite variant"
+    echo "--> $BUILD_VNDKLITE_VARIANT"
     echo ""
     cd sas-creator
     echo "$password" | sudo -S bash lite-adapter.sh 64 $BD/system-miku_treble_arm64_bvN.img
@@ -156,7 +191,7 @@ buildSasImages() {
 
 generatePackages() {
     echo ""
-    echo "--> Generating packages"
+    echo "--> $GEN_PACKAGE"
     echo ""
     BASE_IMAGE=$BD/system-miku_treble_arm64_bvN.img
     mkdir --parents $BD/dsu/vanilla/; mv $BASE_IMAGE $BD/dsu/vanilla/system.img
@@ -173,7 +208,7 @@ generatePackages() {
 
 generateOtaJson() {
     echo ""
-    echo "--> Generating Update json"
+    echo "--> $GEN_UP_JSON"
     echo ""
     prefix="MikuUI-TDA-$VERSION-"
     suffix="-$BUILD_DATE-UNOFFICIAL.zip"
@@ -200,7 +235,7 @@ generateOtaJson() {
 # I use American server in China, so need it
 personal() {
   echo ""
-  echo "--> Upload to github release"
+  echo "--> $UP_GITHUB_RELEASE"
   echo ""
   cd $BL
   assets=()
@@ -212,8 +247,21 @@ personal() {
   cd ..
 }
 
+multipleLanguages
+warning
+
+sleep 3
+
 START=`date +%s`
 BUILD_DATE="$(date +%Y%m%d)"
+
+set -e
+
+BL=$(cd $(dirname $0);pwd)
+BD=$HOME/builds
+VERSION="0.9.0"
+
+read -s -p "$ONCE_PASSWORD" password
 
 autoInstallDependencies
 initRepo
@@ -233,6 +281,8 @@ END=`date +%s`
 ELAPSEDM=$(($(($END-$START))/60))
 ELAPSEDS=$(($(($END-$START))-$ELAPSEDM*60))
 
+multipleLanguages $ELAPSEDM $ELAPSEDS
+
 echo ""
-echo "--> Buildbot completed in $ELAPSEDM minutes and $ELAPSEDS seconds"
+echo "--> $COMPLETED"
 echo ""
