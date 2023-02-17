@@ -15,6 +15,8 @@ BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
 VERSION="0.9.0"
 
+read -s -p "Please enter the password of $USER: " password
+
 autoInstallDependencies() {
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     distro=$(awk -F= '$1 == "ID" {print $2}' /etc/os-release)
@@ -26,8 +28,8 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
        bash setup/arch-manjaro.sh
        cd $ND
     else
-       sudo apt-get update
-       sudo apt-get install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev xattr openjdk-11-jdk jq android-sdk-libsparse-utils
+       echo "$password" | sudo -S apt-get update
+       echo "$password" | sudo -S apt-get install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev xattr openjdk-11-jdk jq android-sdk-libsparse-utils
     fi
 fi
 }
@@ -143,12 +145,12 @@ buildSasImages() {
     echo "--> Building vndklite variant"
     echo ""
     cd sas-creator
-    sudo bash lite-adapter.sh 64 $BD/system-miku_treble_arm64_bvN.img
+    echo "$password" | sudo -S bash lite-adapter.sh 64 $BD/system-miku_treble_arm64_bvN.img
     cp s.img $BD/system-miku_treble_arm64_bvN-vndklite.img
-    sudo rm -rf s.img d tmp
-    sudo bash lite-adapter.sh 64 $BD/system-miku_treble_arm64_bgN.img
+    echo "$password" | sudo -S rm -rf s.img d tmp
+    echo "$password" | sudo bash lite-adapter.sh 64 $BD/system-miku_treble_arm64_bgN.img
     cp s.img $BD/system-miku_treble_arm64_bgN-vndklite.img
-    sudo rm -rf s.img d tmp
+    echo "$password" | sudo -S rm -rf s.img d tmp
     cd ..
 }
 
