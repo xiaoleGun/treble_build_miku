@@ -1,90 +1,92 @@
 #!/bin/bash
-warning() {
-echo
-echo "-----------------------------------------"
-echo "      $BUILDBOT                          "
-echo "                  by                     "
-echo "               xiaoleGun                 "
-echo " $BUILDBOT_EXIT                          "
-echo "-----------------------------------------"
-echo
-}
+
+set -e
 
 multipleLanguages() {
-   if [ -n `echo $LANG | grep zh_CN` ]; then
-       BUILDBOT="Miku UI TDA通用镜像自动构建"
-       BUILDBOT_EXIT="3秒后开始构建 - CTRL-C退出"
-       ONCE_PASSWORD="请输入 $USER 的密码: "
-       ARCH_LINUX="检测到Arch Linux"
-       INIT_MIKU_UI="初始Miku UI"
-       PREPARE_LOCAL_MANIFEST="处理treble manifest"
-       SYNC_REPOS="同步仓库"
-       APPLY_TREBLEDROID_PATCH="应用 trebledroid 补丁中"
-       APPLY_PERSONAL_PATCH="应用 personal 补丁中"
-       SET_UP_ENVIRONMENT="准备构建环境"
-       GEN_DEVICE_MAKEFILE="生成 treble 设备"
-       BUILD_TREBLE_APP="构建 treble app 中"
-       BUILD_TREBLE_IMAGE="构建 treble 镜像中"
-       BUILD_VNDKLITE_VARIANT="构建 vndklite 版本中"
-       GEN_PACKAGE="打包中"
-       GEN_UP_JSON="生成升级json"
-       UP_GITHUB_RELEASE="上传到Github release"
-       COMPLETED="构建完成，使用了 $1 分钟 $2 秒"
+    if [ -n $(echo $LANG | grep zh_CN) ]; then
+        BUILDBOT="Miku UI TDA通用镜像自动构建"
+        BUILDBOT_EXIT="3秒后开始构建Miku UI通用镜像 - CTRL-C退出"
+        ONCE_PASSWORD="请输入 $USER 的密码: "
+        ARCH_LINUX="检测到Arch Linux"
+        INIT_MIKU_UI="初始Miku UI"
+        PREPARE_LOCAL_MANIFEST="处理treble manifest"
+        SYNC_REPOS="同步仓库"
+        APPLY_TREBLEDROID_PATCH="应用 trebledroid 补丁中"
+        APPLY_PERSONAL_PATCH="应用 personal 补丁中"
+        SET_UP_ENVIRONMENT="准备构建环境"
+        GEN_DEVICE_MAKEFILE="生成 treble 设备"
+        BUILD_TREBLE_APP="构建 treble app 中"
+        BUILD_TREBLE_IMAGE="构建 treble 镜像中"
+        BUILD_VNDKLITE_VARIANT="构建 vndklite 版本中"
+        GEN_PACKAGE="打包中"
+        GEN_UP_JSON="生成升级json"
+        UP_GITHUB_RELEASE="上传到Github release"
+        COMPLETED="构建完成，使用了 $1 分钟 $2 秒"
     else
-       BUILDBOT="Miku UI TDA Treble Buildbot"
-       BUILDBOT_EXIT="Executing in 3 seconds - CTRL-C to exit"
-       ONCE_PASSWORD="Please enter the password of $USER: "
-       ARCH_LINUX="Arch Linux Detected"
-       INIT_MIKU_UI="Initializing Miku UI workspace"
-       PREPARE_LOCAL_MANIFEST="Preparing local manifest"
-       SYNC_REPOS="Syncing repos"
-       APPLY_TREBLEDROID_PATCH="Applying trebledroid patches"
-       APPLY_PERSONAL_PATCH="Applying personal patches"
-       SET_UP_ENVIRONMENT="Setting up build environment"
-       GEN_DEVICE_MAKEFILE="Treble device generation"
-       BUILD_TREBLE_APP="Building treble app"
-       BUILD_TREBLE_IMAGE="Building treble image"
-       BUILD_VNDKLITE_VARIANT="Building vndklite variant"
-       GEN_PACKAGE="Generating packages"
-       GEN_UP_JSON="Generating Update json"
-       UP_GITHUB_RELEASE="Upload to github release"
-       COMPLETED="Buildbot completed in $1 minutes and $2 seconds"
-fi      
+        BUILDBOT="Miku UI TDA Treble Buildbot"
+        BUILDBOT_EXIT="Executing in 3 seconds - CTRL-C to exit"
+        ONCE_PASSWORD="Please enter the password of $USER: "
+        ARCH_LINUX="Arch Linux Detected"
+        INIT_MIKU_UI="Initializing Miku UI workspace"
+        PREPARE_LOCAL_MANIFEST="Preparing local manifest"
+        SYNC_REPOS="Syncing repos"
+        APPLY_TREBLEDROID_PATCH="Applying trebledroid patches"
+        APPLY_PERSONAL_PATCH="Applying personal patches"
+        SET_UP_ENVIRONMENT="Setting up build environment"
+        GEN_DEVICE_MAKEFILE="Treble device generation"
+        BUILD_TREBLE_APP="Building treble app"
+        BUILD_TREBLE_IMAGE="Building treble image"
+        BUILD_VNDKLITE_VARIANT="Building vndklite variant"
+        GEN_PACKAGE="Generating packages"
+        GEN_UP_JSON="Generating Update json"
+        UP_GITHUB_RELEASE="Upload to github release"
+        COMPLETED="Buildbot completed in $1 minutes and $2 seconds"
+    fi
+}
+
+warning() {
+    echo
+    echo "-----------------------------------------"
+    echo "      $BUILDBOT                          "
+    echo "                  by                     "
+    echo "               xiaoleGun                 "
+    echo " $BUILDBOT_EXIT                          "
+    echo "-----------------------------------------"
+    echo
 }
 
 autoInstallDependencies() {
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    distro=$(awk -F= '$1 == "ID" {print $2}' /etc/os-release)
-    id_like=$(awk -F= '$1 == "ID_LIKE" {print $2}' /etc/os-release)
-    if [[ "$distro" == "arch" || "$id_like" == "arch" ]]; then
-       echo "$ARCH_LINUX"
-       git clone https://github.com/akhilnarang/scripts $BD/builds
-       cd $BD/scripts
-       bash setup/arch-manjaro.sh
-       cd $ND
-    else
-       echo "$password" | sudo -S apt-get update
-       echo "$password" | sudo -S apt-get install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev xattr openjdk-11-jdk jq android-sdk-libsparse-utils
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        distro=$(awk -F= '$1 == "ID" {print $2}' /etc/os-release)
+        id_like=$(awk -F= '$1 == "ID_LIKE" {print $2}' /etc/os-release)
+        if [[ "$distro" == "arch" || "$id_like" == "arch" ]]; then
+            echo "$ARCH_LINUX"
+            git clone https://github.com/akhilnarang/scripts $BD/builds
+            cd $BD/scripts
+            bash setup/arch-manjaro.sh
+            cd $ND
+        else
+            echo "$password" | sudo -S apt-get update
+            echo "$password" | sudo -S apt-get install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev xattr openjdk-11-jdk jq android-sdk-libsparse-utils
+        fi
     fi
-fi
 }
 
 initRepo() {
-if [ ! -d .repo ]
-then
-    echo ""
-    echo "--> $INIT_MIKU_UI"
-    echo ""
-    repo init -u https://github.com/Miku-UI/manifesto -b TDA --depth=1
-fi
+    if [ ! -d .repo ]; then
+        echo ""
+        echo "--> $INIT_MIKU_UI"
+        echo ""
+        repo init -u https://github.com/Miku-UI/manifesto -b TDA --depth=1
+    fi
 
-if [ -d .repo ] && [ ! -f .repo/local_manifests/miku-treble.xml ] ;then
-     echo ""
-     echo "--> $PREPARE_LOCAL_MANIFEST"
-     echo ""
-     rm -rf .repo/local_manifests
-     mkdir -p .repo/local_manifests
-     echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+    if [ -d .repo ] && [ ! -f .repo/local_manifests/miku-treble.xml ]; then
+        echo ""
+        echo "--> $PREPARE_LOCAL_MANIFEST"
+        echo ""
+        rm -rf .repo/local_manifests
+        mkdir -p .repo/local_manifests
+        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <manifest>
   <remote name=\"github\"
           fetch=\"https://github.com\" />
@@ -96,59 +98,61 @@ if [ -d .repo ] && [ ! -f .repo/local_manifests/miku-treble.xml ] ;then
   <project name=\"phhusson/treble_app\" path=\"treble_app\" remote=\"github\" revision=\"master\" />
   <project name=\"phhusson/sas-creator\" path=\"sas-creator\" remote=\"github\" revision=\"master\" />
 </manifest>" > .repo/local_manifests/miku-treble.xml
-fi
+    fi
 }
 
 syncRepo() {
-echo ""
-echo "--> $SYNC_REPOS"
-echo ""
-repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
+    echo ""
+    echo "--> $SYNC_REPOS"
+    echo ""
+    repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
 }
 
 applyPatches() {
-patches="$(readlink -f -- $1)"
-tree="$2"
+    patches="$(readlink -f -- $1)"
+    tree="$2"
 
-for project in $(cd $patches/patches/$tree; echo *);do
-	p="$(tr _ / <<<$project |sed -e 's;platform/;;g')"
-	[ "$p" == treble/app ] && p=treble_app
-	[ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay
-	pushd $p
-	for patch in $patches/patches/$tree/$project/*.patch;do
-		git am $patch || exit
-	done
-	popd
+    for project in $(cd $patches/patches/$tree; echo *);do
+        p="$(tr _ / <<<$project | sed -e 's;platform/;;g')"
+        [ "$p" == treble/app ] && p=treble_app
+        [ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay
+        pushd $p
+        for patch in $patches/patches/$tree/$project/*.patch; do
+            git am $patch || exit
+        done
+        popd
     done
 }
 
 applyingPatches() {
-echo ""
-echo "--> $APPLY_TREBLEDROID_PATCH"
-echo ""
-applyPatches $BL trebledroid
-echo ""
-echo "--> $APPLY_PERSONAL_PATCH"
-echo ""
-applyPatches $BL personal
+    echo ""
+    echo "--> $APPLY_TREBLEDROID_PATCH"
+    echo ""
+    applyPatches $BL trebledroid
+    echo ""
+    echo "--> $APPLY_PERSONAL_PATCH"
+    echo ""
+    applyPatches $BL personal
 }
 
 initEnvironment() {
-echo ""
-echo "--> $SET_UP_ENVIRONMENT"
-echo ""
-source build/envsetup.sh &> /dev/null
-rm -rf $BD
-mkdir -p $BD
+    echo ""
+    echo "--> $SET_UP_ENVIRONMENT"
+    echo ""
+    source build/envsetup.sh &> /dev/null
+    rm -rf $BD
+    mkdir -p $BD
+}
 
-echo ""
-echo "--> $GEN_DEVICE_MAKEFILE"
-echo ""
-rm -rf device/*/sepolicy/common/private/genfs_contexts
-cd device/phh/treble
-git clean -fdx
-bash generate.sh miku
-cd ../../..
+generateDevice() {
+    echo ""
+    echo "--> $GEN_DEVICE_MAKEFILE"
+    echo ""
+    rm -rf device/*/sepolicy/common/private/genfs_contexts
+    cd device/phh/treble
+    git clean -fdx
+    bash generate.sh miku
+    cd ../../..
 }
 
 buildTrebleApp() {
@@ -217,10 +221,10 @@ generateOtaJson() {
         while read file; do
             packageVariant=$(echo $(basename $file) | sed -e s/^$prefix// -e s/$suffix$//)
             case $packageVariant in
-                "arm64-ab") name="miku_treble_arm64_bvN";;
-                "arm64-ab-vndklite") name="miku_treble_arm64_bvN-vndklite";;
-                "arm64-ab-gapps") name="miku_treble_arm64_bgN";;
-                "arm64-ab-gapps-vndklite") name="miku_treble_arm64_bgN-vndklite";;
+                "arm64-ab") name="miku_treble_arm64_bvN" ;;
+                "arm64-ab-vndklite") name="miku_treble_arm64_bvN-vndklite" ;;
+                "arm64-ab-gapps") name="miku_treble_arm64_bgN" ;;
+                "arm64-ab-gapps-vndklite") name="miku_treble_arm64_bgN-vndklite" ;;
             esac
             size=$(wc -c $file | awk '{print $1}')
             url="https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA-$VERSION/$(basename $file)"
@@ -234,17 +238,17 @@ generateOtaJson() {
 
 # I use American server in China, so need it
 personal() {
-  echo ""
-  echo "--> $UP_GITHUB_RELEASE"
-  echo ""
-  cd $BL
-  assets=()
-  for f in $BD/*-$BUILD_DATE-UNOFFICIAL.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
-  hub release create ${assets[@]} -m "Miku UI TDA v$VERSION
+    echo ""
+    echo "--> $UP_GITHUB_RELEASE"
+    echo ""
+    cd $BL
+    assets=()
+    for f in $BD/*-$BUILD_DATE-UNOFFICIAL.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
+    hub release create ${assets[@]} -m "Miku UI TDA v$VERSION
 
 - Sync with latest sources of TrebleDroid" TDA-$VERSION
-  rm -rf $BD/*-$BUILD_DATE-UNOFFICIAL.zip
-  cd ..
+    rm -rf $BD/*-$BUILD_DATE-UNOFFICIAL.zip
+    cd ..
 }
 
 multipleLanguages
@@ -252,10 +256,8 @@ warning
 
 sleep 3
 
-START=`date +%s`
+START=$(date +%s)
 BUILD_DATE="$(date +%Y%m%d)"
-
-set -e
 
 BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
@@ -268,18 +270,19 @@ initRepo
 syncRepo
 applyingPatches
 initEnvironment
+generateDevice
 buildTrebleApp
 buildTreble
 buildSasImages
 generatePackages
 generateOtaJson
-if [ $USER == xiaolegun ];then
-personal
+if [ $USER == xiaolegun ]; then
+    personal
 fi
 
-END=`date +%s`
-ELAPSEDM=$(($(($END-$START))/60))
-ELAPSEDS=$(($(($END-$START))-$ELAPSEDM*60))
+END=$(date +%s)
+ELAPSEDM=$(($(($END - $START)) / 60))
+ELAPSEDS=$(($(($END - $START)) - $ELAPSEDM * 60))
 
 multipleLanguages $ELAPSEDM $ELAPSEDS
 
