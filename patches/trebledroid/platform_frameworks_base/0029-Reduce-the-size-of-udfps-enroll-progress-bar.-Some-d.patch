@@ -1,7 +1,7 @@
-From f23c91055075f8a2666edd76c4d3dde2a7af9eef Mon Sep 17 00:00:00 2001
+From b63324006e96b923e4c0d0b00c3e51801dc3a4b9 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 17 Dec 2021 17:16:14 -0500
-Subject: [PATCH 29/36] Reduce the size of udfps enroll progress bar. Some
+Subject: [PATCH 29/37] Reduce the size of udfps enroll progress bar. Some
  devices have their udfps pretty low, and the progress bar would make the icon
  at the wrong place
 
@@ -11,10 +11,10 @@ Change-Id: I1609ad9ca316293dcaaf07f7e681d11aadfcd29c
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/packages/SystemUI/res/values/config.xml b/packages/SystemUI/res/values/config.xml
-index 37549c927a90..92b132a8f32e 100644
+index 09a79332107f..081a64418de7 100644
 --- a/packages/SystemUI/res/values/config.xml
 +++ b/packages/SystemUI/res/values/config.xml
-@@ -577,7 +577,7 @@
+@@ -580,7 +580,7 @@
  
      <!-- The radius of the enrollment progress bar, in dp -->
      <integer name="config_udfpsEnrollProgressBar" translatable="false">

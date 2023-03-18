@@ -1,7 +1,7 @@
-From 8cdcd3ad1d42049761bbf5ef8e6e87375b76bb42 Mon Sep 17 00:00:00 2001
+From 98c2acaa7c291e47cad99102ad938b30ba58d031 Mon Sep 17 00:00:00 2001
 From: Danny Lin <danny@kdrag0n.dev>
 Date: Sat, 16 Oct 2021 05:27:57 -0700
-Subject: [PATCH 05/36] Add support for app signature spoofing
+Subject: [PATCH 05/37] Add support for app signature spoofing
 
 This is needed by microG GmsCore to pretend to be the official Google
 Play Services package, because client apps check the package signature
@@ -38,7 +38,7 @@ Change-Id: Ied7d6ce0b83a2d2345c3abba0429998d86494a88
  4 files changed, 56 insertions(+), 3 deletions(-)
 
 diff --git a/core/api/current.txt b/core/api/current.txt
-index 1e4ff94e2631..80538fb210cd 100644
+index 7100bf9265e5..d75bb4a65c62 100644
 --- a/core/api/current.txt
 +++ b/core/api/current.txt
 @@ -87,6 +87,7 @@ package android {
@@ -58,10 +58,10 @@ index 1e4ff94e2631..80538fb210cd 100644
      field public static final String MICROPHONE = "android.permission-group.MICROPHONE";
      field public static final String NEARBY_DEVICES = "android.permission-group.NEARBY_DEVICES";
 diff --git a/core/res/AndroidManifest.xml b/core/res/AndroidManifest.xml
-index 5ae133bbe6e6..47787215ebfe 100644
+index 6a80d1cb62a7..189c5c223cd0 100644
 --- a/core/res/AndroidManifest.xml
 +++ b/core/res/AndroidManifest.xml
-@@ -3534,6 +3534,21 @@
+@@ -3564,6 +3564,21 @@
          android:description="@string/permdesc_getPackageSize"
          android:protectionLevel="normal" />
  
@@ -84,10 +84,10 @@ index 5ae133bbe6e6..47787215ebfe 100644
           {@link android.content.pm.PackageManager#addPackageToPreferred}
           for details. -->
 diff --git a/core/res/res/values/strings.xml b/core/res/res/values/strings.xml
-index 9833c8ba8809..59260d285e36 100644
+index 9ffdc375db9c..a8c3331f0a0a 100644
 --- a/core/res/res/values/strings.xml
 +++ b/core/res/res/values/strings.xml
-@@ -974,6 +974,18 @@
+@@ -977,6 +977,18 @@
  
      <!--  Permissions -->
  

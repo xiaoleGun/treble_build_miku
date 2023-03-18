@@ -1,7 +1,7 @@
-From 3cab215289228366d4daf35d0080bdc2341a52c7 Mon Sep 17 00:00:00 2001
+From 4ffcbc92b908f5b8ceeb6b05d059c65aba94eea0 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 20 Dec 2021 15:01:41 -0500
-Subject: [PATCH 30/36] Dynamically resize boot animation to match screen size
+Subject: [PATCH 30/37] Dynamically resize boot animation to match screen size
 
 Change-Id: I54e49fc6b8c670103852e212d1416e27ff976205
 ---
@@ -9,7 +9,7 @@ Change-Id: I54e49fc6b8c670103852e212d1416e27ff976205
  1 file changed, 20 insertions(+)
 
 diff --git a/cmds/bootanimation/BootAnimation.cpp b/cmds/bootanimation/BootAnimation.cpp
-index 50c8e933d25f..cb1818729157 100644
+index 53a84bd1b21e..327d12f6d299 100644
 --- a/cmds/bootanimation/BootAnimation.cpp
 +++ b/cmds/bootanimation/BootAnimation.cpp
 @@ -583,6 +583,26 @@ status_t BootAnimation::readyToRun() {
@@ -36,9 +36,9 @@ index 50c8e933d25f..cb1818729157 100644
 +	    }
 +    }
 +
-     projectSceneToWindow();
- 
-     // Register a display event receiver
+     // Rotate the boot animation according to the value specified in the sysprop
+     // ro.bootanim.set_orientation_<display_id>. Four values are supported: ORIENTATION_0,
+     // ORIENTATION_90, ORIENTATION_180 and ORIENTATION_270.
 -- 
 2.32.1 (Apple Git-133)
 

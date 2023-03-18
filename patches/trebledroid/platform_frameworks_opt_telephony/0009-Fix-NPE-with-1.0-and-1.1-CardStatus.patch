@@ -1,4 +1,4 @@
-From 37fdaa203860ad16337f6389bda985d486bdd555 Mon Sep 17 00:00:00 2001
+From 732083326167a6208c01738bac9deb58719f4d26 Mon Sep 17 00:00:00 2001
 From: Christian Hoffmann <chrmhoffmann@gmail.com>
 Date: Fri, 21 Oct 2022 12:58:04 +0200
 Subject: [PATCH 09/10] Fix NPE with 1.0 and 1.1 CardStatus
@@ -22,5 +22,5 @@ index 5265be5ac9..48d88c650c 100644
              if (responseInfo.error == RadioError.NONE) {
                  sendMessageResponse(rr.mResult, iccCardStatus);
 -- 
-2.32.1 (Apple Git-133)
+2.25.1
 
