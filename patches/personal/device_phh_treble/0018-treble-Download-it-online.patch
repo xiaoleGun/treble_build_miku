@@ -1,54 +1,21 @@
-From 6eb24fb780ec613f9c98315f222c226ccb06a075 Mon Sep 17 00:00:00 2001
+From 5e08f7054626f84485510d3216c7d06f206422e7 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
-Date: Sat, 12 Mar 2022 12:45:52 +0800
-Subject: [PATCH 13/18] treble: import via browser
+Date: Sat, 18 Mar 2023 11:04:54 +0800
+Subject: [PATCH 18/18] treble: Download it online
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
- miku.mk                |   9 +++++++++
- via/Android.bp         |  10 ++++++++++
- via/via-release-cn.apk | Bin 0 -> 1499996 bytes
- 3 files changed, 19 insertions(+)
- create mode 100644 via/Android.bp
- create mode 100644 via/via-release-cn.apk
+ via/via-release-cn.apk | Bin 1499996 -> 0 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 via/via-release-cn.apk
 
-diff --git a/miku.mk b/miku.mk
-index 28363fc..11baf1d 100644
---- a/miku.mk
-+++ b/miku.mk
-@@ -9,3 +9,12 @@ MIKU_MASTER := xiaoleGun
- # OTA json
- PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
- 	ro.system.ota.json_url=https://gist.githubusercontent.com/xiaoleGun/4e8f9c8473f6a5dd1e261d6edd345a61/raw/cca987a26558b157f1811a7971e1df4ccab6f793/ota.json
-+
-+# Browser
-+ifeq ($(TARGET_PRODUCT), miku_treble_arm64_bgN)
-+PRODUCT_PACKAGES += \
-+    Chrome
-+else
-+PRODUCT_PACKAGES += \
-+    Via
-+endif
-diff --git a/via/Android.bp b/via/Android.bp
-new file mode 100644
-index 0000000..f2aff85
---- /dev/null
-+++ b/via/Android.bp
-@@ -0,0 +1,10 @@
-+android_app_import {
-+    apk: "via-release-cn.apk",
-+    name: "Via",
-+    overrides: [
-+        "QuickSearchBox",
-+        "Browser2",
-+    ],
-+    presigned: true,
-+    product_specific: true,
-+}
 diff --git a/via/via-release-cn.apk b/via/via-release-cn.apk
-new file mode 100644
-index 0000000000000000000000000000000000000000..5b1332b3125485a2392f21a67d2f209d781302e7
+deleted file mode 100644
+index 5b1332b3125485a2392f21a67d2f209d781302e7..0000000000000000000000000000000000000000
 GIT binary patch
+literal 0
+HcmV?d00001
+
 literal 1499996
 zcma&Nb9`sZvOXN!wlT47JDJ$F?PTJKZQFJ-v8{=1JDC{sX3oBQpS{nS-@Wf2{aw9Q
 z@_DNIsp{(LTD?9?0fV3b0{}n(B!_Y+BZco#$-@Ew9B~2wAOipZ2-p}o*qR&3=-Zf^
@@ -25972,9 +25939,6 @@ z9zrc2fr$^aND#GpV?7TtyBwu@BWauy5%3Rmeyt2KU}6AaK9rRO>KA~Pq!#Cw0<V!R
 z)=MlZPDZ)a4bOEtA`BwHwiO2hsE!lM+$gd_1vnla4LrgF=otjqz#xXWBr(h}$kRVG
 z*iA3k4OAx}oAC0Xbe$@&0dWV2MG@M8tS(h-CIkgLq8st+*#1j<lo%NDF&yzo6Uhi)
 iM?X(D*WeI6U!WscfvqgyA{540Mz>}lBLO&9#Q*>$^{L(f
-
-literal 0
-HcmV?d00001
 
 -- 
 2.32.1 (Apple Git-133)

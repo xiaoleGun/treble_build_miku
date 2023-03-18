@@ -14,6 +14,7 @@ multipleLanguages() {
         APPLY_TREBLEDROID_PATCH="应用 trebledroid 补丁中"
         APPLY_PERSONAL_PATCH="应用 personal 补丁中"
         SET_UP_ENVIRONMENT="准备构建环境"
+        DOWNLOAD_VIA="下载Via"
         GEN_DEVICE_MAKEFILE="生成 treble 设备"
         BUILD_TREBLE_APP="构建 treble app 中"
         BUILD_TREBLE_IMAGE="构建 treble 镜像中"
@@ -33,6 +34,7 @@ multipleLanguages() {
         APPLY_TREBLEDROID_PATCH="Applying trebledroid patches"
         APPLY_PERSONAL_PATCH="Applying personal patches"
         SET_UP_ENVIRONMENT="Setting up build environment"
+        DOWNLOAD_VIA="Downloading Via"
         GEN_DEVICE_MAKEFILE="Treble device generation"
         BUILD_TREBLE_APP="Building treble app"
         BUILD_TREBLE_IMAGE="Building treble image"
@@ -144,6 +146,13 @@ initEnvironment() {
     mkdir -p $BD
 }
 
+downloadVia() {
+    echo ""
+    echo "--> $DOWNLOAD_VIA"
+    echo ""
+    wget https://res.viayoo.com/v1/via-release-cn.apk
+}
+
 generateDevice() {
     echo ""
     echo "--> $GEN_DEVICE_MAKEFILE"
@@ -152,7 +161,9 @@ generateDevice() {
     cd device/phh/treble
     git clean -fdx
     bash generate.sh miku
-    cd ../../..
+    cd via
+    downloadVia
+    cd ../../../..
 }
 
 buildTrebleApp() {
