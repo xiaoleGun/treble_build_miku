@@ -180,46 +180,34 @@ buildTrebleApp() {
 
 buildTreble() {
     echo ""
-    echo "--> $BUILD_TREBLE_IMAGE"
+    echo "--> $BUILD_TREBLE_IMAGE: $1"
     echo ""
-    lunch miku_treble_arm64_bvN-userdebug
+    lunch $1-userdebug
     make -j$(nproc --all) systemimage
-    mv $OUT/system.img $BD/system-miku_treble_arm64_bvN.img
-    sleep 1
+    mv $OUT/system.img $BD/system-$1.img
     make installclean
-    lunch miku_treble_arm64_bgN-userdebug
-    make -j$(nproc --all) systemimage
-    mv $OUT/system.img $BD/system-miku_treble_arm64_bgN.img
 }
 
 buildSasImages() {
     echo ""
-    echo "--> $BUILD_VNDKLITE_VARIANT"
+    echo "--> $BUILD_VNDKLITE_VARIANT: $1"
     echo ""
     cd sas-creator
-    echo "$password" | sudo -S bash lite-adapter.sh 64 $BD/system-miku_treble_arm64_bvN.img
-    cp s.img $BD/system-miku_treble_arm64_bvN-vndklite.img
-    echo "$password" | sudo -S rm -rf s.img d tmp
-    echo "$password" | sudo bash lite-adapter.sh 64 $BD/system-miku_treble_arm64_bgN.img
-    cp s.img $BD/system-miku_treble_arm64_bgN-vndklite.img
+    echo "$password" | sudo -S bash lite-adapter.sh 64 $BD/system-$1.img
+    cp s.img $BD/system-$1-vndklite.img
     echo "$password" | sudo -S rm -rf s.img d tmp
     cd ..
 }
 
 generatePackages() {
     echo ""
-    echo "--> $GEN_PACKAGE"
+    echo "--> $GEN_PACKAGE: $1"
     echo ""
-    BASE_IMAGE=$BD/system-miku_treble_arm64_bvN.img
-    mkdir --parents $BD/dsu/vanilla/; mv $BASE_IMAGE $BD/dsu/vanilla/system.img
-    zip -j -v $BD/MikuUI-TDA-$VERSION-arm64-ab-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/vanilla/system.img
-    mkdir --parents $BD/dsu/vanilla-vndklite/; mv ${BASE_IMAGE%.img}-vndklite.img $BD/dsu/vanilla-vndklite/system.img
-    zip -j -v $BD/MikuUI-TDA-$VERSION-arm64-ab-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/vanilla-vndklite/system.img
-    BASE_IMAGE=$BD/system-miku_treble_arm64_bgN.img
-    mkdir --parents $BD/dsu/gapps/; mv $BASE_IMAGE $BD/dsu/gapps/system.img
-    zip -j -v $BD/MikuUI-TDA-$VERSION-arm64-ab-gapps-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/gapps/system.img
-    mkdir --parents $BD/dsu/gapps-vndklite/; mv ${BASE_IMAGE%.img}-vndklite.img $BD/dsu/gapps-vndklite/system.img
-    zip -j -v $BD/MikuUI-TDA-$VERSION-arm64-ab-gapps-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/gapps-vndklite/system.img
+    BASE_IMAGE=$BD/system-$1.img
+    mkdir --parents $BD/dsu/$1/; mv $BASE_IMAGE $BD/dsu/$1/system.img
+    zip -j -v $BD/MikuUI-TDA-$VERSION-$2$3-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/$1/system.img
+    mkdir --parents $BD/dsu/$1-vndklite/; mv ${BASE_IMAGE%.img}-vndklite.img $BD/dsu/$1-vndklite/system.img
+    zip -j -v $BD/MikuUI-TDA-$VERSION-$2$3-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/$1-vndklite/system.img
     rm -rf $BD/dsu
 }
 
@@ -257,7 +245,7 @@ personal() {
     cd $BL
     GITCHANGELOG=$(git log --since="last" --pretty=format:"%s")
     assets=()
-    for f in $BD/*-$BUILD_DATE-UNOFFICIAL.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
+    for f in $BD/MikuUI-TDA-$VERSION-*.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
     hub release create ${assets[@]} -m "Miku UI TDA v$VERSION
 
 - CI build on $BUILD_DATE
@@ -265,7 +253,7 @@ personal() {
 ### Change log
 $GITCHANGELOG" TDA-$VERSION
 
-    rm -rf $BD/*-$BUILD_DATE-UNOFFICIAL.zip
+    rm -rf $BD/MikuUI-TDA-$VERSION-*.zip
     cd ..
 }
 
@@ -290,9 +278,16 @@ applyingPatches
 initEnvironment
 generateDevice
 buildTrebleApp
-buildTreble
-buildSasImages
-generatePackages
+
+buildTreble miku_treble_arm64_bvN
+buildTreble miku_treble_arm64_bgN
+
+buildSasImages miku_treble_arm64_bvN
+buildSasImages miku_treble_arm64_bgN
+
+generatePackages miku_treble_arm64_bvN arm64-ab
+generatePackages miku_treble_arm64_bgN arm64-ab -gapps
+
 generateOtaJson
 if [ $USER == xiaolegun ]; then
     personal
