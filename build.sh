@@ -236,7 +236,7 @@ generateOtaJson() {
             json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
         done
         json="${json%?}]}"
-        echo "$json" | jq . > $BL/ota.json
+        echo "$json" | jq -S . > $BL/ota.json
         cp $BL/ota.json $BD/ota.json
     }
 }
