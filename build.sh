@@ -255,11 +255,16 @@ personal() {
     echo "--> $UP_GITHUB_RELEASE"
     echo ""
     cd $BL
+    GITCHANGELOG=$(git log --since="last" --pretty=format:"%s")
     assets=()
     for f in $BD/*-$BUILD_DATE-UNOFFICIAL.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
     hub release create ${assets[@]} -m "Miku UI TDA v$VERSION
 
-- CI build on $BUILD_DATE" TDA-$VERSION
+- CI build on $BUILD_DATE
+
+### Change log
+$GITCHANGELOG" TDA-$VERSION
+
     rm -rf $BD/*-$BUILD_DATE-UNOFFICIAL.zip
     cd ..
 }
