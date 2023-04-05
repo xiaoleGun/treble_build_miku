@@ -1,15 +1,15 @@
-From e0ac764c8d047e247802ef0bfe5af5a122051528 Mon Sep 17 00:00:00 2001
+From f36dd039b6b5fbaeb4c3757f614857cf7a21eb40 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sun, 6 Feb 2022 14:31:44 +0800
-Subject: [PATCH 01/18] treble: Miku UI Bringup
+Subject: [PATCH 01/14] treble: Miku UI Bringup
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
  base.mk                                       |  4 +++-
- miku.mk                                       |  7 +++++++
+ miku.mk                                       |  9 +++++++++
  .../dialer/callrecord/res/values/config.xml   | 18 ++++++++++++++++++
  .../apps/Settings/res/values/miku_strings.xml | 19 +++++++++++++++++++
- 4 files changed, 47 insertions(+), 1 deletion(-)
+ 4 files changed, 49 insertions(+), 1 deletion(-)
  create mode 100644 miku.mk
  create mode 100644 overlay-miku/packages/apps/Dialer/java/com/android/dialer/callrecord/res/values/config.xml
  create mode 100644 overlay-miku/packages/apps/Settings/res/values/miku_strings.xml
@@ -31,14 +31,16 @@ index ce2f218..a3d48e5 100644
  $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 diff --git a/miku.mk b/miku.mk
 new file mode 100644
-index 0000000..bc0a208
+index 0000000..5b6dab9
 --- /dev/null
 +++ b/miku.mk
-@@ -0,0 +1,7 @@
+@@ -0,0 +1,9 @@
 +# Inherit some common Miku stuff
 +$(call inherit-product, vendor/miku/build/product/miku_product.mk)
-+$(call inherit-product, device/miku/sepolicy/common/sepolicy.mk)
 +-include vendor/miku/build/core/config.mk
++
++# Kernel
++TARGET_NO_KERNEL := true
 +
 +# Maintaier
 +MIKU_MASTER := xiaoleGun

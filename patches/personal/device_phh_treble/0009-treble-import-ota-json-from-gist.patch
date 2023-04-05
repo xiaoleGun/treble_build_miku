@@ -1,18 +1,18 @@
-From c2faf50b8648f8d1772577885be25c354a376ca4 Mon Sep 17 00:00:00 2001
+From 716bedb492a757e5672fe0ec3218b130fb275bce Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Fri, 11 Feb 2022 19:27:50 +0800
-Subject: [PATCH 09/18] treble: import ota json from gist
+Subject: [PATCH 09/14] treble: import ota json from gist
 
 ---
  miku.mk | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/miku.mk b/miku.mk
-index bc0a208..28363fc 100644
+index 5b6dab9..efadf3a 100644
 --- a/miku.mk
 +++ b/miku.mk
-@@ -4,4 +4,8 @@ $(call inherit-product, device/miku/sepolicy/common/sepolicy.mk)
- -include vendor/miku/build/core/config.mk
+@@ -6,4 +6,8 @@ $(call inherit-product, vendor/miku/build/product/miku_product.mk)
+ TARGET_NO_KERNEL := true
  
  # Maintaier
 -MIKU_MASTER := xiaoleGun

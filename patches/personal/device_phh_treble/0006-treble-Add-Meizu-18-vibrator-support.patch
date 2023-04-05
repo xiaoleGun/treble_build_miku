@@ -1,7 +1,7 @@
-From 7b061b1cd4773e8012e31e5da2175e7e6682caf0 Mon Sep 17 00:00:00 2001
+From d1fdf4e0282c28f42561431c9b1aab111f400132 Mon Sep 17 00:00:00 2001
 From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Tue, 22 Jun 2021 13:38:31 +0000
-Subject: [PATCH 06/18] treble: Add Meizu 18 vibrator support
+Subject: [PATCH 06/14] treble: Add Meizu 18 vibrator support
 
 Thanks to:
 - @phhusson for guidance
