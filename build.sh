@@ -288,8 +288,8 @@ buildSasImages miku_treble_arm64_bgN
 generatePackages miku_treble_arm64_bvN arm64-ab
 generatePackages miku_treble_arm64_bgN arm64-ab -gapps
 
-generateOtaJson
 if [ $USER == xiaolegun ]; then
+    generateOtaJson
     personal
 fi
 
