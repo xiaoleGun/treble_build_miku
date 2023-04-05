@@ -222,9 +222,13 @@ generateOtaJson() {
         while read file; do
             packageVariant=$(echo $(basename $file) | sed -e s/^$prefix// -e s/$suffix$//)
             case $packageVariant in
+                "a64-ab") name="miku_treble_a64_bvN" ;;
                 "arm64-ab") name="miku_treble_arm64_bvN" ;;
+                "a64-ab-vndklite") name="miku_treble_a64_bvN-vndklite" ;;
                 "arm64-ab-vndklite") name="miku_treble_arm64_bvN-vndklite" ;;
+                "a64-ab-gapps") name="miku_treble_a64_bgN" ;;
                 "arm64-ab-gapps") name="miku_treble_arm64_bgN" ;;
+                "a64-ab-gapps-vndklite") name="miku_treble_a64_bgN-vndklite" ;;
                 "arm64-ab-gapps-vndklite") name="miku_treble_arm64_bgN-vndklite" ;;
             esac
             size=$(wc -c $file | awk '{print $1}')
@@ -281,12 +285,18 @@ buildTrebleApp
 
 buildTreble miku_treble_arm64_bvN
 buildTreble miku_treble_arm64_bgN
+buildTreble miku_treble_a64_bvN
+buildTreble miku_treble_a64_bgN
 
 buildSasImages miku_treble_arm64_bvN
 buildSasImages miku_treble_arm64_bgN
+buildSasImages miku_treble_a64_bvN
+buildSasImages miku_treble_a64_bgN
 
 generatePackages miku_treble_arm64_bvN arm64-ab
 generatePackages miku_treble_arm64_bgN arm64-ab -gapps
+generatePackages miku_treble_a64_bvN a64-ab
+generatePackages miku_treble_a64_bgN a64-ab -gapps
 
 if [ $USER == xiaolegun ]; then
     generateOtaJson
