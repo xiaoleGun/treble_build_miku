@@ -5,11 +5,11 @@ This is an Android project for Miku fans. If you don't like it, please close thi
 
 ## Variant
 Examples
-> MikuUI-TDA-arm64-ab-vndklite-gapps-20221105-UNOFFICIAL.img.xz
+> MikuUI-TDA-0.13.3-arm64-ab-vndklite-gapps-20230406-UNOFFICIAL.img.xz
 
 They are
 ```
-ProjectName-{SNOW | SNOWLAND | TDA}-Miku-UI-version-arm64-ab-vndklite-gapps-BuildDate-Buildtype
+ProjectName-{SNOW | SNOWLAND | TDA}-Miku UI version-arm64-ab-vndklite-gapps-BuildDate-Buildtype
  |                |          |                        |    |     |      |
  |                |          |                        |    |     |      |
  |                |          |                        |    |     |     GMS
@@ -21,7 +21,7 @@ ProjectName-{SNOW | SNOWLAND | TDA}-Miku-UI-version-arm64-ab-vndklite-gapps-Buil
  |                |          |                        |  Partition type, only AB variants are provided.(1)
  |                |          |                        |
  |                |          |                        |
- |                |          |                   CPU bits, currently only 64 bits.
+ |                |          |                   CPU bits, build 64 bits and a64(2).
  |                |          |
  |     Android 12 | 12.1     | 13  
  |
@@ -29,6 +29,7 @@ Miku UI
 ```
 
 (1) Vendors of Android 9 and above support SAR(system-as-root), so GSI of AB partition type can be used.
+(2) arm32 binder64
 
 ## Build
 To get started with building Miku UI GSI, you'll need to get familiar with [Git and Repo](https://source.android.com/source/using-repo.html) as well as [How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
