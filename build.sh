@@ -247,7 +247,8 @@ personal() {
     echo "--> $UP_GITHUB_RELEASE"
     echo ""
     cd $BL
-    GITCHANGELOG=$(git log --since="last" --pretty=format:"%s")
+    GITLATESTTAG=$(git describe --tags --abbrev=0)
+    GITCHANGELOG=$(git log $GITLATESTTAG..HEAD --pretty=format:"%s")
     assets=()
     for f in $BD/MikuUI-TDA-$VERSION-*.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
     hub release create ${assets[@]} -m "Miku UI TDA v$VERSION
