@@ -236,7 +236,7 @@ generateOtaJson() {
             json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
         done
         json="${json%?}]}"
-        echo "$json" | jq -S . > $BL/ota.json
+        echo "$json" | jq '.variants |= sort_by(.name)' > $BL/ota.json
         cp $BL/ota.json $BD/ota.json
     }
 }
