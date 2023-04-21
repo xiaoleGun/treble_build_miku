@@ -97,7 +97,7 @@ initRepo() {
   <project name=\"TrebleDroid/device_phh_treble\" path=\"device/phh/treble\" remote=\"github\" revision=\"android-13.0\" />
   <project name=\"TrebleDroid/vendor_interfaces\" path=\"vendor/interfaces\" remote=\"github\" revision=\"android-13.0\" />
   <project name=\"phhusson/vendor_magisk\" path=\"vendor/magisk\" remote=\"github\" revision=\"android-10.0\" />
-  <project name=\"phhusson/treble_app\" path=\"treble_app\" remote=\"github\" revision=\"master\" />
+  <project name=\"TrebleDroid/treble_app\" path=\"treble_app\" remote=\"github\" revision=\"master\" />
   <project name=\"phhusson/sas-creator\" path=\"sas-creator\" remote=\"github\" revision=\"master\" />
 
   <project path=\"packages/apps/QcRilAm\" name=\"AndyCGYan/android_packages_apps_QcRilAm\" remote=\"github\" revision=\"master\" />

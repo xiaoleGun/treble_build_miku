@@ -1,4 +1,4 @@
-From e2cd119e5b3da5616b285d79d3c066e0af5e034b Mon Sep 17 00:00:00 2001
+From 983ad8523e4af87f878fd267fa50f6d8b61aea36 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 23 Mar 2021 19:43:26 +0100
 Subject: [PATCH 24/37] Catch broken mainBuiltInDisplayCutoutRectApproximation

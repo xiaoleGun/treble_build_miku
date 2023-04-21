@@ -1,4 +1,4 @@
-From 70c8d5a106212e1c9eed0c6f6adb0f6da23d74ee Mon Sep 17 00:00:00 2001
+From f787161b47b22beb93f0f479668bc7f8956f208f Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 18 Dec 2022 18:20:40 -0500
 Subject: [PATCH 35/37] FOD support for Asus ZF8 and Samsung devices

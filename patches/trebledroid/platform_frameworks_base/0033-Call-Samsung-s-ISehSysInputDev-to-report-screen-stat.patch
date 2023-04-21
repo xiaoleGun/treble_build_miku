@@ -1,4 +1,4 @@
-From 4d46a7ff731877abb3da2e8178776e778ddf18b3 Mon Sep 17 00:00:00 2001
+From 78cac5b19e6c27a8a3a7fd8a2cf6650d5b028bf9 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 14 Dec 2022 17:21:00 -0500
 Subject: [PATCH 33/37] Call Samsung's ISehSysInputDev to report screen state

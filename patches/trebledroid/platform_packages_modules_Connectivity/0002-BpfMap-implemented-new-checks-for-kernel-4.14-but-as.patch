@@ -1,4 +1,4 @@
-From 516f4a9638dac7895ace937585b242a4c0b61c16 Mon Sep 17 00:00:00 2001
+From 9d37a426674ca9bbb388b5e3475dde0105dcad58 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 26 Oct 2022 18:10:46 -0400
 Subject: [PATCH 2/3] BpfMap() implemented new checks for kernel >=4.14 but as
@@ -11,7 +11,7 @@ Change-Id: Ia7fa7494a2c320aa521e915d4926e8748d472689
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/service-t/native/libs/libnetworkstats/BpfNetworkStats.cpp b/service-t/native/libs/libnetworkstats/BpfNetworkStats.cpp
-index 9ebef4d6d..ee30f3db3 100644
+index 9ebef4d6d2..ee30f3db30 100644
 --- a/service-t/native/libs/libnetworkstats/BpfNetworkStats.cpp
 +++ b/service-t/native/libs/libnetworkstats/BpfNetworkStats.cpp
 @@ -102,13 +102,13 @@ int bpfGetIfaceStatsInternal(const char* iface, Stats* stats,
