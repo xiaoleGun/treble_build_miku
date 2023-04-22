@@ -193,6 +193,10 @@ buildSasImages() {
     echo "--> $BUILD_VNDKLITE_VARIANT: $1"
     echo ""
     cd sas-creator
+    if [ -n "$(cat lite-adapter.sh | grep 3500M)" ]; then
+        sed -i 's/3500M/4000M/' lite-adapter.sh
+        sed -i 's/3500M/4000M/' run.sh
+    fi
     echo "$password" | sudo -S bash lite-adapter.sh 64 $BD/system-$1.img
     cp s.img $BD/system-$1-vndklite.img
     echo "$password" | sudo -S rm -rf s.img d tmp
