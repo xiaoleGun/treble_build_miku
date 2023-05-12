@@ -1,7 +1,7 @@
-From ef365762868e25fc3e77d46abdcf70413343f0f7 Mon Sep 17 00:00:00 2001
+From 4838bbbf410f637713c45909c1d482971d27c6bf Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sat, 22 Jan 2022 14:34:45 -0500
-Subject: [PATCH 10/15] Add my own OTA mechanism going over /data
+Subject: [PATCH 10/16] Add my own OTA mechanism going over /data
 
 Change-Id: I9cacff2d761affa0376b4bb8ca63353a9d95b5de
 ---
@@ -132,5 +132,5 @@ index be8c5542f..59d41e373 100644
      boot_clock::time_point start_time = boot_clock::now();
  
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 

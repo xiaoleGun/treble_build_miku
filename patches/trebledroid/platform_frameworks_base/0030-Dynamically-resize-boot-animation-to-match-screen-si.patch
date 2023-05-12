@@ -1,7 +1,7 @@
 From 7a4bb84e00936499212c060090b44a9c43cfa8a3 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 20 Dec 2021 15:01:41 -0500
-Subject: [PATCH 30/37] Dynamically resize boot animation to match screen size
+Subject: [PATCH 30/38] Dynamically resize boot animation to match screen size
 
 Change-Id: I54e49fc6b8c670103852e212d1416e27ff976205
 ---
@@ -40,5 +40,5 @@ index 53a84bd1b21e..327d12f6d299 100644
      // ro.bootanim.set_orientation_<display_id>. Four values are supported: ORIENTATION_0,
      // ORIENTATION_90, ORIENTATION_180 and ORIENTATION_270.
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 

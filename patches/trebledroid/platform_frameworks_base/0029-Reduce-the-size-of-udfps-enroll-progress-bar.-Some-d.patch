@@ -1,7 +1,7 @@
 From aabb074276881eed525ce7af5d3bb03ed318eb2b Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 17 Dec 2021 17:16:14 -0500
-Subject: [PATCH 29/37] Reduce the size of udfps enroll progress bar. Some
+Subject: [PATCH 29/38] Reduce the size of udfps enroll progress bar. Some
  devices have their udfps pretty low, and the progress bar would make the icon
  at the wrong place
 
@@ -24,5 +24,5 @@ index 09a79332107f..081a64418de7 100644
  
      <!-- The time (in ms) needed to trigger the lock icon view's long-press affordance -->
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 

@@ -1,7 +1,7 @@
 From f2e796b13509439f074e563cb7653858199d2932 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 28 Nov 2017 18:28:04 +0100
-Subject: [PATCH 04/37] Relax requirement for visible flag to sdcards
+Subject: [PATCH 04/38] Relax requirement for visible flag to sdcards
 
 The vast majority of sdcard readers are stable enough to be declared by
 the API. (I see no counter-example)
@@ -27,5 +27,5 @@ index 4e78036ff2d0..306943cfeed2 100644
              }
  
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 

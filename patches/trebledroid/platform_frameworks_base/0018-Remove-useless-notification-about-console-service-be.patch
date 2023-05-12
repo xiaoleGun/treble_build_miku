@@ -1,7 +1,7 @@
 From 4f299babed432b007a05699b04aa888f1a402c30 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 11 Dec 2020 14:41:09 +0100
-Subject: [PATCH 18/37] Remove useless notification about "console" service
+Subject: [PATCH 18/38] Remove useless notification about "console" service
  being running
 
 ---
@@ -22,5 +22,5 @@ index 8c3cdb3f55c7..98137942a8d2 100644
          }
          String title = mContext
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 

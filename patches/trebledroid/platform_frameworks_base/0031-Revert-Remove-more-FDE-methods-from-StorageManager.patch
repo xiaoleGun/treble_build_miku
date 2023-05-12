@@ -1,7 +1,7 @@
 From 30c49fe581663c067a54ec80328f80b103a980c0 Mon Sep 17 00:00:00 2001
 From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Sat, 15 Oct 2022 09:33:56 +0000
-Subject: [PATCH 31/37] Revert "Remove more FDE methods from StorageManager"
+Subject: [PATCH 31/38] Revert "Remove more FDE methods from StorageManager"
 
 This reverts commit bd13f84152449a3ead6fa8604fd31f48c0224676.
 ---
@@ -123,5 +123,5 @@ index 98d81c9598b8..8b659f927633 100644
      public static final boolean CONTROL_PRIVAPP_PERMISSIONS_LOG =
              "log".equalsIgnoreCase(CONTROL_PRIVAPP_PERMISSIONS);
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 

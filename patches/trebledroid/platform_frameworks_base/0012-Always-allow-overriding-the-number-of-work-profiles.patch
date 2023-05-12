@@ -1,7 +1,7 @@
 From dedf61548cee685722915f3d8aa50ca61bc48a1e Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 5 Apr 2020 16:32:46 +0200
-Subject: [PATCH 12/37] Always allow overriding the number of work profiles
+Subject: [PATCH 12/38] Always allow overriding the number of work profiles
 
 Change-Id: I6eb09aa71663c6fbe7563e3038bffcabdba0ff6a
 ---
@@ -28,5 +28,5 @@ index c2dd32667bc2..b00b8bd4a0dd 100644
          return defaultMax;
      }
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 

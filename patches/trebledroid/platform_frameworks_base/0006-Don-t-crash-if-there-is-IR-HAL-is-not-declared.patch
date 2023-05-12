@@ -1,7 +1,7 @@
 From db96f7fb02528d97ca833026d8f5aa4269be5f8f Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 17 May 2018 20:28:35 +0200
-Subject: [PATCH 06/37] Don't crash if there is IR HAL is not declared
+Subject: [PATCH 06/38] Don't crash if there is IR HAL is not declared
 
 Change-Id: I3afded27441bbee8244d5fda544b3e6d1238dc1b
 ---
@@ -42,5 +42,5 @@ index 63daa3503bd5..d068ec06fc14 100644
  }
  
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 

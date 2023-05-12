@@ -1,7 +1,7 @@
-From efb0b14344d645aa24c817c492714529f0987023 Mon Sep 17 00:00:00 2001
+From a01beb8d9c58237d0751813db5e894b6ab454b0b Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 10 Nov 2022 13:30:50 -0500
-Subject: [PATCH 14/15] FDE is dead. Fallback FDE to no encryption, and FDE+FBE
+Subject: [PATCH 14/16] FDE is dead. Fallback FDE to no encryption, and FDE+FBE
  to FBE
 
 ---
@@ -34,5 +34,5 @@ index 9d365ff0d..2ecd35faf 100644
              // The voldmanaged flag is followed by an = and the label, a colon and the partition
              // number or the word "auto", e.g. voldmanaged=sdcard:3
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 

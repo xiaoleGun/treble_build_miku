@@ -1,7 +1,7 @@
-From de3f1cd53a3374a5fb0893aa3078e7fd26402515 Mon Sep 17 00:00:00 2001
+From ff8d2ef61ba6d9abc01bdc9e4749c1ffe084b091 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Thu, 10 Feb 2022 09:27:23 +0800
-Subject: [PATCH 08/14] treble: Support Miku UI gapps
+Subject: [PATCH 08/13] treble: Support Miku UI gapps
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
@@ -38,5 +38,5 @@ index 15e12a9..e5d0126 100644
 +    phh-overrides
  endif
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 

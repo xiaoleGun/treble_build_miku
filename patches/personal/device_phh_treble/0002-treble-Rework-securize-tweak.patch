@@ -1,7 +1,7 @@
-From 88779b6b0748b8ef749813a26471431438a79224 Mon Sep 17 00:00:00 2001
+From 6f060380bcc690f142360909f52de27c771234ca Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Wed, 25 Dec 2019 12:34:05 +0200
-Subject: [PATCH 02/14] treble: Rework securize tweak
+Subject: [PATCH 02/13] treble: Rework securize tweak
 
 ---
  base.mk      |  1 -
@@ -9,10 +9,10 @@ Subject: [PATCH 02/14] treble: Rework securize tweak
  2 files changed, 30 insertions(+), 26 deletions(-)
 
 diff --git a/base.mk b/base.mk
-index a3d48e5..0d4c9f6 100644
+index e9e72a6..494cf40 100644
 --- a/base.mk
 +++ b/base.mk
-@@ -178,7 +178,6 @@ PRODUCT_PACKAGES += \
+@@ -179,7 +179,6 @@ PRODUCT_PACKAGES += \
  	resetprop_phh
  
  PRODUCT_COPY_FILES += \
@@ -21,10 +21,10 @@ index a3d48e5..0d4c9f6 100644
  
  PRODUCT_COPY_FILES += \
 diff --git a/rw-system.sh b/rw-system.sh
-index 42d315f..03c3d38 100644
+index 6600774..a13e004 100644
 --- a/rw-system.sh
 +++ b/rw-system.sh
-@@ -727,35 +727,59 @@ copyprop() {
+@@ -735,35 +735,59 @@ copyprop() {
          resetprop_phh "$1" "$(getprop "$2")"
      fi
  }
@@ -90,7 +90,7 @@ index 42d315f..03c3d38 100644
  
      resetprop_phh ro.build.tags release-keys
      resetprop_phh ro.boot.vbmeta.device_state locked
-@@ -769,25 +793,6 @@ if [ -f /system/phh/secure ] || [ -f /metadata/phh/secure ];then
+@@ -777,25 +801,6 @@ if [ -f /system/phh/secure ] || [ -f /metadata/phh/secure ];then
      resetprop_phh ro.build.type user
      resetprop_phh ro.build.selinux 0
  
@@ -117,5 +117,5 @@ index 42d315f..03c3d38 100644
      f=/vendor/lib$abi/libstagefright_foundation.so
      if [ -f "$f" ];then
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 
