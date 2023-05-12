@@ -1,4 +1,4 @@
-From 0dfe0fe1965e02dfb51e3eb105e5bd1394fffb32 Mon Sep 17 00:00:00 2001
+From ea2dc2c5691578d5ddfb7f4b96f63a42626c4cd8 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Tue, 8 Feb 2022 16:40:33 +0800
 Subject: [PATCH 1/2] res: Support multiple languages
@@ -7,29 +7,29 @@ Migrate all descriptions to strings.xml
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
- app/src/main/res/values/strings.xml    | 132 +++++++++++++++++++++++++
+ app/src/main/res/values/strings.xml    | 134 +++++++++++++++++++++++++
  app/src/main/res/xml/pref_custom.xml   |  12 +--
  app/src/main/res/xml/pref_doze.xml     |   6 +-
  app/src/main/res/xml/pref_headers.xml  |  30 +++---
  app/src/main/res/xml/pref_huawei.xml   |  14 +--
  app/src/main/res/xml/pref_ims.xml      |   8 +-
  app/src/main/res/xml/pref_lenovo.xml   |   4 +-
- app/src/main/res/xml/pref_misc.xml     |  88 ++++++++---------
+ app/src/main/res/xml/pref_misc.xml     |  88 ++++++++--------
  app/src/main/res/xml/pref_mydevice.xml |   6 +-
  app/src/main/res/xml/pref_nubia.xml    |  24 ++---
  app/src/main/res/xml/pref_oneplus.xml  |  12 +--
  app/src/main/res/xml/pref_oppo.xml     |  12 +--
  app/src/main/res/xml/pref_qualcomm.xml |  14 +--
- app/src/main/res/xml/pref_samsung.xml  |  40 ++++----
+ app/src/main/res/xml/pref_samsung.xml  |  44 ++++----
  app/src/main/res/xml/pref_vsmart.xml   |   4 +-
  app/src/main/res/xml/pref_xiaomi.xml   |   6 +-
- 16 files changed, 272 insertions(+), 140 deletions(-)
+ 16 files changed, 276 insertions(+), 142 deletions(-)
 
 diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
-index d6f6e83..247a940 100644
+index d6f6e83..e310092 100644
 --- a/app/src/main/res/values/strings.xml
 +++ b/app/src/main/res/values/strings.xml
-@@ -27,4 +27,136 @@
+@@ -27,4 +27,138 @@
      <string name="magisk_exists_message">Magisk was detected! If you proceed with the update you may lose Magisk or the installation may fail!</string>
      <string name="menu_delete_ota">Delete OTA files</string>
      <string name="delete_ota_message">Take in consideration that you may lose your userdata if you proceed!\nTo prevent this, cancel this dialog, reboot and flash the latest update on fastboot mode.\nDo you want to proceed anyway?</string>
@@ -89,7 +89,7 @@ index d6f6e83..247a940 100644
 +    <string name="misc_sponsor">Sponsor phh</string>
 +    <string name="misc_mobile_network">Mobile network</string>
 +    <string name="misc_mobile_signal">Signal meter method</string>
-+    <string name="huawei_headset_fix">Force headset switch (Huawei default)</string>
++    <string name="misc_huawei_headset_fix">Force headset switch (Huawei default)</string>
 +    <string name="misc_headset_devinput">Use alternate way to detect headsets</string>
 +    <string name="misc_disable_audio_effects">Disable audio effects</string>
 +    <string name="misc_rounded_corners">Set rounded corners diameter</string>
@@ -111,7 +111,7 @@ index d6f6e83..247a940 100644
 +    <string name="misc_camera_timestamp">Force Timestamp Source</string>
 +    <string name="misc_bluetooth">Bluetooth workarounds</string>
 +    <string name="misc_max_aspect_ratio_pre_o">Compatibility max aspect ratio</string>
-+    <string name="misc_force_a2dp_offload_disable">Force-disable A2DP offload</string>
++    <string name="misc_dynamic_sysbta">Use System Wide BT HAL</string>
 +    <string name="misc_force_navbar_off">Force navigation bar disabled</string>
 +    <string name="misc_storage_fuse">Disable FUSE storage layer</string>
 +    <string name="misc_storage_fuse_summary">This can (de/in)crease storage speed\nRequires a reboot</string>
@@ -149,6 +149,8 @@ index d6f6e83..247a940 100644
 +    <string name="qualcomm_disable_stereo_voip_summary">May fix high pitched audio. Requires a reboot</string>
 +    <!-- Samsung -->
 +    <string name="samsung_audio_stereo">Enable stereo audio mode</string>
++    <string name="samsung_disable_back_mic">Disable Built-In Back Mic</string>
++    <string name="samsung_disable_back_mic_summary">May fix broken mic on video recording</string>
 +    <string name="samsung_esco_transport_unit_size">Set eSCO transport unit size</string>
 +    <string name="samsung_high_brightness">Enable extended brightness range</string>
 +    <string name="samsung_glove_mode">Enable glove mode</string>
@@ -214,7 +216,7 @@ index 7c28250..c91f0f0 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_doze.xml b/app/src/main/res/xml/pref_doze.xml
-index 6b9a84c..b823011 100644
+index 5835325..ae479ed 100644
 --- a/app/src/main/res/xml/pref_doze.xml
 +++ b/app/src/main/res/xml/pref_doze.xml
 @@ -1,13 +1,13 @@
@@ -222,12 +224,12 @@ index 6b9a84c..b823011 100644
  <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 -    <PreferenceCategory android:title="Doze">
 +    <PreferenceCategory android:title="@string/doze">
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_doze_handwave"
 -            android:title="Enable Handwave gesture" />
 +            android:title="@string/doze_handwave" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_doze_pocket"
 -            android:title="Enable out-of-pocket gesture" />
@@ -304,7 +306,7 @@ index f74aedf..b78cccb 100644
                  android:targetClass=".UpdaterActivity"/>
      </header>
 diff --git a/app/src/main/res/xml/pref_huawei.xml b/app/src/main/res/xml/pref_huawei.xml
-index bedab23..a894515 100644
+index ef6dcb7..839a19c 100644
 --- a/app/src/main/res/xml/pref_huawei.xml
 +++ b/app/src/main/res/xml/pref_huawei.xml
 @@ -1,28 +1,28 @@
@@ -312,7 +314,7 @@ index bedab23..a894515 100644
  <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 -    <PreferenceCategory android:title="Fingerprint">
 +    <PreferenceCategory android:title="@string/huawei_fingerprint">
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_huawei_fingerprint_gestures"
 -            android:title="Enable Fingerprint gestures" />
@@ -320,12 +322,12 @@ index bedab23..a894515 100644
      </PreferenceCategory>
 -    <PreferenceCategory android:title="Display">
 +    <PreferenceCategory android:title="@string/general_display">
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_huawei_touchscreen_glove_mode"
 -            android:title="Enable touchscreen glove mode" />
 +            android:title="@string/huawei_touchscreen_glove_mode" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_huawei_no_hwcomposer"
 -            android:title="Enable graphic issues workaround (recommended if ui is blurry)" />
@@ -344,7 +346,7 @@ index bedab23..a894515 100644
  
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_ims.xml b/app/src/main/res/xml/pref_ims.xml
-index bb98013..99ddc54 100644
+index 3c5d646..07907f1 100644
 --- a/app/src/main/res/xml/pref_ims.xml
 +++ b/app/src/main/res/xml/pref_ims.xml
 @@ -1,16 +1,16 @@
@@ -357,19 +359,19 @@ index bb98013..99ddc54 100644
 -    <Preference android:title="Download and install IMS APK"
 +    <Preference android:title="@string/ims_install_apn"
          android:key="key_ims_install_apn" />
-     <CheckBoxPreference
+     <SwitchPreference
          android:defaultValue="false"
          android:key="key_ims_request_network"
 -        android:title="Request IMS network" />
 +        android:title="@string/ims_request_network" />
-     <CheckBoxPreference
+     <SwitchPreference
          android:defaultValue="false"
          android:key="key_ims_force_enable_setting"
 -        android:title="Force the presence of 4G Calling setting" />
 +        android:title="@string/ims_force_enable_setting" />
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_lenovo.xml b/app/src/main/res/xml/pref_lenovo.xml
-index 01e1ee2..913d24d 100644
+index e22cfa5..9ff49cd 100644
 --- a/app/src/main/res/xml/pref_lenovo.xml
 +++ b/app/src/main/res/xml/pref_lenovo.xml
 @@ -1,12 +1,12 @@
@@ -378,7 +380,7 @@ index 01e1ee2..913d24d 100644
  
 -    <PreferenceCategory android:title="Other">
 +    <PreferenceCategory android:title="@string/general_other">
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
@@ -388,7 +390,7 @@ index 01e1ee2..913d24d 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_misc.xml b/app/src/main/res/xml/pref_misc.xml
-index 9f67536..0995327 100644
+index 70dd45e..beeac97 100644
 --- a/app/src/main/res/xml/pref_misc.xml
 +++ b/app/src/main/res/xml/pref_misc.xml
 @@ -1,157 +1,157 @@
@@ -414,17 +416,17 @@ index 9f67536..0995327 100644
  	</PreferenceCategory>
 -	<PreferenceCategory android:title="Audio">
 +	<PreferenceCategory android:title="@string/general_audio">
- 		<CheckBoxPreference
+ 		<SwitchPreference
              android:defaultValue="false"
              android:key="key_huawei_headset_fix"
 -            android:title="Force headset switch (Huawei default)" />
-+            android:title="@string/huawei_headset_fix" />
- 		<CheckBoxPreference
++            android:title="@string/misc_huawei_headset_fix" />
+ 		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_headset_devinput"
 -            android:title="Use alternate way to detect headsets" />
 +            android:title="@string/misc_headset_devinput" />
- 		<CheckBoxPreference
+ 		<SwitchPreference
  			android:defaultValue="false"
  			android:key="key_misc_disable_audio_effects"
 -			android:title="Disable audio effects" />
@@ -466,14 +468,14 @@ index 9f67536..0995327 100644
 -            android:summary="Recommended after switching display resolution\nRequires root" />
 +            android:title="@string/misc_restart_systemui"
 +            android:summary="@string/misc_restart_systemui_summary" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_no_hwcomposer"
 -            android:title="Disable HW overlays"
 -            android:summary="Eats more CPU and battery" />
 +            android:title="@string/misc_no_hwcomposer"
 +            android:summary="@string/misc_no_hwcomposer_summary" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_aod"
 -            android:title="Force allow Always-On Display" />
@@ -481,24 +483,24 @@ index 9f67536..0995327 100644
  	</PreferenceCategory>
 -	<PreferenceCategory android:title="Backlight">
 +	<PreferenceCategory android:title="@string/misc_backlight">
- 		<CheckBoxPreference
+ 		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_linear_brightness"
 -            android:title="Use linear screen brightness slider" />
 +            android:title="@string/misc_linear_brightness" />
- 		<CheckBoxPreference
+ 		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_disable_buttons_backlight"
 -            android:title="Disable backlight of hardware buttons if present"
 -            android:summary="Requires a reboot" />
 +            android:title="@string/misc_disable_buttons_backlight"
 +            android:summary="@string/general_requires_a_reboot" />
- 		<CheckBoxPreference
+ 		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_backlight_scale"
 -            android:title="Force alternative backlight scale" />
 +            android:title="@string/misc_backlight_scale" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_minimal_brightness"
 -            android:title="Allows setting brightness to the lowest possible" />
@@ -506,12 +508,12 @@ index 9f67536..0995327 100644
  	</PreferenceCategory>
 -	<PreferenceCategory android:title="Camera">
 +	<PreferenceCategory android:title="@string/general_camera">
- 		<CheckBoxPreference
+ 		<SwitchPreference
  			android:defaultValue="false"
  			android:key="key_misc_multi_camera"
 -			android:title="Expose Aux cameras" />
 +			android:title="@string/misc_multi_camera" />
- 		<CheckBoxPreference
+ 		<SwitchPreference
  			android:defaultValue="false"
  			android:key="key_misc_force_camera2api_hal3"
 -			android:title="Force Enable Camera2API HAL3" />
@@ -541,32 +543,32 @@ index 9f67536..0995327 100644
      	    android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"
      	    android:key="key_misc_max_aspect_ratio_pre_o"
 -    	    android:title="Compatibility max aspect ratio" />
-+	    android:title="@string/misc_max_aspect_ratio_pre_o" />
- 		<CheckBoxPreference
-             android:defaultValue="false"
-             android:key="key_misc_force_a2dp_offload_disable"
--            android:title="Force-disable A2DP offload" />
-+            android:title="@string/misc_force_a2dp_offload_disable" />
- 		<CheckBoxPreference
++    	    android:title="@string/misc_max_aspect_ratio_pre_o" />
+ 		<SwitchPreference
+             android:defaultValue="true"
+             android:key="key_misc_dynamic_sysbta"
+-            android:title="Use System Wide BT HAL" />
++            android:title="@string/misc_dynamic_sysbta" />
+ 		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_force_navbar_off"
 -            android:title="Force navigation bar disabled"
 -            android:summary="Requires a reboot" />
 +            android:title="@string/misc_force_navbar_off"
 +            android:summary="@string/general_requires_a_reboot" />
- 		<CheckBoxPreference
+ 		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_storage_fuse"
 -            android:title="Disable FUSE storage layer"
 -            android:summary="This can (de/in)crease storage speed\nRequires a reboot" />
 +            android:title="@string/misc_storage_fuse"
 +            android:summary="@string/misc_storage_fuse_summary" />
- 		<CheckBoxPreference
+ 		<SwitchPreference
  				android:defaultValue="false"
  				android:key="key_misc_restart_ril"
 -				android:title="Automatically restart RIL" />
 +				android:title="@string/misc_restart_ril" />
- 		<CheckBoxPreference
+ 		<SwitchPreference
  				android:defaultValue="false"
  				android:key="key_misc_dt2w"
 -            android:title="Double tap to wake"
@@ -593,7 +595,7 @@ index 9f67536..0995327 100644
                  android:action="android.intent.action.VIEW"
                  android:targetPackage="me.phh.treble.app"
 @@ -160,6 +160,6 @@
- 		<CheckBoxPreference
+ 		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_remotectl"
 -            android:title="Allow takeover of the device by phh for debugging" />
@@ -619,7 +621,7 @@ index bf4ba9f..08643f7 100644
          android:key="key_mydevice_apply_presets" />
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_nubia.xml b/app/src/main/res/xml/pref_nubia.xml
-index f3d330b..3d77de0 100644
+index 3d765fa..35d8dc5 100644
 --- a/app/src/main/res/xml/pref_nubia.xml
 +++ b/app/src/main/res/xml/pref_nubia.xml
 @@ -1,59 +1,59 @@
@@ -627,14 +629,14 @@ index f3d330b..3d77de0 100644
  <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 -    <PreferenceCategory android:title="Touchscreen">
 +    <PreferenceCategory android:title="@string/general_touchscreen">
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="nubia_double_tap_to_wake"
 -            android:title="Enable DT2W" />
 +            android:title="@string/general_enable_dt2w" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
@@ -654,7 +656,7 @@ index f3d330b..3d77de0 100644
      </PreferenceCategory>
 -    <PreferenceCategory android:title="LEDs">
 +    <PreferenceCategory android:title="@string/nubia_leds">
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
@@ -671,21 +673,21 @@ index f3d330b..3d77de0 100644
      </PreferenceCategory>
 -    <PreferenceCategory android:title="Boosts">
 +    <PreferenceCategory android:title="@string/nubia_boosts">
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="nubia_boost_cpu"
 -            android:title="Boost CPU" />
 +            android:title="@string/nubia_boost_cpu" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="nubia_boost_cache"
 -            android:title="Boost caches" />
 +            android:title="@string/nubia_boost_cache" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
@@ -695,7 +697,7 @@ index f3d330b..3d77de0 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_oneplus.xml b/app/src/main/res/xml/pref_oneplus.xml
-index bae0fba..6f7d90e 100644
+index 28224c3..130e2b6 100644
 --- a/app/src/main/res/xml/pref_oneplus.xml
 +++ b/app/src/main/res/xml/pref_oneplus.xml
 @@ -1,30 +1,30 @@
@@ -721,12 +723,12 @@ index bae0fba..6f7d90e 100644
  
 -    <PreferenceCategory android:title="Other">
 +    <PreferenceCategory android:title="@string/general_other">
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_oneplus_usb_otg"
 -            android:title="Enable USB OTG" />
 +            android:title="@string/general_usb_otg" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
@@ -736,7 +738,7 @@ index bae0fba..6f7d90e 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_oppo.xml b/app/src/main/res/xml/pref_oppo.xml
-index c4ba29d..f532d74 100644
+index 392350f..687c38d 100644
 --- a/app/src/main/res/xml/pref_oppo.xml
 +++ b/app/src/main/res/xml/pref_oppo.xml
 @@ -1,28 +1,28 @@
@@ -745,14 +747,14 @@ index c4ba29d..f532d74 100644
  
 -    <PreferenceCategory android:title="Touchscreen">
 +    <PreferenceCategory android:title="@string/general_touchscreen">
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="key_oppo_double_tap_to_wake"
 -            android:title="Enable DT2W" />
 +            android:title="@string/general_enable_dt2w" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
@@ -762,12 +764,12 @@ index c4ba29d..f532d74 100644
      </PreferenceCategory>
 -    <PreferenceCategory android:title="Other">
 +    <PreferenceCategory android:title="@string/general_other">
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_oppo_usb_otg"
 -            android:title="Enable USB OTG" />
 +            android:title="@string/general_usb_otg" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_oppo_dc_diming"
 -            android:title="Enable DC Diming" />
@@ -775,30 +777,30 @@ index c4ba29d..f532d74 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_qualcomm.xml b/app/src/main/res/xml/pref_qualcomm.xml
-index 292579d..22f26eb 100644
+index 491eca4..b561b03 100644
 --- a/app/src/main/res/xml/pref_qualcomm.xml
 +++ b/app/src/main/res/xml/pref_qualcomm.xml
 @@ -3,20 +3,20 @@
-     <CheckBoxPreference
+     <SwitchPreference
          android:defaultValue="false"
          android:key="key_qualcomm_alternate_mediaprofile"
 -        android:title="Use alternate camera profile"
 -        android:summary="Requires a reboot" />
 +        android:title="@string/qualcomm_alternate_mediaprofile"
 +        android:summary="@string/general_requires_a_reboot" />
-     <CheckBoxPreference
+     <SwitchPreference
          android:defaultValue="false"
          android:key="key_qualcomm_alternate_audiopolicy"
 -        android:title="Use alternate audio policy" />
 +        android:title="@string/general_alternate_audiopolicy" />
-     <CheckBoxPreference
+     <SwitchPreference
          android:defaultValue="false"
          android:key="key_qualcomm_disable_soundvolume_effect"
 -        android:title="Disable soundvolume effect"
 -        android:summary="May fix audio distorsion" />
 +        android:title="@string/qualcomm_disable_soundvolume_effect"
 +        android:summary="@string/qualcomm_disable_soundvolume_effect_summary" />
-     <CheckBoxPreference
+     <SwitchPreference
          android:defaultValue="false"
          android:key="key_qualcomm_disable_stereo_voip"
 -        android:title="Disable stereo support on VoIP"
@@ -807,24 +809,31 @@ index 292579d..22f26eb 100644
 +        android:summary="@string/qualcomm_disable_stereo_voip_summary" />
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_samsung.xml b/app/src/main/res/xml/pref_samsung.xml
-index c2ff352..9066484 100644
+index 346ff85..7a071b9 100644
 --- a/app/src/main/res/xml/pref_samsung.xml
 +++ b/app/src/main/res/xml/pref_samsung.xml
-@@ -1,73 +1,73 @@
+@@ -1,78 +1,78 @@
  <?xml version="1.0" encoding="utf-8"?>
  <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 -    <PreferenceCategory android:title="Audio">
 +    <PreferenceCategory android:title="@string/general_audio">
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_alternate_audio_policy"
 -            android:title="Use alternate audio policy" />
 +            android:title="@string/general_alternate_audiopolicy" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_audio_stereo"
 -            android:title="Enable stereo audio mode" />
 +            android:title="@string/samsung_audio_stereo" />
+         <SwitchPreference
+             android:defaultValue="false"
+             android:key="key_samsung_disable_back_mic"
+-            android:title="Disable Built-In Back Mic"
+-            android:summary="May fix broken mic on video recording" />
++            android:title="@string/samsung_disable_back_mic"
++            android:summary="@string/samsung_disable_back_mic_summary" />
          <ListPreference
              android:defaultValue="0"
              android:entries="@array/pref_samsung_transport_size"
@@ -835,12 +844,12 @@ index c2ff352..9066484 100644
      </PreferenceCategory>
 -    <PreferenceCategory android:title="Screen">
 +    <PreferenceCategory android:title="@string/general_screen">
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_high_brightness"
 -            android:title="Enable extended brightness range" />
 +            android:title="@string/samsung_high_brightness" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_glove_mode"
 -            android:title="Enable glove mode" />
@@ -848,22 +857,22 @@ index c2ff352..9066484 100644
      </PreferenceCategory>
 -    <PreferenceCategory android:title="Misc">
 +    <PreferenceCategory android:title="@string/general_misc">
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_wireless_charging_transmit"
 -            android:title="Enable reversed wireless charging(If applicable)" />
 +            android:title="@string/samsung_wireless_charging_transmit" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_double_tap_to_wake"
 -            android:title="Enable double tap to wake" />
 +            android:title="@string/general_enable_dt2w" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_fod_single_click"
 -            android:title="Clicking fingerprint turns device on" />
 +            android:title="@string/samsung_fod_single_click" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_camera_ids"
 -            android:title="Enable access to all cameras"
@@ -881,17 +890,17 @@ index c2ff352..9066484 100644
      </PreferenceCategory>
 -    <PreferenceCategory android:title="Workarounds">
 +    <PreferenceCategory android:title="@string/samsung_workarounds">
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_extra_sensors"
 -            android:title="Enable extra sensors" />
 +            android:title="@string/samsung_extra_sensors" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_colorspace"
 -            android:title="Enable workaround for white-ish screen" />
 +            android:title="@string/samsung_colorspace" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_samsung_broken_fingerprint"
 -            android:title="Enable workaround for broken fingerprint" />
@@ -905,7 +914,7 @@ index c2ff352..9066484 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_vsmart.xml b/app/src/main/res/xml/pref_vsmart.xml
-index deca41f..e93091f 100644
+index f3abfc4..256a1fa 100644
 --- a/app/src/main/res/xml/pref_vsmart.xml
 +++ b/app/src/main/res/xml/pref_vsmart.xml
 @@ -1,10 +1,10 @@
@@ -913,7 +922,7 @@ index deca41f..e93091f 100644
  <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 -    <PreferenceCategory android:title="Display">
 +    <PreferenceCategory android:title="@string/general_display">
-         <CheckBoxPreference
+         <SwitchPreference
              android:defaultValue="false"
              android:key="key_vsmart_dt2w"
 -            android:title="Enable double tap to wake" />
@@ -922,7 +931,7 @@ index deca41f..e93091f 100644
  
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_xiaomi.xml b/app/src/main/res/xml/pref_xiaomi.xml
-index 4887790..365bf47 100644
+index 588281f..7280d73 100644
 --- a/app/src/main/res/xml/pref_xiaomi.xml
 +++ b/app/src/main/res/xml/pref_xiaomi.xml
 @@ -1,18 +1,18 @@
@@ -931,14 +940,14 @@ index 4887790..365bf47 100644
  
 -    <PreferenceCategory android:title="Display">
 +    <PreferenceCategory android:title="@string/general_display">
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="xiaomi_double_tap_to_wake"
 -            android:title="Enable DT2W" />
 +            android:title="@string/general_double_tap_to_wake" />
-         <CheckBoxPreference
+         <SwitchPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
@@ -948,5 +957,5 @@ index 4887790..365bf47 100644
      </PreferenceCategory>
  </PreferenceScreen>
 -- 
-2.32.1 (Apple Git-133)
+2.37.1 (Apple Git-137.1)
 
