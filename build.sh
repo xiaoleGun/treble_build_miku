@@ -287,7 +287,9 @@ VERSION="0.15.1_2"
 
 read -s -p "$ONCE_PASSWORD" password
 
-autoInstallDependencies
+if [ $USER != xiaolegun ]; then
+    autoInstallDependencies
+fi
 initRepo
 syncRepo
 applyingPatches
