@@ -1,6 +1,6 @@
 # Miku UI GSI
 
-**中文** | [English](README-EN.md)
+**中文** | [English](README-EN.md) | [日本語](README-JP.md)
 
 ## 前言
 这是送给所有Miku粉丝的Android项目，如果不喜欢它请关闭本页面，但不要攻击任何人，尤其是其作者。
