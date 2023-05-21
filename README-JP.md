@@ -29,6 +29,7 @@ Miku UI
 ```
 
 (1) Android 9 以降の Vendor は SAR (system-as-root) をサポートしているので、A/B パーティションタイプの GSI が使用できます。
+
 (2) arm32 binder64
 
 ## ビルド
@@ -51,7 +52,7 @@ To get started with building Miku UI GSI, you'll need to get familiar with [Git 
     ```
 
 ## クレジット
-このプロジェクトに協力してくれた方々になります。様々な事しているので評価をして欲しいと思います:
+このプロジェクトに協力してくれた方々になります。様々な事しているので何らかの形で評価をして欲しいと思います:
 - [Miku-UI](https://github.com/Miku-UI)
 - [phhusson](https://github.com/phhusson)
 - [AndyCGYan](https://github.com/AndyCGYan)
