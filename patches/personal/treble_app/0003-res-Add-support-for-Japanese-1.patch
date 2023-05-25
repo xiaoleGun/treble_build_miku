@@ -1,0 +1,481 @@
+From 773a090fe5ded424187e75a33ff98df8e1dbaf91 Mon Sep 17 00:00:00 2001
+From: "Re*Index. (ot_inc)" <32851879+reindex-ot@users.noreply.github.com>
+Date: Thu, 25 May 2023 21:21:15 +0900
+Subject: [PATCH 3/3] res: Add support for Japanese (#1)
+
+---
+ app/src/main/res/values-ja/pref_custom.xml  |  39 +++++
+ app/src/main/res/values-ja/pref_huawei.xml  |  13 ++
+ app/src/main/res/values-ja/pref_misc.xml    |  75 +++++++++
+ app/src/main/res/values-ja/pref_nubia.xml   |  74 +++++++++
+ app/src/main/res/values-ja/pref_oneplus.xml |  29 ++++
+ app/src/main/res/values-ja/pref_samsung.xml |  17 ++
+ app/src/main/res/values-ja/strings.xml      | 167 ++++++++++++++++++++
+ 7 files changed, 414 insertions(+)
+ create mode 100644 app/src/main/res/values-ja/pref_custom.xml
+ create mode 100644 app/src/main/res/values-ja/pref_huawei.xml
+ create mode 100644 app/src/main/res/values-ja/pref_misc.xml
+ create mode 100644 app/src/main/res/values-ja/pref_nubia.xml
+ create mode 100644 app/src/main/res/values-ja/pref_oneplus.xml
+ create mode 100644 app/src/main/res/values-ja/pref_samsung.xml
+ create mode 100644 app/src/main/res/values-ja/strings.xml
+
+diff --git a/app/src/main/res/values-ja/pref_custom.xml b/app/src/main/res/values-ja/pref_custom.xml
+new file mode 100644
+index 0000000..4a708ab
+--- /dev/null
++++ b/app/src/main/res/values-ja/pref_custom.xml
+@@ -0,0 +1,39 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <array name="pref_custom_pointer_type">
++      <item>"マウスカーソル"</item>
++      <item>"ペンポインタ"</item>
++    </array>
++    <array name="pref_custom_pointer_type_values">
++      <item>"mouse"</item>
++      <item>"pen"</item>
++    </array>
++
++    <array name="pref_custom_accent_color">
++	    <item>"デフォルト"</item>
++    </array>
++    <array name="pref_custom_accent_color_values">
++	    <item>""</item>
++    </array>
++
++    <array name="pref_custom_icon_shape">
++	    <item>"デフォルト"</item>
++    </array>
++    <array name="pref_custom_icon_shape_values">
++	    <item>""</item>
++    </array>
++
++    <array name="pref_custom_icon_pack">
++	    <item>"デフォルト"</item>
++    </array>
++    <array name="pref_custom_icon_pack_values">
++	    <item>""</item>
++    </array>
++
++    <array name="pref_custom_font_family">
++	    <item>"デフォルト"</item>
++    </array>
++    <array name="pref_custom_font_family_values">
++	    <item>""</item>
++    </array>
++</resources>
+diff --git a/app/src/main/res/values-ja/pref_huawei.xml b/app/src/main/res/values-ja/pref_huawei.xml
+new file mode 100644
+index 0000000..e648acf
+--- /dev/null
++++ b/app/src/main/res/values-ja/pref_huawei.xml
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <array name="pref_huawei_fast_charge">
++	    <item>標準の USB 充電 (1500mA)</item>
++	    <item>中速 (2750mA)</item>
++	    <item>高速 (4000mA)</item>
++    </array>
++    <array name="pref_huawei_fast_charge_values">
++	    <item>"-1"</item>
++	    <item>"2750"</item>
++	    <item>"4000"</item>
++    </array>
++</resources>
+diff --git a/app/src/main/res/values-ja/pref_misc.xml b/app/src/main/res/values-ja/pref_misc.xml
+new file mode 100644
+index 0000000..f94d309
+--- /dev/null
++++ b/app/src/main/res/values-ja/pref_misc.xml
+@@ -0,0 +1,75 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++  <array name="pref_misc_mobile_signal">
++    <item>Android のデフォルト</item>
++    <item>Huawei のデバイス/OpenKirin</item>
++    <item>RSSI</item>
++    <item>RSRP</item>
++    <item>RSSNR</item>
++  </array>
++  <array name="pref_misc_mobile_signal_values">
++    <item>default</item>
++    <item>openkirin</item>
++    <item>rssi</item>
++    <item>rsrp</item>
++    <item>rssnr</item>
++  </array>
++  <array name="pref_misc_fps_divisor">
++    <item>"1 (デフォルト)"</item>
++    <item>"2"</item>
++    <item>"3"</item>
++  </array>
++  <array name="pref_misc_fps_divisor_values">
++    <item>"1"</item>
++    <item>"2"</item>
++    <item>"3"</item>
++  </array>
++  <array name="pref_misc_max_aspect_ratio_pre_o">
++    <item>"1.86 (デフォルト)"</item>
++    <item>"2.0"</item>
++    <item>"無制限"</item>
++  </array>
++  <array name="pref_misc_max_aspect_ratio_pre_o_values">
++    <item>"1.86"</item>
++    <item>"2.0"</item>
++    <item>"0.0"</item>
++  </array>
++  <array name="pref_misc_bluetooth">
++    <item>"なし"</item>
++    <item>"MediaTek"</item>
++    <item>"Huawei"</item>
++  </array>
++  <array name="pref_misc_bluetooth_values">
++    <item>"none"</item>
++    <item>"mediatek"</item>
++    <item>"huawei"</item>
++  </array>
++  <array name="pref_misc_display_fps">
++    <item>"強制しない"</item>
++    <item>"60fps"</item>
++  </array>
++  <array name="pref_misc_display_fps_values">
++    <item>"-1"</item>
++    <item>"0"</item>
++  </array>
++  <array name="pref_misc_camera_timestamp">
++    <item>"上書きしない"</item>
++    <item>"Clock monotonic"</item>
++    <item>"Clock boottime"</item>
++  </array>
++  <array name="pref_misc_camera_timestamp_values">
++    <item>"-1"</item>
++    <item>"0"</item>
++    <item>"1"</item>
++  </array>
++  <array name="pref_misc_fod_color">
++    <item>"グリーン"</item>
++    <item>"シアン"</item>
++    <item>"ホワイト"</item>
++  </array>
++  <array name="pref_misc_fod_color_values">
++    <item>"00ff00"</item>
++    <item>"00ffff"</item>
++    <item>"ffffff"</item>
++  </array>
++</resources>
+diff --git a/app/src/main/res/values-ja/pref_nubia.xml b/app/src/main/res/values-ja/pref_nubia.xml
+new file mode 100644
+index 0000000..fef7287
+--- /dev/null
++++ b/app/src/main/res/values-ja/pref_nubia.xml
+@@ -0,0 +1,74 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++  <array name="pref_nubia_fan">
++    <item>OFF</item>
++    <item>低速</item>
++    <item>中速</item>
++    <item>高速</item>
++  </array>
++  <array name="pref_nubia_fan_values">
++    <item>"0"</item>
++    <item>"3"</item>
++    <item>"4"</item>
++    <item>"5"</item>
++  </array>
++  <array name="pref_nubia_redmagic_led">
++    <item>OFF</item>
++    <item>スクロールエフェクト 0</item>
++    <item>スクロールエフェクト 1</item>
++    <item>スクロールエフェクト 2</item>
++    <item>スクロールエフェクト 3</item>
++    <item>スクロールエフェクト 4</item>
++    <item>スクロールエフェクト 5</item>
++    <item>スクロールエフェクト 6</item>
++    <item>スクロールエフェクト 7</item>
++    <item>スクロールエフェクト 8</item>
++    <item>低速点滅エフェクト 0</item>
++    <item>低速点滅エフェクト1</item>
++    <item>低速点滅エフェクト 2</item>
++    <item>低速点滅エフェクト 3</item>
++    <item>低速点滅エフェクト 4</item>
++    <item>低速点滅エフェクト 5</item>
++    <item>低速点滅エフェクト 6</item>
++    <item>低速点滅エフェクト 7</item>
++    <item>低速点滅エフェクト 8</item>
++    <item>高速点滅エフェクト 0</item>
++    <item>高速点滅エフェクト 1</item>
++    <item>高速点滅エフェクト 2</item>
++    <item>高速点滅エフェクト 3</item>
++    <item>高速点滅エフェクト 4</item>
++    <item>高速点滅エフェクト 5</item>
++    <item>高速点滅エフェクト 6</item>
++    <item>高速点滅エフェクト 7</item>
++    <item>高速点滅エフェクト 8</item>
++  </array>
++  <array name="pref_nubia_redmagic_led_values">
++    <item>"0"</item>
++    <item>"0xa0"</item>
++    <item>"0xa1"</item>
++    <item>"0xa2"</item>
++    <item>"0xa3"</item>
++    <item>"0xa4"</item>
++    <item>"0xa5"</item>
++    <item>"0xa6"</item>
++    <item>"0xa7"</item>
++    <item>"0xa8"</item>
++    <item>"0x70"</item>
++    <item>"0x71"</item>
++    <item>"0x72"</item>
++    <item>"0x73"</item>
++    <item>"0x74"</item>
++    <item>"0x75"</item>
++    <item>"0x76"</item>
++    <item>"0x77"</item>
++    <item>"0x78"</item>
++    <item>"0x80"</item>
++    <item>"0x81"</item>
++    <item>"0x82"</item>
++    <item>"0x83"</item>
++    <item>"0x85"</item>
++    <item>"0x86"</item>
++    <item>"0x87"</item>
++    <item>"0x88"</item>
++  </array>
++</resources>
+diff --git a/app/src/main/res/values-ja/pref_oneplus.xml b/app/src/main/res/values-ja/pref_oneplus.xml
+new file mode 100644
+index 0000000..8c591d2
+--- /dev/null
++++ b/app/src/main/res/values-ja/pref_oneplus.xml
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <array name="pref_oneplus_display_mode">
++        <item>デフォルト</item>
++        <item>DCI-P3</item>
++        <item>sRGB</item>
++    </array>
++    <array name="pref_oneplus_display_mode_values">
++        <item>default</item>
++        <item>dcip3</item>
++        <item>srgb</item>
++    </array>
++    <array name="pref_oneplus_display_high_brightness">
++        <item>無効</item>
++        <item>"1"</item>
++        <item>"2"</item>
++        <item>"3"</item>
++        <item>"4"</item>
++        <item>"5"</item>
++    </array>
++    <array name="pref_oneplus_display_high_brightness_values">
++        <item>"0"</item>
++        <item>"1"</item>
++        <item>"2"</item>
++        <item>"3"</item>
++        <item>"4"</item>
++        <item>"5"</item>
++    </array>
++</resources>
+diff --git a/app/src/main/res/values-ja/pref_samsung.xml b/app/src/main/res/values-ja/pref_samsung.xml
+new file mode 100644
+index 0000000..0c7b9d0
+--- /dev/null
++++ b/app/src/main/res/values-ja/pref_samsung.xml
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <array name="pref_samsung_transport_size">
++	    <item>"0 (デフォルト)"</item>
++	    <item>"8"</item>
++	    <item>"16"</item>
++            <item>"24"</item>
++            <item>"32"</item>
++    </array>
++    <array name="pref_samsung_transport_size_values">
++            <item>"0"</item>
++            <item>"8"</item>
++            <item>"16"</item>
++            <item>"24"</item>
++            <item>"32"</item>
++    </array>
++</resources>
+diff --git a/app/src/main/res/values-ja/strings.xml b/app/src/main/res/values-ja/strings.xml
+new file mode 100644
+index 0000000..fb3ad4f
+--- /dev/null
++++ b/app/src/main/res/values-ja/strings.xml
+@@ -0,0 +1,167 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++  <string name="app_name">PhhTrebleApp</string>
++  <string name="title_activity_settings">設定</string>
++  <string name="title_activity_top_level">Phh Treble 設定</string>
++  <string name="desc_activity_top_level">デバイス固有の設定</string>
++  <string name="remove_telephony_subsystem">Telephony サブシステムを削除</string>
++  <string name="remove_root">Root を削除</string>
++  <string name="continue_question">続行しますか？</string>
++  <string name="title_activity_updater">アップデータ</string>
++  <string name="update_not_found_title">使用中のシステムは最新です</string>
++  <string name="update_found_title">システムアップデートが可能です</string>
++  <string name="checking_update_title">利用可能なアップデートを確認</string>
++  <string name="update_found_button">ダウンロードとインストール</string>
++  <string name="update_not_found_button">アップデートを確認</string>
++  <string name="error_dialog_title">エラー</string>
++  <string name="dynamic_device_message">使用しているデバイスは OTA アップデートに対応していません！</string>
++  <string name="update_error_message">ダウンロード中にエラーが発生しました!\n後ほどやり直してください。</string>
++  <string name="success_install_message">アップデートのインストールが正常に完了しました。\n今すぐに再起動をしてください。</string>
++  <string name="failed_download_message">アップデートのダウンロードに失敗しました。\n詳細はログを確認してください。</string>
++  <string name="failed_install_message">新しいアップデートのインストールに失敗しました。\n詳細はログを確認してください。</string>
++  <string name="preparing_update_title">システムアップデートを確認中です</string>
++  <string name="downloading_update_title">システムアップデートをダウンロード中です</string>
++  <string name="applying_update_title">システムアップデートを適用中です</string>
++  <string name="applied_update_title">アップデートが正常に適用されました</string>
++  <string name="prevent_exit_message">アップデートはまだ継続中です。アプリを終了すると停止します。\n今すぐに終了しますか？</string>
++  <string name="warning_dialog_title">警告</string>
++  <string name="magisk_exists_message">Magisk が検出されました！このままアップデートを続行するとインストールに失敗または Magisk の機能が失われる可能性があります！</string>
++  <string name="menu_delete_ota">OTA ファイルを削除</string>
++  <string name="delete_ota_message">このまま続行をするとユーザーデータを失う可能性がある事を考慮してください！\nこれを防ぐにはデバイスを Fastboot モードで起動をして最新の ROM を焼いてください。\nそれでも続行しますか？</string>
++  <!-- Custom -->
++  <string name="custom_system_ui_tuner">System UI 調整ツール</string>
++  <string name="custom_ui">UI</string>
++  <string name="custom_styles">スタイル</string>
++  <string name="custom_pointer_type">ポインターの種類</string>
++  <string name="custom_accent_color">アクセントカラー</string>
++  <string name="custom_icon_shape">アイコンの形状</string>
++  <string name="custom_icon_pack">アイコンパック</string>
++  <string name="custom_font_family">フォントファミリー</string>
++  <!-- Doze -->
++  <string name="doze">Doze</string>
++  <string name="doze_handwave">ハンドウェーブジェスチャーを有効化</string>
++  <string name="doze_pocket">ポケット取り出し時のジェスチャーを有効化</string>
++  <!-- General -->
++  <string name="general_audio">オーディオ</string>
++  <string name="general_camera">カメラ</string>
++  <string name="general_display">画面</string>
++  <string name="general_enable_dt2w">ダブルタップで点灯を有効化</string>
++  <string name="general_double_tap_to_wake">ダブルタップで点灯を有効化</string>
++  <string name="general_game_mode">ゲームモードを有効化</string>
++  <string name="general_usb_otg">USB OTG を有効化</string>
++  <string name="general_misc">その他</string>
++  <string name="general_other">その他</string>
++  <string name="general_requires_a_reboot">再起動が必要です</string>
++  <string name="general_screen">画面</string>
++  <string name="general_touchscreen">タッチスクリーン</string>
++  <string name="general_alternate_audiopolicy">代替のオーディオポリシーを使用する</string>
++  <!-- Headers -->
++  <string name="my_device">マイデバイス</string>
++  <string name="oneplus_features">OnePlus の機能</string>
++  <string name="nubia_features">Nubia の機能</string>
++  <string name="vsmart_features">Vsmart の機能</string>
++  <string name="qualcomm_features">Qualcomm の機能</string>
++  <string name="huawei_features">Huawei の機能</string>
++  <string name="samsung_features">Samsung の機能</string>
++  <string name="lenovo_features">Lenovo の機能</string>
++  <string name="xiaomi_features">Xiaomi の機能</string>
++  <string name="oppo_features">OPPO の機能</string>
++  <string name="doze_features">Doze の機能</string>
++  <string name="misc_features">その他の機能</string>
++  <string name="ims_features">IMS の機能</string>
++  <string name="customization_features">カスタマイズの機能</string>
++  <string name="updater">アップデータ</string>
++  <!-- Huawei -->
++  <string name="huawei_fingerprint">指紋認証</string>
++  <string name="huawei_fingerprint_gestures">指紋認証ジェスチャーを有効化</string>
++  <string name="huawei_touchscreen_glove_mode">手袋モードを有効化</string>
++  <string name="huawei_graphic_issues_workaround">グラフィックの問題を回避する (画面がぼやけてしまう場合に推奨します)</string>
++  <string name="huawei_fast_charge">Huawei の高速充電</string>
++  <!-- IMS -->
++  <string name="ims_create_apn">IMS APN を作成</string>
++  <string name="ims_install_apn">IMS APK をダウンロードとインストール</string>
++  <string name="ims_request_network">IMS ネットワークをリクエスト</string>
++  <string name="ims_force_enable_setting">VoLTE の設定を強制する</string>
++  <!-- Misc -->
++  <string name="misc_sponsor">Sponsor phh</string>
++  <string name="misc_mobile_network">モバイルネットワーク</string>
++  <string name="misc_mobile_signal">信号メーターの方式</string>
++  <string name="misc_huawei_headset_fix">ヘッドセットスイッチを強制する (Huawei のデフォルト)</string>
++  <string name="misc_headset_devinput">代替のヘッドセット検出方法を使用する</string>
++  <string name="misc_disable_audio_effects">オーディオエフェクトを無効化</string>
++  <string name="misc_rounded_corners">丸い角の直径を設定</string>
++  <string name="misc_rounded_corners_overlay">強制または偽装された丸い角の直径を設定</string>
++  <string name="misc_fps_divisor">FPS 除数</string>
++  <string name="misc_display_fps">FPS を強制</string>
++  <string name="misc_restart_systemui">SystemUI を再起動</string>
++  <string name="misc_restart_systemui_summary">画面の解像度の変更後に行なう事を推奨します\n Root 権限が必要です</string>
++  <string name="misc_no_hwcomposer">HW オーバーレイを無効化</string>
++  <string name="misc_no_hwcomposer_summary">CPU とバッテリーをより多く消費します</string>
++  <string name="misc_aod">常時表示画面を強制する</string>
++  <string name="misc_backlight">バックライト</string>
++  <string name="misc_linear_brightness">リニアスクリーンの輝度スライダーを使用する</string>
++  <string name="misc_disable_buttons_backlight">ハードウェアボタンのバックライトがある場合は無効化する</string>
++  <string name="misc_backlight_scale">代替のバックライトスケールを強制使用する</string>
++  <string name="misc_minimal_brightness">輝度を最低に設定できるようにする</string>
++  <string name="misc_multi_camera">Aux カメラを露出</string>
++  <string name="misc_force_camera2api_hal3">Camera2API HAL3 を強制的に有効化</string>
++  <string name="misc_camera_timestamp">タイムスタンプソースを強制</string>
++  <string name="misc_bluetooth">Bluetooth の問題の回避</string>
++  <string name="misc_max_aspect_ratio_pre_o">互換性のある最大アスペクト比</string>
++  <string name="misc_dynamic_sysbta">システム全体の Bluetooth HAL を使用する</string>
++  <string name="misc_force_navbar_off">強制的にナビゲーションバーを無効化</string>
++  <string name="misc_storage_fuse">FUSE ストレージレイヤーを無効化</string>
++  <string name="misc_storage_fuse_summary">ストレージの速度が低下する可能性があります\n再起動が必要です</string>
++  <string name="misc_restart_ril">RIL を自動で再起動</string>
++  <string name="misc_dt2w">ダブルタップで点灯</string>
++  <string name="misc_dt2w_summary">機能が動作する可能性は低いです</string>
++  <string name="misc_fod_color">アンダーディスプレイ FP カラー</string>
++  <string name="misc_securize">セキュアライズ</string>
++  <string name="misc_debugging">デバッグ</string>
++  <string name="misc_debug_sensors">センサーのデバッグ</string>
++  <string name="misc_remotectl">デバッグのために phh によるデバイスの占有を許可</string>
++  <!-- My device -->
++  <string name="mydevice_maintainer">マイデバイスのメンテナ</string>
++  <string name="mydevice_telegram_group">デバイスの Telegram グループ</string>
++  <string name="mydevice_apply_presets">プリセットを適用</string>
++  <!-- Nubia -->
++  <string name="nubia_fan_speed">ファンの速度</string>
++  <string name="nubia_redmagic_logo_breath">RedMagic ロゴをブレスさせる</string>
++  <string name="nubia_leds">LED</string>
++  <string name="nubia_redmagic_led">RedMagic RGB</string>
++  <string name="nubia_boosts">ブースト</string>
++  <string name="nubia_boost_cpu">CPU をブースト</string>
++  <string name="nubia_boost_cache">キャッシュをブースト</string>
++  <string name="nubia_boost_gpu">GPU をブースト</string>
++  <!-- OnePlus -->
++  <string name="oneplus_display_mode">画面モード</string>
++  <string name="oneplus_display_high_brightness">高輝度モード</string>
++  <!-- OPPO -->
++  <string name="oppo_dc_diming">DC 調光を有効化</string>
++  <!-- Qualcomm -->
++  <string name="qualcomm_alternate_mediaprofile">代替のカメラプロファイルを使用する</string>
++  <string name="qualcomm_disable_soundvolume_effect">サウンドボリュームエフェクトを無効化</string>
++  <string name="qualcomm_disable_soundvolume_effect_summary">音の乱れが修正できる場合があります</string>
++  <string name="qualcomm_disable_stereo_voip">VoIP のステレオ対応を無効化</string>
++  <string name="qualcomm_disable_stereo_voip_summary">高音の音声を修正できる場合があります。再起動が必要です</string>
++  <!-- Samsung -->
++  <string name="samsung_audio_stereo">ステレオオーディオモードを有効化</string>
++  <string name="samsung_disable_back_mic">内蔵バックマイクを無効化</string>
++  <string name="samsung_disable_back_mic_summary">動画撮影時のマイク音の異常を修正できます</string>
++  <string name="samsung_esco_transport_unit_size">eSCO トランスポートユニットサイズを設定</string>
++  <string name="samsung_high_brightness">輝度範囲の拡張を有効化</string>
++  <string name="samsung_glove_mode">手袋モードを有効化</string>
++  <string name="samsung_wireless_charging_transmit">リバースワイヤレス充電を有効化 (該当する場合)</string>
++  <string name="samsung_fod_single_click">指紋センサーをクリックで画面を点灯</string>
++  <string name="samsung_flash_strength">フラッシュの強さを設定</string>
++  <string name="samsung_flash_strength_summary">値は 1～5 の整数値になります</string>
++  <string name="samsung_camera_ids">すべてのカメラをアクセス可能にする</string>
++  <string name="samsung_camera_ids_summary">Q vendor が必要です</string>
++  <string name="samsung_workarounds">問題の回避</string>
++  <string name="samsung_extra_sensors">追加のセンサーを有効化</string>
++  <string name="samsung_colorspace">画面が白っぽく表示される問題の回避を有効化</string>
++  <string name="samsung_broken_fingerprint">壊れた指紋認証の問題の回避を有効化</string>
++  <string name="samsung_backlight_multiplier">バックライトスケール、レベルの最大値を設定</string>
++  <!-- Xiaomi -->
++  <string name="xiaomi_disable_sunlight_mode">太陽光スクリーンを無効化</string>
++</resources>
+-- 
+2.37.1 (Apple Git-137.1)
+
