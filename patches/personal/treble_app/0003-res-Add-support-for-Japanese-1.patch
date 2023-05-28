@@ -1,4 +1,4 @@
-From 773a090fe5ded424187e75a33ff98df8e1dbaf91 Mon Sep 17 00:00:00 2001
+From c74d9dabfb81d726a30daa0c38296cf2be9e6409 Mon Sep 17 00:00:00 2001
 From: "Re*Index. (ot_inc)" <32851879+reindex-ot@users.noreply.github.com>
 Date: Thu, 25 May 2023 21:21:15 +0900
 Subject: [PATCH 3/3] res: Add support for Japanese (#1)
@@ -305,7 +305,7 @@ index 0000000..0c7b9d0
 +</resources>
 diff --git a/app/src/main/res/values-ja/strings.xml b/app/src/main/res/values-ja/strings.xml
 new file mode 100644
-index 0000000..fb3ad4f
+index 0000000..7444c87
 --- /dev/null
 +++ b/app/src/main/res/values-ja/strings.xml
 @@ -0,0 +1,167 @@
@@ -341,7 +341,7 @@ index 0000000..fb3ad4f
 +  <string name="delete_ota_message">このまま続行をするとユーザーデータを失う可能性がある事を考慮してください！\nこれを防ぐにはデバイスを Fastboot モードで起動をして最新の ROM を焼いてください。\nそれでも続行しますか？</string>
 +  <!-- Custom -->
 +  <string name="custom_system_ui_tuner">System UI 調整ツール</string>
-+  <string name="custom_ui">UI</string>
++  <string name="custom_ui">ユーザーインターフェース</string>
 +  <string name="custom_styles">スタイル</string>
 +  <string name="custom_pointer_type">ポインターの種類</string>
 +  <string name="custom_accent_color">アクセントカラー</string>
@@ -404,8 +404,8 @@ index 0000000..fb3ad4f
 +  <string name="misc_rounded_corners_overlay">強制または偽装された丸い角の直径を設定</string>
 +  <string name="misc_fps_divisor">FPS 除数</string>
 +  <string name="misc_display_fps">FPS を強制</string>
-+  <string name="misc_restart_systemui">SystemUI を再起動</string>
-+  <string name="misc_restart_systemui_summary">画面の解像度の変更後に行なう事を推奨します\n Root 権限が必要です</string>
++  <string name="misc_restart_systemui">System UI を再起動</string>
++  <string name="misc_restart_systemui_summary">画面の解像度の変更後に行なう事を推奨します\nRoot 権限が必要です</string>
 +  <string name="misc_no_hwcomposer">HW オーバーレイを無効化</string>
 +  <string name="misc_no_hwcomposer_summary">CPU とバッテリーをより多く消費します</string>
 +  <string name="misc_aod">常時表示画面を強制する</string>
@@ -417,7 +417,7 @@ index 0000000..fb3ad4f
 +  <string name="misc_multi_camera">Aux カメラを露出</string>
 +  <string name="misc_force_camera2api_hal3">Camera2API HAL3 を強制的に有効化</string>
 +  <string name="misc_camera_timestamp">タイムスタンプソースを強制</string>
-+  <string name="misc_bluetooth">Bluetooth の問題の回避</string>
++  <string name="misc_bluetooth">Bluetooth の問題を回避</string>
 +  <string name="misc_max_aspect_ratio_pre_o">互換性のある最大アスペクト比</string>
 +  <string name="misc_dynamic_sysbta">システム全体の Bluetooth HAL を使用する</string>
 +  <string name="misc_force_navbar_off">強制的にナビゲーションバーを無効化</string>
