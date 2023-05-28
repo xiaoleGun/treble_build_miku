@@ -1,0 +1,46 @@
+From 665fc6deb2727b7f8580286f302390d3da0a62ad Mon Sep 17 00:00:00 2001
+From: Iceows <mounierr07@gmail.com>
+Date: Mon, 22 May 2023 20:54:42 +0200
+Subject: [PATCH 19/19] Revert "Add offline Charge Service"
+
+This reverts commit 43f44ff1830e3f9e7a32ec4989aab140d2935b83.
+---
+ rootdir/init.rc | 15 ---------------
+ 1 file changed, 15 deletions(-)
+
+diff --git a/rootdir/init.rc b/rootdir/init.rc
+index a26e6679e..ab45bb032 100644
+--- a/rootdir/init.rc
++++ b/rootdir/init.rc
+@@ -11,17 +11,6 @@ import /vendor/etc/init/hw/init.${ro.hardware}.rc
+ import /system/etc/init/hw/init.usb.configfs.rc
+ import /system/etc/init/hw/init.${ro.zygote}.rc
+ 
+-service charger /bin/charger
+-    class charger
+-    user system
+-    group system shell graphics input wakelock
+-    capabilities SYS_BOOT
+-    seclabel u:r:charger:s0
+-
+-on boot
+-    chown system system /sys/class/power_supply/batery/input_suspend
+-    chmod 0777 /sys/class/power_supply/batery/input_suspend
+-
+ # Cgroups are mounted right before early-init using list from /etc/cgroups.json
+ on early-init
+     # Disable sysrq from keyboard
+@@ -1198,10 +1187,6 @@ on nonencrypted
+ on property:sys.init_log_level=*
+     loglevel ${sys.init_log_level}
+ 
+-on charger && property:ro.hardware=mt*
+-    write /sys/class/leds/lcd-backlight/trigger "backlight"
+-    write /sys/class/android_usb/android0/enable 1
+-
+ on charger
+     class_start charger
+ 
+-- 
+2.37.1 (Apple Git-137.1)
+
