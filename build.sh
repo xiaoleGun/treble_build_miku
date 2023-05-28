@@ -283,7 +283,7 @@ BUILD_DATE="$(date +%Y%m%d)"
 
 BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
-VERSION="0.15.2"
+VERSION="0.15.2_2"
 
 read -s -p "$ONCE_PASSWORD" password
 
