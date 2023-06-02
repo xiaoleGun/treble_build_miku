@@ -29,6 +29,7 @@ Miku UI
 ```
 
 (1) Vendors of Android 9 and above support SAR(system-as-root), so GSI of AB partition type can be used.
+
 (2) arm32 binder64
 
 ## Build

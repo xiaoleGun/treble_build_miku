@@ -31,6 +31,7 @@ Miku UI
 ```
 
 (1) 安卓9及以上的底包支持SAR(system-as-root)，所以可以使用AB分区类型的GSI
+
 (2) arm32 binder64
 
 ## 构建
