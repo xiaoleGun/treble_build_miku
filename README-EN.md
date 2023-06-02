@@ -3,6 +3,11 @@
 ## Preface
 This is an Android project for Miku fans. If you don't like it, please close this page, but don't attack Miku and the author of this project.
 
+## Version
+Latest version: 0.15.2_2
+
+[Downloads](https://github.com/xiaoleGun/treble_build_miku/releases)
+
 ## Variant
 Examples
 > MikuUI-TDA-0.13.3-arm64-ab-vndklite-gapps-20230406-UNOFFICIAL.img.xz

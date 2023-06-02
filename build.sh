@@ -283,7 +283,7 @@ BUILD_DATE="$(date +%Y%m%d)"
 
 BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
-VERSION="0.15.2_2"
+VERSION=`grep -oP '(?<=最新版本: ).*' README.md`
 
 read -s -p "$ONCE_PASSWORD" password
 
