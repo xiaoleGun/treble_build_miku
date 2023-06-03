@@ -283,7 +283,7 @@ BUILD_DATE="$(date +%Y%m%d)"
 
 BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
-VERSION=`grep -oP '(?<=最新版本: ).*' README.md`
+VERSION=`grep -oP '(?<=最新版本: ).*' $BL/README.md`
 
 multipleLanguages
 warning
