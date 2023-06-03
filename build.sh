@@ -143,11 +143,11 @@ applyingPatches() {
     echo ""
     echo "--> $APPLY_TREBLEDROID_PATCH"
     echo ""
-    applyPatches $BL trebledroid
+    applyPatches $SD trebledroid
     echo ""
     echo "--> $APPLY_PERSONAL_PATCH"
     echo ""
-    applyPatches $BL personal
+    applyPatches $SD personal
 }
 
 initEnvironment() {
@@ -251,8 +251,8 @@ generateOtaJson() {
             json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
         done
         json="${json%?}]}"
-        echo "$json" | jq '.variants |= sort_by(.name)' > $BL/ota.json
-        cp $BL/ota.json $BD/ota.json
+        echo "$json" | jq '.variants |= sort_by(.name)' > $SD/ota.json
+        cp $SD/ota.json $BD/ota.json
     }
 }
 
@@ -261,7 +261,7 @@ personal() {
     echo ""
     echo "--> $UP_GITHUB_RELEASE"
     echo ""
-    cd $BL
+    cd $SD
     GITLATESTTAG=$(git describe --tags --abbrev=0)
     GITCHANGELOG=$(git log $GITLATESTTAG..HEAD --pretty=format:"%s")
     assets=()
@@ -281,9 +281,9 @@ $GITCHANGELOG" TDA-$VERSION
 START=$(date +%s)
 BUILD_DATE="$(date +%Y%m%d)"
 
-BL=$(cd $(dirname $0);pwd)
+SD=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
-VERSION=`grep -oP '(?<=最新版本: ).*' $BL/README.md`
+VERSION=`grep -oP '(?<=最新版本: ).*' $SD/README.md`
 
 multipleLanguages
 warning
