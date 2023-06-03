@@ -6,6 +6,7 @@ multipleLanguages() {
     if [ -n $(echo $LANG | grep zh_CN) ]; then
         BUILDBOT="Miku UI TDA通用镜像自动构建"
         BUILDBOT_EXIT="3秒后开始构建Miku UI通用镜像 - CTRL-C退出"
+        SHOW_VERSION="版本"
         ONCE_PASSWORD="请输入 $USER 的密码: "
         ARCH_LINUX="检测到Arch Linux"
         INIT_MIKU_UI="初始Miku UI"
@@ -26,6 +27,7 @@ multipleLanguages() {
     else
         BUILDBOT="Miku UI TDA Treble Buildbot"
         BUILDBOT_EXIT="Executing in 3 seconds - CTRL-C to exit"
+        SHOW_VERSION="Version"
         ONCE_PASSWORD="Please enter the password of $USER: "
         ARCH_LINUX="Arch Linux Detected"
         INIT_MIKU_UI="Initializing Miku UI workspace"
@@ -55,6 +57,8 @@ warning() {
     echo " $BUILDBOT_EXIT                          "
     echo "-----------------------------------------"
     echo
+
+    echo "$SHOW_VERSION: $VERSION"
 }
 
 autoInstallDependencies() {
@@ -273,17 +277,18 @@ $GITCHANGELOG" TDA-$VERSION
     cd ..
 }
 
-multipleLanguages
-warning
-
-sleep 3
-
+# Performing function
 START=$(date +%s)
 BUILD_DATE="$(date +%Y%m%d)"
 
 BL=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
 VERSION=`grep -oP '(?<=最新版本: ).*' README.md`
+
+multipleLanguages
+warning
+
+sleep 3
 
 read -s -p "$ONCE_PASSWORD" password
 
