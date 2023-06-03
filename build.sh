@@ -57,8 +57,8 @@ warning() {
     echo " $BUILDBOT_EXIT                          "
     echo "-----------------------------------------"
     echo
-
     echo "$SHOW_VERSION: $VERSION"
+    echo
 }
 
 autoInstallDependencies() {
@@ -87,16 +87,16 @@ autoInstallDependencies() {
 
 initRepo() {
     if [ ! -d .repo ]; then
-        echo ""
+        echo
         echo "--> $INIT_MIKU_UI"
-        echo ""
+        echo
         repo init -u https://github.com/Miku-UI/manifesto -b TDA --depth=1
     fi
 
     if [ -d .repo ] && [ ! -f .repo/local_manifests/miku-treble.xml ]; then
-        echo ""
+        echo
         echo "--> $PREPARE_LOCAL_MANIFEST"
-        echo ""
+        echo
         rm -rf .repo/local_manifests
         mkdir -p .repo/local_manifests
         echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
@@ -117,9 +117,9 @@ initRepo() {
 }
 
 syncRepo() {
-    echo ""
+    echo
     echo "--> $SYNC_REPOS"
-    echo ""
+    echo
     repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
 }
 
@@ -140,36 +140,36 @@ applyPatches() {
 }
 
 applyingPatches() {
-    echo ""
+    echo
     echo "--> $APPLY_TREBLEDROID_PATCH"
-    echo ""
+    echo
     applyPatches $SD trebledroid
-    echo ""
+    echo
     echo "--> $APPLY_PERSONAL_PATCH"
-    echo ""
+    echo
     applyPatches $SD personal
 }
 
 initEnvironment() {
-    echo ""
+    echo
     echo "--> $SET_UP_ENVIRONMENT"
-    echo ""
+    echo
     source build/envsetup.sh &> /dev/null
     rm -rf $BD
     mkdir -p $BD
 }
 
 downloadVia() {
-    echo ""
+    echo
     echo "--> $DOWNLOAD_VIA"
-    echo ""
+    echo
     wget https://res.viayoo.com/v1/via-release-cn.apk
 }
 
 generateDevice() {
-    echo ""
+    echo
     echo "--> $GEN_DEVICE_MAKEFILE"
-    echo ""
+    echo
     rm -rf device/*/sepolicy/common/private/genfs_contexts
     cd device/phh/treble
     git clean -fdx
@@ -180,9 +180,9 @@ generateDevice() {
 }
 
 buildTrebleApp() {
-    echo ""
+    echo
     echo "--> $BUILD_TREBLE_APP"
-    echo ""
+    echo
     cd treble_app
     bash build.sh release
     cp TrebleApp.apk ../vendor/hardware_overlay/TrebleApp/app.apk
@@ -190,9 +190,9 @@ buildTrebleApp() {
 }
 
 buildTreble() {
-    echo ""
+    echo
     echo "--> $BUILD_TREBLE_IMAGE: $1"
-    echo ""
+    echo
     lunch $1-userdebug
     make -j$(nproc --all) systemimage
     mv $OUT/system.img $BD/system-$1.img
@@ -200,9 +200,9 @@ buildTreble() {
 }
 
 buildSasImages() {
-    echo ""
+    echo
     echo "--> $BUILD_VNDKLITE_VARIANT: $1"
-    echo ""
+    echo
     cd sas-creator
     if [ -n "$(cat lite-adapter.sh | grep 3500M)" ]; then
         sed -i 's/3500M/4000M/' lite-adapter.sh
@@ -215,9 +215,9 @@ buildSasImages() {
 }
 
 generatePackages() {
-    echo ""
+    echo
     echo "--> $GEN_PACKAGE: $1"
-    echo ""
+    echo
     BASE_IMAGE=$BD/system-$1.img
     mkdir --parents $BD/dsu/$1/; mv $BASE_IMAGE $BD/dsu/$1/system.img
     zip -j -v $BD/MikuUI-TDA-$VERSION-$2$3-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/$1/system.img
@@ -227,9 +227,9 @@ generatePackages() {
 }
 
 generateOtaJson() {
-    echo ""
+    echo
     echo "--> $GEN_UP_JSON"
-    echo ""
+    echo
     prefix="MikuUI-TDA-$VERSION-"
     suffix="-$BUILD_DATE-UNOFFICIAL.zip"
     json="{\"version\": \"$VERSION\",\"date\": \"$(date +%s -d '-4hours')\",\"variants\": ["
@@ -258,9 +258,9 @@ generateOtaJson() {
 
 # I use American server in China, so need it
 personal() {
-    echo ""
+    echo
     echo "--> $UP_GITHUB_RELEASE"
-    echo ""
+    echo
     cd $SD
     GITLATESTTAG=$(git describe --tags --abbrev=0)
     GITCHANGELOG=$(git log $GITLATESTTAG..HEAD --pretty=format:"%s")
@@ -328,6 +328,6 @@ ELAPSEDS=$(($(($END - $START)) - $ELAPSEDM * 60))
 
 multipleLanguages $ELAPSEDM $ELAPSEDS
 
-echo ""
+echo
 echo "--> $COMPLETED"
-echo ""
+echo
