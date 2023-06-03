@@ -186,7 +186,9 @@ buildTrebleApp() {
     cd treble_app
     bash build.sh release
     cp TrebleApp.apk ../vendor/hardware_overlay/TrebleApp/app.apk
-    cd ..
+    cd ../vendor/hardware_overlay
+    git commit -a -m "Update Treble App"
+    cd ../..
 }
 
 buildTreble() {
