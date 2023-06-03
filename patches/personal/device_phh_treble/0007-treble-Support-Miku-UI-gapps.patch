@@ -1,7 +1,7 @@
-From ff8d2ef61ba6d9abc01bdc9e4749c1ffe084b091 Mon Sep 17 00:00:00 2001
+From e7020a3fde200cc16eca55d9937cc3724d79248f Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Thu, 10 Feb 2022 09:27:23 +0800
-Subject: [PATCH 08/13] treble: Support Miku UI gapps
+Subject: [PATCH 07/12] treble: Support Miku UI gapps
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---

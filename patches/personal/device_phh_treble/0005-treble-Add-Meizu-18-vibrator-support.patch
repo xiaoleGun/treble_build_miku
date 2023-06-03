@@ -1,7 +1,7 @@
-From cf7f1dd213d287e95f422460494a90e452525216 Mon Sep 17 00:00:00 2001
+From 674d76bb1b67c21bdea6decad8638b8b440eb5dc Mon Sep 17 00:00:00 2001
 From: Andy CrossGate Yan <GeForce8800Ultra@gmail.com>
 Date: Tue, 22 Jun 2021 13:38:31 +0000
-Subject: [PATCH 06/13] treble: Add Meizu 18 vibrator support
+Subject: [PATCH 05/12] treble: Add Meizu 18 vibrator support
 
 Thanks to:
 - @phhusson for guidance
@@ -27,10 +27,10 @@ Change-Id: Iecf12cd814e8773abfd78a19f98e31125a73761a
  create mode 100644 hal/meizu-vibrator/service.cpp
 
 diff --git a/base.mk b/base.mk
-index 86aa039..b360b7b 100644
+index 5e64e91..890a105 100644
 --- a/base.mk
 +++ b/base.mk
-@@ -235,7 +235,10 @@ PRODUCT_COPY_FILES += \
+@@ -239,7 +239,10 @@ PRODUCT_COPY_FILES += \
  PRODUCT_PACKAGES += phh-ota
  
  PRODUCT_PACKAGES += \

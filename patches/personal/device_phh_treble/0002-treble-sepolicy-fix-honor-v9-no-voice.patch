@@ -1,7 +1,7 @@
-From 14e380fb599603220f61a108a87b1a1856315e66 Mon Sep 17 00:00:00 2001
+From 8c1e339b24394a5324491e51ea89c7a3700436ee Mon Sep 17 00:00:00 2001
 From: kindle4jerry <kindle4jerry@gmail.com>
 Date: Sun, 6 Feb 2022 14:42:18 +0800
-Subject: [PATCH 03/13] treble: sepolicy: fix honor v9 no voice
+Subject: [PATCH 02/12] treble: sepolicy: fix honor v9 no voice
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
