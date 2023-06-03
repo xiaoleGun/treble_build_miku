@@ -1,7 +1,7 @@
 From f30139694c67ef252839fbc955a374df2c1792d3 Mon Sep 17 00:00:00 2001
 From: Peter Cai <peter@typeblog.net>
 Date: Wed, 16 Dec 2020 21:26:45 +0800
-Subject: [PATCH 21/38] TelephonyManager: add API annotations for
+Subject: [PATCH 21/39] TelephonyManager: add API annotations for
  setTelephonyProperty
 
 * This method was added back by reverting commit
