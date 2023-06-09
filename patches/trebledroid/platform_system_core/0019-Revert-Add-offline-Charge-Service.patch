@@ -1,7 +1,7 @@
 From 665fc6deb2727b7f8580286f302390d3da0a62ad Mon Sep 17 00:00:00 2001
 From: Iceows <mounierr07@gmail.com>
 Date: Mon, 22 May 2023 20:54:42 +0200
-Subject: [PATCH 19/19] Revert "Add offline Charge Service"
+Subject: [PATCH 19/20] Revert "Add offline Charge Service"
 
 This reverts commit 43f44ff1830e3f9e7a32ec4989aab140d2935b83.
 ---
