@@ -1,7 +1,7 @@
-From fd777a9302e73715aa43f349463705d26c66e19d Mon Sep 17 00:00:00 2001
+From 7dbe0430efb92de83910c5e65de8e7f5cab7aa22 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 18 Dec 2022 18:20:40 -0500
-Subject: [PATCH 34/38] FOD support for Asus ZF8 and Samsung devices
+Subject: [PATCH 34/39] FOD support for Asus ZF8 and Samsung devices
 
 Thanks Asus for providing a free device to make this support
 And thanks @davigamer987 for donating enough to get a Samsung FOD device
