@@ -1,4 +1,4 @@
-From 4f158185ae326fcfa767b642da482af99eee8779 Mon Sep 17 00:00:00 2001
+From e9a22cd0d594da4574b549f02a7f1a7acd1b29e6 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 26 Oct 2022 17:59:11 -0400
 Subject: [PATCH 12/18] Fix support for devices without cgroupv2 support
@@ -12,10 +12,10 @@ devices without cgroupv2 simply won't freeze processes at all
  1 file changed, 4 insertions(+)
 
 diff --git a/init/service.cpp b/init/service.cpp
-index 38435a658..64af4d381 100644
+index bd704cf8e..188b042d9 100644
 --- a/init/service.cpp
 +++ b/init/service.cpp
-@@ -665,11 +665,15 @@ Result<void> Service::Start() {
+@@ -662,11 +662,15 @@ Result<void> Service::Start() {
                        limit_percent_ != -1 || !limit_property_.empty();
      errno = -createProcessGroup(proc_attr_.uid, pid_, use_memcg);
      if (errno != 0) {
@@ -32,5 +32,5 @@ index 38435a658..64af4d381 100644
  
      if (use_memcg) {
 -- 
-2.37.1 (Apple Git-137.1)
+2.25.1
 

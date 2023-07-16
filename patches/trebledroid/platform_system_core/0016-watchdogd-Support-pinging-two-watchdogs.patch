@@ -1,4 +1,4 @@
-From 9e492f59db513db5f9aa49f6f4056e2b0dfd01e0 Mon Sep 17 00:00:00 2001
+From d7037a9f94800e8107c0e847b572298c6d063c99 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sat, 27 May 2023 05:36:21 -0400
 Subject: [PATCH 16/18] watchdogd: Support pinging two watchdogs
@@ -74,5 +74,5 @@ index 5dc41e6b8..69abb4e2b 100644
      }
  }
 -- 
-2.37.1 (Apple Git-137.1)
+2.25.1
 

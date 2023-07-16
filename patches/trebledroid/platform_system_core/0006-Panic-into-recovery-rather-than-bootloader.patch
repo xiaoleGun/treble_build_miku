@@ -1,4 +1,4 @@
-From 87a054932db40910e02599b1d1cebaac5330dcb6 Mon Sep 17 00:00:00 2001
+From 0231dc621f36bcf2c93d3325975047cd45c79a1b Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 4 Sep 2019 21:11:48 +0200
 Subject: [PATCH 06/18] Panic into recovery rather than bootloader
@@ -34,5 +34,5 @@ index 1f411636c..cd25f80f1 100644
          const std::string kRebootTargetStringPattern = kRebootTargetString + "=";
          start_pos += sizeof(kRebootTargetStringPattern) - 1;
 -- 
-2.37.1 (Apple Git-137.1)
+2.25.1
 

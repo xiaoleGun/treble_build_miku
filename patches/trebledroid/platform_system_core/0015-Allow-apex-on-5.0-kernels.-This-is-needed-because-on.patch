@@ -1,4 +1,4 @@
-From 7d35d299f18b8d5c0d81c2585dea83cf1732c577 Mon Sep 17 00:00:00 2001
+From 117010f3fa8806be306470ebd5d0a499e80b45c2 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 28 Apr 2023 12:29:05 -0400
 Subject: [PATCH 15/18] Allow apex on > 5.0 kernels. This is needed because on
@@ -9,7 +9,7 @@ Subject: [PATCH 15/18] Allow apex on > 5.0 kernels. This is needed because on
  1 file changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/init/property_service.cpp b/init/property_service.cpp
-index 4dc542224..eb167eb4c 100644
+index 080ee9c71..3dc81169e 100644
 --- a/init/property_service.cpp
 +++ b/init/property_service.cpp
 @@ -61,6 +61,7 @@
@@ -20,7 +20,7 @@ index 4dc542224..eb167eb4c 100644
  
  #include "debug_ramdisk.h"
  #include "epoll.h"
-@@ -633,6 +634,16 @@ uint32_t InitPropertySet(const std::string& name, const std::string& value) {
+@@ -632,6 +633,16 @@ uint32_t InitPropertySet(const std::string& name, const std::string& value) {
  static bool load_properties_from_file(const char*, const char*,
                                        std::map<std::string, std::string>*);
  
@@ -37,7 +37,7 @@ index 4dc542224..eb167eb4c 100644
  /*
   * Filter is used to decide which properties to load: NULL loads all keys,
   * "ro.foo.*" is a prefix match, and "ro.foo.bar" is an exact match.
-@@ -727,7 +738,9 @@ static void LoadProperties(char* data, const char* filter, const char* filename,
+@@ -726,7 +737,9 @@ static void LoadProperties(char* data, const char* filter, const char* filename,
                  } else if (it->second != value) {
                      LOG(WARNING) << "Overriding previous property '" << key << "':'" << it->second
                                   << "' with new value '" << value << "'";
@@ -49,5 +49,5 @@ index 4dc542224..eb167eb4c 100644
                      } else {
                          it->second = value;
 -- 
-2.37.1 (Apple Git-137.1)
+2.25.1
 

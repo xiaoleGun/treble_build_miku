@@ -1,4 +1,4 @@
-From ebf6d8a190f01322820d4d875c3f9938f15d4c37 Mon Sep 17 00:00:00 2001
+From cb9a3099438f957df8a4143f341c612821ff6921 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 1 Nov 2019 18:22:13 +0100
 Subject: [PATCH 09/18] Ugly but secure: Set /dev/uinput as 0666 to fix
@@ -28,5 +28,5 @@ index 4ec59afe9..c9cd629b3 100644
  /dev/tty0                 0660   root       system
  /dev/graphics/*           0660   root       graphics
 -- 
-2.37.1 (Apple Git-137.1)
+2.25.1
 
