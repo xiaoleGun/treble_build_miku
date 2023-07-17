@@ -1,4 +1,4 @@
-From f9185460e962aa6f2775fef8b74b1395e79843cc Mon Sep 17 00:00:00 2001
+From cb67a9f6fb041ac86329d7cb09a2f2bcf18a86b2 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Tue, 8 Feb 2022 16:40:33 +0800
 Subject: [PATCH 1/3] res: Support multiple languages
@@ -7,39 +7,32 @@ Migrate all descriptions to strings.xml
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
- app/src/main/res/values/strings.xml    | 145 +++++++++++++++++++++++++
- app/src/main/res/xml/pref_asus.xml     |  14 +--
- app/src/main/res/xml/pref_custom.xml   |  18 +--
- app/src/main/res/xml/pref_doze.xml     |   6 +-
- app/src/main/res/xml/pref_headers.xml  |  32 +++---
+ app/src/main/res/values/strings.xml    | 139 +++++++++++++++++++++++++
+ app/src/main/res/xml/pref_custom.xml   |  18 ++--
+ app/src/main/res/xml/pref_doze.xml     |   8 +-
+ app/src/main/res/xml/pref_headers.xml  |  30 +++---
  app/src/main/res/xml/pref_huawei.xml   |  14 +--
  app/src/main/res/xml/pref_ims.xml      |   8 +-
  app/src/main/res/xml/pref_lenovo.xml   |   4 +-
  app/src/main/res/xml/pref_misc.xml     |  92 ++++++++--------
  app/src/main/res/xml/pref_mydevice.xml |   6 +-
- app/src/main/res/xml/pref_nubia.xml    |  24 ++--
- app/src/main/res/xml/pref_oneplus.xml  |  12 +-
- app/src/main/res/xml/pref_oppo.xml     |  12 +-
+ app/src/main/res/xml/pref_nubia.xml    |  24 ++---
+ app/src/main/res/xml/pref_oneplus.xml  |  12 +--
+ app/src/main/res/xml/pref_oppo.xml     |  12 +--
  app/src/main/res/xml/pref_qualcomm.xml |  14 +--
  app/src/main/res/xml/pref_samsung.xml  |  44 ++++----
  app/src/main/res/xml/pref_vsmart.xml   |   4 +-
  app/src/main/res/xml/pref_xiaomi.xml   |   6 +-
- 17 files changed, 300 insertions(+), 155 deletions(-)
+ 16 files changed, 287 insertions(+), 148 deletions(-)
 
 diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
-index d6f6e83..2863f5d 100644
+index d6f6e83..4ef8f91 100644
 --- a/app/src/main/res/values/strings.xml
 +++ b/app/src/main/res/values/strings.xml
-@@ -27,4 +27,149 @@
+@@ -27,4 +27,143 @@
      <string name="magisk_exists_message">Magisk was detected! If you proceed with the update you may lose Magisk or the installation may fail!</string>
      <string name="menu_delete_ota">Delete OTA files</string>
      <string name="delete_ota_message">Take in consideration that you may lose your userdata if you proceed!\nTo prevent this, cancel this dialog, reboot and flash the latest update on fastboot mode.\nDo you want to proceed anyway?</string>
-+    <!-- Asus -->
-+    <string name="asus_glove_mode">Enable glove mode</string>
-+    <string name="asus_dt2w">Enable double tap to wake</string>
-+    <string name="asus_fp_wake">Enable fingerprint wake</string>
-+    <string name="asus_usb_port_picker">Requires a reboot</string>
-+    <string name="asus_usb_port_picker_summary">USB port picker</string>
 +    <!-- Custom -->
 +    <string name="custom_system_ui_tuner">System UI Tuner</string>
 +    <string name="custom_ui">UI</string>
@@ -53,6 +46,7 @@ index d6f6e83..2863f5d 100644
 +    <string name="doze">Doze</string>
 +    <string name="doze_handwave">Enable Handwave gesture</string>
 +    <string name="doze_pocket">Enable out-of-pocket gesture</string>
++    <string name="doze_chopchop">Enable Chop Chop gesture</string>
 +    <!-- General -->
 +    <string name="general_audio">Audio</string>
 +    <string name="general_camera">Camera</string>
@@ -78,7 +72,6 @@ index d6f6e83..2863f5d 100644
 +    <string name="lenovo_features">Lenovo features</string>
 +    <string name="xiaomi_features">Xiaomi features</string>
 +    <string name="oppo_features">OPPO features</string>
-+    <string name="asus_features">Asus features</string>
 +    <string name="doze_features">Doze features</string>
 +    <string name="misc_features">Misc features</string>
 +    <string name="ims_features">IMS features</string>
@@ -180,44 +173,6 @@ index d6f6e83..2863f5d 100644
 +    <!-- Xiaomi -->
 +    <string name="xiaomi_disable_sunlight_mode">Disable Sunlight Mode</string>
  </resources>
-diff --git a/app/src/main/res/xml/pref_asus.xml b/app/src/main/res/xml/pref_asus.xml
-index 89bc590..e02594a 100644
---- a/app/src/main/res/xml/pref_asus.xml
-+++ b/app/src/main/res/xml/pref_asus.xml
-@@ -1,26 +1,26 @@
- <?xml version="1.0" encoding="utf-8"?>
- <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
--    <PreferenceCategory android:title="Display">
-+    <PreferenceCategory android:title="@string/general_display">
-         <SwitchPreference
-             android:defaultValue="false"
-             android:key="key_asus_glove_mode"
--            android:title="Enable glove mode" />
-+            android:title="@string/asus_glove_mode" />
-         <SwitchPreference
-             android:defaultValue="false"
-             android:key="key_asus_dt2w"
--            android:title="Enable double tap to wake" />
-+            android:title="@string/asus_dt2w" />
-     </PreferenceCategory>
--    <PreferenceCategory android:title="Other">
-+    <PreferenceCategory android:title="@string/general_other">
-         <SwitchPreference
-             android:defaultValue="true"
-             android:key="key_asus_fp_wake"
--            android:title="Enable fingerprint wake" />
-+            android:title="asus_fp_wake" />
-         <ListPreference
-             android:defaultValue="-1"
-             android:entries="@array/pref_asus_usb_port_picker"
-             android:entryValues="@array/pref_asus_usb_port_picker_values"
-             android:key="key_asus_usb_port_picker"
--            android:summary="Requires a reboot"
--            android:title="USB port picker" />
-+            android:summary="@string/asus_usb_port_picker_summary"
-+            android:title="@string/asus_usb_port_picker" />
-     </PreferenceCategory>
- </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_custom.xml b/app/src/main/res/xml/pref_custom.xml
 index b39d167..93ec1be 100644
 --- a/app/src/main/res/xml/pref_custom.xml
@@ -278,12 +233,13 @@ index b39d167..93ec1be 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_doze.xml b/app/src/main/res/xml/pref_doze.xml
-index 5835325..ae479ed 100644
+index 3f8d1c1..e08e319 100644
 --- a/app/src/main/res/xml/pref_doze.xml
 +++ b/app/src/main/res/xml/pref_doze.xml
-@@ -1,13 +1,13 @@
+@@ -1,20 +1,20 @@
  <?xml version="1.0" encoding="utf-8"?>
- <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+ <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:android="http://schemas.android.com/apk/res/android">
 -    <PreferenceCategory android:title="Doze">
 +    <PreferenceCategory android:title="@string/doze">
          <SwitchPreference
@@ -296,10 +252,17 @@ index 5835325..ae479ed 100644
              android:key="key_doze_pocket"
 -            android:title="Enable out-of-pocket gesture" />
 +            android:title="@string/doze_pocket" />
+         <SwitchPreference
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:defaultValue="false"
+             android:key="key_doze_chopchop"
+-            android:title="Enable Chop Chop gesture" />
++            android:title="@string/doze_chopchop" />
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_headers.xml b/app/src/main/res/xml/pref_headers.xml
-index 5c54ed8..7db9aba 100644
+index 5c54ed8..5c6bdf5 100644
 --- a/app/src/main/res/xml/pref_headers.xml
 +++ b/app/src/main/res/xml/pref_headers.xml
 @@ -1,52 +1,52 @@
@@ -346,8 +309,7 @@ index 5c54ed8..7db9aba 100644
 +        android:title="@string/oppo_features" />
      <header
          android:fragment="me.phh.treble.app.AsusSettingsFragment"
--        android:title="Asus features" />
-+        android:title="@string/asus_features" />
+         android:title="Asus features" />
      <header
          android:fragment="me.phh.treble.app.DozeSettingsFragment"
 -        android:title="Doze features" />
