@@ -1,4 +1,4 @@
-From cf517c6052fbeddfaa57b942b7e09cd197546c64 Mon Sep 17 00:00:00 2001
+From 8ab904e0c6d167089a8cfb5d96e1b40764dd0d27 Mon Sep 17 00:00:00 2001
 From: "Re*Index. (ot_inc)" <32851879+reindex-ot@users.noreply.github.com>
 Date: Thu, 25 May 2023 21:21:15 +0900
 Subject: [PATCH 3/3] res: Add support for Japanese (#1)

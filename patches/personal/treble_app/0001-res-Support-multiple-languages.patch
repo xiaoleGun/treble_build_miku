@@ -1,4 +1,4 @@
-From cb67a9f6fb041ac86329d7cb09a2f2bcf18a86b2 Mon Sep 17 00:00:00 2001
+From a8767de24c2e6226515150b2a3e91f138ba2003a Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Tue, 8 Feb 2022 16:40:33 +0800
 Subject: [PATCH 1/3] res: Support multiple languages
@@ -7,14 +7,14 @@ Migrate all descriptions to strings.xml
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
- app/src/main/res/values/strings.xml    | 139 +++++++++++++++++++++++++
+ app/src/main/res/values/strings.xml    | 141 +++++++++++++++++++++++++
  app/src/main/res/xml/pref_custom.xml   |  18 ++--
  app/src/main/res/xml/pref_doze.xml     |   8 +-
  app/src/main/res/xml/pref_headers.xml  |  30 +++---
  app/src/main/res/xml/pref_huawei.xml   |  14 +--
  app/src/main/res/xml/pref_ims.xml      |   8 +-
  app/src/main/res/xml/pref_lenovo.xml   |   4 +-
- app/src/main/res/xml/pref_misc.xml     |  92 ++++++++--------
+ app/src/main/res/xml/pref_misc.xml     |  96 ++++++++---------
  app/src/main/res/xml/pref_mydevice.xml |   6 +-
  app/src/main/res/xml/pref_nubia.xml    |  24 ++---
  app/src/main/res/xml/pref_oneplus.xml  |  12 +--
@@ -23,13 +23,13 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
  app/src/main/res/xml/pref_samsung.xml  |  44 ++++----
  app/src/main/res/xml/pref_vsmart.xml   |   4 +-
  app/src/main/res/xml/pref_xiaomi.xml   |   6 +-
- 16 files changed, 287 insertions(+), 148 deletions(-)
+ 16 files changed, 291 insertions(+), 150 deletions(-)
 
 diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
-index d6f6e83..4ef8f91 100644
+index d6f6e83..1d7cbfa 100644
 --- a/app/src/main/res/values/strings.xml
 +++ b/app/src/main/res/values/strings.xml
-@@ -27,4 +27,143 @@
+@@ -27,4 +27,145 @@
      <string name="magisk_exists_message">Magisk was detected! If you proceed with the update you may lose Magisk or the installation may fail!</string>
      <string name="menu_delete_ota">Delete OTA files</string>
      <string name="delete_ota_message">Take in consideration that you may lose your userdata if you proceed!\nTo prevent this, cancel this dialog, reboot and flash the latest update on fastboot mode.\nDo you want to proceed anyway?</string>
@@ -117,6 +117,8 @@ index d6f6e83..4ef8f91 100644
 +    <string name="misc_bluetooth">Bluetooth workarounds</string>
 +    <string name="misc_max_aspect_ratio_pre_o">Compatibility max aspect ratio</string>
 +    <string name="misc_dynamic_sysbta">Use System Wide BT HAL</string>
++    <string name="misc_allow_binder_thread_on_incoming_calls">Allow binder thread on incoming calls</string>
++    <string name="misc_allow_binder_thread_on_incoming_calls_summary">Possible workaround for 4G calling\nRequires a reboot</string>
 +    <string name="misc_force_navbar_off">Force navigation bar disabled</string>
 +    <string name="misc_storage_fuse">Disable FUSE storage layer</string>
 +    <string name="misc_storage_fuse_summary">This can (de/in)crease storage speed\nRequires a reboot</string>
@@ -418,10 +420,10 @@ index e22cfa5..9ff49cd 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_misc.xml b/app/src/main/res/xml/pref_misc.xml
-index 26c6d3a..305a1b2 100644
+index 1aed133..40814ba 100644
 --- a/app/src/main/res/xml/pref_misc.xml
 +++ b/app/src/main/res/xml/pref_misc.xml
-@@ -1,162 +1,162 @@
+@@ -1,167 +1,167 @@
  <?xml version="1.0" encoding="utf-8"?>
  <PreferenceScreen
  	xmlns:android="http://schemas.android.com/apk/res/android">
@@ -585,6 +587,13 @@ index 26c6d3a..305a1b2 100644
 -            android:title="Use System Wide BT HAL" />
 +            android:title="@string/misc_dynamic_sysbta" />
  		<SwitchPreference
+ 			android:defaultValue="false"
+ 			android:key="key_misc_allow_binder_thread_on_incoming_calls"
+-			android:summary="Possible workaround for 4G calling\nRequires a reboot"
+-			android:title="Allow binder thread on incoming calls" />
++			android:summary="@string/misc_allow_binder_thread_on_incoming_calls_summary"
++			android:title="@stting/misc_allow_binder_thread_on_incoming_calls" />
+ 		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_force_navbar_off"
 -            android:title="Force navigation bar disabled"
@@ -629,7 +638,7 @@ index 26c6d3a..305a1b2 100644
              <intent
                  android:action="android.intent.action.VIEW"
                  android:targetPackage="me.phh.treble.app"
-@@ -165,6 +165,6 @@
+@@ -170,6 +170,6 @@
  		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_remotectl"
