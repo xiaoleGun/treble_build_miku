@@ -1,7 +1,7 @@
-From 096bca2b303d02901fe32607843aca8303016058 Mon Sep 17 00:00:00 2001
+From 9151b2fb171e189781024b2b18c49541fff49330 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Mon, 3 Oct 2022 13:50:36 +0100
-Subject: [PATCH 11/18] fs_mgr: Keep allowing encryptable fstab flag
+Subject: [PATCH 11/19] fs_mgr: Keep allowing encryptable fstab flag
 
 Some users still use "encryptable" flag while being unencrypted. Let them still boot their devices.
 
@@ -33,5 +33,5 @@ index 9c77299a6..9d365ff0d 100644
  }
  
 -- 
-2.25.1
+2.37.1 (Apple Git-137.1)
 

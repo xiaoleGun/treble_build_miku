@@ -1,7 +1,7 @@
-From 0d7411bb4a24b6e1d6fae2ae532c9a7d7996ae1a Mon Sep 17 00:00:00 2001
+From 9e5975c1fd040b52ae984dcb40a59a523e4c09dd Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Tue, 1 Feb 2022 13:48:35 +0000
-Subject: [PATCH 08/18] Revert "Set /system/xbin permissions to 750."
+Subject: [PATCH 08/19] Revert "Set /system/xbin permissions to 750."
 
 This reverts commit 42a1a126e554a8bca31d0afc832848b7b0fa1f4e.
 
@@ -24,5 +24,5 @@ index a6835fc70..f686b469c 100644
      { 00751, AID_ROOT,         AID_SHELL,        0, "system_ext/bin" },
      { 00751, AID_ROOT,         AID_SHELL,        0, "system_ext/apex/*/bin" },
 -- 
-2.25.1
+2.37.1 (Apple Git-137.1)
 
