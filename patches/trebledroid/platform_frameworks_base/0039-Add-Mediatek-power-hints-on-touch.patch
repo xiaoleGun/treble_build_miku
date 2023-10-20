@@ -1,7 +1,7 @@
-From 4654f7dff40badf8219ad790db1d162dda165783 Mon Sep 17 00:00:00 2001
+From bba79d2a5d20f8ec210d832d08bfec69128eed70 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sat, 17 Jun 2023 08:31:55 -0400
-Subject: [PATCH 39/40] Add Mediatek power hints on touch
+Subject: [PATCH 39/43] Add Mediatek power hints on touch
 
 Mediatek has multiple HALs (which existed concurrently), so it is a bit
 of a mess.
@@ -37,7 +37,7 @@ index 604e1be0f03f..145a74a43464 100644
          "vendor.goodix.hardware.biometrics.fingerprint-V2.1-java",
          "vendor.samsung.hardware.biometrics.fingerprint-V3.0-java",
 diff --git a/services/core/java/com/android/server/wm/DisplayPolicy.java b/services/core/java/com/android/server/wm/DisplayPolicy.java
-index 7df69d6bf35e..7b839efaf701 100644
+index 7df69d6bf35e..c0e6372f51fb 100644
 --- a/services/core/java/com/android/server/wm/DisplayPolicy.java
 +++ b/services/core/java/com/android/server/wm/DisplayPolicy.java
 @@ -237,6 +237,9 @@ public class DisplayPolicy {
@@ -101,10 +101,10 @@ index 7df69d6bf35e..7b839efaf701 100644
 +                                        hint = 24; // MTKPOWER_HINT_APP_ROTATE
 +                                mMtkPerf.perfCusLockHint(hint, 1000);
 +                            } catch(Throwable t) {
-+                                 android.util.Log.d("PHH-Power", "Failed sending touch power hint", t);
++                                android.util.Log.d("PHH-Power", "Failed sending touch power hint", t);
 +                            }
 +                        }
-+                        if(mOldMtkPerf != null) {
++                    if(mOldMtkPerf != null) {
 +                            try {
 +                                android.util.Log.d("PHH-Power", "mtk1 power hint");
 +                                int hint = 36; // MTKPOWER_HINT_APP_TOUCH
