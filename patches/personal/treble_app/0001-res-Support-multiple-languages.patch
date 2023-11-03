@@ -1,4 +1,4 @@
-From 79fd1f56b4cd68d9acdd6982aeb7c7677e9f8a57 Mon Sep 17 00:00:00 2001
+From 2127c8cd1bedefe0f057f49267e203e7405dfc2f Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Tue, 8 Feb 2022 16:40:33 +0800
 Subject: [PATCH 1/3] res: Support multiple languages
@@ -7,29 +7,29 @@ Migrate all descriptions to strings.xml
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
- app/src/main/res/values/strings.xml    | 143 +++++++++++++++++++++++++
- app/src/main/res/xml/pref_custom.xml   |  18 ++--
+ app/src/main/res/values/strings.xml    | 158 +++++++++++++++++++++++++
+ app/src/main/res/xml/pref_custom.xml   |  18 +--
  app/src/main/res/xml/pref_doze.xml     |   8 +-
- app/src/main/res/xml/pref_headers.xml  |  30 +++---
+ app/src/main/res/xml/pref_headers.xml  |  30 ++---
  app/src/main/res/xml/pref_huawei.xml   |  14 +--
  app/src/main/res/xml/pref_ims.xml      |   8 +-
  app/src/main/res/xml/pref_lenovo.xml   |   4 +-
- app/src/main/res/xml/pref_misc.xml     | 101 +++++++++--------
+ app/src/main/res/xml/pref_misc.xml     | 108 ++++++++---------
  app/src/main/res/xml/pref_mydevice.xml |   6 +-
- app/src/main/res/xml/pref_nubia.xml    |  24 ++---
- app/src/main/res/xml/pref_oneplus.xml  |  12 +--
- app/src/main/res/xml/pref_oppo.xml     |  12 +--
+ app/src/main/res/xml/pref_nubia.xml    |  48 ++++----
+ app/src/main/res/xml/pref_oneplus.xml  |  12 +-
+ app/src/main/res/xml/pref_oppo.xml     |  12 +-
  app/src/main/res/xml/pref_qualcomm.xml |  14 +--
- app/src/main/res/xml/pref_samsung.xml  |  44 ++++----
+ app/src/main/res/xml/pref_samsung.xml  |  44 +++----
  app/src/main/res/xml/pref_vsmart.xml   |   4 +-
  app/src/main/res/xml/pref_xiaomi.xml   |   6 +-
- 16 files changed, 295 insertions(+), 153 deletions(-)
+ 16 files changed, 326 insertions(+), 168 deletions(-)
 
 diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
-index d6f6e83..ed4f31a 100644
+index d6f6e83..99e3833 100644
 --- a/app/src/main/res/values/strings.xml
 +++ b/app/src/main/res/values/strings.xml
-@@ -27,4 +27,147 @@
+@@ -27,4 +27,162 @@
      <string name="magisk_exists_message">Magisk was detected! If you proceed with the update you may lose Magisk or the installation may fail!</string>
      <string name="menu_delete_ota">Delete OTA files</string>
      <string name="delete_ota_message">Take in consideration that you may lose your userdata if you proceed!\nTo prevent this, cancel this dialog, reboot and flash the latest update on fastboot mode.\nDo you want to proceed anyway?</string>
@@ -51,8 +51,8 @@ index d6f6e83..ed4f31a 100644
 +    <string name="general_audio">Audio</string>
 +    <string name="general_camera">Camera</string>
 +    <string name="general_display">Display</string>
-+    <string name="general_enable_dt2w">Enable double tap to wake</string>
-+    <string name="general_double_tap_to_wake">Enable DT2W</string>
++    <string name="general_enable_dt2w">Enable DT2W</string>
++    <string name="general_double_tap_to_wake">Enable double tap to wake</string>
 +    <string name="general_game_mode">Enable game mode</string>
 +    <string name="general_usb_otg">Enable USB OTG</string>
 +    <string name="general_misc">Misc</string>
@@ -96,6 +96,7 @@ index d6f6e83..ed4f31a 100644
 +    <string name="misc_huawei_headset_fix">Force headset switch (Huawei default)</string>
 +    <string name="misc_headset_devinput">Use alternate way to detect headsets</string>
 +    <string name="misc_disable_audio_effects">Disable audio effects</string>
++    <string name="misc_disable_fast_audio">Disable fast audio</string>
 +    <string name="misc_rounded_corners">Set rounded corners diameter</string>
 +    <string name="misc_rounded_corners_overlay">Set forced/faked rounded corners diameter</string>
 +    <string name="misc_fps_divisor">FPS Divisor</string>
@@ -109,6 +110,7 @@ index d6f6e83..ed4f31a 100644
 +    <string name="misc_mediatek_touch_hint_rotate_summary">For Mediatek devices</string>
 +    <string name="misc_backlight">Backlight</string>
 +    <string name="misc_low_gamma_brightness">Set alternative brightness curve</string>
++    <string name="misc_linear_brightness">Set linear brightness curve</string>
 +    <string name="misc_disable_buttons_backlight">Disable backlight of hardware buttons if present</string>
 +    <string name="misc_backlight_scale">Force alternative backlight scale</string>
 +    <string name="misc_minimal_brightness">Allows setting brightness to the lowest possible</string>
@@ -125,6 +127,8 @@ index d6f6e83..ed4f31a 100644
 +    <string name="misc_storage_fuse">Disable FUSE storage layer</string>
 +    <string name="misc_storage_fuse_summary">This can (de/in)crease storage speed\nRequires a reboot</string>
 +    <string name="misc_restart_ril">Automatically restart RIL</string>
++    <string name="misc_force_display_5g">Force display 5G network</string>
++    <string name="misc_force_display_5g_summary">Displays 5G as an option for the preferred network type\nRequires a reboot</string>
 +    <string name="misc_dt2w">Double tap to wake</string>
 +    <string name="misc_dt2w_summary">Unlikely to work for you</string>
 +    <string name="misc_fod_color">Under-display fp color</string>
@@ -137,14 +141,25 @@ index d6f6e83..ed4f31a 100644
 +    <string name="mydevice_telegram_group">Community telegram group for my device</string>
 +    <string name="mydevice_apply_presets">Apply presets</string>
 +    <!-- Nubia -->
++    <string name="nubia_high_touch_sample_rate">Enable high touch sample rate</string>
++    <string name="nubia_high_touch_sample_rate_summary">Drain more battery.</string>
++    <string name="nubia_high_touch_sensitivity">Enable high touch sensitivity</string>
++    <string name="nubia_high_touch_sensitivity_summary">While using gloves</string>
++    <string name="nubia_touchscreen_game_mode_summaryOn">Auto stop fan is disabled</string>
++    <string name="nubia_bypass_charger">Enable bypass charger</string>
++    <string name="nubia_bypass_charger_summaryOff">Charger -> Battery -> Phone</string>
++    <string name="nubia_bypass_charger_summaryOn">Charger->Phone</string>
 +    <string name="nubia_fan_speed">FAN speed</string>
-+    <string name="nubia_redmagic_logo_breath">Make Redmagic logo breath</string>
++    <string name="nubia_fan_speed_summary">Support smart charging</string>
 +    <string name="nubia_leds">LEDs</string>
++    <string name="nubia_redmagic_logo_breath">Make Redmagic logo breath</string>
 +    <string name="nubia_redmagic_led">REDMAGIC RGB</string>
 +    <string name="nubia_boosts">Boosts</string>
 +    <string name="nubia_boost_cpu">Boost CPU</string>
 +    <string name="nubia_boost_cache">Boost caches</string>
 +    <string name="nubia_boost_gpu">Boost GPU</string>
++    <string name="nubia_boost_ufs">Boost UFS</string>
++    <string name="nubia_boost_ufs_summaryOn">Increase Read/Write speed</string>
 +    <!-- OnePlus -->
 +    <string name="oneplus_display_mode">Display Mode</string>
 +    <string name="oneplus_display_high_brightness">High brightness mode</string>
@@ -422,10 +437,10 @@ index e22cfa5..9ff49cd 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_misc.xml b/app/src/main/res/xml/pref_misc.xml
-index d660f60..ff377bb 100644
+index a819fa6..1a984d0 100644
 --- a/app/src/main/res/xml/pref_misc.xml
 +++ b/app/src/main/res/xml/pref_misc.xml
-@@ -1,171 +1,170 @@
+@@ -1,184 +1,184 @@
  <?xml version="1.0" encoding="utf-8"?>
  <PreferenceScreen
  	xmlns:android="http://schemas.android.com/apk/res/android">
@@ -463,6 +478,11 @@ index d660f60..ff377bb 100644
  			android:key="key_misc_disable_audio_effects"
 -			android:title="Disable audio effects" />
 +			android:title="@string/misc_disable_audio_effects" />
+ 		<SwitchPreference
+ 			android:defaultValue="false"
+ 			android:key="key_misc_disable_fast_audio"
+-			android:title="Disable fast audio" />
++			android:title="@string/misc_disable_fast_audio" />
  	</PreferenceCategory>
 -	<PreferenceCategory android:title="Display">
 +	<PreferenceCategory android:title="@string/general_display">
@@ -543,6 +563,11 @@ index d660f60..ff377bb 100644
 +            android:title="@string/misc_low_gamma_brightness" />
  		<SwitchPreference
              android:defaultValue="false"
+             android:key="key_misc_linear_brightness"
+-            android:title="Set linear brightness curve" />
++            android:title="@string/misc_linear_brightness" />
+ 		<SwitchPreference
+             android:defaultValue="false"
              android:key="key_misc_disable_buttons_backlight"
 -            android:title="Disable backlight of hardware buttons if present"
 -            android:summary="Requires a reboot" />
@@ -606,7 +631,14 @@ index d660f60..ff377bb 100644
 +			android:summary="@string/misc_allow_binder_thread_on_incoming_calls_summary"
 +			android:title="@stting/misc_allow_binder_thread_on_incoming_calls" />
  		<SwitchPreference
--				android:defaultValue="false"
+ 			android:defaultValue="false"
+ 			android:key="key_misc_force_display_5g"
+-			android:title="Force display 5G network"
+-			android:summary="Displays 5G as an option for the preferred network type\nRequires a reboot" />
++			android:title="@string/misc_force_display_5g"
++			android:summary="@string/misc_force_display_5g_summary" />
+ 		<SwitchPreference
+ 				android:defaultValue="false"
  				android:key="key_misc_restart_ril"
 -				android:title="Automatically restart RIL" />
 +				android:title="@string/misc_restart_ril" />
@@ -646,7 +678,7 @@ index d660f60..ff377bb 100644
              <intent
                  android:action="android.intent.action.VIEW"
                  android:targetPackage="me.phh.treble.app"
-@@ -174,6 +173,6 @@
+@@ -187,6 +187,6 @@
  		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_remotectl"
@@ -673,79 +705,124 @@ index bf4ba9f..08643f7 100644
          android:key="key_mydevice_apply_presets" />
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_nubia.xml b/app/src/main/res/xml/pref_nubia.xml
-index 3d765fa..35d8dc5 100644
+index 75502a5..68a655b 100644
 --- a/app/src/main/res/xml/pref_nubia.xml
 +++ b/app/src/main/res/xml/pref_nubia.xml
-@@ -1,59 +1,59 @@
+@@ -1,92 +1,92 @@
  <?xml version="1.0" encoding="utf-8"?>
- <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+ <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:android="http://schemas.android.com/apk/res/android">
 -    <PreferenceCategory android:title="Touchscreen">
 +    <PreferenceCategory android:title="@string/general_touchscreen">
-         <SwitchPreference
+         <CheckBoxPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="nubia_double_tap_to_wake"
--            android:title="Enable DT2W" />
-+            android:title="@string/general_enable_dt2w" />
-         <SwitchPreference
+-            android:title="Enable DT2W"
+-            app:summary="Double tap to wake up" />
++            android:title="@string/general_enable_dt2w"
++            app:summary="@string/general_double_tap_to_wake" />
+         <CheckBoxPreference
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:defaultValue="false"
+             android:key="nubia_high_touch_sample_rate"
+-            android:title="Enable high touch sample rate"
+-            app:summary="Drain more battery." />
++            android:title="@string/nubia_high_touch_sample_rate"
++            app:summary="@string/nubia_high_touch_sample_rate_summary" />
+         <CheckBoxPreference
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:defaultValue="false"
+             android:key="nubia_high_touch_sensitivity"
+-            android:title="Enable high touch sensitivity"
+-            app:summary="While using gloves" />
++            android:title="@string/nubia_high_touch_sensitivity"
++            app:summary="@string/nubia_high_touch_sensitivity_summary" />
+     </PreferenceCategory>
+-    <PreferenceCategory android:title="Misc">
++    <PreferenceCategory android:title="@string/general_misc">
+         <CheckBoxPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="nubia_touchscreen_game_mode"
--            android:title="Enable game mode" />
-+            android:title="@string/general_game_mode" />
-     </PreferenceCategory>
--    <PreferenceCategory android:title="Misc">
-+    <PreferenceCategory android:title="@string/general_misc">
- 	    <ListPreference
- 		    android:defaultValue="-1"
- 		    android:entries="@array/pref_nubia_fan"
- 		    android:entryValues="@array/pref_nubia_fan_values"
- 		    android:key="nubia_fan_speed"
--		    android:title="FAN speed" />
-+		    android:title="@string/nubia_fan_speed" />
+-            android:title="Enable game mode"
+-            app:summaryOn="Auto stop fan is disabled" />
++            android:title="@string/general_game_mode"
++            app:summaryOn="@string/nubia_touchscreen_game_mode_summaryOn" />
+         <CheckBoxPreference
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:defaultValue="false"
+             android:key="nubia_bypass_charger"
+-            android:title="Enable bypass charger"
+-            app:summaryOff="Charger -> Battery -> Phone"
+-            app:summaryOn="Charger->Phone" />
++            android:title="@string/nubia_bypass_charger"
++            app:summaryOff="@string/nubia_bypass_charger_summaryOff"
++            app:summaryOn="@string/nubia_bypass_charger_summaryOn" />
+         <ListPreference
+             android:defaultValue="0"
+             android:entries="@array/pref_nubia_fan"
+             android:entryValues="@array/pref_nubia_fan_values"
+             android:key="nubia_fan_speed"
+-            android:title="FAN speed"
+-            app:summary="Support smart charging" />
++            android:title="@string/nubia_fan_speed"
++            app:summary="@string/nubia_fan_speed_summary" />
      </PreferenceCategory>
 -    <PreferenceCategory android:title="LEDs">
 +    <PreferenceCategory android:title="@string/nubia_leds">
-         <SwitchPreference
+         <CheckBoxPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="nubia_redmagic_logo_breath"
 -            android:title="Make Redmagic logo breath" />
 +            android:title="@string/nubia_redmagic_logo_breath" />
- 	    <ListPreference
- 		    android:defaultValue="-1"
- 		    android:entries="@array/pref_nubia_redmagic_led"
- 		    android:entryValues="@array/pref_nubia_redmagic_led_values"
- 		    android:key="nubia_redmagic_led"
--		    android:title="REDMAGIC RGB" />
-+		    android:title="@string/nubia_redmagic_led" />
+         <ListPreference
+             android:defaultValue="-1"
+             android:entries="@array/pref_nubia_redmagic_led"
+             android:entryValues="@array/pref_nubia_redmagic_led_values"
+             android:key="nubia_redmagic_led"
+-            android:title="REDMAGIC RGB" />
++            android:title="@string/nubia_redmagic_led" />
      </PreferenceCategory>
 -    <PreferenceCategory android:title="Boosts">
 +    <PreferenceCategory android:title="@string/nubia_boosts">
-         <SwitchPreference
+         <CheckBoxPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="nubia_boost_cpu"
 -            android:title="Boost CPU" />
 +            android:title="@string/nubia_boost_cpu" />
-         <SwitchPreference
+         <CheckBoxPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="nubia_boost_cache"
 -            android:title="Boost caches" />
 +            android:title="@string/nubia_boost_cache" />
-         <SwitchPreference
+         <CheckBoxPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:defaultValue="false"
              android:key="nubia_boost_gpu"
 -            android:title="Boost GPU" />
 +            android:title="@string/nubia_boost_gpu" />
+         <CheckBoxPreference
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:defaultValue="false"
+             android:key="nubia_boost_ufs"
+-            android:title="Boost UFS"
+-            app:summaryOn="Increase Read/Write speed" />
++            android:title="@string/nubia_boost_ufs"
++            app:summaryOn="@string/nubia_boost_ufs_summaryOn" />
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_oneplus.xml b/app/src/main/res/xml/pref_oneplus.xml
@@ -1009,5 +1086,5 @@ index 588281f..7280d73 100644
      </PreferenceCategory>
  </PreferenceScreen>
 -- 
-2.37.1 (Apple Git-137.1)
+2.41.0
 

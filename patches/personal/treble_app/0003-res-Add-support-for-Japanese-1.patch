@@ -1,4 +1,4 @@
-From 0c8e00a24dc1d9f997eacd800ab97a7eca5b7ce1 Mon Sep 17 00:00:00 2001
+From f756bcca79827f81ed350121e3b7bc4bd0b3a57c Mon Sep 17 00:00:00 2001
 From: "Re*Index. (ot_inc)" <32851879+reindex-ot@users.noreply.github.com>
 Date: Thu, 25 May 2023 21:21:15 +0900
 Subject: [PATCH 3/3] res: Add support for Japanese (#1)
@@ -477,5 +477,5 @@ index 0000000..7444c87
 +  <string name="xiaomi_disable_sunlight_mode">太陽光スクリーンを無効化</string>
 +</resources>
 -- 
-2.37.1 (Apple Git-137.1)
+2.41.0
 
