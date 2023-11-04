@@ -6,7 +6,7 @@
 这是送给所有Miku粉丝的Android项目，如果不喜欢它请关闭本页面，但不要攻击任何人，尤其是其作者。
 
 ## 版本
-最新版本: 1.0.1
+最新版本: 0.1.3
 
 [下载](https://github.com/xiaoleGun/treble_build_miku/releases)
 
@@ -16,21 +16,21 @@
 
 从前到后，分别为
 ```
-ProjectName-{SNOW | SNOWLAND | TDA}-Miku UI版本-arm64-ab-vndklite-gapps-构建日期-构建类型
- |                |          |                   |    |     |      |
- |                |          |                   |    |     |      |
- |                |          |                   |    |     |   谷歌服务
- |                |          |                   |    |     |
- |                |          |                   |    |     |
- |                |          |                   |    |    用于vndklite的设备
- |                |          |                   |    |    支持system读写
- |                |          |                   |    |
- |                |          |                   |  分区类型，仅构建AB(1)
- |                |          |                   |
- |                |          |                   |
- |                |          |                CPU位数，构建64位和a64(2)
- |                |          |
- |     Android 12 | 12.1     | 13
+ProjectName-{SNOW | SNOWLAND | TDA | Udon}-版本号-arm64-ab-vndklite-gapps-构建日期-构建类型
+ |                |          |     |               |    |     |      |
+ |                |          |     |               |    |     |      |
+ |                |          |     |               |    |     |   谷歌服务
+ |                |          |     |               |    |     |
+ |                |          |     |               |    |     |
+ |                |          |     |               |    |    用于vndklite的设备
+ |                |          |     |               |    |    支持system读写
+ |                |          |     |               |    |
+ |                |          |     |               |  分区类型，仅构建AB(1)
+ |                |          |     |               |
+ |                |          |     |               |
+ |                |          |     |          CPU架构，构建64位和a64(2)
+ |                |          |     |
+ |     Android 12 | 12.1     | 13  | 14
  |
 Miku UI
 ```
@@ -51,7 +51,7 @@ Miku UI
     ```
 - 下载本仓库
     ```
-    git clone https://github.com/xiaoleGun/treble_build_miku -b TDA
+    git clone https://github.com/xiaoleGun/treble_build_miku -b Udon
     ```
 - 完成之后运行脚本:
     ```

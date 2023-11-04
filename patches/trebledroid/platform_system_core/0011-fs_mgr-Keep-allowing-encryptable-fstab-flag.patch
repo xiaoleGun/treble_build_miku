@@ -1,7 +1,7 @@
-From 9151b2fb171e189781024b2b18c49541fff49330 Mon Sep 17 00:00:00 2001
+From 6593bb652c740085f55f872bf7ffe49398eb5988 Mon Sep 17 00:00:00 2001
 From: Alberto Ponces <ponces26@gmail.com>
 Date: Mon, 3 Oct 2022 13:50:36 +0100
-Subject: [PATCH 11/19] fs_mgr: Keep allowing encryptable fstab flag
+Subject: [PATCH 11/22] fs_mgr: Keep allowing encryptable fstab flag
 
 Some users still use "encryptable" flag while being unencrypted. Let them still boot their devices.
 
@@ -11,10 +11,10 @@ Change-Id: Id2554d6563a869bb5bcf39c67b0322484bdab0c9
  1 file changed, 11 deletions(-)
 
 diff --git a/fs_mgr/fs_mgr_fstab.cpp b/fs_mgr/fs_mgr_fstab.cpp
-index 9c77299a6..9d365ff0d 100644
+index 7731545d0..fad84c653 100644
 --- a/fs_mgr/fs_mgr_fstab.cpp
 +++ b/fs_mgr/fs_mgr_fstab.cpp
-@@ -311,17 +311,6 @@ bool ParseFsMgrFlags(const std::string& flags, FstabEntry* entry) {
+@@ -322,17 +322,6 @@ bool ParseFsMgrFlags(const std::string& flags, FstabEntry* entry) {
          }
      }
  
@@ -33,5 +33,5 @@ index 9c77299a6..9d365ff0d 100644
  }
  
 -- 
-2.37.1 (Apple Git-137.1)
+2.41.0
 

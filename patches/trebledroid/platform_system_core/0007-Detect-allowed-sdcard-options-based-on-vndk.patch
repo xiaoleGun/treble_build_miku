@@ -1,7 +1,7 @@
-From a96eb8c3afd7515b8066d70485d11c86fa98900c Mon Sep 17 00:00:00 2001
+From b1ef4ed4eed253cfd922859d8a698da4ef3f3af8 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 14 Aug 2018 19:33:03 +0200
-Subject: [PATCH 07/19] Detect allowed sdcard options based on vndk
+Subject: [PATCH 07/22] Detect allowed sdcard options based on vndk
 
 Some kernel crashes when using too recent sdcardfs options
 
@@ -39,5 +39,5 @@ index 622de5b7a..e580190e9 100644
      // handle older kernels that aren't updated yet.
      for (int i = 0; i <= new_opts_list.size(); ++i) {
 -- 
-2.37.1 (Apple Git-137.1)
+2.41.0
 

@@ -1,7 +1,7 @@
-From 34542670680b4cf095cfb3a57d233ae8e0032976 Mon Sep 17 00:00:00 2001
+From 283300fcb754a243cacce7a11d3a477a9ad3dd2f Mon Sep 17 00:00:00 2001
 From: Isaac Chen <tingyi364@gmail.com>
 Date: Wed, 23 Jun 2021 13:07:30 +0800
-Subject: [PATCH 05/19] init: Do not start console service when debuggable
+Subject: [PATCH 05/22] init: Do not start console service when debuggable
 
 Google added a check for this in R, when it's running it will show a
 notification about that performance is impacted.
@@ -13,10 +13,10 @@ Change-Id: I34cfd6b42d3b9aee4b3e63181480cfb8b1255f29
  1 file changed, 3 deletions(-)
 
 diff --git a/rootdir/init.rc b/rootdir/init.rc
-index 6b7687ab7..45fde5225 100644
+index 63273a0c3..8b48a9c87 100644
 --- a/rootdir/init.rc
 +++ b/rootdir/init.rc
-@@ -1280,9 +1280,6 @@ on property:ro.debuggable=1
+@@ -1312,9 +1312,6 @@ on property:ro.debuggable=1
      # Give reads to anyone for the accessibility trace folder on debug builds.
      chmod 0775 /data/misc/a11ytrace
  
@@ -27,5 +27,5 @@ index 6b7687ab7..45fde5225 100644
    # TODO(b/135984674): reset all necessary properties here.
    setprop sys.boot_completed ""
 -- 
-2.37.1 (Apple Git-137.1)
+2.41.0
 

@@ -44,7 +44,7 @@ Miku UI GSI のビルドを始めるには、[How to build a GSI](https://github
     ```
 - このリポジトリをクローンする:
     ```
-    git clone https://github.com/xiaoleGun/treble_build_miku -b TDA
+    git clone https://github.com/xiaoleGun/treble_build_miku -b Udon
     ```
 - 最後にビルドスクリプトを実行する:
     ```

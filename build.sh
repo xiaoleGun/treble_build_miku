@@ -4,7 +4,7 @@ set -e
 
 multipleLanguages() {
     if [ -n $(echo $LANG | grep zh_CN) ]; then
-        BUILDBOT="Miku UI TDA通用镜像自动构建"
+        BUILDBOT="Miku UI Udon通用镜像自动构建"
         BUILDBOT_EXIT="3秒后开始构建Miku UI通用镜像 - CTRL-C退出"
         SHOW_VERSION="构建版本"
         ONCE_PASSWORD="请输入 $USER 的密码: "
@@ -25,7 +25,7 @@ multipleLanguages() {
         UP_GITHUB_RELEASE="上传到Github release"
         COMPLETED="构建完成，使用了 $1 分钟 $2 秒"
     else
-        BUILDBOT="Miku UI TDA Treble Buildbot"
+        BUILDBOT="Miku UI Udon Treble Buildbot"
         BUILDBOT_EXIT="Executing in 3 seconds - CTRL-C to exit"
         SHOW_VERSION="Build version"
         ONCE_PASSWORD="Please enter the password of $USER: "
@@ -57,7 +57,7 @@ warning() {
     echo " $BUILDBOT_EXIT                          "
     echo "-----------------------------------------"
     echo
-    echo "$SHOW_VERSION: $VERSION"
+    echo "$SHOW_VERSION: $VERSION_CODE"
     echo
 }
 
@@ -90,7 +90,7 @@ initRepo() {
         echo
         echo "--> $INIT_MIKU_UI"
         echo
-        repo init -u https://github.com/Miku-UI/manifesto -b TDA --depth=1
+        repo init -u https://github.com/Miku-UI/manifesto -b Udon --depth=1
     fi
 
     if [ -d .repo ] && [ ! -f .repo/local_manifests/miku-treble.xml ]; then
@@ -105,11 +105,12 @@ initRepo() {
           fetch=\"https://github.com\" />
 
   <project name=\"TrebleDroid/vendor_hardware_overlay\" path=\"vendor/hardware_overlay\" remote=\"github\" revision=\"pie\" />
-  <project name=\"TrebleDroid/device_phh_treble\" path=\"device/phh/treble\" remote=\"github\" revision=\"android-13.0\" />
-  <project name=\"TrebleDroid/vendor_interfaces\" path=\"vendor/interfaces\" remote=\"github\" revision=\"android-13.0\" />
+  <project name=\"TrebleDroid/device_phh_treble\" path=\"device/phh/treble\" remote=\"github\" revision=\"android-14.0\" />
+  <project name=\"TrebleDroid/vendor_interfaces\" path=\"vendor/interfaces\" remote=\"github\" revision=\"android-14.0\" />
   <project name=\"phhusson/vendor_magisk\" path=\"vendor/magisk\" remote=\"github\" revision=\"android-10.0\" />
   <project name=\"TrebleDroid/treble_app\" path=\"treble_app\" remote=\"github\" revision=\"master\" />
   <project name=\"phhusson/sas-creator\" path=\"sas-creator\" remote=\"github\" revision=\"master\" />
+  <project name=\"platform/prebuilts/vndk/v28\" path=\"prebuilts/vndk/v28\" remote=\"aosp\" revision=\"204f1bad00aaf480ba33233f7b8c2ddaa03155dd\" clone-depth=\"1\" />
 
   <project path=\"packages/apps/QcRilAm\" name=\"AndyCGYan/android_packages_apps_QcRilAm\" remote=\"github\" revision=\"master\" />
 </manifest>" > .repo/local_manifests/miku-treble.xml
@@ -207,8 +208,8 @@ buildSasImages() {
     echo
     cd sas-creator
     if [ -n "$(cat lite-adapter.sh | grep 3500M)" ]; then
-        sed -i 's/3500M/4000M/' lite-adapter.sh
-        sed -i 's/3500M/4000M/' run.sh
+        sed -i 's/3500M/5000M/' lite-adapter.sh
+        sed -i 's/3500M/5000M/' run.sh
     fi
     echo "$password" | sudo -S bash lite-adapter.sh 64 $BD/system-$1.img
     cp s.img $BD/system-$1-vndklite.img
@@ -222,9 +223,9 @@ generatePackages() {
     echo
     BASE_IMAGE=$BD/system-$1.img
     mkdir --parents $BD/dsu/$1/; mv $BASE_IMAGE $BD/dsu/$1/system.img
-    zip -j -v $BD/MikuUI-TDA-$VERSION-$2$3-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/$1/system.img
+    zip -j -v $BD/MikuUI-$VERSION-$VERSION_CODE-$2$3-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/$1/system.img
     mkdir --parents $BD/dsu/$1-vndklite/; mv ${BASE_IMAGE%.img}-vndklite.img $BD/dsu/$1-vndklite/system.img
-    zip -j -v $BD/MikuUI-TDA-$VERSION-$2$3-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/$1-vndklite/system.img
+    zip -j -v $BD/MikuUI-$VERSION-$VERSION_CODE-$2$3-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/$1-vndklite/system.img
     rm -rf $BD/dsu
 }
 
@@ -232,9 +233,9 @@ generateOtaJson() {
     echo
     echo "--> $GEN_UP_JSON"
     echo
-    prefix="MikuUI-TDA-$VERSION-"
+    prefix="MikuUI-$VERSION-$VERSION_CODE-"
     suffix="-$BUILD_DATE-UNOFFICIAL.zip"
-    json="{\"version\": \"$VERSION\",\"date\": \"$(date +%s -d '-4hours')\",\"variants\": ["
+    json="{\"version\": \"$VERSION_CODE\",\"date\": \"$(date +%s -d '-4hours')\",\"variants\": ["
     find $BD -name "*.zip" | {
         while read file; do
             packageVariant=$(echo $(basename $file) | sed -e s/^$prefix// -e s/$suffix$//)
@@ -249,7 +250,7 @@ generateOtaJson() {
                 "arm64-ab-gapps-vndklite") name="miku_treble_arm64_bgN-vndklite" ;;
             esac
             size=$(wc -c $file | awk '{print $1}')
-            url="https://github.com/xiaoleGun/treble_build_miku/releases/download/TDA-$VERSION/$(basename $file)"
+            url="https://github.com/xiaoleGun/treble_build_miku/releases/download/$VERSION-$VERSION_CODE/$(basename $file)"
             json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
         done
         json="${json%?}]}"
@@ -267,15 +268,15 @@ personal() {
     GITLATESTTAG=$(git describe --tags --abbrev=0)
     GITCHANGELOG=$(git log $GITLATESTTAG..HEAD --pretty=format:"%s")
     assets=()
-    for f in $BD/MikuUI-TDA-$VERSION-*.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
-    hub release create ${assets[@]} -m "Miku UI TDA v$VERSION
+    for f in $BD/MikuUI-$VERSION-$VERSION_CODE-*.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
+    hub release create ${assets[@]} -m "Miku UI $VERSION v$VERSION_CODE
 
 - CI build on $BUILD_DATE
 
 ### Change log
-$GITCHANGELOG" TDA-$VERSION
+$GITCHANGELOG" $VERSION-$VERSION_CODE
 
-    rm -rf $BD/MikuUI-TDA-$VERSION-*.zip
+    rm -rf $BD/MikuUI-$VERSION-$VERSION_CODE-*.zip
     cd ..
 }
 
@@ -285,7 +286,8 @@ BUILD_DATE="$(date +%Y%m%d)"
 
 SD=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
-VERSION=`grep -oP '(?<=最新版本: ).*' $SD/README.md`
+VERSION=Udon
+VERSION_CODE=`grep -oP '(?<=最新版本: ).*' $SD/README.md`
 
 multipleLanguages
 warning

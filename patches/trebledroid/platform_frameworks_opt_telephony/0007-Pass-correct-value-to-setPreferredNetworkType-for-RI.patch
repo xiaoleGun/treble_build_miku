@@ -1,7 +1,7 @@
-From b166016b7b4168215a61ef8334f0126290e427b1 Mon Sep 17 00:00:00 2001
+From 0ce580d6287dada0dbd4110e2c4ae5e34d807205 Mon Sep 17 00:00:00 2001
 From: LuK1337 <priv.luk@gmail.com>
 Date: Fri, 21 Oct 2022 20:55:05 +0200
-Subject: [PATCH 07/10] Pass correct value to setPreferredNetworkType() for RIL
+Subject: [PATCH 07/11] Pass correct value to setPreferredNetworkType() for RIL
  version < 1.4
 
 Change-Id: Id14be66a2ea4e85b6504bc03fd7d2f038185c17d
@@ -11,10 +11,10 @@ Change-Id: Id14be66a2ea4e85b6504bc03fd7d2f038185c17d
  2 files changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/src/java/com/android/internal/telephony/RIL.java b/src/java/com/android/internal/telephony/RIL.java
-index 341d9c5d74..f30bee5846 100644
+index ba2c38d6bb..1c0113e899 100644
 --- a/src/java/com/android/internal/telephony/RIL.java
 +++ b/src/java/com/android/internal/telephony/RIL.java
-@@ -2879,7 +2879,8 @@ public class RIL extends BaseCommands implements CommandsInterface {
+@@ -3027,7 +3027,8 @@ public class RIL extends BaseCommands implements CommandsInterface {
              mMetrics.writeSetPreferredNetworkType(mPhoneId, networkType);
  
              try {
@@ -22,13 +22,13 @@ index 341d9c5d74..f30bee5846 100644
 +                networkProxy.setPreferredNetworkTypeBitmap(
 +                        rr.mSerial, mAllowedNetworkTypesBitmask, networkType);
              } catch (RemoteException | RuntimeException e) {
-                 handleRadioProxyExceptionForRR(NETWORK_SERVICE, "setPreferredNetworkType", e);
+                 handleRadioProxyExceptionForRR(HAL_SERVICE_NETWORK, "setPreferredNetworkType", e);
              }
 diff --git a/src/java/com/android/internal/telephony/RadioNetworkProxy.java b/src/java/com/android/internal/telephony/RadioNetworkProxy.java
-index b88103510a..661fa56954 100644
+index 246c2e0204..2e352a96b4 100644
 --- a/src/java/com/android/internal/telephony/RadioNetworkProxy.java
 +++ b/src/java/com/android/internal/telephony/RadioNetworkProxy.java
-@@ -379,16 +379,17 @@ public class RadioNetworkProxy extends RadioServiceProxy {
+@@ -389,16 +389,17 @@ public class RadioNetworkProxy extends RadioServiceProxy {
       * Call IRadioNetwork#setPreferredNetworkTypeBitmap
       * @param serial Serial number of request
       * @param networkTypesBitmask Preferred network types bitmask to set

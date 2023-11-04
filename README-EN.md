@@ -4,7 +4,7 @@
 This is an Android project for Miku fans. If you don't like it, please close this page, but don't attack Miku and the author of this project.
 
 ## Version
-Latest version: 1.0.1
+Latest version: 0.1.3
 
 [Downloads](https://github.com/xiaoleGun/treble_build_miku/releases)
 
@@ -14,21 +14,21 @@ Examples
 
 They are
 ```
-ProjectName-{SNOW | SNOWLAND | TDA}-Miku UI version-arm64-ab-vndklite-gapps-BuildDate-Buildtype
- |                |          |                        |    |     |      |
- |                |          |                        |    |     |      |
- |                |          |                        |    |     |     GMS
- |                |          |                        |    |     |
- |                |          |                        |    |     |
- |                |          |                        |    |    It is used for vndklite devices and 
- |                |          |                        |    |    supports system reading and writing.
- |                |          |                        |    |
- |                |          |                        |  Partition type, only AB variants are provided.(1)
- |                |          |                        |
- |                |          |                        |
- |                |          |                   CPU bits, build 64 bits and a64(2).
- |                |          |
- |     Android 12 | 12.1     | 13  
+ProjectName-{SNOW | SNOWLAND | TDA | Udon}-version-arm64-ab-vndklite-gapps-BuildDate-Buildtype
+ |                |          |     |                  |    |     |      |
+ |                |          |     |                  |    |     |      |
+ |                |          |     |                  |    |     |     GMS
+ |                |          |     |                  |    |     |
+ |                |          |     |                  |    |     |
+ |                |          |     |                  |    |    It is used for vndklite devices and 
+ |                |          |     |                  |    |    supports system reading and writing.
+ |                |          |     |                  |    |
+ |                |          |     |                  |  Partition type, only AB variants are provided.(1)
+ |                |          |     |                  |
+ |                |          |     |                  |
+ |                |          |     |             CPU arch, build 64 bits and a64(2).
+ |                |          |     |
+ |     Android 12 | 12.1     | 13  | 14
  |
 Miku UI
 ```
@@ -49,7 +49,7 @@ To get started with building Miku UI GSI, you'll need to get familiar with [Git 
     ```
 - Clone this repo:
     ```
-    git clone https://github.com/xiaoleGun/treble_build_miku -b TDA
+    git clone https://github.com/xiaoleGun/treble_build_miku -b Udon
     ```
 - Finally, start the build script:
     ```
