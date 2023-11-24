@@ -1,7 +1,7 @@
-From 989bf5ad3940dba13fa3227d38024c8da2cea6ab Mon Sep 17 00:00:00 2001
+From 9a9ed903a0357141b0c730fe54daf50db40d2cf0 Mon Sep 17 00:00:00 2001
 From: Huy Hoang <38396158+boydaihungst@users.noreply.github.com>
 Date: Thu, 19 Oct 2023 07:06:55 +0700
-Subject: [PATCH 22/22] fix: Nubia 6 series custom rc action prop validation
+Subject: [PATCH 22/23] fix: Nubia 6 series custom rc action prop validation
 
 ---
  init/action_parser.cpp | 1 +
