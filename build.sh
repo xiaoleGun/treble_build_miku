@@ -223,9 +223,9 @@ generatePackages() {
     echo
     BASE_IMAGE=$BD/system-$1.img
     mkdir --parents $BD/dsu/$1/; mv $BASE_IMAGE $BD/dsu/$1/system.img
-    zip -j -v $BD/MikuUI-$VERSION-$VERSION_CODE-$2$3-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/$1/system.img
+    xz -cv9 $BD/dsu/$1/system.img -T0 > $BD/MikuUI-$VERSION-$VERSION_CODE-$2$3-$BUILD_DATE-UNOFFICIAL.img.xz
     mkdir --parents $BD/dsu/$1-vndklite/; mv ${BASE_IMAGE%.img}-vndklite.img $BD/dsu/$1-vndklite/system.img
-    zip -j -v $BD/MikuUI-$VERSION-$VERSION_CODE-$2$3-vndklite-$BUILD_DATE-UNOFFICIAL.zip $BD/dsu/$1-vndklite/system.img
+    xz -cv9 $BD/dsu/$1-vndklite/system.img -T0 > $BD/MikuUI-$VERSION-$VERSION_CODE-$2$3-vndklite-$BUILD_DATE-UNOFFICIAL.img.xz
     rm -rf $BD/dsu
 }
 
@@ -234,9 +234,9 @@ generateOtaJson() {
     echo "--> $GEN_UP_JSON"
     echo
     prefix="MikuUI-$VERSION-$VERSION_CODE-"
-    suffix="-$BUILD_DATE-UNOFFICIAL.zip"
+    suffix="-$BUILD_DATE-UNOFFICIAL.img.gz"
     json="{\"version\": \"$VERSION_CODE\",\"date\": \"$(date +%s -d '-4hours')\",\"variants\": ["
-    find $BD -name "*.zip" | {
+    find $BD -name "*.img.xz" | {
         while read file; do
             packageVariant=$(echo $(basename $file) | sed -e s/^$prefix// -e s/$suffix$//)
             case $packageVariant in
@@ -268,7 +268,7 @@ personal() {
     GITLATESTTAG=$(git describe --tags --abbrev=0)
     GITCHANGELOG=$(git log $GITLATESTTAG..HEAD --pretty=format:"%s")
     assets=()
-    for f in $BD/MikuUI-$VERSION-$VERSION_CODE-*.zip; do [ -f "$f" ] && assets+=(-a "$f"); done
+    for f in $BD/MikuUI-$VERSION-$VERSION_CODE-*.xz; do [ -f "$f" ] && assets+=(-a "$f"); done
     hub release create ${assets[@]} -m "Miku UI $VERSION v$VERSION_CODE
 
 - CI build on $BUILD_DATE
@@ -276,7 +276,7 @@ personal() {
 ### Change log
 $GITCHANGELOG" $VERSION-$VERSION_CODE
 
-    rm -rf $BD/MikuUI-$VERSION-$VERSION_CODE-*.zip
+    rm -rf $BD/MikuUI-$VERSION-$VERSION_CODE-*.xz
     cd ..
 }
 
