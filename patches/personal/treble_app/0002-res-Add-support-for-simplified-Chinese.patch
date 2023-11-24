@@ -1,4 +1,4 @@
-From 50c3bac60ed713adc081974f8a60ac805d50901b Mon Sep 17 00:00:00 2001
+From 04cbd394e1bb1bbbf68c5ee3184541b35a09ee49 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Wed, 9 Feb 2022 14:16:06 +0800
 Subject: [PATCH 2/3] res: Add support for simplified Chinese
@@ -11,8 +11,8 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
  app/src/main/res/values-zh-rCH/pref_nubia.xml |  75 +++++++
  .../main/res/values-zh-rCH/pref_oneplus.xml   |  29 +++
  .../main/res/values-zh-rCH/pref_samsung.xml   |  17 ++
- app/src/main/res/values-zh-rCH/strings.xml    | 186 ++++++++++++++++++
- 7 files changed, 420 insertions(+)
+ app/src/main/res/values-zh-rCH/strings.xml    | 190 ++++++++++++++++++
+ 7 files changed, 424 insertions(+)
  create mode 100644 app/src/main/res/values-zh-rCH/pref_custom.xml
  create mode 100644 app/src/main/res/values-zh-rCH/pref_huawei.xml
  create mode 100644 app/src/main/res/values-zh-rCH/pref_misc.xml
@@ -293,10 +293,10 @@ index 0000000..f3b12e2
 +</resources>
 diff --git a/app/src/main/res/values-zh-rCH/strings.xml b/app/src/main/res/values-zh-rCH/strings.xml
 new file mode 100644
-index 0000000..321804f
+index 0000000..7f3b90e
 --- /dev/null
 +++ b/app/src/main/res/values-zh-rCH/strings.xml
-@@ -0,0 +1,186 @@
+@@ -0,0 +1,190 @@
 +<resources>
 +    <string name="app_name">PhhTrebleApp</string>
 +    <string name="title_activity_settings">设置</string>
@@ -420,6 +420,8 @@ index 0000000..321804f
 +    <string name="misc_restart_ril">自动重启RIL</string>
 +    <string name="misc_force_display_5g">强制显示5G</string>
 +    <string name="misc_force_display_5g_summary">将5G显示为首选网络类型的选项\n需要重启</string>
++    <string name="misc_disable_voice_call_in">禁用 &quot;语音通话输入&quot;途径</string>
++    <string name="misc_disable_voice_call_in_summary">可能修复通话中的回声或不工作的音频\n需要重新启动</string>
 +    <string name="misc_dt2w">双击唤醒</string>
 +    <string name="misc_dt2w_summary">如果不会工作，此选项尝试修复</string>
 +    <string name="misc_fod_color">显示FOD颜色</string>
@@ -437,6 +439,8 @@ index 0000000..321804f
 +    <string name="nubia_high_touch_sensitivity">启用高触控灵敏度</string>
 +    <string name="nubia_high_touch_sensitivity_summary">使用手套时</string>
 +    <string name="nubia_touchscreen_game_mode_summaryOn">自动停止风扇已禁用</string>
++    <string name="nubia_shoulder_btn">启用肩键</string>
++    <string name="nubia_shoulder_btn_summary">肩键/触发器</string>
 +    <string name="nubia_bypass_charger">启用绕开电池充电</string>
 +    <string name="nubia_bypass_charger_summaryOff">充电器 -> 电池 -> 手机</string>
 +    <string name="nubia_bypass_charger_summaryOn">充电器->手机</string>

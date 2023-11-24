@@ -1,4 +1,4 @@
-From 2127c8cd1bedefe0f057f49267e203e7405dfc2f Mon Sep 17 00:00:00 2001
+From 8dfa7669cffd982ef49bcd445ac8685bfd607873 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Tue, 8 Feb 2022 16:40:33 +0800
 Subject: [PATCH 1/3] res: Support multiple languages
@@ -7,29 +7,29 @@ Migrate all descriptions to strings.xml
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
- app/src/main/res/values/strings.xml    | 158 +++++++++++++++++++++++++
+ app/src/main/res/values/strings.xml    | 162 +++++++++++++++++++++++++
  app/src/main/res/xml/pref_custom.xml   |  18 +--
  app/src/main/res/xml/pref_doze.xml     |   8 +-
  app/src/main/res/xml/pref_headers.xml  |  30 ++---
  app/src/main/res/xml/pref_huawei.xml   |  14 +--
  app/src/main/res/xml/pref_ims.xml      |   8 +-
  app/src/main/res/xml/pref_lenovo.xml   |   4 +-
- app/src/main/res/xml/pref_misc.xml     | 108 ++++++++---------
+ app/src/main/res/xml/pref_misc.xml     | 112 ++++++++---------
  app/src/main/res/xml/pref_mydevice.xml |   6 +-
- app/src/main/res/xml/pref_nubia.xml    |  48 ++++----
+ app/src/main/res/xml/pref_nubia.xml    |  52 ++++----
  app/src/main/res/xml/pref_oneplus.xml  |  12 +-
  app/src/main/res/xml/pref_oppo.xml     |  12 +-
  app/src/main/res/xml/pref_qualcomm.xml |  14 +--
  app/src/main/res/xml/pref_samsung.xml  |  44 +++----
  app/src/main/res/xml/pref_vsmart.xml   |   4 +-
  app/src/main/res/xml/pref_xiaomi.xml   |   6 +-
- 16 files changed, 326 insertions(+), 168 deletions(-)
+ 16 files changed, 334 insertions(+), 172 deletions(-)
 
 diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
-index d6f6e83..99e3833 100644
+index d6f6e83..652ec83 100644
 --- a/app/src/main/res/values/strings.xml
 +++ b/app/src/main/res/values/strings.xml
-@@ -27,4 +27,162 @@
+@@ -27,4 +27,166 @@
      <string name="magisk_exists_message">Magisk was detected! If you proceed with the update you may lose Magisk or the installation may fail!</string>
      <string name="menu_delete_ota">Delete OTA files</string>
      <string name="delete_ota_message">Take in consideration that you may lose your userdata if you proceed!\nTo prevent this, cancel this dialog, reboot and flash the latest update on fastboot mode.\nDo you want to proceed anyway?</string>
@@ -129,6 +129,8 @@ index d6f6e83..99e3833 100644
 +    <string name="misc_restart_ril">Automatically restart RIL</string>
 +    <string name="misc_force_display_5g">Force display 5G network</string>
 +    <string name="misc_force_display_5g_summary">Displays 5G as an option for the preferred network type\nRequires a reboot</string>
++    <string name="misc_disable_voice_call_in">Disable &quot;Voice Call In&quot; route</string>
++    <string name="misc_disable_voice_call_in_summary">May fix echo or non-working audio on calls\nRequires a reboot</string>
 +    <string name="misc_dt2w">Double tap to wake</string>
 +    <string name="misc_dt2w_summary">Unlikely to work for you</string>
 +    <string name="misc_fod_color">Under-display fp color</string>
@@ -146,6 +148,8 @@ index d6f6e83..99e3833 100644
 +    <string name="nubia_high_touch_sensitivity">Enable high touch sensitivity</string>
 +    <string name="nubia_high_touch_sensitivity_summary">While using gloves</string>
 +    <string name="nubia_touchscreen_game_mode_summaryOn">Auto stop fan is disabled</string>
++    <string name="nubia_shoulder_btn">Enable shoulder buttons</string>
++    <string name="nubia_shoulder_btn_summary">Shoulder buttons/triggers</string>
 +    <string name="nubia_bypass_charger">Enable bypass charger</string>
 +    <string name="nubia_bypass_charger_summaryOff">Charger -> Battery -> Phone</string>
 +    <string name="nubia_bypass_charger_summaryOn">Charger->Phone</string>
@@ -437,10 +441,10 @@ index e22cfa5..9ff49cd 100644
      </PreferenceCategory>
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_misc.xml b/app/src/main/res/xml/pref_misc.xml
-index a819fa6..1a984d0 100644
+index b7b5c91..40eb09c 100644
 --- a/app/src/main/res/xml/pref_misc.xml
 +++ b/app/src/main/res/xml/pref_misc.xml
-@@ -1,184 +1,184 @@
+@@ -1,189 +1,189 @@
  <?xml version="1.0" encoding="utf-8"?>
  <PreferenceScreen
  	xmlns:android="http://schemas.android.com/apk/res/android">
@@ -638,6 +642,13 @@ index a819fa6..1a984d0 100644
 +			android:title="@string/misc_force_display_5g"
 +			android:summary="@string/misc_force_display_5g_summary" />
  		<SwitchPreference
+ 			android:defaultValue="false"
+ 			android:key="key_misc_disable_voice_call_in"
+-			android:title="Disable &quot;Voice Call In&quot; route"
+-			android:summary="May fix echo or non-working audio on calls\nRequires a reboot" />
++			android:title="@string/misc_disable_voice_call_in"
++			android:summary="@string/misc_disable_voice_call_in_summary" />
+ 		<SwitchPreference
  				android:defaultValue="false"
  				android:key="key_misc_restart_ril"
 -				android:title="Automatically restart RIL" />
@@ -678,7 +689,7 @@ index a819fa6..1a984d0 100644
              <intent
                  android:action="android.intent.action.VIEW"
                  android:targetPackage="me.phh.treble.app"
-@@ -187,6 +187,6 @@
+@@ -192,6 +192,6 @@
  		<SwitchPreference
              android:defaultValue="false"
              android:key="key_misc_remotectl"
@@ -705,10 +716,10 @@ index bf4ba9f..08643f7 100644
          android:key="key_mydevice_apply_presets" />
  </PreferenceScreen>
 diff --git a/app/src/main/res/xml/pref_nubia.xml b/app/src/main/res/xml/pref_nubia.xml
-index 75502a5..68a655b 100644
+index c251025..6b75ad8 100644
 --- a/app/src/main/res/xml/pref_nubia.xml
 +++ b/app/src/main/res/xml/pref_nubia.xml
-@@ -1,92 +1,92 @@
+@@ -1,99 +1,99 @@
  <?xml version="1.0" encoding="utf-8"?>
  <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
      xmlns:android="http://schemas.android.com/apk/res/android">
@@ -753,6 +764,15 @@ index 75502a5..68a655b 100644
 -            app:summaryOn="Auto stop fan is disabled" />
 +            android:title="@string/general_game_mode"
 +            app:summaryOn="@string/nubia_touchscreen_game_mode_summaryOn" />
+         <CheckBoxPreference
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:defaultValue="false"
+             android:key="nubia_shoulder_btn"
+-            android:title="Enable shoulder buttons"
+-            app:summary="Shoulder buttons/triggers" />
++            android:title="@string/nubia_shoulder_btn"
++            app:summary="@string/nubia_shoulder_btn_summary" />
          <CheckBoxPreference
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
