@@ -4,7 +4,7 @@
 This is an Android project for Miku fans. If you don't like it, please close this page, but don't attack Miku and the author of this project.
 
 ## Version
-Latest version: 0.1.3
+Latest version: 0.2.0
 
 [Downloads](https://github.com/xiaoleGun/treble_build_miku/releases)
 
