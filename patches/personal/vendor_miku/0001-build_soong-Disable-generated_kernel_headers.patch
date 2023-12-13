@@ -1,7 +1,7 @@
-From afc41987484891b7efbdfce1b4bc7bd8e966223d Mon Sep 17 00:00:00 2001
+From 936e2351230b0a6fc3388fece74003476b20c626 Mon Sep 17 00:00:00 2001
 From: AndyCGYan <GeForce8800Ultra@gmail.com>
 Date: Sun, 6 Feb 2022 14:58:02 +0800
-Subject: [PATCH] build_soong: Disable generated_kernel_headers
+Subject: [PATCH 1/2] build_soong: Disable generated_kernel_headers
 
 Signed-off-by: xiaoleGun <1592501605@qq.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
  1 file changed, 7 deletions(-)
 
 diff --git a/build/soong/Android.bp b/build/soong/Android.bp
-index 45c0098..e6b4913 100644
+index 8b984c4..21edf48 100644
 --- a/build/soong/Android.bp
 +++ b/build/soong/Android.bp
 @@ -20,9 +20,6 @@ bootstrap_go_package {
@@ -34,5 +34,5 @@ index 45c0098..e6b4913 100644
  
  cc_library_headers {
 -- 
-2.32.1 (Apple Git-133)
+2.41.0
 
