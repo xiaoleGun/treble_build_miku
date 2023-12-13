@@ -1,7 +1,7 @@
-From 4f707bc2fe4fc50d1a9c7033dcb59586dedc7317 Mon Sep 17 00:00:00 2001
+From 6ea8159a6ab285530cac5b44379f3f8952efc953 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 12 Aug 2019 23:08:26 +0200
-Subject: [PATCH 10/44] Add support for samsung touch, physical and hover
+Subject: [PATCH 10/45] Add support for samsung touch, physical and hover
  proximity sensor as fallback to real proximity sensor
 
 Change-Id: I7a0f8b4665c802140d19197d850b77b2a7ac1865
@@ -10,13 +10,13 @@ Change-Id: I7a0f8b4665c802140d19197d850b77b2a7ac1865
  1 file changed, 35 insertions(+)
 
 diff --git a/services/core/java/com/android/server/display/DisplayPowerController.java b/services/core/java/com/android/server/display/DisplayPowerController.java
-index e3b2ef4e0090..e69570132a73 100644
+index 2431851ad0bd..12b4a17712d1 100644
 --- a/services/core/java/com/android/server/display/DisplayPowerController.java
 +++ b/services/core/java/com/android/server/display/DisplayPowerController.java
-@@ -2328,6 +2328,27 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
-                 mDisplayDeviceConfig.getProximitySensor();
-         mProximitySensor = SensorUtils.findSensor(mSensorManager, proxSensor.type, proxSensor.name,
-                 Sensor.TYPE_PROXIMITY);
+@@ -2376,6 +2376,27 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
+         }
+         mProximitySensor = SensorUtils.findSensor(mSensorManager,
+                 mDisplayDeviceConfig.getProximitySensor(), Sensor.TYPE_PROXIMITY);
 +        if(mProximitySensor == null) {
 +            java.util.List<Sensor> sensors = mSensorManager.getSensorList(Sensor.TYPE_ALL);
 +            for(Sensor sensor: sensors) {
@@ -41,7 +41,7 @@ index e3b2ef4e0090..e69570132a73 100644
          if (mProximitySensor != null) {
              mProximityThreshold = Math.min(mProximitySensor.getMaximumRange(),
                      TYPICAL_PROXIMITY_THRESHOLD);
-@@ -3346,6 +3367,20 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
+@@ -3418,6 +3439,20 @@ final class DisplayPowerController implements AutomaticBrightnessController.Call
          public void onSensorChanged(SensorEvent event) {
              if (mProximitySensorEnabled) {
                  final long time = mClock.uptimeMillis();

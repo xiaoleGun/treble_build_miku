@@ -1,40 +1,36 @@
-From deb7579015bbea3b25ff46249d79f9e42467820b Mon Sep 17 00:00:00 2001
+From e5319f9b5d97fcdbdd5464ccc7e9e9af23107d64 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 18 Oct 2023 16:53:40 -0400
-Subject: [PATCH 40/44] Ignore cgroup creation errors
+Subject: [PATCH 40/45] Ignore cgroup creation errors
 
 For old kernels who don't have those modern cgroups
 ---
- core/jni/com_android_internal_os_Zygote.cpp               | 3 +++
+ core/jni/com_android_internal_os_Zygote.cpp               | 2 ++
  services/core/java/com/android/server/am/ProcessList.java | 5 -----
- 2 files changed, 3 insertions(+), 5 deletions(-)
+ 2 files changed, 2 insertions(+), 5 deletions(-)
 
 diff --git a/core/jni/com_android_internal_os_Zygote.cpp b/core/jni/com_android_internal_os_Zygote.cpp
-index ce806a0fcc08..bac0c8315f26 100644
+index 56066b2d813c..4ee3e92910d0 100644
 --- a/core/jni/com_android_internal_os_Zygote.cpp
 +++ b/core/jni/com_android_internal_os_Zygote.cpp
-@@ -1805,6 +1805,8 @@ static void SpecializeCommon(JNIEnv* env, uid_t uid, gid_t gid, jintArray gids,
+@@ -1806,10 +1806,12 @@ static void SpecializeCommon(JNIEnv* env, uid_t uid, gid_t gid, jintArray gids,
      if (!is_system_server && getuid() == 0) {
          const int rc = createProcessGroup(uid, getpid());
          if (rc != 0) {
-+                ALOGE("createProcessGroup(%d, %d) failed: %s", uid, /* pid= */ 0, strerror(-rc));
 +#if 0
-             if (rc == -ESRCH) {
-                 // If process is dead, treat this as a non-fatal error
-                 ALOGE("createProcessGroup(%d, %d) failed: %s", uid, /* pid= */ 0, strerror(-rc));
-@@ -1814,6 +1816,7 @@ static void SpecializeCommon(JNIEnv* env, uid_t uid, gid_t gid, jintArray gids,
-                                      : CREATE_ERROR("createProcessGroup(%d, %d) failed: %s", uid,
-                                                     /* pid= */ 0, strerror(-rc)));
-             }
+             fail_fn(rc == -EROFS ? CREATE_ERROR("createProcessGroup failed, kernel missing "
+                                                 "CONFIG_CGROUP_CPUACCT?")
+                                  : CREATE_ERROR("createProcessGroup(%d, %d) failed: %s", uid,
+                                                 /* pid= */ 0, strerror(-rc)));
 +#endif
          }
      }
  
 diff --git a/services/core/java/com/android/server/am/ProcessList.java b/services/core/java/com/android/server/am/ProcessList.java
-index e08b33178e6f..b0331e9a3b48 100644
+index 8a90cb25378a..7d171f74294f 100644
 --- a/services/core/java/com/android/server/am/ProcessList.java
 +++ b/services/core/java/com/android/server/am/ProcessList.java
-@@ -2438,14 +2438,9 @@ public final class ProcessList {
+@@ -2439,14 +2439,9 @@ public final class ProcessList {
                          // If we're not told to skip the process group creation, go create it.
                          final int res = Process.createProcessGroup(uid, startResult.pid);
                          if (res < 0) {

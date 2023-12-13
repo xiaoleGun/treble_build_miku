@@ -1,7 +1,7 @@
-From be25317eed6a535a68ecd0d973130471bcf220d5 Mon Sep 17 00:00:00 2001
+From ecfed1beb9944ade123faf31a25979b7875a2811 Mon Sep 17 00:00:00 2001
 From: Peter Cai <peter@typeblog.net>
 Date: Wed, 1 Jun 2022 16:56:20 -0400
-Subject: [PATCH 06/44] Implement a persistent property to override the default
+Subject: [PATCH 06/45] Implement a persistent property to override the default
  primary camera (0)
 
 Change-Id: I49b45d00bf71d7932591b3516d49a680e1b6568b
@@ -27,10 +27,10 @@ index 358e5cfa4c4e..3114f2a6b911 100644
          CameraInfo cameraInfo = new CameraInfo();
          for (int i = 0; i < numberOfCameras; i++) {
 diff --git a/core/java/android/hardware/camera2/CameraManager.java b/core/java/android/hardware/camera2/CameraManager.java
-index 47aaadc40b51..92dbc2356d2f 100644
+index 69660d9344c9..d8841489e051 100644
 --- a/core/java/android/hardware/camera2/CameraManager.java
 +++ b/core/java/android/hardware/camera2/CameraManager.java
-@@ -2025,6 +2025,15 @@ public final class CameraManager {
+@@ -2081,6 +2081,15 @@ public final class CameraManager {
                          }
                      }});
  
