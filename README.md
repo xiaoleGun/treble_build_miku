@@ -6,7 +6,7 @@
 这是送给所有Miku粉丝的Android项目，如果不喜欢它请关闭本页面，但不要攻击任何人，尤其是其作者。
 
 ## 版本
-最新版本: 0.2.0
+最新版本: 0.4.0
 
 [下载](https://github.com/xiaoleGun/treble_build_miku/releases)
 
