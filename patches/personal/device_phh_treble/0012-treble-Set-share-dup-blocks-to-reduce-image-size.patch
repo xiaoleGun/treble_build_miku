@@ -1,0 +1,24 @@
+From 26643a28ecbc8bdb7342f601a4c2644bc0b60799 Mon Sep 17 00:00:00 2001
+From: xiaoleGun <1592501605@qq.com>
+Date: Sat, 30 Dec 2023 14:10:43 +0800
+Subject: [PATCH 12/12] treble: Set share dup blocks to reduce image size
+
+Signed-off-by: xiaoleGun <1592501605@qq.com>
+---
+ miku.mk | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/miku.mk b/miku.mk
+index b934a6f..a113521 100644
+--- a/miku.mk
++++ b/miku.mk
+@@ -20,3 +20,6 @@ else
+ PRODUCT_PACKAGES += \
+     Via
+ endif
++
++# Partitions
++BOARD_EXT4_SHARE_DUP_BLOCKS := true
+-- 
+2.41.0
+

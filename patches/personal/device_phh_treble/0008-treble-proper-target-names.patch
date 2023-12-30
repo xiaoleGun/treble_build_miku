@@ -1,14 +1,14 @@
-From f56f9fe24c98f7c366835fb7ce0e87763e5a525f Mon Sep 17 00:00:00 2001
+From eb2615024da3bb98c95648ecfa65ac11a8335de3 Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sat, 26 Feb 2022 12:01:01 +0800
-Subject: [PATCH 09/12] treble: proper target names
+Subject: [PATCH 08/12] treble: proper target names
 
 ---
  generate.sh | 3 +++
  1 file changed, 3 insertions(+)
 
 diff --git a/generate.sh b/generate.sh
-index 9c20eb5..067e0d6 100644
+index 461eff1..37bc9ad 100644
 --- a/generate.sh
 +++ b/generate.sh
 @@ -65,6 +65,9 @@ for part in a ab;do
@@ -22,5 +22,5 @@ index 9c20eb5..067e0d6 100644
  				baseArch="$arch"
  				if [ "$arch" = "a64" ];then
 -- 
-2.37.1 (Apple Git-137.1)
+2.41.0
 

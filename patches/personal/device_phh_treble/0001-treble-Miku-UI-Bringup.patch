@@ -1,4 +1,4 @@
-From 0bb23b7a8b648c7fe5356881b4cefc37dc84b32a Mon Sep 17 00:00:00 2001
+From 5208764b51e87cdbd4efdcb22251192e75a1f82a Mon Sep 17 00:00:00 2001
 From: xiaoleGun <1592501605@qq.com>
 Date: Sun, 6 Feb 2022 14:31:44 +0800
 Subject: [PATCH 01/12] treble: Miku UI Bringup
@@ -15,11 +15,11 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
  create mode 100644 overlay-miku/packages/apps/Settings/res/values/miku_strings.xml
 
 diff --git a/base.mk b/base.mk
-index b9298a2..55b3678 100644
+index 620fb96..b13b4bf 100644
 --- a/base.mk
 +++ b/base.mk
-@@ -22,7 +22,9 @@ PRODUCT_COPY_FILES += \
- 	device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+@@ -18,7 +18,9 @@ PRODUCT_COPY_FILES += \
+     device/phh/treble/bluetooth/audio/config/sysbta_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysbta_audio_policy_configuration_7_0.xml
  
  SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += device/phh/treble/sepolicy
 -PRODUCT_PACKAGE_OVERLAYS += device/phh/treble/overlay
@@ -97,5 +97,5 @@ index 0000000..15887ba
 +</resources>
 \ No newline at end of file
 -- 
-2.37.1 (Apple Git-137.1)
+2.41.0
 
