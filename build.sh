@@ -73,14 +73,7 @@ autoInstallDependencies() {
             cd $ND
         else
             echo "$password" | sudo -S apt-get update
-            echo "$password" | sudo -S apt-get install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev xattr openjdk-11-jdk jq android-sdk-libsparse-utils python3 python2 -y
-
-            if [[ ! -f /bin/repo || -c `repo &>/dev/null` ]]; then
-               mkdir -p ~/bin
-               curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-               echo "$password" | sudo -S cp ~/bin/repo /bin/repo
-               echo "$password" | sudo -S chmod a+x /bin/repo
-            fi
+            echo "$password" | sudo -S apt-get install bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev xattr openjdk-11-jdk jq android-sdk-libsparse-utils python3 python2 repo -y
         fi
     fi
 }
