@@ -1,4 +1,4 @@
-From 6e1512f870bb559c3ae14592a846a76230c11778 Mon Sep 17 00:00:00 2001
+From 17c976e2ca04456dd6b0ada8ee6cb12ecb0bc053 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 28 Mar 2021 14:48:49 +0200
 Subject: [PATCH 16/24] Use a fake volume policy when none has been found
@@ -15,10 +15,10 @@ Change-Id: I461a3f22893ab2b1d96d67f22397369b2cae41e5
  1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/services/audiopolicy/engine/config/src/EngineConfig.cpp b/services/audiopolicy/engine/config/src/EngineConfig.cpp
-index ca78ce7213..59211577c4 100644
+index 714ab78203..74297aae92 100644
 --- a/services/audiopolicy/engine/config/src/EngineConfig.cpp
 +++ b/services/audiopolicy/engine/config/src/EngineConfig.cpp
-@@ -800,7 +800,12 @@ android::status_t parseLegacyVolumeFile(const char* path, VolumeGroups &volumeGr
+@@ -839,7 +839,12 @@ android::status_t parseLegacyVolumeFile(const char* path, VolumeGroups &volumeGr
  android::status_t parseLegacyVolumes(VolumeGroups &volumeGroups) {
      if (std::string audioPolicyXmlConfigFile = audio_get_audio_policy_config_file();
              !audioPolicyXmlConfigFile.empty()) {
@@ -33,5 +33,5 @@ index ca78ce7213..59211577c4 100644
          ALOGE("No readable audio policy config file found");
          return BAD_VALUE;
 -- 
-2.46.0.windows.1
+2.25.1
 

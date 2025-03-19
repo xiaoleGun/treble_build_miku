@@ -1,7 +1,7 @@
-From af7b542aca65c85ebcf03183448d0b9485d83729 Mon Sep 17 00:00:00 2001
+From 0c0dfe6a30bb231df2c28a2e0a354535e7b319a8 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 24 Mar 2019 23:05:14 +0100
-Subject: [PATCH 09/52] Support samsung Pie and Q light hal
+Subject: [PATCH 09/54] Support samsung Pie and Q light hal
 
 Change-Id: I01f94acd7d0672733e48854d80368f9ac6f861c6
 ---
@@ -9,10 +9,10 @@ Change-Id: I01f94acd7d0672733e48854d80368f9ac6f861c6
  1 file changed, 2 insertions(+)
 
 diff --git a/services/core/jni/Android.bp b/services/core/jni/Android.bp
-index 3607dddc66d5..3641e3b21149 100644
+index a5085fc3147c..1710d33ff836 100644
 --- a/services/core/jni/Android.bp
 +++ b/services/core/jni/Android.bp
-@@ -209,6 +209,8 @@ cc_defaults {
+@@ -211,6 +211,8 @@ cc_defaults {
          "android.system.suspend-V1-ndk",
          "server_configurable_flags",
          "service.incremental",
@@ -22,5 +22,5 @@ index 3607dddc66d5..3641e3b21149 100644
  
      static_libs: [
 -- 
-2.46.0.windows.1
+2.25.1
 

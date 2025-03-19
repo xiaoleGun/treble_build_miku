@@ -1,7 +1,7 @@
-From fe96da21e616901a3347f1eef625a6b66323cf7b Mon Sep 17 00:00:00 2001
+From 1d16df8cfa3cae37623efa79f49ba7b86125d4bd Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 20 Dec 2023 09:48:04 -0500
-Subject: [PATCH 10/13] Fix loading unnamed GLES
+Subject: [PATCH 10/14] Fix loading unnamed GLES
 
 Normally Android loads libGLES_${ro.hardware.egl}.so
 But up to Android 14, it was allowed not to set ro.hardware.egl
@@ -22,10 +22,10 @@ Test:
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/opengl/libs/EGL/Loader.cpp b/opengl/libs/EGL/Loader.cpp
-index e487cbc54d..71e170c73f 100644
+index bf0e38e986..d82af56606 100644
 --- a/opengl/libs/EGL/Loader.cpp
 +++ b/opengl/libs/EGL/Loader.cpp
-@@ -314,8 +314,7 @@ void* Loader::open(egl_connection_t* cnx) {
+@@ -321,8 +321,7 @@ void* Loader::open(egl_connection_t* cnx) {
          hnd = attempt_to_load_system_driver(cnx, nullptr, true);
      }
  
@@ -36,5 +36,5 @@ index e487cbc54d..71e170c73f 100644
          // matching if the device is launched before Android 14.
          hnd = attempt_to_load_system_driver(cnx, nullptr, false);
 -- 
-2.46.0.windows.1
+2.25.1
 

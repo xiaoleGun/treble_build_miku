@@ -1,7 +1,7 @@
-From 95fedbd400701d064250ba91ea1ab2def4111421 Mon Sep 17 00:00:00 2001
+From e48f8d5420f012ac84c22a1ccdfa6037f53c9413 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sat, 7 Mar 2020 14:49:09 +0100
-Subject: [PATCH 2/5] Failing to create facedata shouldn't be fatal
+Subject: [PATCH 2/6] Failing to create facedata shouldn't be fatal
 
 Some Pie vendors create it on their own, so SELinux would deny that
 Also not all devices have face unlock anyway

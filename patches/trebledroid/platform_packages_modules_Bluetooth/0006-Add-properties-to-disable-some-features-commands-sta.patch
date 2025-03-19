@@ -1,37 +1,38 @@
-From 70359b7f5d4d6f6ed8455db325e6a1575fd9dbeb Mon Sep 17 00:00:00 2001
+From f0158f8a9d0e97b7e97168524ba3a670af0a6073 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sat, 27 May 2023 06:41:32 -0400
-Subject: [PATCH 6/8] Add properties to disable some features/commands/states
+Subject: [PATCH 6/9] Add properties to disable some features/commands/states
  that the ble chip declared but doesnt actually support
 
 ---
- system/gd/hci/controller.cc | 72 ++++++++++++++++++++++++++++++++++---
- 1 file changed, 68 insertions(+), 4 deletions(-)
+ system/gd/hci/controller.cc | 73 +++++++++++++++++++++++++++++++++++--
+ 1 file changed, 69 insertions(+), 4 deletions(-)
 
 diff --git a/system/gd/hci/controller.cc b/system/gd/hci/controller.cc
-index a6c16a9061..237dbe6b93 100644
+index 3a4ab17dfb..292c2e4f24 100644
 --- a/system/gd/hci/controller.cc
 +++ b/system/gd/hci/controller.cc
-@@ -18,6 +18,7 @@
- 
- #include <android_bluetooth_flags.h>
+@@ -19,6 +19,7 @@
+ #include <bluetooth/log.h>
+ #include <com_android_bluetooth_flags.h>
  
 +#include <base/strings/string_split.h>
  #include <future>
  #include <memory>
  #include <string>
-@@ -33,6 +34,7 @@
- #include "os/metrics.h"
- #include "os/system_properties.h"
+@@ -36,6 +37,8 @@
  #include "sysprops/sysprops_module.h"
-+using bluetooth::os::GetSystemProperty;
+ #endif
  
++using bluetooth::os::GetSystemProperty;
++
  namespace bluetooth {
  namespace hci {
-@@ -313,7 +315,23 @@ struct Controller::impl {
+ 
+@@ -350,7 +353,23 @@ struct Controller::impl {
      ASSERT(complete_view.IsValid());
      ErrorCode status = complete_view.GetStatus();
-     ASSERT_LOG(status == ErrorCode::SUCCESS, "Status 0x%02hhx, %s", status, ErrorCodeText(status).c_str());
+     log::assert_that(status == ErrorCode::SUCCESS, "Status {}", ErrorCodeText(status));
 -    local_supported_commands_ = complete_view.GetSupportedCommands();
 +    //local_supported_commands_ = complete_view.GetSupportedCommands();
 +
@@ -42,7 +43,7 @@ index a6c16a9061..237dbe6b93 100644
 +        auto s = base::SplitString(ignored_commands, ",", base::TRIM_WHITESPACE, base::SPLIT_WANT_ALL);
 +        for(auto command: s) {
 +            int index = std::stoi(command);
-+            LOG_WARN("Ignoring local supported command %d", index);
++            log::warn("Ignoring local supported command {}", index);
 +            uint16_t byte_index = index / 10;
 +            uint16_t bit_index = index % 10;
 +            local_commands[byte_index] &= ~(1 << bit_index);
@@ -52,10 +53,10 @@ index a6c16a9061..237dbe6b93 100644
 +    local_supported_commands_ = local_commands;
    }
  
-   void read_local_extended_features_complete_handler(std::promise<void> promise, CommandCompleteView view) {
-@@ -322,7 +340,25 @@ struct Controller::impl {
+   void read_local_extended_features_complete_handler(std::promise<void> promise,
+@@ -360,7 +379,25 @@ struct Controller::impl {
      ErrorCode status = complete_view.GetStatus();
-     ASSERT_LOG(status == ErrorCode::SUCCESS, "Status 0x%02hhx, %s", status, ErrorCodeText(status).c_str());
+     log::assert_that(status == ErrorCode::SUCCESS, "Status {}", ErrorCodeText(status));
      uint8_t page_number = complete_view.GetPageNumber();
 -    extended_lmp_features_array_.push_back(complete_view.GetExtendedLmpFeatures());
 +
@@ -70,20 +71,20 @@ index a6c16a9061..237dbe6b93 100644
 +        for(auto feature: s) {
 +            int index = std::stoi(feature) - offset;
 +            if(index >= 0 && index < 64) {
-+                LOG_WARN("Ignoring local supported feature %d", index);
++                log::warn("Ignoring local supported feature {}", index);
 +                lmp_features &= ~(1ULL << index);
 +            }
 +        }
 +    }
 +    extended_lmp_features_array_.push_back(lmp_features);
 +
-     bluetooth::os::LogMetricBluetoothLocalSupportedFeatures(page_number, complete_view.GetExtendedLmpFeatures());
-     // Query all extended features
-     if (page_number < complete_view.GetMaximumPageNumber()) {
-@@ -475,7 +511,21 @@ struct Controller::impl {
+     if (page_number == 0 && local_version_information_.manufacturer_name_ == LMP_COMPID_INTEL &&
+         local_version_information_.lmp_version_ == LmpVersion::V_4_2 &&
+         local_version_information_.lmp_subversion_ == LMP_SUBVERSION_INTEL_AC7265) {
+@@ -523,7 +560,21 @@ struct Controller::impl {
      ASSERT(complete_view.IsValid());
      ErrorCode status = complete_view.GetStatus();
-     ASSERT_LOG(status == ErrorCode::SUCCESS, "Status 0x%02hhx, %s", status, ErrorCodeText(status).c_str());
+     log::assert_that(status == ErrorCode::SUCCESS, "Status {}", status, ErrorCodeText(status));
 -    le_local_supported_features_ = complete_view.GetLeFeatures();
 +
 +    //le_local_supported_features_ = complete_view.GetLeFeatures();
@@ -94,7 +95,7 @@ index a6c16a9061..237dbe6b93 100644
 +        auto s = base::SplitString(ignored_features, ",", base::TRIM_WHITESPACE, base::SPLIT_WANT_ALL);
 +        for(auto feature: s) {
 +            int index = std::stoi(feature);
-+            LOG_WARN("Ignoring local supported feature %d", index);
++            log::warn("Ignoring local supported feature {}", index);
 +            local_features &= ~(1ULL << index);
 +        }
 +    }
@@ -103,13 +104,13 @@ index a6c16a9061..237dbe6b93 100644
    }
  
    void le_read_supported_states_handler(CommandCompleteView view) {
-@@ -483,7 +533,21 @@ struct Controller::impl {
+@@ -531,7 +582,21 @@ struct Controller::impl {
      ASSERT(complete_view.IsValid());
      ErrorCode status = complete_view.GetStatus();
-     ASSERT_LOG(status == ErrorCode::SUCCESS, "Status 0x%02hhx, %s", status, ErrorCodeText(status).c_str());
+     log::assert_that(status == ErrorCode::SUCCESS, "Status {}", ErrorCodeText(status));
 -    le_supported_states_ = complete_view.GetLeStates();
-+    //le_supported_states_ = complete_view.GetLeStates();
 +
++    //le_supported_states_ = complete_view.GetLeStates();
 +    auto local_states = complete_view.GetLeStates();
 +    std::string ignored_states = GetSystemProperty("persist.sys.bt.unsupported.states").value_or("");
 +
@@ -117,7 +118,7 @@ index a6c16a9061..237dbe6b93 100644
 +        auto s = base::SplitString(ignored_states, ",", base::TRIM_WHITESPACE, base::SPLIT_WANT_ALL);
 +        for(auto state: s) {
 +            int index = std::stoi(state);
-+            LOG_WARN("Ignoring local supported state %d", index);
++            log::warn("Ignoring local supported state {}", index);
 +            local_states &= ~(1ULL << index);
 +        }
 +    }
@@ -127,5 +128,5 @@ index a6c16a9061..237dbe6b93 100644
  
    void le_read_accept_list_size_handler(CommandCompleteView view) {
 -- 
-2.46.0.windows.1
+2.25.1
 
