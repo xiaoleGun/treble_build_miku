@@ -6,7 +6,7 @@
 这是送给所有Miku粉丝的Android项目，如果不喜欢它请关闭本页面，但不要攻击任何人，尤其是其作者。
 
 ## 版本
-最新版本: 0.12.0
+最新版本: 0.6.1
 
 [下载](https://github.com/xiaoleGun/treble_build_miku/releases)
 
@@ -51,7 +51,7 @@ Miku UI
     ```
 - 下载本仓库
     ```
-    git clone https://github.com/xiaoleGun/treble_build_miku -b Udon_v2
+    git clone https://github.com/yukineko2233/treble_build_miku -b Vampire_v2
     ```
 - 完成之后运行脚本:
     ```
