@@ -1,6 +1,6 @@
-From d7035da3a6c21e7b4d5226a90eb8101fbfe63483 Mon Sep 17 00:00:00 2001
+From 26d69689aedb8a4f72ec94e0e91da377ba217acb Mon Sep 17 00:00:00 2001
 From: "Re*Index. (ot_inc)" <32851879+reindex-ot@users.noreply.github.com>
-Date: Thu, 25 May 2023 21:21:15 +0900
+Date: Fri, 21 Mar 2025 06:34:51 +0800
 Subject: [PATCH 3/4] res: Add support for Japanese (#1)
 
 Update Japanese Strings. (#4)
@@ -23,7 +23,7 @@ Update Japanese.
 
 ---------
 
-Signed-off-by: xiaoleGun <1592501605@qq.com>
+Signed-off-by: YukiNeko <yukineko2233@outlook.com>
 ---
  app/src/main/res/values-ja/pref_custom.xml  |  39 +++++
  app/src/main/res/values-ja/pref_huawei.xml  |  13 ++
@@ -41,7 +41,7 @@ Signed-off-by: xiaoleGun <1592501605@qq.com>
 
 diff --git a/app/src/main/res/values-ja/pref_custom.xml b/app/src/main/res/values-ja/pref_custom.xml
 new file mode 100644
-index 0000000..4a708ab
+index 0000000..74d3362
 --- /dev/null
 +++ b/app/src/main/res/values-ja/pref_custom.xml
 @@ -0,0 +1,39 @@
@@ -84,9 +84,10 @@ index 0000000..4a708ab
 +	    <item>""</item>
 +    </array>
 +</resources>
+\ No newline at end of file
 diff --git a/app/src/main/res/values-ja/pref_huawei.xml b/app/src/main/res/values-ja/pref_huawei.xml
 new file mode 100644
-index 0000000..e648acf
+index 0000000..3589dd5
 --- /dev/null
 +++ b/app/src/main/res/values-ja/pref_huawei.xml
 @@ -0,0 +1,13 @@
@@ -103,9 +104,10 @@ index 0000000..e648acf
 +	    <item>"4000"</item>
 +    </array>
 +</resources>
+\ No newline at end of file
 diff --git a/app/src/main/res/values-ja/pref_misc.xml b/app/src/main/res/values-ja/pref_misc.xml
 new file mode 100644
-index 0000000..736feb7
+index 0000000..eeee8cd
 --- /dev/null
 +++ b/app/src/main/res/values-ja/pref_misc.xml
 @@ -0,0 +1,65 @@
@@ -174,9 +176,10 @@ index 0000000..736feb7
 +    <item>"ffffff"</item>
 +  </array>
 +</resources>
+\ No newline at end of file
 diff --git a/app/src/main/res/values-ja/pref_nubia.xml b/app/src/main/res/values-ja/pref_nubia.xml
 new file mode 100644
-index 0000000..fef7287
+index 0000000..f43fdd8
 --- /dev/null
 +++ b/app/src/main/res/values-ja/pref_nubia.xml
 @@ -0,0 +1,74 @@
@@ -254,9 +257,10 @@ index 0000000..fef7287
 +    <item>"0x88"</item>
 +  </array>
 +</resources>
+\ No newline at end of file
 diff --git a/app/src/main/res/values-ja/pref_oneplus.xml b/app/src/main/res/values-ja/pref_oneplus.xml
 new file mode 100644
-index 0000000..8c591d2
+index 0000000..b344c4e
 --- /dev/null
 +++ b/app/src/main/res/values-ja/pref_oneplus.xml
 @@ -0,0 +1,29 @@
@@ -289,9 +293,10 @@ index 0000000..8c591d2
 +        <item>"5"</item>
 +    </array>
 +</resources>
+\ No newline at end of file
 diff --git a/app/src/main/res/values-ja/strings.xml b/app/src/main/res/values-ja/strings.xml
 new file mode 100644
-index 0000000..7f65a7d
+index 0000000..9ce726d
 --- /dev/null
 +++ b/app/src/main/res/values-ja/strings.xml
 @@ -0,0 +1,172 @@
@@ -467,6 +472,7 @@ index 0000000..7f65a7d
 +  <string name="samsung_broken_fingerprint">壊れた指紋認証の問題の回避を有効化する</string>
 +  <string name="samsung_backlight_multiplier">バックライトスケール、レベルの最大値を設定する</string>
 +</resources>
+\ No newline at end of file
 -- 
-2.46.0.windows.1
+2.25.1
 
