@@ -1,24 +1,25 @@
-From dd03c99e311866b3e05c7a18c73183155715986a Mon Sep 17 00:00:00 2001
+From 82c227bd2f398e32eed60d42eee15b9e122468e3 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Tue, 7 May 2024 22:44:25 +0000
 Subject: [PATCH] Dont abort if the DnsHelper failed to init on BPF-less kernel
 
 ---
- DnsProxyListener.cpp | 1 -
- 1 file changed, 1 deletion(-)
+ DnsProxyListener.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/DnsProxyListener.cpp b/DnsProxyListener.cpp
-index 8064aef7..008e1a5d 100644
+index 04c59212..b881a68e 100644
 --- a/DnsProxyListener.cpp
 +++ b/DnsProxyListener.cpp
-@@ -691,7 +691,6 @@ IsUidBlockedFn resolveIsUidNetworkingBlockedFn() {
+@@ -691,7 +691,7 @@ IsUidBlockedFn resolveIsUidNetworkingBlockedFn() {
      const int ret = (*ADnsHelper_init)();
      if (ret) {
          LOG(ERROR) << __func__ << ": ADnsHelper_init failed " << strerror(-ret);
 -        abort();
++        return nullptr;
      }
  
      IsUidBlockedFn f =
 -- 
-2.34.1
+2.25.1
 

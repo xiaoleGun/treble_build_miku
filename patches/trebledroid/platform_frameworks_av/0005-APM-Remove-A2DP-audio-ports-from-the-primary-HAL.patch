@@ -1,4 +1,4 @@
-From bee42f9fd5e0fddb6fad0b4d364bc8da0e3a455d Mon Sep 17 00:00:00 2001
+From 21f4d4d02358846e51d736158cc61c2f7c3c0eb6 Mon Sep 17 00:00:00 2001
 From: Peter Cai <peter@typeblog.net>
 Date: Thu, 25 Aug 2022 13:30:29 -0400
 Subject: [PATCH 05/24] APM: Remove A2DP audio ports from the primary HAL
@@ -75,5 +75,5 @@ index 29d36ca00b..839974b9d3 100644
  
      RouteTraits::Collection routes;
 -- 
-2.46.0.windows.1
+2.25.1
 

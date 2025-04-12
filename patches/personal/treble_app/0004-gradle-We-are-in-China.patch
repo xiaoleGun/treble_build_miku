@@ -1,6 +1,6 @@
-From 66e9fa367c8bd5090ae04d61af9d95e89d85ba00 Mon Sep 17 00:00:00 2001
+From 53929238f2297c52c396d3d5223a2aa6a4010e15 Mon Sep 17 00:00:00 2001
 From: snnbyyds <snnbyyds@gmail.com>
-Date: Sat, 13 Apr 2024 08:16:41 +0800
+Date: Fri, 21 Mar 2025 06:35:15 +0800
 Subject: [PATCH 4/4] gradle: We are in China!
 
 ---
@@ -18,5 +18,5 @@ index fee24ad..87aa201 100644
 -distributionUrl=https\://services.gradle.org/distributions/gradle-7.5-all.zip
 +distributionUrl=https\://mirrors.cloud.tencent.com/gradle/gradle-7.5-all.zip
 -- 
-2.46.0.windows.1
+2.25.1
 

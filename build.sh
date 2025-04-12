@@ -2,7 +2,7 @@
 
 multipleLanguages() {
     if [ -n $(echo $LANG | grep zh_CN) ]; then
-        BUILDBOT="Miku UI Udon通用镜像自动构建"
+        BUILDBOT="Miku UI Vampire_v2通用镜像自动构建"
         BUILDBOT_EXIT="3秒后开始构建Miku UI通用镜像 - CTRL-C退出"
         SHOW_VERSION="构建版本"
         ONCE_PASSWORD="请输入 $USER 的密码: "
@@ -23,7 +23,7 @@ multipleLanguages() {
         UP_GITHUB_RELEASE="上传到Github release"
         COMPLETED="构建完成，使用了 $1 分钟 $2 秒"
     else
-        BUILDBOT="Miku UI Udon Treble Buildbot"
+        BUILDBOT="Miku UI Vampire_v2 Treble Buildbot"
         BUILDBOT_EXIT="Executing in 3 seconds - CTRL-C to exit"
         SHOW_VERSION="Build version"
         ONCE_PASSWORD="Please enter the password of $USER: "
@@ -81,7 +81,7 @@ initRepo() {
         echo
         echo "--> $INIT_MIKU_UI"
         echo
-        repo init -u https://github.com/Miku-UI/manifesto -b Udon_v2 --depth=1
+        repo init -u https://github.com/Miku-UI/manifesto -b Vampire_v2 --depth=1
     fi
 
     if [ -d .repo ] && [ ! -f .repo/local_manifests/miku-treble.xml ]; then
@@ -96,8 +96,8 @@ initRepo() {
           fetch=\"https://github.com\" />
 
   <project name=\"TrebleDroid/vendor_hardware_overlay\" path=\"vendor/hardware_overlay\" remote=\"github\" revision=\"pie\" />
-  <project name=\"TrebleDroid/device_phh_treble\" path=\"device/phh/treble\" remote=\"github\" revision=\"android-14.0\" />
-  <project name=\"TrebleDroid/vendor_interfaces\" path=\"vendor/interfaces\" remote=\"github\" revision=\"android-14.0\" />
+  <project name=\"TrebleDroid/device_phh_treble\" path=\"device/phh/treble\" remote=\"github\" revision=\"android-15.0\" />
+  <project name=\"TrebleDroid/vendor_interfaces\" path=\"vendor/interfaces\" remote=\"github\" revision=\"android-15.0\" />
   <project name=\"phhusson/vendor_magisk\" path=\"vendor/magisk\" remote=\"github\" revision=\"android-10.0\" />
   <project name=\"TrebleDroid/treble_app\" path=\"treble_app\" remote=\"github\" revision=\"master\" />
   <project name=\"phhusson/sas-creator\" path=\"sas-creator\" remote=\"github\" revision=\"master\" />
@@ -112,7 +112,7 @@ syncRepo() {
     echo
     echo "--> $SYNC_REPOS"
     echo
-    repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
+    repo sync -c --force-sync --no-clone-bundle --no-tags -j4
 }
 
 applyPatches() {
@@ -121,17 +121,36 @@ applyPatches() {
 
     for project in $(cd $patches/patches/$tree; echo *);do
         p="$(tr _ / <<<$project | sed -e 's;platform/;;g')"
+        [ "$p" == build ] && p=build/make
         [ "$p" == treble/app ] && p=treble_app
         [ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay
+        repo sync -l --force-sync $p || continue
         pushd $p
-        for patch in $patches/patches/$tree/$project/*.patch; do
-            git am $patch || exit
+        git clean -fdx; git reset --hard
+        for patch in $patches/patches/$tree/$project/*.patch;do
+            #Check if patch is already applied
+            if patch -f -p1 --dry-run -R < $patch > /dev/null;then
+                continue
+            fi
+
+            if git apply --check $patch;then
+                git am $patch
+            elif patch -f -p1 --dry-run < $patch > /dev/null;then
+                #This will fail
+                git am $patch || true
+                patch -f -p1 < $patch
+                git add -u
+                git am --continue
+            else
+                echo "Failed applying $patch"
+            fi
         done
         popd
     done
 }
 
 applyingPatches() {
+    git init
     echo
     echo "--> $APPLY_TREBLEDROID_PATCH"
     echo
@@ -187,7 +206,7 @@ buildTreble() {
     echo
     echo "--> $BUILD_TREBLE_IMAGE: $1"
     echo
-    lunch $1-ap2a-userdebug
+    lunch $1-ap4a-userdebug
     make -j$(nproc --all) systemimage
     mv $OUT/system.img $BD/system-$1.img
     make installclean
@@ -272,7 +291,7 @@ BUILD_DATE="$(date +%Y%m%d)"
 
 SD=$(cd $(dirname $0);pwd)
 BD=$HOME/builds
-VERSION=Udon_v2
+VERSION=Vampire_v2
 VERSION_CODE=`grep -oP '(?<=最新版本: ).*' $SD/README.md`
 
 multipleLanguages

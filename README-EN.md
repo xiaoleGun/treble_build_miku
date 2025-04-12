@@ -4,7 +4,7 @@
 This is an Android project for Miku fans. If you don't like it, please close this page, but don't attack Miku and the author of this project.
 
 ## Version
-Latest version: 0.12.0
+Latest version: 0.6.1
 
 [Downloads](https://github.com/xiaoleGun/treble_build_miku/releases)
 
@@ -49,7 +49,7 @@ To get started with building Miku UI GSI, you'll need to get familiar with [Git 
     ```
 - Clone this repo:
     ```
-    git clone https://github.com/xiaoleGun/treble_build_miku -b Udon_v2
+    git clone https://github.com/xiaoleGun/treble_build_miku -b Vampire_v2
     ```
 - Finally, start the build script:
     ```

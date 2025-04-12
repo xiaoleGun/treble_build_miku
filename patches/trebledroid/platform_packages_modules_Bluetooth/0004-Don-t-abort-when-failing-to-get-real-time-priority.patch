@@ -1,7 +1,7 @@
-From f65e86d29dce513b9b61a1f51bd82823e29f7f8e Mon Sep 17 00:00:00 2001
+From b20f3ed1d6affcec252b4d6e2dc1b546e5e0365b Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Sun, 17 Oct 2021 17:17:13 -0400
-Subject: [PATCH 4/8] Don't abort when failing to get real-time priority
+Subject: [PATCH 4/9] Don't abort when failing to get real-time priority
 
 On some devices (like OP6), for unknown reason, trying to go to realtime
 fails with EPERM.
@@ -19,10 +19,10 @@ Change-Id: Id25dac186628e933185bdfd640498004459b375a
  4 files changed, 14 insertions(+), 4 deletions(-)
 
 diff --git a/system/btif/src/btif_a2dp_sink.cc b/system/btif/src/btif_a2dp_sink.cc
-index 8e0083b014..0f6369e205 100644
+index 0aba99e201..a0523f7390 100644
 --- a/system/btif/src/btif_a2dp_sink.cc
 +++ b/system/btif/src/btif_a2dp_sink.cc
-@@ -197,7 +197,7 @@ bool btif_a2dp_sink_init() {
+@@ -196,7 +196,7 @@ bool btif_a2dp_sink_init() {
    /* Schedule the rest of the operations */
    if (!btif_a2dp_sink_cb.worker_thread.EnableRealTimeScheduling()) {
  #if defined(__ANDROID__)
@@ -30,12 +30,12 @@ index 8e0083b014..0f6369e205 100644
 +    log::error("Failed to increase A2DP decoder thread priority");
  #endif
    }
-   btif_a2dp_sink_cb.worker_thread.DoInThread(
+   btif_a2dp_sink_cb.worker_thread.DoInThread(FROM_HERE,
 diff --git a/system/btif/src/btif_a2dp_source.cc b/system/btif/src/btif_a2dp_source.cc
-index 6b6555ec88..2dcf06dd3e 100644
+index f67527da8b..b5f1b37d69 100644
 --- a/system/btif/src/btif_a2dp_source.cc
 +++ b/system/btif/src/btif_a2dp_source.cc
-@@ -374,7 +374,7 @@ static void btif_a2dp_source_startup_delayed() {
+@@ -350,7 +350,7 @@ static void btif_a2dp_source_startup_delayed() {
    log::info("state={}", btif_a2dp_source_cb.StateStr());
    if (!btif_a2dp_source_thread.EnableRealTimeScheduling()) {
  #if defined(__ANDROID__)
@@ -45,7 +45,7 @@ index 6b6555ec88..2dcf06dd3e 100644
    }
    if (!bluetooth::audio::a2dp::init(&btif_a2dp_source_thread)) {
 diff --git a/system/osi/src/alarm.cc b/system/osi/src/alarm.cc
-index 408f4f3bee..4b48be24c7 100644
+index 0d515c486d..098eb1763c 100644
 --- a/system/osi/src/alarm.cc
 +++ b/system/osi/src/alarm.cc
 @@ -673,7 +673,17 @@ static bool timer_create_internal(const clockid_t clock_id, timer_t* timer) {
@@ -56,7 +56,7 @@ index 408f4f3bee..4b48be24c7 100644
 +
 +  int ret = timer_create(clock_id, &sigevent, timer);
 +  if (ret == -1) {
-+       LOG_ERROR("%s failed to create timer with RT err %s... Try again without RT", __func__, strerror(errno));
++       log::error("{} failed to create timer with RT err {}... Try again without RT", __func__, strerror(errno));
 +      // Recreate timer without RT priority
 +      memset(&sigevent, 0, sizeof(sigevent));
 +      sigevent.sigev_notify = SIGEV_THREAD;
@@ -64,14 +64,14 @@ index 408f4f3bee..4b48be24c7 100644
 +      ret = timer_create(clock_id, &sigevent, timer);
 +  }
 +  if (ret == -1) {
-     LOG_ERROR("%s unable to create timer with clock %d: %s", __func__, clock_id,
-               strerror(errno));
+     log::error("unable to create timer with clock {}: {}", clock_id, strerror(errno));
      if (clock_id == CLOCK_BOOTTIME_ALARM) {
+       log::error(
 diff --git a/system/stack/btu/main_thread.cc b/system/stack/btu/main_thread.cc
-index a2cdd7bac6..045cbc3cbd 100644
+index 03afc210f5..e30c592f34 100644
 --- a/system/stack/btu/main_thread.cc
 +++ b/system/stack/btu/main_thread.cc
-@@ -71,7 +71,7 @@ void main_thread_start_up() {
+@@ -70,7 +70,7 @@ void main_thread_start_up() {
    }
    if (!main_thread.EnableRealTimeScheduling()) {
  #if defined(__ANDROID__)
@@ -81,5 +81,5 @@ index a2cdd7bac6..045cbc3cbd 100644
      log::error("unable to enable real time scheduling");
  #endif
 -- 
-2.46.0.windows.1
+2.25.1
 

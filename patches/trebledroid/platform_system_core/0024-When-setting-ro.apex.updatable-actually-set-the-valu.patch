@@ -1,7 +1,7 @@
-From 9f71616bf50aca6a4db8d4f8322bba503c65a50d Mon Sep 17 00:00:00 2001
+From 821c916238c42854486f6da4dbf2c37c2a6ad721 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Thu, 25 Jan 2024 15:20:10 -0500
-Subject: [PATCH 24/26] When setting ro.apex.updatable, actually set the value
+Subject: [PATCH 24/27] When setting ro.apex.updatable, actually set the value
 
 Before this change, we were only changing the override, but on newest
 Android 14 vendor, they don't explicitly set ro.apex.updatable=true
@@ -15,10 +15,10 @@ This fixes boot on Samsung Galaxy S24
  1 file changed, 9 insertions(+), 4 deletions(-)
 
 diff --git a/init/property_service.cpp b/init/property_service.cpp
-index 1edb467e9..b1bee0f1c 100644
+index b18a51269..b414946bb 100644
 --- a/init/property_service.cpp
 +++ b/init/property_service.cpp
-@@ -819,17 +819,22 @@ static void LoadProperties(char* data, const char* filter, const char* filename,
+@@ -818,17 +818,22 @@ static void LoadProperties(char* data, const char* filter, const char* filename,
              std::string error;
              if (CheckPermissions(key, value, context, cr, &error) == PROP_SUCCESS) {
                  auto it = properties->find(key);
@@ -46,5 +46,5 @@ index 1edb467e9..b1bee0f1c 100644
  		}
              } else {
 -- 
-2.46.0.windows.1
+2.25.1
 

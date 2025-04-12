@@ -1,4 +1,4 @@
-From 244d8613b3d559d8b9d79ccd5ce8fae905e4c545 Mon Sep 17 00:00:00 2001
+From c994e53275d733fcd4c349e2d0f9e7dc96fe06fa Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Mon, 21 Dec 2020 20:19:11 +0100
 Subject: [PATCH 13/24] Make camera IDs filter-out optional
@@ -11,7 +11,7 @@ Add a property for that.
  1 file changed, 9 insertions(+), 5 deletions(-)
 
 diff --git a/services/camera/libcameraservice/common/CameraProviderManager.cpp b/services/camera/libcameraservice/common/CameraProviderManager.cpp
-index 60e4eb7b42..fbfdecc2ed 100644
+index ddf484c31c..1187c5b5b6 100644
 --- a/services/camera/libcameraservice/common/CameraProviderManager.cpp
 +++ b/services/camera/libcameraservice/common/CameraProviderManager.cpp
 @@ -328,7 +328,9 @@ std::vector<std::string> CameraProviderManager::getAPI1CompatibleCameraDeviceIds
@@ -25,7 +25,7 @@ index 60e4eb7b42..fbfdecc2ed 100644
          collectDeviceIdsLocked(providerDeviceIds, publicDeviceIds, systemDeviceIds);
      }
      auto sortFunc =
-@@ -1137,10 +1139,12 @@ SystemCameraKind CameraProviderManager::ProviderInfo::DeviceInfo3::getSystemCame
+@@ -1124,10 +1126,12 @@ SystemCameraKind CameraProviderManager::ProviderInfo::DeviceInfo3::getSystemCame
  
      // Go through the capabilities and check if it has
      // ANDROID_REQUEST_AVAILABLE_CAPABILITIES_SYSTEM_CAMERA
@@ -43,5 +43,5 @@ index 60e4eb7b42..fbfdecc2ed 100644
      }
      return SystemCameraKind::PUBLIC;
 -- 
-2.46.0.windows.1
+2.25.1
 

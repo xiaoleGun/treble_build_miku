@@ -1,7 +1,7 @@
-From 348a1986fbbdf567f6a4a63f9da08ba4e22e1279 Mon Sep 17 00:00:00 2001
+From 630d785daad2fff5f98833bd6d8bf71ac6cfe217 Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Wed, 4 Sep 2019 21:11:48 +0200
-Subject: [PATCH 04/26] Panic into recovery rather than bootloader
+Subject: [PATCH 04/27] Panic into recovery rather than bootloader
 
 Getting last_kmsg/pstore from bootloader isn't possible for other people
 than the OEM, but we have TWRP to access last_kmsg/pstore
@@ -9,8 +9,7 @@ than the OEM, but we have TWRP to access last_kmsg/pstore
 Change-Id: If04bb6572dc66677d7b44f7d302b2d69ce526200
 ---
  init/reboot_utils.cpp | 2 +-
- rootdir/init.rc       | 3 +++
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/init/reboot_utils.cpp b/init/reboot_utils.cpp
 index 547b1869f..dd0fbbfe8 100644
@@ -25,20 +24,6 @@ index 547b1869f..dd0fbbfe8 100644
  static bool init_fatal_panic = false;
  
  // this needs to read the /proc/* files directly because it is called before
-diff --git a/rootdir/init.rc b/rootdir/init.rc
-index 518315776..95404f9b1 100644
---- a/rootdir/init.rc
-+++ b/rootdir/init.rc
-@@ -1305,6 +1305,9 @@ on property:ro.debuggable=1
-     # Give reads to anyone for the accessibility trace folder on debug builds.
-     chmod 0775 /data/misc/a11ytrace
- 
-+on init && property:ro.debuggable=1 && property:ro.console.enable=1
-+    start console
-+
- on userspace-reboot-requested
-   # TODO(b/135984674): reset all necessary properties here.
-   setprop sys.boot_completed ""
 -- 
-2.46.0.windows.1
+2.25.1
 

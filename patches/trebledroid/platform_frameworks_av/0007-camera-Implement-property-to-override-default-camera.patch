@@ -1,4 +1,4 @@
-From 2676c5a7748df795ccc8c0d39e248f868346c136 Mon Sep 17 00:00:00 2001
+From 531335fb00fc9caaa816bccc8784650c1979eafe Mon Sep 17 00:00:00 2001
 From: Peter Cai <peter@typeblog.net>
 Date: Wed, 1 Jun 2022 16:56:46 -0400
 Subject: [PATCH 07/24] camera: Implement property to override default camera
@@ -11,10 +11,10 @@ Change-Id: I002bfa974bafc2cc01365eeea31c7a5dcb5a2028
  1 file changed, 22 insertions(+)
 
 diff --git a/services/camera/libcameraservice/common/CameraProviderManager.cpp b/services/camera/libcameraservice/common/CameraProviderManager.cpp
-index 15e2755a98..60e4eb7b42 100644
+index 51f06cb013..ddf484c31c 100644
 --- a/services/camera/libcameraservice/common/CameraProviderManager.cpp
 +++ b/services/camera/libcameraservice/common/CameraProviderManager.cpp
-@@ -41,6 +41,7 @@
+@@ -43,6 +43,7 @@
  #include <functional>
  #include <camera_metadata_hidden.h>
  #include <android-base/parseint.h>
@@ -58,5 +58,5 @@ index 15e2755a98..60e4eb7b42 100644
  }
  
 -- 
-2.46.0.windows.1
+2.25.1
 

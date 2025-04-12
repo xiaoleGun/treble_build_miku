@@ -1,7 +1,7 @@
-From 2d6d801c232054d1ea5e8d7afaeb447b62a75513 Mon Sep 17 00:00:00 2001
+From a9ba0875b31277b28d0f3615d8c795fbcaf714de Mon Sep 17 00:00:00 2001
 From: Pierre-Hugues Husson <phh@phh.me>
 Date: Fri, 28 Apr 2023 12:29:05 -0400
-Subject: [PATCH 12/26] Allow apex on > 5.0 kernels. This is needed because on
+Subject: [PATCH 12/27] Allow apex on > 5.0 kernels. This is needed because on
  Pixels, camera HAL are exclusively in vendor apex
 
 Change-Id: I334cde4c5557b0ff70d550205c5bb727d4b5dbf5
@@ -10,10 +10,10 @@ Change-Id: I334cde4c5557b0ff70d550205c5bb727d4b5dbf5
  1 file changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/init/property_service.cpp b/init/property_service.cpp
-index 11bd5aeb3..7fd6e6e75 100644
+index 7b3861534..8c0cc6442 100644
 --- a/init/property_service.cpp
 +++ b/init/property_service.cpp
-@@ -64,6 +64,7 @@
+@@ -61,6 +61,7 @@
  #include <selinux/android.h>
  #include <selinux/label.h>
  #include <selinux/selinux.h>
@@ -21,7 +21,7 @@ index 11bd5aeb3..7fd6e6e75 100644
  #include <vendorsupport/api_level.h>
  
  #include "debug_ramdisk.h"
-@@ -706,6 +707,16 @@ uint32_t InitPropertySet(const std::string& name, const std::string& value) {
+@@ -705,6 +706,16 @@ uint32_t InitPropertySet(const std::string& name, const std::string& value) {
  static Result<void> load_properties_from_file(const char*, const char*,
                                                std::map<std::string, std::string>*);
  
@@ -38,7 +38,7 @@ index 11bd5aeb3..7fd6e6e75 100644
  /*
   * Filter is used to decide which properties to load: NULL loads all keys,
   * "ro.foo.*" is a prefix match, and "ro.foo.bar" is an exact match.
-@@ -803,7 +814,9 @@ static void LoadProperties(char* data, const char* filter, const char* filename,
+@@ -802,7 +813,9 @@ static void LoadProperties(char* data, const char* filter, const char* filename,
                  } else if (it->second != value) {
                      LOG(WARNING) << "Overriding previous property '" << key << "':'" << it->second
                                   << "' with new value '" << value << "'";
@@ -50,5 +50,5 @@ index 11bd5aeb3..7fd6e6e75 100644
                      } else {
                          it->second = value;
 -- 
-2.46.0.windows.1
+2.25.1
 
