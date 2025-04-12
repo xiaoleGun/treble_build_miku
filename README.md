@@ -51,7 +51,7 @@ Miku UI
     ```
 - 下载本仓库
     ```
-    git clone https://github.com/yukineko2233/treble_build_miku -b Vampire_v2
+    git clone https://github.com/xiaoleGun/treble_build_miku -b Vampire_v2
     ```
 - 完成之后运行脚本:
     ```

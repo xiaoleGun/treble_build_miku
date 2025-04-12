@@ -49,7 +49,7 @@ To get started with building Miku UI GSI, you'll need to get familiar with [Git 
     ```
 - Clone this repo:
     ```
-    git clone https://github.com/yukineko2233/treble_build_miku -b Vampire_v2
+    git clone https://github.com/xiaoleGun/treble_build_miku -b Vampire_v2
     ```
 - Finally, start the build script:
     ```
