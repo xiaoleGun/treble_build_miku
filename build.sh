@@ -112,7 +112,7 @@ syncRepo() {
     echo
     echo "--> $SYNC_REPOS"
     echo
-    repo sync -c --force-sync --no-clone-bundle --no-tags -j4
+    repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
 }
 
 applyPatches() {
