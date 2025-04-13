@@ -116,36 +116,41 @@ syncRepo() {
 }
 
 applyPatches() {
-    patches="$(readlink -f -- $1)"
+    patches="$(readlink -f -- "$1")"
     tree="$2"
 
-    for project in $(cd $patches/patches/$tree; echo *);do
-        p="$(tr _ / <<<$project | sed -e 's;platform/;;g')"
+    for project in $(cd "$patches/patches/$tree"; echo *); do
+        p="$(tr _ / <<< "$project" | sed -e 's;platform/;;g')"
         [ "$p" == build ] && p=build/make
         [ "$p" == treble/app ] && p=treble_app
         [ "$p" == vendor/hardware/overlay ] && p=vendor/hardware_overlay
-        repo sync -l --force-sync $p || continue
-        pushd $p
-        git clean -fdx; git reset --hard
-        for patch in $patches/patches/$tree/$project/*.patch;do
-            #Check if patch is already applied
-            if patch -f -p1 --dry-run -R < $patch > /dev/null;then
+
+        # 同步仓库（失败时跳过项目）
+        if ! repo sync -l --force-sync "$p"; then
+            echo "Failed to sync $p. Skipping project."
+            continue
+        fi
+
+        pushd "$p" > /dev/null
+        git clean -fdx
+        git reset --hard
+
+        # 遍历补丁文件
+        for patch in "$patches/patches/$tree/$project"/*.patch; do
+            # 检查补丁是否已应用（使用Git自身机制）
+            if git apply --reverse --check "$patch" &>/dev/null; then
+                echo "Patch $patch already applied. Skipping."
                 continue
             fi
 
-            if git apply --check $patch;then
-                git am $patch
-            elif patch -f -p1 --dry-run < $patch > /dev/null;then
-                #This will fail
-                git am $patch || true
-                patch -f -p1 < $patch
-                git add -u
-                git am --continue
-            else
-                echo "Failed applying $patch"
+            # 尝试应用补丁，失败则退出脚本
+            if ! git am "$patch"; then
+                echo "ERROR: Failed to apply $patch with git am!" >&2
+                echo "Project: $p" >&2
+                exit 1  # 直接终止整个脚本
             fi
         done
-        popd
+        popd > /dev/null
     done
 }
 
